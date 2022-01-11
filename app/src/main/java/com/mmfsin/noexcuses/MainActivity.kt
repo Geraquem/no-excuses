@@ -6,19 +6,26 @@ import androidx.appcompat.app.AppCompatActivity
 import com.mmfsin.noexcuses.intefaces.IFragment
 import com.mmfsin.noexcuses.view.category.CategoryFragment
 import com.mmfsin.noexcuses.view.category.model.CategoryDTO
+import com.mmfsin.noexcuses.view.exercises.ExercisesFragment
 
 class MainActivity : AppCompatActivity(), IFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction()
+        /* QUITAR EN UN FUTURO */
+        supportFragmentManager.beginTransaction().addToBackStack(null)
             .replace(R.id.fragment_container_view, CategoryFragment(this)).commit()
     }
 
     override fun openExercises(category: CategoryDTO) {
-        Toast.makeText(this, category.name, Toast.LENGTH_SHORT).show()
+        supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragment_container_view, ExercisesFragment(this, category))
+            .commit()
     }
 
-    override fun close() {}
+    override fun close() {
+        supportFragmentManager.popBackStack()
+    }
 }

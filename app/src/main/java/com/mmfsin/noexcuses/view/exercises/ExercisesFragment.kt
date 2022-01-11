@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.intefaces.IFragment
 import com.mmfsin.noexcuses.view.category.model.CategoryDTO
+import kotlinx.android.synthetic.main.fragment_exercises.*
 
-class ExercisesFragment(val listener: IFragment, val category: CategoryDTO) : Fragment(), ExercisesView {
+class ExercisesFragment(private val listener: IFragment, val category: CategoryDTO) : Fragment(),
+    ExercisesView {
 
     private val presenter by lazy { ExercisesPresenter(this) }
 
@@ -26,12 +26,16 @@ class ExercisesFragment(val listener: IFragment, val category: CategoryDTO) : Fr
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_category, container, false)
+        return inflater.inflate(R.layout.fragment_exercises, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //loading VISIBLE
+
+        backButton.setOnClickListener { listener.close() }
+        toolbarText.text = category.name
+
     }
 
     override fun somethingWentWrong() {

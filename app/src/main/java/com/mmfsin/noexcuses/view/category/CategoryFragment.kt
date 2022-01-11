@@ -14,8 +14,9 @@ import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.intefaces.IFragment
 import com.mmfsin.noexcuses.view.category.model.CategoryDTO
+import kotlinx.android.synthetic.main.fragment_category.*
 
-class CategoryFragment(val listener: IFragment) : Fragment(), CategoryView {
+class CategoryFragment(private val listener: IFragment) : Fragment(), CategoryView {
 
     private val presenter by lazy { CategoryPresenter(this) }
 
@@ -39,13 +40,11 @@ class CategoryFragment(val listener: IFragment) : Fragment(), CategoryView {
 
         //loading VISIBLE
 
+        backButton.setOnClickListener { listener.close() }
+
         groups = presenter.getGroupList(mContext, activity)
         images = presenter.getImagesList(mContext, activity)
         names = presenter.getNamesList(mContext, activity)
-
-//        groups[0].setOnClickListener{
-//            Toast.makeText(mContext, "groupppp1", Toast.LENGTH_SHORT).show()
-//        }
 
         if (groups.isNotEmpty() && images.isNotEmpty() && names.isNotEmpty()) {
             for (group in groups) {
@@ -83,19 +82,19 @@ class CategoryFragment(val listener: IFragment) : Fragment(), CategoryView {
                 listener.openExercises(categories[0])
             }
             R.id.group2 -> {
-                Toast.makeText(mContext, "groupppp2", Toast.LENGTH_SHORT).show()
+                listener.openExercises(categories[1])
             }
             R.id.group3 -> {
-                Toast.makeText(mContext, "groupppp3", Toast.LENGTH_SHORT).show()
+                listener.openExercises(categories[2])
             }
             R.id.group4 -> {
-                Toast.makeText(mContext, "groupppp4", Toast.LENGTH_SHORT).show()
+                listener.openExercises(categories[3])
             }
             R.id.group5 -> {
-                Toast.makeText(mContext, "groupppp5", Toast.LENGTH_SHORT).show()
+                listener.openExercises(categories[4])
             }
             R.id.group6 -> {
-                Toast.makeText(mContext, "groupppp6", Toast.LENGTH_SHORT).show()
+                listener.openExercises(categories[5])
             }
         }
     }
