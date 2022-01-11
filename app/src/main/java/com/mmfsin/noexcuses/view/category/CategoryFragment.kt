@@ -5,19 +5,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
-import com.mmfsin.noexcuses.view.category.adapter.RViewAdapter
+import com.mmfsin.noexcuses.intefaces.IFragment
 import com.mmfsin.noexcuses.view.category.model.CategoryDTO
-import kotlinx.android.synthetic.main.fragment_category.*
 
-class CategoryFragment : Fragment(), CategoryView {
+class CategoryFragment(val listener: IFragment) : Fragment(), CategoryView {
 
     private val presenter by lazy { CategoryPresenter(this) }
 
-    private lateinit var adapter: RViewAdapter
+    private lateinit var categories: List<CategoryDTO>
+    private lateinit var groups: List<LinearLayout>
+    private lateinit var images: List<ImageView>
+    private lateinit var names: List<TextView>
 
     private lateinit var mContext: Context
 
@@ -31,19 +36,35 @@ class CategoryFragment : Fragment(), CategoryView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         //loading VISIBLE
-        presenter.getCategoryList()
+
+        groups = presenter.getGroupList(mContext, activity)
+        images = presenter.getImagesList(mContext, activity)
+        names = presenter.getNamesList(mContext, activity)
+
+//        groups[0].setOnClickListener{
+//            Toast.makeText(mContext, "groupppp1", Toast.LENGTH_SHORT).show()
+//        }
+
+        if (groups.isNotEmpty() && images.isNotEmpty() && names.isNotEmpty()) {
+            for (group in groups) {
+                group.setOnClickListener(onCLick)
+            }
+            presenter.getCategoryList()
+        } else {
+            somethingWentWrong()
+        }
     }
 
     override fun showCategoryList(list: List<CategoryDTO>) {
-        recyclerView.layoutManager = LinearLayoutManager(mContext)
-        adapter = RViewAdapter(
-            { Toast.makeText(mContext, it.name, Toast.LENGTH_SHORT).show() },
-            mContext,
-            list
-        )
-        recyclerView.adapter = adapter
-        // loading.visibility = View.GONE
+        categories = list
+        for (i in list.indices) {
+            Glide.with(mContext).load(list[i].image).into(images[i])
+            names[i].text = list[i].name
+        }
+
+        //loading GONE
     }
 
     override fun somethingWentWrong() {
@@ -53,5 +74,29 @@ class CategoryFragment : Fragment(), CategoryView {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+    }
+
+    private val
+            onCLick = View.OnClickListener {
+        when (it.id) {
+            R.id.group1 -> {
+                listener.openExercises(categories[0])
+            }
+            R.id.group2 -> {
+                Toast.makeText(mContext, "groupppp2", Toast.LENGTH_SHORT).show()
+            }
+            R.id.group3 -> {
+                Toast.makeText(mContext, "groupppp3", Toast.LENGTH_SHORT).show()
+            }
+            R.id.group4 -> {
+                Toast.makeText(mContext, "groupppp4", Toast.LENGTH_SHORT).show()
+            }
+            R.id.group5 -> {
+                Toast.makeText(mContext, "groupppp5", Toast.LENGTH_SHORT).show()
+            }
+            R.id.group6 -> {
+                Toast.makeText(mContext, "groupppp6", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

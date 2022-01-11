@@ -3,4 +3,6 @@
 
     <string name="contentDescription">contentDescription</string>
     <string name="somethingWentWrong">Vaya, algo ha salido mal</string>
+
+    <string name="muscularGroups">GRUPOS MUSCULARES</string>
 </resources>
