@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.RowExerciseBinding
 import com.mmfsin.noexcuses.view.exercises.model.ExerciseDTO
@@ -31,11 +32,11 @@ class RViewAdapter(
 
     override fun getItemCount() = exercises.size
 
-
     class RecordHolder(view: View) : RecyclerView.ViewHolder(view) {
         val bdg = RowExerciseBinding.bind(view)
         fun bind(context: Context, exercise: ExerciseDTO) {
-
+            Glide.with(context).load(exercise.image).into(bdg.exerciseImage)
+            bdg.exerciseName.text = exercise.name
         }
     }
 }

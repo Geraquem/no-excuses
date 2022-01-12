@@ -1,12 +1,10 @@
-package com.mmfsin.noexcuses.view.exercises
+package com.mmfsin.noexcuses.view.exercisedetail
 
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,12 +15,11 @@ import com.mmfsin.noexcuses.view.exercises.adapter.RViewAdapter
 import com.mmfsin.noexcuses.view.exercises.model.ExerciseDTO
 import kotlinx.android.synthetic.main.fragment_exercises.*
 
-class ExercisesFragment(private val listener: IFragment, val category: CategoryDTO) : Fragment(),
-    ExercisesView {
+class ExerciseDetailFragment(private val listener: IFragment, val category: CategoryDTO) :
+    Fragment(),
+    ExerciseDetailView {
 
-    private val presenter by lazy { ExercisesPresenter(this) }
-
-    private lateinit var adapter: RViewAdapter
+    private val presenter by lazy { ExerciseDetailPresenter(this) }
 
     private lateinit var mContext: Context
 
@@ -36,21 +33,8 @@ class ExercisesFragment(private val listener: IFragment, val category: CategoryD
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         //loading VISIBLE
 
-        backButton.setOnClickListener { listener.close() }
-        toolbarText.text = category.name
-
-        presenter.getExercises(category.name)
-    }
-
-    override fun showExercises(list: List<ExerciseDTO>) {
-        recyclerView.layoutManager = LinearLayoutManager(mContext)
-        adapter = RViewAdapter({}, mContext, list)
-        recyclerView.adapter = adapter
-
-//        loading.visibility = View.GONE
     }
 
     override fun somethingWentWrong() {
