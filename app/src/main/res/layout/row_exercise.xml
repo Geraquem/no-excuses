@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:fontFamily="sans-serif-condensed"
-            android:text="FLEXIONES MILITARES"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -36,7 +35,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
-            android:text="Musculos involucrados en el ejercicio: Pectoral, tríceps hombro superior y antebrazo"
             android:textSize="15sp" />
 
     </LinearLayout>

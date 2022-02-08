@@ -4,5 +4,11 @@
     <string name="contentDescription">contentDescription</string>
     <string name="somethingWentWrong">Vaya, algo ha salido mal</string>
 
+    <string name="exercises">EJERCICIOS</string>
+    <string name="tables">TABLAS</string>
+    <string name="material">MATERIAL EN CASA</string>
+
     <string name="muscularGroups">GRUPOS MUSCULARES</string>
+
+    <string name="howToDoIt">¿Cómo se hace?</string>
 </resources>

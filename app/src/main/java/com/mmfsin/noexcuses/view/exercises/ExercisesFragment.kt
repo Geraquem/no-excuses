@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,7 +45,7 @@ class ExercisesFragment(private val listener: IFragment, val category: CategoryD
 
     override fun showExercises(list: List<ExerciseDTO>) {
         recyclerView.layoutManager = LinearLayoutManager(mContext)
-        adapter = RViewAdapter({}, mContext, list)
+        adapter = RViewAdapter({ listener.openExerciseDetail(it) }, mContext, list)
         recyclerView.adapter = adapter
 
 //        loading.visibility = View.GONE
