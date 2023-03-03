@@ -11,6 +11,14 @@
     <!-- Phases -->
     <string name="create_new_phase">Crear nueva</string>
 
+    <!-- New Phase -->
+    <string name="new_phase_title">Crea tu nueva serie de rutinas</string>
+    <string name="new_phase_name">Nombre</string>
+    <string name="new_phase_name_hint">Ej: Fase 1</string>
+    <string name="new_phase_description">Descripción (opcional)</string>
+    <string name="new_phase_description_hint">Ej: Hasta el 6 de Abril</string>
+    <string name="new_phase_save">Guardar</string>
+    <string name="new_phase_cancel">Cancelar</string>
 
     <string name="muscularGroups">GRUPOS MUSCULARES</string>
 

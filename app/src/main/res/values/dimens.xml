@@ -12,6 +12,8 @@
     <dimen name="margin_padding_xxxlarge">44dp</dimen>
     <dimen name="margin_padding_gigant">56dp</dimen>
 
+    <dimen name="size_image_big">64dp</dimen>
+
     <dimen name="elevation_default">5dp</dimen>
 
 </resources>

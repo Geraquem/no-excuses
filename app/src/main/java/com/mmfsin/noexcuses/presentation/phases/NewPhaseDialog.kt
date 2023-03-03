@@ -8,4 +8,20 @@ class NewPhaseDialog : BaseDialog<DialogNewPhaseBinding>() {
 
     override fun inflateView(inflater: LayoutInflater): DialogNewPhaseBinding =
         DialogNewPhaseBinding.inflate(inflater)
+
+    override fun setUI() {
+        super.setUI()
+    }
+
+    override fun setListeners() {
+        binding.apply {
+            cancel.setOnClickListener { dismiss() }
+            save.setOnClickListener {
+                val name = etName.text.toString()
+                if (name.isNotEmpty()) {
+                    //Save in realm
+                }
+            }
+        }
+    }
 }

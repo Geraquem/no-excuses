@@ -1,56 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_new_phase">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBar"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_left"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground">
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
 
-        <androidx.appcompat.widget.Toolbar
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_image_big"
+        android:background="@color/soft_red"
+        android:contentDescription="@string/content_description"
+        android:paddingVertical="@dimen/margin_padding_medium"
+        android:src="@drawable/ic_close"
+        app:layout_constraintLeft_toLeftOf="@id/gl_left"
+        app:layout_constraintRight_toRightOf="@id/gl_right"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_medium"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="@id/gl_left"
+        app:layout_constraintRight_toRightOf="@id/gl_right"
+        app:layout_constraintTop_toBottomOf="@id/image">
+
+        <TextView
+            style="@style/BigTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_padding_small"
+            android:text="@string/new_phase_title" />
+
+        <TextView
+            style="@style/MediumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_padding_small"
+            android:text="@string/new_phase_name" />
+
+        <EditText
+            android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/windowBackground"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:layout_marginBottom="@dimen/margin_padding_medium"
+            android:autofillHints="no"
+            android:background="@drawable/bg_edittext"
+            android:hint="@string/new_phase_name_hint"
+            android:inputType="textPersonName"
+            android:lines="1"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:paddingHorizontal="@dimen/margin_padding_medium"
+            android:paddingVertical="@dimen/margin_padding_small" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginVertical="10dp">
+        <TextView
+            style="@style/MediumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_padding_small"
+            android:text="@string/new_phase_description" />
 
-                <ImageView
-                    android:id="@+id/backButton"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_arrow_back" />
+        <EditText
+            android:id="@+id/et_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_padding_large"
+            android:autofillHints="no"
+            android:background="@drawable/bg_edittext"
+            android:hint="@string/new_phase_description_hint"
+            android:inputType="textShortMessage"
+            android:lines="1"
+            android:maxLength="60"
+            android:maxLines="1"
+            android:padding="@dimen/margin_padding_medium" />
 
-                <TextView
-                    android:id="@+id/toolbarText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/backButton"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textAllCaps="true"
-                    android:textSize="22sp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="@dimen/margin_padding_large">
 
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/cancel"
+                style="@style/MediumTextView_Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_padding_medium"
+                android:text="@string/new_phase_cancel" />
 
-        </androidx.appcompat.widget.Toolbar>
+            <TextView
+                android:id="@+id/save"
+                style="@style/MediumTextView_Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/new_phase_save" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+        </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_below="@id/appBar"
-        android:layout_height="wrap_content"/>
+    </LinearLayout>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

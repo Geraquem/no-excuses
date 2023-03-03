@@ -21,7 +21,6 @@ class PhaseFragment() : BaseFragment<FragmentPhasesBinding>() {
     private lateinit var mContext: Context
 
     override fun setUI() {
-        Toast.makeText(mContext, "hola", Toast.LENGTH_SHORT).show()
     }
 
     override fun setListeners() {
