@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_padding_small"
+    android:background="@drawable/bg_phase"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:elevation="@dimen/elevation_default"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/margin_padding_medium"
+    android:paddingVertical="@dimen/margin_padding_xmedium">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/BigTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin_padding_small"
+        android:elevation="@dimen/elevation_default"
+        tools:text="Fase 1" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        style="@style/MediumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:text="Descripción de la fase 1" />
+
+</LinearLayout>

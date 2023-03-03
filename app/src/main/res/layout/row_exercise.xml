@@ -11,7 +11,7 @@
         android:id="@+id/exerciseImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:contentDescription="@string/contentDescription"
+        android:contentDescription="@string/content_description"
         android:src="@color/black" />
 
     <LinearLayout
