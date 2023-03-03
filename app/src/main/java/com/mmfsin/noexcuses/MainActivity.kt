@@ -3,12 +3,11 @@ package com.mmfsin.noexcuses
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mmfsin.noexcuses.intefaces.IFragment
-import com.mmfsin.noexcuses.view.category.CategoryFragment
 import com.mmfsin.noexcuses.view.category.model.CategoryDTO
 import com.mmfsin.noexcuses.view.exercisedetail.ExerciseDetailFragment
 import com.mmfsin.noexcuses.view.exercises.ExercisesFragment
 import com.mmfsin.noexcuses.view.exercises.model.ExerciseDTO
-import kotlinx.android.synthetic.main.activity_main.*
+import io.realm.Realm
 
 class MainActivity : AppCompatActivity(), IFragment {
 
@@ -16,14 +15,16 @@ class MainActivity : AppCompatActivity(), IFragment {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        exercises.setOnClickListener {
-            supportFragmentManager.beginTransaction().addToBackStack(null)
-                .replace(R.id.fragment_container_view, CategoryFragment(this)).commit()
-        }
+        Realm.init(this)
 
-        tables.setOnClickListener {}
-
-        material.setOnClickListener {}
+//        exercises.setOnClickListener {
+//            supportFragmentManager.beginTransaction().addToBackStack(null)
+//                .replace(R.id.fragment_container_view, CategoryFragment(this)).commit()
+//        }
+//
+//        tables.setOnClickListener {}
+//
+//        material.setOnClickListener {}
 
     }
 

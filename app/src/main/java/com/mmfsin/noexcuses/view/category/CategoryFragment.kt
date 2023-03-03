@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.intefaces.IFragment
 import com.mmfsin.noexcuses.view.category.model.CategoryDTO
-import kotlinx.android.synthetic.main.fragment_category.*
 
 class CategoryFragment(private val listener: IFragment) : Fragment(), CategoryView {
 
@@ -40,7 +39,7 @@ class CategoryFragment(private val listener: IFragment) : Fragment(), CategoryVi
 
         //loading VISIBLE
 
-        backButton.setOnClickListener { listener.close() }
+//        backButton.setOnClickListener { listener.close() }
 
         groups = presenter.getGroupList(mContext, activity)
         images = presenter.getImagesList(mContext, activity)

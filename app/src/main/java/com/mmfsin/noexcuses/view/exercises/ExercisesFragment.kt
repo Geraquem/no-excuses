@@ -7,13 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.intefaces.IFragment
 import com.mmfsin.noexcuses.view.category.model.CategoryDTO
 import com.mmfsin.noexcuses.view.exercises.adapter.RViewAdapter
 import com.mmfsin.noexcuses.view.exercises.model.ExerciseDTO
-import kotlinx.android.synthetic.main.fragment_exercises.*
 
 class ExercisesFragment(private val listener: IFragment, val category: CategoryDTO) : Fragment(),
     ExercisesView {
@@ -37,16 +35,16 @@ class ExercisesFragment(private val listener: IFragment, val category: CategoryD
 
         //loading VISIBLE
 
-        backButton.setOnClickListener { listener.close() }
-        toolbarText.text = category.name
+//        backButton.setOnClickListener { listener.close() }
+//        toolbarText.text = category.name
 
         presenter.getExercises(category.name)
     }
 
     override fun showExercises(list: List<ExerciseDTO>) {
-        recyclerView.layoutManager = LinearLayoutManager(mContext)
-        adapter = RViewAdapter({ listener.openExerciseDetail(it) }, mContext, list)
-        recyclerView.adapter = adapter
+//        recyclerView.layoutManager = LinearLayoutManager(mContext)
+//        adapter = RViewAdapter({ listener.openExerciseDetail(it) }, mContext, list)
+//        recyclerView.adapter = adapter
 
 //        loading.visibility = View.GONE
     }
