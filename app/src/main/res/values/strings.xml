@@ -10,6 +10,8 @@
 
     <!-- Phases -->
     <string name="create_new_phase">Crear nueva</string>
+    <string name="phase_menu_edit">Editar</string>
+    <string name="phase_menu_delete">Eliminar</string>
 
     <!-- New Phase -->
     <string name="new_phase_title">Crea tu nueva serie de rutinas</string>

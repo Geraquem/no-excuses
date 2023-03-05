@@ -16,7 +16,12 @@
 
     <fragment
         android:id="@+id/phasesFragment"
-        android:name="com.mmfsin.noexcuses.presentation.phases.PhaseFragment"
+        android:name="com.mmfsin.noexcuses.presentation.phases.PhasesFragment"
+        tools:layout="@layout/fragment_phases" />
+
+    <fragment
+        android:id="@+id/routinesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.phases.PhasesFragment"
         tools:layout="@layout/fragment_phases" />
 
 </navigation>

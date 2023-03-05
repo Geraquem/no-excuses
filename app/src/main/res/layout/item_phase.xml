@@ -11,10 +11,19 @@
     android:elevation="@dimen/elevation_default"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/margin_padding_medium"
-    android:paddingVertical="@dimen/margin_padding_xmedium">
+    android:paddingTop="@dimen/margin_padding_xmedium"
+    android:paddingBottom="@dimen/margin_padding_medium">
+
+    <ImageView
+        android:id="@+id/iv_menu"
+        android:layout_width="@dimen/margin_padding_medium"
+        android:layout_height="@dimen/margin_padding_medium"
+        android:layout_gravity="end"
+        android:contentDescription="@string/content_description"
+        android:src="@drawable/ic_three_dots_menu" />
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_name"
         style="@style/BigTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
