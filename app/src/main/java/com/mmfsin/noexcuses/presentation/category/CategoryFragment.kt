@@ -12,10 +12,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
-import com.mmfsin.noexcuses.intefaces.IFragment
 import com.mmfsin.noexcuses.presentation.category.model.CategoryDTO
 
-class CategoryFragment(private val listener: IFragment) : Fragment(), CategoryView {
+class CategoryFragment() : Fragment(), CategoryView {
 
     private val presenter by lazy { CategoryPresenter(this) }
 
@@ -47,7 +46,7 @@ class CategoryFragment(private val listener: IFragment) : Fragment(), CategoryVi
 
         if (groups.isNotEmpty() && images.isNotEmpty() && names.isNotEmpty()) {
             for (group in groups) {
-                group.setOnClickListener(onCLick)
+//                group.setOnClickListener(onCLick)
             }
             presenter.getCategoryList()
         } else {
@@ -72,29 +71,5 @@ class CategoryFragment(private val listener: IFragment) : Fragment(), CategoryVi
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
-    }
-
-    private val
-            onCLick = View.OnClickListener {
-        when (it.id) {
-            R.id.group1 -> {
-                listener.openExercises(categories[0])
-            }
-            R.id.group2 -> {
-                listener.openExercises(categories[1])
-            }
-            R.id.group3 -> {
-                listener.openExercises(categories[2])
-            }
-            R.id.group4 -> {
-                listener.openExercises(categories[3])
-            }
-            R.id.group5 -> {
-                listener.openExercises(categories[4])
-            }
-            R.id.group6 -> {
-                listener.openExercises(categories[5])
-            }
-        }
     }
 }
