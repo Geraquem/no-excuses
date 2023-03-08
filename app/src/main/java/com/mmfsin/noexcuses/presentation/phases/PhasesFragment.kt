@@ -5,15 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentPhasesBinding
 import com.mmfsin.noexcuses.domain.models.Phase
+import com.mmfsin.noexcuses.presentation.phases.PhasesFragmentDirections.Companion.actionPhasesToRoutines
 import com.mmfsin.noexcuses.presentation.phases.adapter.PhasesAdapter
 import com.mmfsin.noexcuses.presentation.phases.dialog.NewPhaseDialog
-import com.mmfsin.noexcuses.presentation.phases.interfaces.IPhaseListener
+import com.mmfsin.noexcuses.presentation.phases.interfaces.IPhasesListener
 
-class PhasesFragment() : BaseFragment<FragmentPhasesBinding>(), PhasesView, IPhaseListener {
+class PhasesFragment() : BaseFragment<FragmentPhasesBinding>(), PhasesView, IPhasesListener {
 
     private val presenter by lazy { PhasesPresenter(this) }
 
@@ -44,8 +46,7 @@ class PhasesFragment() : BaseFragment<FragmentPhasesBinding>(), PhasesView, IPha
         }
     }
 
-    override fun onClick(id: String) {
-    }
+    override fun onClick(id: String) = findNavController().navigate(actionPhasesToRoutines())
 
     override fun editPhase(id: String) {
         val a = 2

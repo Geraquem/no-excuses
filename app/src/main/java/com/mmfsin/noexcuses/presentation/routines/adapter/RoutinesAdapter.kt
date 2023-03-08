@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemPhaseBinding
 import com.mmfsin.noexcuses.domain.models.Phase
-import com.mmfsin.noexcuses.presentation.phases.interfaces.IPhasesListener
+import com.mmfsin.noexcuses.presentation.routines.interfaces.IRoutinesListener
 
-class PhasesAdapter(
+class RoutinesAdapter(
     private val phases: List<Phase>,
-    private val listener: IPhasesListener
-) : RecyclerView.Adapter<PhasesAdapter.ViewHolder>() {
+    private val listener: IRoutinesListener
+) : RecyclerView.Adapter<RoutinesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemPhaseBinding.bind(view)
@@ -23,7 +23,7 @@ class PhasesAdapter(
                     ?: run { tvDescription.visibility = View.GONE }
 
                 ivMenu.setOnClickListener {
-                    //TODO
+                   //TODO
                 }
             }
         }

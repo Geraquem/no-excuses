@@ -17,11 +17,15 @@
     <fragment
         android:id="@+id/phasesFragment"
         android:name="com.mmfsin.noexcuses.presentation.phases.PhasesFragment"
-        tools:layout="@layout/fragment_phases" />
+        tools:layout="@layout/fragment_phases">
+        <action
+            android:id="@+id/action_phases_to_routines"
+            app:destination="@id/routinesFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/routinesFragment"
-        android:name="com.mmfsin.noexcuses.presentation.phases.PhasesFragment"
-        tools:layout="@layout/fragment_phases" />
+        android:name="com.mmfsin.noexcuses.presentation.routines.RoutinesFragment"
+        tools:layout="@layout/fragment_routines" />
 
 </navigation>

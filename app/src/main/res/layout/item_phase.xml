@@ -20,7 +20,7 @@
         android:layout_height="@dimen/margin_padding_medium"
         android:layout_gravity="end"
         android:contentDescription="@string/content_description"
-        android:src="@drawable/ic_three_dots_menu" />
+        android:src="@drawable/ic_add" />
 
     <TextView
         android:id="@+id/tv_name"

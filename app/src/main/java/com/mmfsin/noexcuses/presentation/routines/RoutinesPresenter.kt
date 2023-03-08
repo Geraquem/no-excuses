@@ -1,11 +1,12 @@
-package com.mmfsin.noexcuses.presentation.phases
+package com.mmfsin.noexcuses.presentation.routines
 
 import com.mmfsin.noexcuses.data.repository.PhasesRepository
 import com.mmfsin.noexcuses.presentation.routines.RoutinesView
 
-class PhasesPresenter(val view: PhasesView) {
+class RoutinesPresenter(val view: RoutinesView) {
 
     private val repository by lazy { PhasesRepository() }
 
-    fun getPhases() = view.getPhases(repository.getPhases())
+    fun getRoutines() = view.getRoutines(repository.getPhases())
+
 }
