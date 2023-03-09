@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.phases.adapter
+package com.mmfsin.noexcuses.presentation.routines.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -21,10 +21,6 @@ class RoutinesAdapter(
                 tvName.text = phase.name
                 phase.description?.let { desc -> tvDescription.text = desc }
                     ?: run { tvDescription.visibility = View.GONE }
-
-                ivMenu.setOnClickListener {
-                   //TODO
-                }
             }
         }
     }

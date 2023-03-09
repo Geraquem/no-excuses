@@ -21,10 +21,6 @@ class PhasesAdapter(
                 tvName.text = phase.name
                 phase.description?.let { desc -> tvDescription.text = desc }
                     ?: run { tvDescription.visibility = View.GONE }
-
-                ivMenu.setOnClickListener {
-                    //TODO
-                }
             }
         }
     }
