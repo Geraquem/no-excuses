@@ -53,7 +53,7 @@
         <item name="android:fontFamily">@font/montserrat_regular</item>
     </style>
 
-    <style name="RecyclerView">
+    <style name="scroll_no_effects">
         <item name="android:scrollbars">none</item>
         <item name="android:overScrollMode">never</item>
     </style>

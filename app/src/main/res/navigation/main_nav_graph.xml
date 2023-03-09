@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_init_to_phases"
             app:destination="@id/phasesFragment" />
+        <action
+            android:id="@+id/action_phases_to_muscularGroups"
+            app:destination="@id/muscularGroupsFragment" />
     </fragment>
 
     <fragment
@@ -26,6 +29,15 @@
     <fragment
         android:id="@+id/routinesFragment"
         android:name="com.mmfsin.noexcuses.presentation.routines.RoutinesFragment"
-        tools:layout="@layout/fragment_routines" />
+        tools:layout="@layout/fragment_routines">
+        <action
+            android:id="@+id/action_routines_to_muscularGroups"
+            app:destination="@id/muscularGroupsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/muscularGroupsFragment"
+        android:name="com.mmfsin.noexcuses.presentation.musculargroups.MGroupsFragment"
+        tools:layout="@layout/fragment_muscular_groups" />
 
 </navigation>

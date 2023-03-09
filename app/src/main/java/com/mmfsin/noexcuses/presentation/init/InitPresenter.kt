@@ -1,21 +1,22 @@
 package com.mmfsin.noexcuses.presentation.init
 
 import com.mmfsin.noexcuses.data.repository.ExercisesRepository
-import com.mmfsin.noexcuses.data.repository.PhasesRepository
-import com.mmfsin.noexcuses.presentation.routines.RoutinesView
+import com.mmfsin.noexcuses.data.repository.FirebaseRepository
+import com.mmfsin.noexcuses.domain.interfaces.IExercises
 
-class InitPresenter(val view: InitView) {
+class InitPresenter(val view: InitView) : IExercises {
 
+    private val firebase by lazy { FirebaseRepository(this) }
     private val repository by lazy { ExercisesRepository() }
 
     fun checkWhereToCall() {
         val realmList = repository.getExercisesFromRealm()
-        if (realmList.isEmpty()) {
-            getExercisesFromFirebase()
-        } else {
-            view.onFirebaseResult()
-        }
+        if (realmList.isEmpty()) firebase.getExercisesFromFirebase()
+        else view.flowCompleted()
     }
 
-    fun getExercisesFromFirebase() = repository.getExercisesFromFirebase()
+    override fun retrievedFromFirebase(result: Boolean) {
+        if (result) view.flowCompleted()
+        else view.sww()
+    }
 }

@@ -22,6 +22,16 @@
     <string name="new_phase_save">Guardar</string>
     <string name="new_phase_cancel">Cancelar</string>
 
-    <string name="muscularGroups">GRUPOS MUSCULARES</string>
+    <!-- Muscular Groups -->
+    <string name="muscularGroups">Grupos musculares</string>
+    <string name="mg_hombro">hombro</string>
+    <string name="mg_pecho">pecho</string>
+    <string name="mg_biceps">biceps</string>
+    <string name="mg_triceps">triceps</string>
+    <string name="mg_espalda">espalda</string>
+    <string name="mg_piernas">piernas</string>
+    <string name="mg_abdominales">torso</string>
+    <string name="abdominales">abdominales</string>
+    <string name="mg_cardio">cardio</string>
 
 </resources>

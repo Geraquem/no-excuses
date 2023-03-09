@@ -1,15 +1,12 @@
-package com.mmfsin.noexcuses.presentation.category
+package com.mmfsin.noexcuses.presentation.musculargroups
 
 import android.content.Context
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
-import com.mmfsin.noexcuses.presentation.category.model.CategoryDTO
 
-class CategoryPresenter(val view: CategoryView) : CategoryInteractor.ICategory {
-
-    private val interactor by lazy { CategoryInteractor(this) }
+class MGroupsPresenter(val view: MGroupsView) {
 
     fun getGroupList(context: Context, activity: FragmentActivity?): List<LinearLayout> {
         val list = mutableListOf<LinearLayout>()
@@ -41,15 +38,4 @@ class CategoryPresenter(val view: CategoryView) : CategoryInteractor.ICategory {
         return list
     }
 
-    fun getCategoryList() {
-        interactor.getCategoryList()
-    }
-
-    override fun ok(list: List<CategoryDTO>) {
-        view.showCategoryList(list)
-    }
-
-    override fun ko() {
-        view.somethingWentWrong()
-    }
 }

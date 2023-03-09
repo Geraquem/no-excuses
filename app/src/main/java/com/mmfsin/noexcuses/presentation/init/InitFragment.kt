@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentInitBinding
 import com.mmfsin.noexcuses.presentation.init.InitFragmentDirections.Companion.actionInitToPhases
+import com.mmfsin.noexcuses.presentation.init.InitFragmentDirections.Companion.actionPhasesToMuscularGroups
 
 class InitFragment : BaseFragment<FragmentInitBinding>(), InitView {
 
@@ -17,7 +18,6 @@ class InitFragment : BaseFragment<FragmentInitBinding>(), InitView {
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
     ) = FragmentInitBinding.inflate(inflater, container, false)
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,11 +31,16 @@ class InitFragment : BaseFragment<FragmentInitBinding>(), InitView {
     override fun setListeners() {
         binding.apply {
             phases.setOnClickListener { findNavController().navigate(actionInitToPhases()) }
+            exercises.setOnClickListener { findNavController().navigate(actionPhasesToMuscularGroups()) }
         }
     }
 
-    override fun onFirebaseResult() {
+    override fun flowCompleted() {
         Toast.makeText(this@InitFragment.requireContext(), "realm existe", Toast.LENGTH_SHORT)
             .show()
+    }
+
+    override fun sww() {
+        Toast.makeText(this@InitFragment.requireContext(), "sww", Toast.LENGTH_SHORT).show()
     }
 }
