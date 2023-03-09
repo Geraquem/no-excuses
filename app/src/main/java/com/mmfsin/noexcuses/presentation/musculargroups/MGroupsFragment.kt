@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMuscularGroupsBinding
@@ -28,7 +29,7 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>(), MGroupsVi
             setMuscularGroupData(triceps, R.drawable.iv_triceps, R.string.mg_triceps)
             setMuscularGroupData(espalda, R.drawable.iv_espalda, R.string.mg_espalda)
             setMuscularGroupData(pierna, R.drawable.iv_piernas, R.string.mg_piernas)
-            setMuscularGroupData(abdominales, R.drawable.iv_abdominales, R.string.mg_abdominales)
+            setMuscularGroupData(abdominales, R.drawable.iv_torso, R.string.mg_torso)
             setMuscularGroupData(cardio, R.drawable.iv_cardio, R.string.mg_cardio)
         }
     }
@@ -36,13 +37,15 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>(), MGroupsVi
     private fun setMuscularGroupData(mgroup: IncludeMuscularGroupBinding, image: Int, name: Int) {
         mgroup.image.setImageResource(image)
         mgroup.tvName.text = getString(name)
+        mgroup.root.setOnClickListener { navigateToExercises(getString(name)) }
     }
 
     override fun setListeners() {
-        binding.apply {
-            toolbar.ivBack.setOnClickListener { activity?.onBackPressed() }
+        binding.toolbar.ivBack.setOnClickListener { activity?.onBackPressed() }
+    }
 
-        }
+    private fun navigateToExercises(name: String) {
+        findNavController().navigate(MGroupsFragmentDirections.actionMuscularGroupsToExercises(name))
     }
 
     override fun sww() {

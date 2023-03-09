@@ -30,8 +30,10 @@
     <string name="mg_triceps">triceps</string>
     <string name="mg_espalda">espalda</string>
     <string name="mg_piernas">piernas</string>
-    <string name="mg_abdominales">torso</string>
-    <string name="abdominales">abdominales</string>
+    <string name="mg_torso">torso</string>
     <string name="mg_cardio">cardio</string>
+
+    <!-- Exercises -->
+    <string name="exercises_toolbar">Ejercicios - <b>%s</b></string>
 
 </resources>

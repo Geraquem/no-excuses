@@ -29,15 +29,24 @@
     <fragment
         android:id="@+id/routinesFragment"
         android:name="com.mmfsin.noexcuses.presentation.routines.RoutinesFragment"
-        tools:layout="@layout/fragment_routines">
-        <action
-            android:id="@+id/action_routines_to_muscularGroups"
-            app:destination="@id/muscularGroupsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_routines" />
 
     <fragment
         android:id="@+id/muscularGroupsFragment"
         android:name="com.mmfsin.noexcuses.presentation.musculargroups.MGroupsFragment"
-        tools:layout="@layout/fragment_muscular_groups" />
+        tools:layout="@layout/fragment_muscular_groups">
+        <action
+            android:id="@+id/action_muscularGroups_to_exercises"
+            app:destination="@id/exercisesFragment">
+            <argument
+                android:name="name"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/exercisesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.exercises.ExercisesFragment"
+        tools:layout="@layout/fragment_exercises" />
 
 </navigation>
