@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentInitBinding
+import com.mmfsin.noexcuses.databinding.IncludeButtonInitBinding
 import com.mmfsin.noexcuses.presentation.init.InitFragmentDirections.Companion.actionInitToPhases
 import com.mmfsin.noexcuses.presentation.init.InitFragmentDirections.Companion.actionPhasesToMuscularGroups
 
@@ -25,13 +27,25 @@ class InitFragment : BaseFragment<FragmentInitBinding>(), InitView {
     }
 
     override fun setUI() {
-        super.setUI()
+        binding.apply {
+            setButtons(routines, R.drawable.iv_rutinas, R.string.routines)
+            setButtons(exercises, R.drawable.iv_exercises, R.string.exercises)
+        }
+    }
+
+    private fun setButtons(button: IncludeButtonInitBinding, image: Int, name: Int) {
+        button.image.setImageResource(image)
+        button.tvName.text = getString(name)
     }
 
     override fun setListeners() {
         binding.apply {
-            phases.setOnClickListener { findNavController().navigate(actionInitToPhases()) }
-            exercises.setOnClickListener { findNavController().navigate(actionPhasesToMuscularGroups()) }
+            routines.root.setOnClickListener {
+                findNavController().navigate(actionInitToPhases())
+            }
+            exercises.root.setOnClickListener {
+                findNavController().navigate(actionPhasesToMuscularGroups())
+            }
         }
     }
 

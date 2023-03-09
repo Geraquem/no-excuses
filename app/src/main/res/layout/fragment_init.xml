@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -22,62 +24,28 @@
         app:layout_constraintGuide_percent="0.95" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/gl_left"
+        app:layout_constraintRight_toRightOf="@id/gl_right"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/content_description"
-            android:src="@color/black" />
-
-        <LinearLayout
-            android:id="@+id/phases"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_tv_init"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/BigTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/bg_tv_init"
-                android:drawablePadding="@dimen/margin_padding_medium"
-                android:elevation="@dimen/elevation_default"
-                android:gravity="center"
-                android:paddingVertical="@dimen/margin_padding_small"
-                android:text="@string/tables" />
-
-            <ImageView
-                android:layout_width="@dimen/margin_padding_large"
-                android:layout_height="@dimen/margin_padding_large"
-                android:contentDescription="@string/content_description"
-                android:src="@drawable/ic_close" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/exercises"
+        <include
+            android:id="@+id/routines"
+            layout="@layout/include_button_init"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="@string/exercises"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            app:drawableEndCompat="@drawable/ic_close" />
+            android:layout_marginEnd="@dimen/margin_padding_medium" />
+
+        <include
+            android:id="@+id/exercises"
+            layout="@layout/include_button_init" />
 
     </LinearLayout>
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_container_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
