@@ -23,7 +23,11 @@
         tools:layout="@layout/fragment_phases">
         <action
             android:id="@+id/action_phases_to_routines"
-            app:destination="@id/routinesFragment" />
+            app:destination="@id/routinesFragment">
+            <argument
+                android:name="phase"
+                app:argType="com.mmfsin.noexcuses.domain.models.Phase" />
+        </action>
     </fragment>
 
     <fragment

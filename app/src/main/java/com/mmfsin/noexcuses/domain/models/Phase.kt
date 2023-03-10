@@ -8,4 +8,4 @@ open class Phase(
     var id: String = "",
     var name: String = "",
     var description: String? = null
-) : RealmObject()
+) : RealmObject(), java.io.Serializable

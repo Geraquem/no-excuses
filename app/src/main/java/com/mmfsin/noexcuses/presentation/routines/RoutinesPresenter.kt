@@ -7,6 +7,6 @@ class RoutinesPresenter(val view: RoutinesView) {
 
     private val repository by lazy { PhasesRepository() }
 
-    fun getRoutines() = view.getRoutines(repository.getPhases())
+//    fun getRoutines() = view.getRoutines(repository.getPhases())
 
 }

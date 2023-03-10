@@ -10,17 +10,18 @@ import com.mmfsin.noexcuses.domain.models.Phase
 import com.mmfsin.noexcuses.presentation.phases.interfaces.IPhasesListener
 
 class PhasesAdapter(
-    private val phases: List<Phase>,
-    private val listener: IPhasesListener
+    private val phases: List<Phase>, private val listener: IPhasesListener
 ) : RecyclerView.Adapter<PhasesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemPhaseBinding.bind(view)
-        fun bind(phase: Phase) {
+        fun bind(phase: Phase, listener: IPhasesListener) {
             binding.apply {
                 tvName.text = phase.name
                 phase.description?.let { desc -> tvDescription.text = desc }
                     ?: run { tvDescription.visibility = View.GONE }
+
+                ivConfig.setOnClickListener { listener.config(phase) }
             }
         }
     }
@@ -32,8 +33,8 @@ class PhasesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(phases[position])
-        holder.itemView.setOnClickListener { listener.onClick(phases[position].id) }
+        holder.bind(phases[position], listener)
+        holder.itemView.setOnClickListener { listener.onClick(phases[position]) }
     }
 
     override fun getItemCount(): Int = phases.size
