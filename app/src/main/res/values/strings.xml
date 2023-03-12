@@ -5,8 +5,11 @@
     <string name="sww">Vaya, algo ha salido mal</string>
 
     <!-- Main -->
-    <string name="routines">RUTINAS</string>
-    <string name="exercises">EJERCICIOS</string>
+    <string name="routines">Rutinas</string>
+    <string name="exercises">Ejercicios</string>
+    <string name="my_weights">Mis pesos</string>
+    <string name="notes">Notas</string>
+    <string name="laziness">Pereza</string>
 
     <!-- Phases -->
     <string name="create_new_phase">Crear nueva rutina</string>
@@ -26,6 +29,13 @@
     <string name="delete_phase">Eliminar</string>
     <string name="delete_phase_cancel">Cancelar</string>
     <string name="delete_phase_confirm">¿Quieres eliminar %s?</string>
+
+    <!-- New Day -->
+    <string name="new_day_title">Crea tu nuevo día de entrenamiento</string>
+    <string name="new_day_name">Nombre</string>
+    <string name="new_day_name_hint">Ej: Lunes</string>
+    <string name="new_day_save">Guardar</string>
+    <string name="new_day_cancel">Cancelar</string>
 
     <!-- Muscular Groups -->
     <string name="muscularGroups">Grupos musculares</string>

@@ -9,10 +9,11 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMuscularGroupsBinding
 import com.mmfsin.noexcuses.databinding.IncludeMuscularGroupBinding
+import com.mmfsin.noexcuses.presentation.days.DaysFragmentDirections
 
-class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>(), MGroupsView {
+class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>() {
 
-    private val presenter by lazy { MGroupsPresenter(this) }
+    private var dayId: String? = null
 
     private lateinit var mContext: Context
 
@@ -20,7 +21,10 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>(), MGroupsVi
         inflater: LayoutInflater, container: ViewGroup?
     ) = FragmentMuscularGroupsBinding.inflate(inflater, container, false)
 
+    private fun getBundleArgs() = arguments?.let { bundle -> dayId = bundle.getString("dayId") }
+
     override fun setUI() {
+        getBundleArgs()
         binding.apply {
             toolbar.title.text = getString(R.string.muscularGroups)
             setMuscularGroupData(hombro, R.drawable.iv_hombros, R.string.mg_hombro)
@@ -32,12 +36,16 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>(), MGroupsVi
             setMuscularGroupData(abdominales, R.drawable.iv_torso, R.string.mg_torso)
             setMuscularGroupData(cardio, R.drawable.iv_cardio, R.string.mg_cardio)
         }
+
+        dayId?.let {
+            Toast.makeText(this@MGroupsFragment.requireContext(), dayId, Toast.LENGTH_SHORT)
+                .show() }
     }
 
-    private fun setMuscularGroupData(mgroup: IncludeMuscularGroupBinding, image: Int, name: Int) {
-        mgroup.image.setImageResource(image)
-        mgroup.tvName.text = getString(name)
-        mgroup.root.setOnClickListener { navigateToExercises(getString(name)) }
+    private fun setMuscularGroupData(group: IncludeMuscularGroupBinding, image: Int, name: Int) {
+        group.image.setImageResource(image)
+        group.tvName.text = getString(name)
+        group.root.setOnClickListener { navigateToExercises(getString(name)) }
     }
 
     override fun setListeners() {
@@ -46,10 +54,6 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>(), MGroupsVi
 
     private fun navigateToExercises(name: String) {
         findNavController().navigate(MGroupsFragmentDirections.actionMuscularGroupsToExercises(name))
-    }
-
-    override fun sww() {
-        Toast.makeText(mContext, getString(R.string.sww), Toast.LENGTH_SHORT).show()
     }
 
     override fun onAttach(context: Context) {
