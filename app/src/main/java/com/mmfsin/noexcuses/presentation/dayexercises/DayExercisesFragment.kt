@@ -1,0 +1,82 @@
+package com.mmfsin.noexcuses.presentation.dayexercises
+
+import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.mmfsin.noexcuses.R
+import com.mmfsin.noexcuses.base.BaseFragment
+import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
+import com.mmfsin.noexcuses.domain.models.RealmExercise
+import com.mmfsin.noexcuses.presentation.chooseexercises.adapter.ChExercisesAdapter
+import com.mmfsin.noexcuses.presentation.chooseexercises.interfaces.IChExercisesListener
+import com.mmfsin.noexcuses.presentation.dayexercises.DayExercisesFragmentDirections.Companion.actionDayExercisesToMuscularGroups
+import com.mmfsin.noexcuses.presentation.days.DaysFragmentDirections
+import com.mmfsin.noexcuses.presentation.exercises.adapter.ExercisesAdapter
+import com.mmfsin.noexcuses.presentation.exercises.interfaces.IExercisesListener
+
+class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExercisesView,
+    IExercisesListener {
+
+    private val presenter by lazy { DayExercisesPresenter(this) }
+
+    private var name: String = ""
+    private var dayId: String? = null
+
+    private lateinit var mContext: Context
+
+    override fun inflateView(
+        inflater: LayoutInflater, container: ViewGroup?
+    ) = FragmentExercisesBinding.inflate(inflater, container, false)
+
+
+    private fun getBundleArgs() = arguments?.let { bundle ->
+        name = bundle.getString("name", "")
+        dayId = bundle.getString("dayId")
+    }
+
+    override fun setUI() {
+        getBundleArgs()
+        binding.apply {
+            toolbar.title.text = name
+            toolbar.iconRight.setImageResource(R.drawable.ic_add)
+            toolbar.iconRight.visibility = View.VISIBLE
+        }
+        dayId?.let { presenter.getDayExercises(it) }
+    }
+
+    override fun setListeners() {
+        binding.toolbar.apply {
+            ivBack.setOnClickListener { activity?.onBackPressed() }
+            iconRight.setOnClickListener {
+                dayId?.let { dayId ->
+                    findNavController().navigate(actionDayExercisesToMuscularGroups(name, dayId))
+                }
+            }
+        }
+    }
+
+    override fun getDayExercises(exercises: List<RealmExercise>) {
+        binding.rvExercises.apply {
+            layoutManager = LinearLayoutManager(mContext)
+            adapter = ExercisesAdapter(exercises, this@DayExercisesFragment)
+        }
+    }
+
+    override fun onClick(id: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun sww() {
+        Toast.makeText(this@DayExercisesFragment.requireContext(), "sww", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
+}

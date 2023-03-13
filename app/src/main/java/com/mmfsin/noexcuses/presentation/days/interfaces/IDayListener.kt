@@ -1,5 +1,7 @@
 package com.mmfsin.noexcuses.presentation.days.interfaces
 
+import com.mmfsin.noexcuses.domain.models.Day
+
 interface IDayListener {
-    fun onClick(id: String)
+    fun onClick(day: Day)
 }

@@ -36,7 +36,26 @@
         tools:layout="@layout/fragment_days">
         <action
             android:id="@+id/action_phases_to_muscularGroups"
+            app:destination="@id/dayExercisesFragment">
+            <argument
+                android:name="name"
+                app:argType="string" />
+            <argument
+                android:name="dayId"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/dayExercisesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.dayexercises.DayExercisesFragment"
+        tools:layout="@layout/fragment_exercises">
+        <action
+            android:id="@+id/action_dayExercises_to_muscularGroups"
             app:destination="@id/muscularGroupsFragment">
+            <argument
+                android:name="name"
+                app:argType="string" />
             <argument
                 android:name="dayId"
                 app:argType="string" />

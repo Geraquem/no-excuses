@@ -6,7 +6,7 @@ import com.mmfsin.noexcuses.data.database.RealmDatabase
 import com.mmfsin.noexcuses.domain.interfaces.IExercises
 import com.mmfsin.noexcuses.domain.models.RealmExercise
 
-class FirebaseRepository(val listener: IExercises) {
+class FirebaseRepository(private val listener: IExercises) {
 
     private val realm by lazy { RealmDatabase() }
 

@@ -80,8 +80,8 @@ class DaysFragment() : BaseFragment<FragmentDaysBinding>(), DaysView, IDayListen
         phase?.let { presenter.getDays(it.id) }
     }
 
-    override fun onClick(id: String) =
-        findNavController().navigate(actionPhasesToMuscularGroups(id))
+    override fun onClick(day: Day) =
+        findNavController().navigate(actionPhasesToMuscularGroups(day.name, day.id))
 
     override fun sww() {
     }
