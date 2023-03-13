@@ -3,6 +3,7 @@ package com.mmfsin.noexcuses.presentation.init
 import com.mmfsin.noexcuses.data.repository.ExercisesRepository
 import com.mmfsin.noexcuses.data.repository.FirebaseRepository
 import com.mmfsin.noexcuses.domain.interfaces.IExercises
+import com.mmfsin.noexcuses.domain.models.CompleteExercise
 
 class InitPresenter(val view: InitView) : IExercises {
 
@@ -10,7 +11,7 @@ class InitPresenter(val view: InitView) : IExercises {
     private val repository by lazy { ExercisesRepository() }
 
     fun checkWhereToCall() {
-         firebase.getExercisesFromFirebase()
+        firebase.getExercisesFromFirebase()
     }
 
 //    fun checkWhereToCall() {
@@ -19,8 +20,10 @@ class InitPresenter(val view: InitView) : IExercises {
 //        else view.flowCompleted()
 //    }
 
-    override fun retrievedFromFirebase(result: Boolean) {
+    override fun retrievedExercisesFromFirebase(result: Boolean) {
         if (result) view.flowCompleted()
         else view.sww()
     }
+
+    override fun retrievedSingleExercise(result: CompleteExercise?) {}
 }

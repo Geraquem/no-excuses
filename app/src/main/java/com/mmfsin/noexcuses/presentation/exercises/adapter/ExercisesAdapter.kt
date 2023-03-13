@@ -29,7 +29,7 @@ class ExercisesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(realmExercises[position])
-        holder.itemView.setOnClickListener { listener.onClick(realmExercises[position].id) }
+        holder.itemView.setOnClickListener { listener.onClick(realmExercises[position]) }
     }
 
     override fun getItemCount(): Int = realmExercises.size

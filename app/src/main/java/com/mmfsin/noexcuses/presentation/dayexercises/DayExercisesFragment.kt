@@ -16,8 +16,10 @@ import com.mmfsin.noexcuses.presentation.chooseexercises.adapter.ChExercisesAdap
 import com.mmfsin.noexcuses.presentation.chooseexercises.interfaces.IChExercisesListener
 import com.mmfsin.noexcuses.presentation.dayexercises.DayExercisesFragmentDirections.Companion.actionDayExercisesToMuscularGroups
 import com.mmfsin.noexcuses.presentation.days.DaysFragmentDirections
+import com.mmfsin.noexcuses.presentation.detailexercise.DetailExerciseDialog
 import com.mmfsin.noexcuses.presentation.exercises.adapter.ExercisesAdapter
 import com.mmfsin.noexcuses.presentation.exercises.interfaces.IExercisesListener
+import com.mmfsin.noexcuses.presentation.phases.dialogs.newphase.NewPhaseDialog
 
 class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExercisesView,
     IExercisesListener {
@@ -67,8 +69,9 @@ class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExerci
         }
     }
 
-    override fun onClick(id: String) {
-        TODO("Not yet implemented")
+    override fun onClick(exercise: RealmExercise) {
+        val dialog = DetailExerciseDialog(exercise)
+        activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
 
     override fun sww() {

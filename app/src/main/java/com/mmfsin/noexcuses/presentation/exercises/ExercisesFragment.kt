@@ -9,8 +9,10 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
 import com.mmfsin.noexcuses.domain.models.RealmExercise
+import com.mmfsin.noexcuses.presentation.detailexercise.DetailExerciseDialog
 import com.mmfsin.noexcuses.presentation.exercises.adapter.ExercisesAdapter
 import com.mmfsin.noexcuses.presentation.exercises.interfaces.IExercisesListener
+import com.mmfsin.noexcuses.presentation.phases.dialogs.newphase.NewPhaseDialog
 
 class ExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ExercisesView,
     IExercisesListener {
@@ -50,8 +52,9 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ExercisesVie
         Toast.makeText(this@ExercisesFragment.requireContext(), "sww", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onClick(id: String) {
-        /** open detail Exercise */
+    override fun onClick(exercise: RealmExercise) {
+        val dialog = DetailExerciseDialog(exercise)
+        activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
 
     override fun onAttach(context: Context) {

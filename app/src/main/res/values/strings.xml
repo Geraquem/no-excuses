@@ -51,4 +51,9 @@
     <!-- Exercises -->
     <string name="exercises_toolbar">Ejercicios - <b>%s</b></string>
 
+    <!-- Exercise Detail -->
+    <string name="exercises_of">Ejercicio de <b>%s</b></string>
+    <string name="involved_muscles">Músculos involucrados:</string>
+    <string name="how_to_do_it">¿Cómo se hace?</string>
+
 </resources>
