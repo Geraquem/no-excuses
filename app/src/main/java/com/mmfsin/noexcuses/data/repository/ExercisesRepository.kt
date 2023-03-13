@@ -1,20 +1,21 @@
 package com.mmfsin.noexcuses.data.repository
 
 import com.mmfsin.noexcuses.data.database.RealmDatabase
-import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.domain.models.ComboModel
+import com.mmfsin.noexcuses.domain.models.RealmExercise
 import io.realm.kotlin.where
 
 class ExercisesRepository {
 
     private val realm by lazy { RealmDatabase() }
 
-    fun getExercisesFromRealm(): List<Exercise> {
+    fun getExercisesFromRealm(): List<RealmExercise> {
         return realm.getObjectsFromRealm {
-            where<Exercise>().findAll()
+            where<RealmExercise>().findAll()
         }
     }
 
-    fun saveExercise(exercise: Exercise): Boolean = realm.addObject { exercise }
+    fun saveCombo(comboModel: ComboModel): Boolean = realm.addObject { comboModel }
 
-    fun deleteExercise(exercise: Exercise): Boolean = realm.deleteObject({ exercise }, exercise.id)
+    fun deleteExercise(realmExercise: RealmExercise): Boolean = realm.deleteObject({ realmExercise }, realmExercise.id)
 }

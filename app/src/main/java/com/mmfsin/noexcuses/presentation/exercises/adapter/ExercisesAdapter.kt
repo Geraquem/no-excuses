@@ -6,17 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemSimpleExerciseBinding
-import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.domain.models.RealmExercise
 import com.mmfsin.noexcuses.presentation.exercises.interfaces.IExercisesListener
 
 class ExercisesAdapter(
-    private val exercises: List<Exercise>, private val listener: IExercisesListener
+    private val realmExercises: List<RealmExercise>, private val listener: IExercisesListener
 ) : RecyclerView.Adapter<ExercisesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemSimpleExerciseBinding.bind(view)
-        fun bind(exercise: Exercise) {
-            binding.apply { tvName.text = exercise.nombre }
+        fun bind(realmExercise: RealmExercise) {
+            binding.apply { tvName.text = realmExercise.nombre }
         }
     }
 
@@ -28,9 +28,9 @@ class ExercisesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(exercises[position])
-        holder.itemView.setOnClickListener { listener.onClick(exercises[position].id) }
+        holder.bind(realmExercises[position])
+        holder.itemView.setOnClickListener { listener.onClick(realmExercises[position].id) }
     }
 
-    override fun getItemCount(): Int = exercises.size
+    override fun getItemCount(): Int = realmExercises.size
 }

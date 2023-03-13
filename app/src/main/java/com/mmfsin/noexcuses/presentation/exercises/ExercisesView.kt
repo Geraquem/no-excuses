@@ -1,8 +1,8 @@
 package com.mmfsin.noexcuses.presentation.exercises
 
-import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.domain.models.RealmExercise
 
 interface ExercisesView {
-    fun getExecises(exercises: List<Exercise>)
+    fun getExecises(realmExercises: List<RealmExercise>)
     fun sww()
 }

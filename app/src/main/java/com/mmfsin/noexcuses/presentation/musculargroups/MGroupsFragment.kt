@@ -10,6 +10,7 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMuscularGroupsBinding
 import com.mmfsin.noexcuses.databinding.IncludeMuscularGroupBinding
 import com.mmfsin.noexcuses.presentation.days.DaysFragmentDirections
+import com.mmfsin.noexcuses.presentation.musculargroups.MGroupsFragmentDirections.Companion.actionMuscularGroupsToChooseExercises
 
 class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>() {
 
@@ -38,14 +39,20 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>() {
         }
 
         dayId?.let {
-            Toast.makeText(this@MGroupsFragment.requireContext(), dayId, Toast.LENGTH_SHORT)
-                .show() }
+            Toast.makeText(this@MGroupsFragment.requireContext(), dayId, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setMuscularGroupData(group: IncludeMuscularGroupBinding, image: Int, name: Int) {
         group.image.setImageResource(image)
         group.tvName.text = getString(name)
-        group.root.setOnClickListener { navigateToExercises(getString(name)) }
+        group.root.setOnClickListener {
+            dayId?.let {
+                navigateToChooseExercises(getString(name))
+            } ?: run {
+                navigateToExercises(getString(name))
+            }
+        }
     }
 
     override fun setListeners() {
@@ -54,6 +61,12 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>() {
 
     private fun navigateToExercises(name: String) {
         findNavController().navigate(MGroupsFragmentDirections.actionMuscularGroupsToExercises(name))
+    }
+
+    private fun navigateToChooseExercises(name: String) {
+        dayId?.let { dayId ->
+            findNavController().navigate(actionMuscularGroupsToChooseExercises(name, dayId))
+        }
     }
 
     override fun onAttach(context: Context) {

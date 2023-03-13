@@ -54,11 +54,26 @@
                 android:name="name"
                 app:argType="string" />
         </action>
+        <action
+            android:id="@+id/action_muscularGroups_to_chooseExercises"
+            app:destination="@id/chooseExercisesFragment">
+            <argument
+                android:name="name"
+                app:argType="string" />
+            <argument
+                android:name="dayId"
+                app:argType="string" />
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/exercisesFragment"
         android:name="com.mmfsin.noexcuses.presentation.exercises.ExercisesFragment"
+        tools:layout="@layout/fragment_exercises" />
+
+    <fragment
+        android:id="@+id/chooseExercisesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.chooseexercises.ChExercisesFragment"
         tools:layout="@layout/fragment_exercises" />
 
 </navigation>

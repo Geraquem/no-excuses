@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
-import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.domain.models.RealmExercise
 import com.mmfsin.noexcuses.presentation.exercises.adapter.ExercisesAdapter
 import com.mmfsin.noexcuses.presentation.exercises.interfaces.IExercisesListener
 
@@ -39,10 +39,10 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ExercisesVie
         binding.toolbar.ivBack.setOnClickListener { activity?.onBackPressed() }
     }
 
-    override fun getExecises(exercises: List<Exercise>) {
+    override fun getExecises(realmExercises: List<RealmExercise>) {
         binding.rvExercises.apply {
             layoutManager = LinearLayoutManager(mContext)
-            adapter = ExercisesAdapter(exercises, this@ExercisesFragment)
+            adapter = ExercisesAdapter(realmExercises, this@ExercisesFragment)
         }
     }
 

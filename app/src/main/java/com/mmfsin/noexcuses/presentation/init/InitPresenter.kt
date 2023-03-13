@@ -10,10 +10,14 @@ class InitPresenter(val view: InitView) : IExercises {
     private val repository by lazy { ExercisesRepository() }
 
     fun checkWhereToCall() {
-        val realmList = repository.getExercisesFromRealm()
-        if (realmList.isEmpty()) firebase.getExercisesFromFirebase()
-        else view.flowCompleted()
+         firebase.getExercisesFromFirebase()
     }
+
+//    fun checkWhereToCall() {
+//        val realmList = repository.getExercisesFromRealm()
+//        if (realmList.isEmpty()) firebase.getExercisesFromFirebase()
+//        else view.flowCompleted()
+//    }
 
     override fun retrievedFromFirebase(result: Boolean) {
         if (result) view.flowCompleted()

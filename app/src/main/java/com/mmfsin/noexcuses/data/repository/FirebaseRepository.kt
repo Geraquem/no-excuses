@@ -4,8 +4,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.mmfsin.noexcuses.data.database.RealmDatabase
 import com.mmfsin.noexcuses.domain.interfaces.IExercises
-import com.mmfsin.noexcuses.domain.models.Exercise
-import io.realm.kotlin.where
+import com.mmfsin.noexcuses.domain.models.RealmExercise
 
 class FirebaseRepository(val listener: IExercises) {
 
@@ -15,15 +14,15 @@ class FirebaseRepository(val listener: IExercises) {
         Firebase.database.reference.child("ejercicios").get().addOnSuccessListener {
             for (muscularName in it.children) {
                 for (exercise in muscularName.children) {
-                    exercise.getValue(Exercise::class.java)?.let { ex -> save(ex) }
+                    exercise.getValue(RealmExercise::class.java)?.let { ex -> save(ex) }
                 }
-                listener.retrievedFromFirebase(true)
             }
+            listener.retrievedFromFirebase(true)
         }.addOnFailureListener {
             listener.retrievedFromFirebase(false)
         }
     }
 
-    private fun save(exercise: Exercise): Boolean = realm.addObject { exercise }
+    private fun save(realmExercise: RealmExercise): Boolean = realm.addObject { realmExercise }
 
 }

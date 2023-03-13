@@ -71,8 +71,6 @@ class InitFragment : BaseFragment<FragmentInitBinding>(), InitView {
     }
 
     override fun flowCompleted() {
-        Toast.makeText(this@InitFragment.requireContext(), "realm existe", Toast.LENGTH_SHORT)
-            .show()
     }
 
     override fun sww() {
