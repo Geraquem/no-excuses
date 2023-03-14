@@ -1,5 +1,6 @@
 package com.mmfsin.noexcuses.presentation.detailexercise
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Toast
 import com.mmfsin.noexcuses.R
@@ -7,6 +8,7 @@ import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogDetailExerciseBinding
 import com.mmfsin.noexcuses.domain.models.CompleteExercise
 import com.mmfsin.noexcuses.domain.models.RealmExercise
+import com.mmfsin.noexcuses.presentation.webview.WebViewActivity
 
 class DetailExerciseDialog(
     private val exercise: RealmExercise,
@@ -27,6 +29,13 @@ class DetailExerciseDialog(
         binding.apply {
             tvExerciseOf.text = getString(R.string.exercises_of, exercise.category)
             tvName.text = exercise.nombre
+
+            btnHowToDoIt.setOnClickListener {
+                startActivity(Intent(activity, WebViewActivity::class.java).apply {
+                    putExtra("dataURL", exercise.dataURL)
+                })
+            }
+
         }
     }
 
