@@ -11,6 +11,7 @@ import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
 import com.mmfsin.noexcuses.domain.models.RealmExercise
 import com.mmfsin.noexcuses.presentation.chooseexercises.adapter.ChExercisesAdapter
 import com.mmfsin.noexcuses.presentation.chooseexercises.interfaces.IChExercisesListener
+import com.mmfsin.noexcuses.presentation.detailexercise.DetailExerciseDialog
 
 class ChExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ChExercisesView,
     IChExercisesListener {
@@ -54,17 +55,17 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ChExercise
         Toast.makeText(this@ChExercisesFragment.requireContext(), "sww", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onClick(exerciseId: String) {
-        Toast.makeText(binding.root.context, exerciseId, Toast.LENGTH_SHORT).show()
-        dayId?.let { dayId ->
-            presenter.saveComoModel(dayId, exerciseId)
+    override fun onClick(exercise: RealmExercise) {
+        val dialog = DetailExerciseDialog(true, exercise) {
+            dayId?.let { dayId -> presenter.saveComoModel(dayId, exercise.id) }
         }
+        activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
 
     override fun savedExerciseInDay(result: Boolean) {
-        if(result){
+        if (result) {
             Toast.makeText(binding.root.context, "todo guay", Toast.LENGTH_SHORT).show()
-        }else{
+        } else {
             Toast.makeText(binding.root.context, "problemas", Toast.LENGTH_SHORT).show()
         }
     }

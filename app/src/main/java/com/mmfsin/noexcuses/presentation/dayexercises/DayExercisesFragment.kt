@@ -67,7 +67,7 @@ class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExerci
     }
 
     override fun onClick(exercise: RealmExercise) {
-        val dialog = DetailExerciseDialog(exercise)
+        val dialog = DetailExerciseDialog(false, exercise)
         activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
 

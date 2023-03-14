@@ -57,25 +57,33 @@
             tools:text="PRESS DE BANCA PLANO CON BARRA" />
 
         <TextView
-            style="@style/MediumTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/involved_muscles" />
-
-        <TextView
-            android:id="@+id/tv_involved_muscles"
-            style="@style/MediumTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding_medium"
-            tools:text="Pectoral superior, hombro rotador superior" />
-
-        <Button
             android:id="@+id/btn_how_to_do_it"
+            style="@style/MediumTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/soft_green"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_round_white"
+            android:elevation="@dimen/elevation_default"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/margin_padding_medium"
+            android:paddingVertical="@dimen/margin_padding_small"
             android:text="@string/how_to_do_it"
+            android:textAllCaps="true"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/btn_add_to_day"
+            style="@style/MediumTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_padding_xxxlarge"
+            android:background="@drawable/bg_round_white"
+            android:elevation="@dimen/elevation_default"
+            android:gravity="center"
+            android:padding="@dimen/margin_padding_medium"
+            android:text="@string/add_to_day"
+            android:textAllCaps="true"
             android:textColor="@color/black" />
 
     </LinearLayout>

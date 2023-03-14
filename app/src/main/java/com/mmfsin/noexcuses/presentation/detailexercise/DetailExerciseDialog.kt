@@ -2,6 +2,7 @@ package com.mmfsin.noexcuses.presentation.detailexercise
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
@@ -11,7 +12,9 @@ import com.mmfsin.noexcuses.domain.models.RealmExercise
 import com.mmfsin.noexcuses.presentation.webview.WebViewActivity
 
 class DetailExerciseDialog(
+    private val fromDay: Boolean,
     private val exercise: RealmExercise,
+    private val add: () -> Unit = {}
 ) : BaseDialog<DialogDetailExerciseBinding>(), DetailExerciseView {
 
     private val presenter by lazy { DetailExercisePresenter(this) }
@@ -21,6 +24,7 @@ class DetailExerciseDialog(
 
     override fun setUI() {
         presenter.getExercise(exercise)
+        binding.btnAddToDay.visibility = if (fromDay) View.VISIBLE else View.GONE
     }
 
     override fun setListeners() {}
@@ -36,6 +40,15 @@ class DetailExerciseDialog(
                 })
             }
 
+            btnAddToDay.setOnClickListener {
+                add()
+                Toast.makeText(
+                    this@DetailExerciseDialog.requireContext(),
+                    "Añadido correctamente",
+                    Toast.LENGTH_SHORT
+                ).show()
+                dismiss()
+            }
         }
     }
 
