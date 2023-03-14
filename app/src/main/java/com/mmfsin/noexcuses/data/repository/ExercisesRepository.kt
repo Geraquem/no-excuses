@@ -31,14 +31,14 @@ class ExercisesRepository {
         return list
     }
 
-    private fun getComboModelsFromRealm(): List<ComboModel> {
+    fun getComModelByExerciseId(exerciseId: String): ComboModel {
         return realm.getObjectsFromRealm {
-            where<ComboModel>().findAll()
-        }
+            where<ComboModel>().equalTo("exerciseId", exerciseId).findAll()
+        }[0]
     }
 
-    fun saveCombo(comboModel: ComboModel): Boolean = realm.addObject { comboModel }
+    fun saveComboModel(comboModel: ComboModel): Boolean = realm.addObject { comboModel }
 
-    fun deleteExercise(realmExercise: RealmExercise): Boolean =
-        realm.deleteObject({ realmExercise }, realmExercise.id)
+    fun deleteComboModel(comboModel: ComboModel): Boolean =
+        realm.deleteObject({ comboModel }, comboModel.id)
 }

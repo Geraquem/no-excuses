@@ -23,12 +23,13 @@
     <string name="new_phase_save">Guardar</string>
     <string name="new_phase_cancel">Cancelar</string>
 
-    <!-- Edit / Delete Phase -->
+    <!-- Edit / Delete -->
     <string name="edit_phase_title">Editar %s</string>
     <string name="edit_phase_edit">Editar</string>
     <string name="delete_phase">Eliminar</string>
     <string name="delete_phase_cancel">Cancelar</string>
     <string name="delete_phase_confirm">¿Quieres eliminar %s?</string>
+    <string name="delete_day_exercise_confirm">¿Quieres eliminar %s de tu rutina?</string>
 
     <!-- New Day -->
     <string name="new_day_title">Crea tu nuevo día de entrenamiento</string>

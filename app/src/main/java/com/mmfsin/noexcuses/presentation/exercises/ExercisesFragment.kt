@@ -12,7 +12,6 @@ import com.mmfsin.noexcuses.domain.models.RealmExercise
 import com.mmfsin.noexcuses.presentation.detailexercise.DetailExerciseDialog
 import com.mmfsin.noexcuses.presentation.exercises.adapter.ExercisesAdapter
 import com.mmfsin.noexcuses.presentation.exercises.interfaces.IExercisesListener
-import com.mmfsin.noexcuses.presentation.phases.dialogs.newphase.NewPhaseDialog
 
 class ExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ExercisesView,
     IExercisesListener {

@@ -29,7 +29,7 @@
         android:background="@drawable/bg_new_phase_button"
         android:contentDescription="@string/content_description"
         android:paddingVertical="@dimen/margin_padding_medium"
-        android:src="@drawable/ic_close"
+        android:src="@drawable/ic_throw_trash"
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right"
         app:layout_constraintTop_toTopOf="parent" />

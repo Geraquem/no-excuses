@@ -1,7 +1,6 @@
 package com.mmfsin.noexcuses.presentation.dayexercises
 
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,18 +10,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
+import com.mmfsin.noexcuses.domain.models.ComboModel
 import com.mmfsin.noexcuses.domain.models.RealmExercise
-import com.mmfsin.noexcuses.presentation.chooseexercises.adapter.ChExercisesAdapter
-import com.mmfsin.noexcuses.presentation.chooseexercises.interfaces.IChExercisesListener
 import com.mmfsin.noexcuses.presentation.dayexercises.DayExercisesFragmentDirections.Companion.actionDayExercisesToMuscularGroups
-import com.mmfsin.noexcuses.presentation.days.DaysFragmentDirections
+import com.mmfsin.noexcuses.presentation.dayexercises.adapter.DayExercisesAdapter
+import com.mmfsin.noexcuses.presentation.dayexercises.dialogs.deleteday.DeleteDayExerciseDialog
+import com.mmfsin.noexcuses.presentation.dayexercises.interfaces.IDayExercisesListener
 import com.mmfsin.noexcuses.presentation.detailexercise.DetailExerciseDialog
-import com.mmfsin.noexcuses.presentation.exercises.adapter.ExercisesAdapter
-import com.mmfsin.noexcuses.presentation.exercises.interfaces.IExercisesListener
-import com.mmfsin.noexcuses.presentation.phases.dialogs.newphase.NewPhaseDialog
+import com.mmfsin.noexcuses.presentation.phases.dialogs.deletephase.DeletePhaseDialog
 
 class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExercisesView,
-    IExercisesListener {
+    IDayExercisesListener {
 
     private val presenter by lazy { DayExercisesPresenter(this) }
 
@@ -34,7 +32,6 @@ class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExerci
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
     ) = FragmentExercisesBinding.inflate(inflater, container, false)
-
 
     private fun getBundleArgs() = arguments?.let { bundle ->
         name = bundle.getString("name", "")
@@ -65,7 +62,7 @@ class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExerci
     override fun getDayExercises(exercises: List<RealmExercise>) {
         binding.rvExercises.apply {
             layoutManager = LinearLayoutManager(mContext)
-            adapter = ExercisesAdapter(exercises, this@DayExercisesFragment)
+            adapter = DayExercisesAdapter(exercises, this@DayExercisesFragment)
         }
     }
 
@@ -74,8 +71,19 @@ class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExerci
         activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
 
+    override fun deleteDayExercise(exercise: RealmExercise) {
+        val combo = presenter.getComboModelByExerciseId(exercise.id)
+        val dialog =
+            DeleteDayExerciseDialog(exercise.nombre, combo) { presenter.deleteComboModel(it) }
+        activity?.let { dialog.show(it.supportFragmentManager, "") }
+    }
+
     override fun sww() {
         Toast.makeText(this@DayExercisesFragment.requireContext(), "sww", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun dayExerciseDeleted() {
+        dayId?.let { presenter.getDayExercises(it) }
     }
 
     override fun onAttach(context: Context) {

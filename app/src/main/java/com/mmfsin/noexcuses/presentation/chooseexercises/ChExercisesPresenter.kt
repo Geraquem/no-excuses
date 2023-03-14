@@ -17,11 +17,10 @@ class ChExercisesPresenter(val view: ChExercisesView) {
         }
     }
 
-
     fun saveComoModel(dayId: String, exerciseId: String) {
         val id = UUID.randomUUID().toString()
         val combo = ComboModel(id, dayId, exerciseId)
-        val result = repository.saveCombo(combo)
+        val result = repository.saveComboModel(combo)
         view.savedExerciseInDay(result)
     }
 }
