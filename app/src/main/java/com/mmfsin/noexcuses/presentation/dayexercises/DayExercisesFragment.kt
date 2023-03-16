@@ -10,14 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
-import com.mmfsin.noexcuses.domain.models.ComboModel
 import com.mmfsin.noexcuses.domain.models.RealmExercise
 import com.mmfsin.noexcuses.presentation.dayexercises.DayExercisesFragmentDirections.Companion.actionDayExercisesToMuscularGroups
 import com.mmfsin.noexcuses.presentation.dayexercises.adapter.DayExercisesAdapter
 import com.mmfsin.noexcuses.presentation.dayexercises.dialogs.deleteday.DeleteDayExerciseDialog
 import com.mmfsin.noexcuses.presentation.dayexercises.interfaces.IDayExercisesListener
 import com.mmfsin.noexcuses.presentation.detailexercise.DetailExerciseDialog
-import com.mmfsin.noexcuses.presentation.phases.dialogs.deletephase.DeletePhaseDialog
 
 class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExercisesView,
     IDayExercisesListener {
@@ -74,7 +72,7 @@ class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExerci
     override fun deleteDayExercise(exercise: RealmExercise) {
         val combo = presenter.getComboModelByExerciseId(exercise.id)
         val dialog =
-            DeleteDayExerciseDialog(exercise.nombre, combo) { presenter.deleteComboModel(it) }
+            DeleteDayExerciseDialog(exercise.name, combo) { presenter.deleteComboModel(it) }
         activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
 

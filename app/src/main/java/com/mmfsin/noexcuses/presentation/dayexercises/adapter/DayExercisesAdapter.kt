@@ -4,8 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
-import com.mmfsin.noexcuses.databinding.ItemDayExerciseBinding
+import com.mmfsin.noexcuses.databinding.ItemExerciseBinding
 import com.mmfsin.noexcuses.domain.models.RealmExercise
 import com.mmfsin.noexcuses.presentation.dayexercises.interfaces.IDayExercisesListener
 
@@ -14,15 +15,19 @@ class DayExercisesAdapter(
 ) : RecyclerView.Adapter<DayExercisesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = ItemDayExerciseBinding.bind(view)
-        fun bind(realmExercise: RealmExercise) {
-            binding.apply { tvName.text = realmExercise.nombre }
+        val binding = ItemExerciseBinding.bind(view)
+        fun bind(exercise: RealmExercise) {
+            binding.apply {
+                Glide.with(binding.root.context).load(exercise.imageURL).into(image);
+                tvCategory.text = exercise.category
+                tvName.text = exercise.name
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_day_exercise, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_exercise, parent, false)
         )
     }
 
