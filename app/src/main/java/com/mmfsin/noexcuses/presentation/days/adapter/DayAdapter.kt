@@ -15,7 +15,7 @@ class DayAdapter(
 ) : RecyclerView.Adapter<DayAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemDayBinding.bind(view)
+        val binding = ItemDayBinding.bind(view)
         fun bind(day: Day) {
             binding.apply {
                 tvName.text = day.name
@@ -33,6 +33,7 @@ class DayAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(days[position])
         holder.itemView.setOnClickListener { listener.onClick(days[position]) }
+        holder.binding.config.setOnClickListener { listener.config(days[position]) }
     }
 
     override fun getItemCount(): Int = days.size

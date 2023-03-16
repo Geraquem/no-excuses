@@ -14,14 +14,12 @@ class PhasesAdapter(
 ) : RecyclerView.Adapter<PhasesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemPhaseBinding.bind(view)
-        fun bind(phase: Phase, listener: IPhasesListener) {
+        val binding = ItemPhaseBinding.bind(view)
+        fun bind(phase: Phase) {
             binding.apply {
                 tvName.text = phase.name
                 phase.description?.let { desc -> tvDescription.text = desc }
                     ?: run { tvDescription.visibility = View.GONE }
-
-                ivConfig.setOnClickListener { listener.config(phase) }
             }
         }
     }
@@ -33,8 +31,9 @@ class PhasesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(phases[position], listener)
+        holder.bind(phases[position])
         holder.itemView.setOnClickListener { listener.onClick(phases[position]) }
+        holder.binding.ivConfig.setOnClickListener { listener.config(phases[position]) }
     }
 
     override fun getItemCount(): Int = phases.size

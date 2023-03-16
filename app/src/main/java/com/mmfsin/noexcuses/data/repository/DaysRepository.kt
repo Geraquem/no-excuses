@@ -17,5 +17,6 @@ class DaysRepository {
 
     fun addDay(day: Day): Boolean = realm.addObject { day }
 
+    /** borrar todos los combo models asociados a este dia */
     fun deleteDay(day: Day): Boolean = realm.deleteObject({ day }, day.id)
 }

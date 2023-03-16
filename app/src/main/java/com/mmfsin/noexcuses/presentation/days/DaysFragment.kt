@@ -2,7 +2,6 @@ package com.mmfsin.noexcuses.presentation.days
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Layout.Directions
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,10 +15,15 @@ import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.Phase
 import com.mmfsin.noexcuses.presentation.days.DaysFragmentDirections.Companion.actionPhasesToMuscularGroups
 import com.mmfsin.noexcuses.presentation.days.adapter.DayAdapter
+import com.mmfsin.noexcuses.presentation.days.dialog.configday.ConfigDayDialog
+import com.mmfsin.noexcuses.presentation.days.dialog.deleteday.DeleteDayDialog
 import com.mmfsin.noexcuses.presentation.days.dialog.newday.NewDayDialog
+import com.mmfsin.noexcuses.presentation.days.interfaces.IConfigDayListener
 import com.mmfsin.noexcuses.presentation.days.interfaces.IDayListener
+import com.mmfsin.noexcuses.presentation.phases.dialogs.configphase.ConfigPhaseDialog
 
-class DaysFragment() : BaseFragment<FragmentDaysBinding>(), DaysView, IDayListener {
+class DaysFragment() : BaseFragment<FragmentDaysBinding>(), DaysView, IDayListener,
+    IConfigDayListener {
 
     private val presenter by lazy { DaysPresenter(this) }
 
@@ -84,6 +88,23 @@ class DaysFragment() : BaseFragment<FragmentDaysBinding>(), DaysView, IDayListen
         findNavController().navigate(actionPhasesToMuscularGroups(day.name, day.id))
 
     override fun sww() {
+    }
+
+    override fun config(day: Day) {
+        val dialog = ConfigDayDialog(day, this)
+        activity?.let { dialog.show(it.supportFragmentManager, "") }
+    }
+
+    override fun edit(day: Day) {
+        phase?.let { phase ->
+            val dialog = NewDayDialog(day, phase.id) { presenter.getDays(phase.id) }
+            activity?.let { dialog.show(it.supportFragmentManager, "") }
+        }
+    }
+
+    override fun delete(day: Day) {
+        val dialog = DeleteDayDialog(day) { presenter.deleteDay(it) }
+        activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
 
     override fun onAttach(context: Context) {
