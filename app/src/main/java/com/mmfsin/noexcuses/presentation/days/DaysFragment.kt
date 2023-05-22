@@ -13,14 +13,13 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentDaysBinding
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.Phase
-import com.mmfsin.noexcuses.presentation.days.DaysFragmentDirections.Companion.actionPhasesToMuscularGroups
+import com.mmfsin.noexcuses.presentation.days.DaysFragmentDirections.Companion.actionDaysToDayExercises
 import com.mmfsin.noexcuses.presentation.days.adapter.DayAdapter
 import com.mmfsin.noexcuses.presentation.days.dialog.configday.ConfigDayDialog
 import com.mmfsin.noexcuses.presentation.days.dialog.deleteday.DeleteDayDialog
 import com.mmfsin.noexcuses.presentation.days.dialog.newday.NewDayDialog
 import com.mmfsin.noexcuses.presentation.days.interfaces.IConfigDayListener
 import com.mmfsin.noexcuses.presentation.days.interfaces.IDayListener
-import com.mmfsin.noexcuses.presentation.phases.dialogs.configphase.ConfigPhaseDialog
 
 class DaysFragment() : BaseFragment<FragmentDaysBinding>(), DaysView, IDayListener,
     IConfigDayListener {
@@ -39,9 +38,7 @@ class DaysFragment() : BaseFragment<FragmentDaysBinding>(), DaysView, IDayListen
         super.onViewCreated(view, savedInstanceState)
         phase?.let { presenter.getDays(it.id) } ?: run {
             activity?.onBackPressed()
-            Toast.makeText(
-                this@DaysFragment.requireContext(), getString(R.string.sww), Toast.LENGTH_SHORT
-            ).show()
+            sww()
         }
     }
 
@@ -85,9 +82,12 @@ class DaysFragment() : BaseFragment<FragmentDaysBinding>(), DaysView, IDayListen
     }
 
     override fun onClick(day: Day) =
-        findNavController().navigate(actionPhasesToMuscularGroups(day.name, day.id))
+        findNavController().navigate(actionDaysToDayExercises(day.name, day.id))
 
     override fun sww() {
+        Toast.makeText(
+            this@DaysFragment.requireContext(), getString(R.string.sww), Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun config(day: Day) {

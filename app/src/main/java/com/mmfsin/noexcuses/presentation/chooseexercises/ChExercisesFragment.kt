@@ -18,7 +18,8 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ChExercise
 
     private val presenter by lazy { ChExercisesPresenter(this) }
 
-    private var name: String = ""
+    private var mGroupName: String = ""
+    private var dayName: String? = null
     private var dayId: String? = null
 
     private lateinit var mContext: Context
@@ -28,16 +29,17 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ChExercise
     ) = FragmentExercisesBinding.inflate(inflater, container, false)
 
     private fun getBundleArgs() = arguments?.let { bundle ->
-        name = bundle.getString("name", "")
+        mGroupName = bundle.getString("mGroupName", "")
+        dayName = bundle.getString("dayName", "")
         dayId = bundle.getString("dayId")
     }
 
     override fun setUI() {
         getBundleArgs()
         binding.apply {
-            toolbar.title.text = getString(R.string.exercises_toolbar, name)
+            toolbar.title.text = getString(R.string.exercises_toolbar, mGroupName)
         }
-        presenter.getExercisesByMuscularGroup(name)
+        presenter.getExercisesByMuscularGroup(mGroupName)
     }
 
     override fun setListeners() {
@@ -56,7 +58,7 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ChExercise
     }
 
     override fun onClick(exercise: RealmExercise) {
-        val dialog = DetailExerciseDialog(true, exercise) {
+        val dialog = DetailExerciseDialog(true, exercise, dayName) {
             dayId?.let { dayId -> presenter.saveComoModel(dayId, exercise.id) }
         }
         activity?.let { dialog.show(it.supportFragmentManager, "") }

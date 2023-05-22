@@ -22,7 +22,7 @@ class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExerci
 
     private val presenter by lazy { DayExercisesPresenter(this) }
 
-    private var name: String = ""
+    private var dayName: String = ""
     private var dayId: String? = null
 
     private lateinit var mContext: Context
@@ -32,14 +32,14 @@ class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExerci
     ) = FragmentExercisesBinding.inflate(inflater, container, false)
 
     private fun getBundleArgs() = arguments?.let { bundle ->
-        name = bundle.getString("name", "")
+        dayName = bundle.getString("dayName", "")
         dayId = bundle.getString("dayId")
     }
 
     override fun setUI() {
         getBundleArgs()
         binding.apply {
-            toolbar.title.text = name
+            toolbar.title.text = dayName
             toolbar.iconRight.setImageResource(R.drawable.ic_add)
             toolbar.iconRight.visibility = View.VISIBLE
         }
@@ -51,7 +51,7 @@ class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExerci
             ivBack.setOnClickListener { activity?.onBackPressed() }
             iconRight.setOnClickListener {
                 dayId?.let { dayId ->
-                    findNavController().navigate(actionDayExercisesToMuscularGroups(name, dayId))
+                    findNavController().navigate(actionDayExercisesToMuscularGroups(dayName, dayId))
                 }
             }
         }

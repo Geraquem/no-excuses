@@ -9,5 +9,7 @@ open class RealmExercise(
     var category: String = "",
     var name: String = "",
     var imageURL: String = "",
-    var order: Long = 0
+    var order: Long = 0,
+    var dataURL: String? = "",
+    var videoURL: String? = ""
 ) : RealmObject()

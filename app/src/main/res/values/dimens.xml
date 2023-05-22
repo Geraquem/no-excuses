@@ -13,7 +13,9 @@
     <dimen name="margin_padding_gigant">56dp</dimen>
 
     <dimen name="size_image_big">64dp</dimen>
+    <dimen name="size_image_xbig">84dp</dimen>
     <dimen name="size_image_muscular">100dp</dimen>
+    <dimen name="size_image_muscular_detail">164dp</dimen>
 
     <dimen name="elevation_default">5dp</dimen>
 

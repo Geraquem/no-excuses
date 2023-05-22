@@ -21,6 +21,7 @@ class DayExercisesAdapter(
                 Glide.with(binding.root.context).load(exercise.imageURL).into(image);
                 tvCategory.text = exercise.category
                 tvName.text = exercise.name
+                delete.visibility = View.VISIBLE
             }
         }
     }

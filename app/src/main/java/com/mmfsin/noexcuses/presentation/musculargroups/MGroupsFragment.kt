@@ -14,6 +14,7 @@ import com.mmfsin.noexcuses.presentation.musculargroups.MGroupsFragmentDirection
 
 class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>() {
 
+    private var dayName: String? = null
     private var dayId: String? = null
 
     private lateinit var mContext: Context
@@ -22,7 +23,12 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>() {
         inflater: LayoutInflater, container: ViewGroup?
     ) = FragmentMuscularGroupsBinding.inflate(inflater, container, false)
 
-    private fun getBundleArgs() = arguments?.let { bundle -> dayId = bundle.getString("dayId") }
+    private fun getBundleArgs() {
+        arguments?.let { bundle ->
+            dayName = bundle.getString("dayName", "")
+            dayId = bundle.getString("dayId")
+        }
+    }
 
     override fun setUI() {
         getBundleArgs()
@@ -39,7 +45,8 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>() {
         }
 
         dayId?.let {
-            Toast.makeText(this@MGroupsFragment.requireContext(), dayId, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MGroupsFragment.requireContext(), dayName, Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -65,7 +72,11 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>() {
 
     private fun navigateToChooseExercises(name: String) {
         dayId?.let { dayId ->
-            findNavController().navigate(actionMuscularGroupsToChooseExercises(name, dayId))
+            dayName?.let { dayName ->
+                findNavController().navigate(
+                    actionMuscularGroupsToChooseExercises(name, dayName, dayId)
+                )
+            }
         }
     }
 

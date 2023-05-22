@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogDetailExerciseBinding
@@ -14,6 +15,7 @@ import com.mmfsin.noexcuses.presentation.webview.WebViewActivity
 class DetailExerciseDialog(
     private val fromDay: Boolean,
     private val exercise: RealmExercise,
+    private val dayName: String? = null,
     private val add: () -> Unit = {}
 ) : BaseDialog<DialogDetailExerciseBinding>(), DetailExerciseView {
 
@@ -23,16 +25,26 @@ class DetailExerciseDialog(
         DialogDetailExerciseBinding.inflate(inflater)
 
     override fun setUI() {
-        presenter.getExercise(exercise)
-        binding.btnAddToDay.visibility = if (fromDay) View.VISIBLE else View.GONE
+        binding.apply {
+            Glide.with(this@DetailExerciseDialog.requireContext()).load(exercise.imageURL)
+                .into(image)
+            tvExerciseOf.text = getString(R.string.exercises_of, exercise.category)
+            tvName.text = exercise.name
+            exercise.videoURL?.let { presenter.playVideo(youtubePlayerView, it) }
+
+            btnAddToDay.apply {
+                if (fromDay) {
+                    text = getString(R.string.add_to_day, dayName)
+                    visibility = View.VISIBLE
+                } else visibility = View.GONE
+            }
+        }
     }
 
-    override fun setListeners() {}
-
-    override fun getExerciseDetail(exercise: CompleteExercise) {
+    override fun setListeners() {
         binding.apply {
-            tvExerciseOf.text = getString(R.string.exercises_of, exercise.category)
-            tvName.text = exercise.nombre
+
+            ivClose.setOnClickListener { dismiss() }
 
             btnHowToDoIt.setOnClickListener {
                 startActivity(Intent(activity, WebViewActivity::class.java).apply {
@@ -42,14 +54,13 @@ class DetailExerciseDialog(
 
             btnAddToDay.setOnClickListener {
                 add()
-                Toast.makeText(
-                    this@DetailExerciseDialog.requireContext(),
-                    "Añadido correctamente",
-                    Toast.LENGTH_SHORT
-                ).show()
                 dismiss()
             }
         }
+    }
+
+    override fun getExerciseDetail(exercise: CompleteExercise) {
+
     }
 
     override fun sww() {
