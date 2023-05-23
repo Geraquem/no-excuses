@@ -61,6 +61,8 @@
     <string name="exercises_of">Ejercicio de <b>%s</b></string>
     <string name="involved_muscles">Músculos involucrados:</string>
     <string name="how_to_do_it">¿Cómo se hace?</string>
+    <string name="watch_video">Ver vídeo</string>
+    <string name="hide_video">Ocultar vídeo</string>
     <string name="add_to_day">Añadir a %s</string>
 
 </resources>

@@ -26,7 +26,7 @@
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_image_big"
-        android:background="@drawable/bg_new_phase_button"
+        android:background="@drawable/bg_top_red"
         android:contentDescription="@string/content_description"
         android:paddingVertical="@dimen/margin_padding_medium"
         android:src="@drawable/ic_close"

@@ -18,7 +18,7 @@ class DayExercisesAdapter(
         val binding = ItemExerciseBinding.bind(view)
         fun bind(exercise: RealmExercise) {
             binding.apply {
-                Glide.with(binding.root.context).load(exercise.imageURL).into(image);
+                Glide.with(binding.root.context).load(exercise.imageURL).into(image)
                 tvCategory.text = exercise.category
                 tvName.text = exercise.name
                 delete.visibility = View.VISIBLE

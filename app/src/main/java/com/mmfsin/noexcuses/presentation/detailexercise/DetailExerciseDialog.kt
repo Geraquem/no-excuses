@@ -21,6 +21,8 @@ class DetailExerciseDialog(
 
     private val presenter by lazy { DetailExercisePresenter(this) }
 
+    private var isYPlayerVisible = false
+
     override fun inflateView(inflater: LayoutInflater) =
         DialogDetailExerciseBinding.inflate(inflater)
 
@@ -30,11 +32,12 @@ class DetailExerciseDialog(
                 .into(image)
             tvExerciseOf.text = getString(R.string.exercises_of, exercise.category)
             tvName.text = exercise.name
-            exercise.videoURL?.let { presenter.playVideo(youtubePlayerView, it) }
+//            exercise.videoURL?.let { presenter.playVideo(youtubePlayerView, it) }
+            exercise.videoURL?.let { presenter.playVideo(youtubePlayerView, "a5uQMwRMHcs") }
 
             btnAddToDay.apply {
                 if (fromDay) {
-                    text = getString(R.string.add_to_day, dayName)
+                    tvAddToDay.text = getString(R.string.add_to_day, dayName)
                     visibility = View.VISIBLE
                 } else visibility = View.GONE
             }
@@ -50,6 +53,18 @@ class DetailExerciseDialog(
                 startActivity(Intent(activity, WebViewActivity::class.java).apply {
                     putExtra("dataURL", exercise.dataURL)
                 })
+            }
+
+            btnVideo.setOnClickListener {
+                isYPlayerVisible = !isYPlayerVisible
+                youtubePlayerView.visibility = if (isYPlayerVisible){
+                    btnVideo.text = getString(R.string.hide_video)
+                    View.VISIBLE
+                } else{
+                    btnVideo.text = getString(R.string.watch_video)
+                    View.GONE
+                }
+                if (!isYPlayerVisible) presenter.pauseVideo(youtubePlayerView)
             }
 
             btnAddToDay.setOnClickListener {

@@ -63,20 +63,11 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="@dimen/size_image_muscular_detail"
-            android:layout_height="@dimen/size_image_muscular_detail"
+            android:layout_width="@dimen/size_image_muscular"
+            android:layout_height="@dimen/size_image_muscular"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/margin_padding_medium"
-            android:contentDescription="@string/content_description"
-            android:visibility="gone" />
-
-        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-            android:id="@+id/youtubePlayerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding_large"
-            app:autoPlay="false"
-            app:showFullScreenButton="false" />
+            android:contentDescription="@string/content_description" />
 
         <TextView
             android:id="@+id/btn_how_to_do_it"
@@ -84,29 +75,74 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/bg_round_white"
+            android:layout_marginTop="@dimen/margin_padding_medium"
+            android:background="@drawable/bg_round_white_stroke"
             android:elevation="@dimen/elevation_default"
             android:gravity="center"
-            android:paddingHorizontal="@dimen/margin_padding_medium"
-            android:paddingVertical="@dimen/margin_padding_small"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_padding_medium"
             android:text="@string/how_to_do_it"
             android:textAllCaps="true"
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/btn_add_to_day"
+            android:id="@+id/btn_video"
             style="@style/MediumTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_padding_large"
-            android:background="@drawable/bg_round_white"
+            android:layout_marginTop="@dimen/margin_padding_medium"
+            android:background="@drawable/bg_round_white_stroke"
             android:elevation="@dimen/elevation_default"
             android:gravity="center"
+            android:orientation="horizontal"
             android:padding="@dimen/margin_padding_medium"
-            android:text="@string/add_to_day"
+            android:text="@string/watch_video"
             android:textAllCaps="true"
             android:textColor="@color/black" />
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtubePlayerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_medium"
+            android:layout_marginBottom="@dimen/margin_padding_large"
+            android:visibility="gone"
+            app:autoPlay="false"
+            app:showFullScreenButton="false"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/btn_add_to_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_padding_medium"
+            android:background="@drawable/bg_round_green_stroke"
+            android:elevation="@dimen/elevation_default"
+            android:gravity="center"
+            android:padding="@dimen/margin_padding_medium">
+
+            <TextView
+                android:id="@+id/tv_add_to_day"
+                style="@style/MediumTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/margin_padding_small"
+                android:gravity="center"
+                android:text="@string/add_to_day"
+                android:textAllCaps="true"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/content_description"
+                android:src="@drawable/ic_check" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

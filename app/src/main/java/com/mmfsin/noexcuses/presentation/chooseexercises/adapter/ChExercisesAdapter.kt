@@ -18,7 +18,7 @@ class ChExercisesAdapter(
         private val binding = ItemExerciseBinding.bind(view)
         fun bind(exercise: RealmExercise) {
             binding.apply {
-                Glide.with(binding.root.context).load(exercise.imageURL).into(image);
+                Glide.with(binding.root.context).load(exercise.imageURL).into(image)
                 tvCategory.visibility = View.GONE
                 tvName.text = exercise.name
             }

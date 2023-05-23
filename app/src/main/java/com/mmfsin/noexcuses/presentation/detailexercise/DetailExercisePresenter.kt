@@ -31,6 +31,14 @@ class DetailExercisePresenter(val view: DetailExerciseView) : IExercises {
         })
     }
 
+    fun pauseVideo(youtubePlayerView: YouTubePlayerView) {
+        youtubePlayerView.getYouTubePlayerWhenReady(object : YouTubePlayerCallback {
+            override fun onYouTubePlayer(youTubePlayer: YouTubePlayer) {
+                youTubePlayer.pause()
+            }
+        })
+    }
+
     override fun retrievedExercisesFromFirebase(result: Boolean) {}
 
     override fun retrievedSingleExercise(result: CompleteExercise?) {
