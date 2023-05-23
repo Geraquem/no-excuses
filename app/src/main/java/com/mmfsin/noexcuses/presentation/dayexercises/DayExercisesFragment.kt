@@ -58,6 +58,7 @@ class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExerci
     }
 
     override fun getDayExercises(exercises: List<RealmExercise>) {
+        binding.nothingYet.root.visibility = if (exercises.isEmpty()) View.VISIBLE else View.GONE
         binding.rvExercises.apply {
             layoutManager = LinearLayoutManager(mContext)
             adapter = DayExercisesAdapter(exercises, this@DayExercisesFragment)

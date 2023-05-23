@@ -71,6 +71,7 @@ class DaysFragment() : BaseFragment<FragmentDaysBinding>(), DaysView, IDayListen
     }
 
     override fun getDays(days: List<Day>) {
+        binding.nothingYet.root.visibility = if (days.isEmpty()) View.VISIBLE else View.GONE
         binding.rvDays.apply {
             layoutManager = LinearLayoutManager(mContext)
             adapter = DayAdapter(days, this@DaysFragment)

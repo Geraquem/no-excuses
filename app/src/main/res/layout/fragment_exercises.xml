@@ -41,4 +41,13 @@
         tools:itemCount="5"
         tools:listitem="@layout/item_exercise" />
 
+    <include
+        android:id="@+id/nothing_yet"
+        layout="@layout/include_nothing_yet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/gl_left"
+        app:layout_constraintRight_toRightOf="@id/gl_right"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

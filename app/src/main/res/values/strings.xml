@@ -10,6 +10,7 @@
     <string name="my_weights">Mis pesos</string>
     <string name="notes">Notas</string>
     <string name="laziness">Pereza</string>
+    <string name="empty_recycler">No has añadido nada todavía</string>
 
     <!-- Phases -->
     <string name="create_new_phase">Crear nueva rutina</string>
