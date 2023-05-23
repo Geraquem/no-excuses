@@ -2,28 +2,28 @@ package com.mmfsin.noexcuses.data.repository
 
 import com.mmfsin.noexcuses.data.database.RealmDatabase
 import com.mmfsin.noexcuses.domain.models.ComboModel
-import com.mmfsin.noexcuses.domain.models.RealmExercise
+import com.mmfsin.noexcuses.domain.models.Exercise
 import io.realm.kotlin.where
 
 class ExercisesRepository {
 
     private val realm by lazy { RealmDatabase() }
 
-    fun getExercisesFromRealm(): List<RealmExercise> {
+    fun getExercisesFromRealm(): List<Exercise> {
         return realm.getObjectsFromRealm {
-            where<RealmExercise>().findAll()
+            where<Exercise>().findAll()
         }
     }
 
-    fun getDayExercises(dayId: String): List<RealmExercise> {
-        val list = mutableListOf<RealmExercise>()
+    fun getDayExercises(dayId: String): List<Exercise> {
+        val list = mutableListOf<Exercise>()
         val exercises = realm.getObjectsFromRealm {
             where<ComboModel>().equalTo("dayId", dayId).findAll()
         }
 
         for (exercise in exercises) {
             val o = realm.getObjectsFromRealm {
-                where<RealmExercise>().equalTo("id", exercise.exerciseId).findAll()
+                where<Exercise>().equalTo("id", exercise.exerciseId).findAll()
             }[0]
             list.add(o)
         }

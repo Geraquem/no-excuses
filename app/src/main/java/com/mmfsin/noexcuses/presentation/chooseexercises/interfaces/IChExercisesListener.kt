@@ -1,7 +1,7 @@
 package com.mmfsin.noexcuses.presentation.chooseexercises.interfaces
 
-import com.mmfsin.noexcuses.domain.models.RealmExercise
+import com.mmfsin.noexcuses.domain.models.Exercise
 
 interface IChExercisesListener {
-    fun onClick(exercise: RealmExercise)
+    fun onClick(exercise: Exercise)
 }

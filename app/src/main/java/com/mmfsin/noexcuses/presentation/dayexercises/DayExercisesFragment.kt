@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
-import com.mmfsin.noexcuses.domain.models.RealmExercise
+import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.dayexercises.DayExercisesFragmentDirections.Companion.actionDayExercisesToMuscularGroups
 import com.mmfsin.noexcuses.presentation.dayexercises.adapter.DayExercisesAdapter
 import com.mmfsin.noexcuses.presentation.dayexercises.dialogs.deleteday.DeleteDayExerciseDialog
@@ -57,7 +57,7 @@ class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExerci
         }
     }
 
-    override fun getDayExercises(exercises: List<RealmExercise>) {
+    override fun getDayExercises(exercises: List<Exercise>) {
         binding.nothingYet.root.visibility = if (exercises.isEmpty()) View.VISIBLE else View.GONE
         binding.rvExercises.apply {
             layoutManager = LinearLayoutManager(mContext)
@@ -65,12 +65,12 @@ class DayExercisesFragment : BaseFragment<FragmentExercisesBinding>(), DayExerci
         }
     }
 
-    override fun onClick(exercise: RealmExercise) {
+    override fun onClick(exercise: Exercise) {
         val dialog = DetailExerciseDialog(false, exercise)
         activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
 
-    override fun deleteDayExercise(exercise: RealmExercise) {
+    override fun deleteDayExercise(exercise: Exercise) {
         val combo = presenter.getComboModelByExerciseId(exercise.id)
         val dialog =
             DeleteDayExerciseDialog(exercise.name, combo) { presenter.deleteComboModel(it) }

@@ -43,11 +43,6 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>() {
             setMuscularGroupData(abdominales, R.drawable.iv_torso, R.string.mg_torso)
             setMuscularGroupData(cardio, R.drawable.iv_cardio, R.string.mg_cardio)
         }
-
-        dayId?.let {
-            Toast.makeText(this@MGroupsFragment.requireContext(), dayName, Toast.LENGTH_SHORT)
-                .show()
-        }
     }
 
     private fun setMuscularGroupData(group: IncludeMuscularGroupBinding, image: Int, name: Int) {

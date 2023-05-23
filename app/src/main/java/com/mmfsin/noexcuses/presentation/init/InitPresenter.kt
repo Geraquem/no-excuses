@@ -2,10 +2,9 @@ package com.mmfsin.noexcuses.presentation.init
 
 import com.mmfsin.noexcuses.data.repository.ExercisesRepository
 import com.mmfsin.noexcuses.data.repository.FirebaseRepository
-import com.mmfsin.noexcuses.domain.interfaces.IExercises
-import com.mmfsin.noexcuses.domain.models.CompleteExercise
+import com.mmfsin.noexcuses.domain.interfaces.IFirebase
 
-class InitPresenter(val view: InitView) : IExercises {
+class InitPresenter(val view: InitView) : IFirebase {
 
     private val firebase by lazy { FirebaseRepository(this) }
     private val repository by lazy { ExercisesRepository() }
@@ -20,10 +19,12 @@ class InitPresenter(val view: InitView) : IExercises {
 //        else view.flowCompleted()
 //    }
 
+    override fun retrievedMGroupsFromFirebase(result: Boolean) {
+
+    }
+
     override fun retrievedExercisesFromFirebase(result: Boolean) {
         if (result) view.flowCompleted()
         else view.sww()
     }
-
-    override fun retrievedSingleExercise(result: CompleteExercise?) {}
 }

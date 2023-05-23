@@ -8,13 +8,12 @@ import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogDetailExerciseBinding
-import com.mmfsin.noexcuses.domain.models.CompleteExercise
-import com.mmfsin.noexcuses.domain.models.RealmExercise
+import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.webview.WebViewActivity
 
 class DetailExerciseDialog(
     private val fromDay: Boolean,
-    private val exercise: RealmExercise,
+    private val exercise: Exercise,
     private val dayName: String? = null,
     private val add: () -> Unit = {}
 ) : BaseDialog<DialogDetailExerciseBinding>(), DetailExerciseView {
@@ -72,10 +71,6 @@ class DetailExerciseDialog(
                 dismiss()
             }
         }
-    }
-
-    override fun getExerciseDetail(exercise: CompleteExercise) {
-
     }
 
     override fun sww() {

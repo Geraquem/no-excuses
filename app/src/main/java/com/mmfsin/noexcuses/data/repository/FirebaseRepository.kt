@@ -3,19 +3,21 @@ package com.mmfsin.noexcuses.data.repository
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.mmfsin.noexcuses.data.database.RealmDatabase
-import com.mmfsin.noexcuses.domain.interfaces.IExercises
-import com.mmfsin.noexcuses.domain.models.CompleteExercise
-import com.mmfsin.noexcuses.domain.models.RealmExercise
+import com.mmfsin.noexcuses.domain.interfaces.IFirebase
+import com.mmfsin.noexcuses.domain.models.Exercise
 
-class FirebaseRepository(private val listener: IExercises) {
+class FirebaseRepository(private val listener: IFirebase) {
+
+    private val muscularGroupsRoot = Firebase.database.reference.child("muscular_groups")
+    private val exercisesRoot = Firebase.database.reference.child("exercises")
 
     private val realm by lazy { RealmDatabase() }
 
-    fun getExercisesFromFirebase() {
-        Firebase.database.reference.child("ejercicios").get().addOnSuccessListener {
+    fun getMuscularGroupsFromFirebase() {
+        muscularGroupsRoot.get().addOnSuccessListener {
             for (muscularName in it.children) {
                 for (exercise in muscularName.children) {
-                    exercise.getValue(RealmExercise::class.java)?.let { ex -> save(ex) }
+                    exercise.getValue(Exercise::class.java)?.let { ex -> saveExercise(ex) }
                 }
             }
             listener.retrievedExercisesFromFirebase(true)
@@ -24,18 +26,22 @@ class FirebaseRepository(private val listener: IExercises) {
         }
     }
 
-    fun getExerciseFromFirebase(exercise: RealmExercise) {
-        Firebase.database.reference.child("ejercicios")
-            .child(exercise.category).child(exercise.id)
-            .get().addOnSuccessListener {
-                it.getValue(CompleteExercise::class.java)?.let { exercise ->
-                    listener.retrievedSingleExercise(exercise)
+    fun getExercisesFromFirebase() {
+        exercisesRoot.get().addOnSuccessListener {
+            for (muscularName in it.children) {
+                for (exercise in muscularName.children) {
+                    exercise.getValue(Exercise::class.java)?.let { ex -> saveExercise(ex) }
                 }
-            }.addOnFailureListener {
-                listener.retrievedSingleExercise(null)
             }
+            listener.retrievedExercisesFromFirebase(true)
+        }.addOnFailureListener {
+            listener.retrievedExercisesFromFirebase(false)
+        }
     }
 
-    private fun save(realmExercise: RealmExercise): Boolean = realm.addObject { realmExercise }
+    private fun saveMGroup(exercise: Exercise): Boolean =
+        realm.addObject { exercise }
 
+    private fun saveExercise(exercise: Exercise): Boolean =
+        realm.addObject { exercise }
 }

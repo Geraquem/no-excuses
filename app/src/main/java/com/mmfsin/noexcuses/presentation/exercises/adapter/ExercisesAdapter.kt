@@ -7,16 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemNormalExerciseBinding
-import com.mmfsin.noexcuses.domain.models.RealmExercise
+import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.exercises.interfaces.IExercisesListener
 
 class ExercisesAdapter(
-    private val realmExercises: List<RealmExercise>, private val listener: IExercisesListener
+    private val exercises: List<Exercise>, private val listener: IExercisesListener
 ) : RecyclerView.Adapter<ExercisesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemNormalExerciseBinding.bind(view)
-        fun bind(exercise: RealmExercise) {
+        fun bind(exercise: Exercise) {
             binding.apply {
                 Glide.with(binding.root.context).load(exercise.imageURL).into(image)
                 tvName.text = exercise.name
@@ -32,9 +32,9 @@ class ExercisesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(realmExercises[position])
-        holder.itemView.setOnClickListener { listener.onClick(realmExercises[position]) }
+        holder.bind(exercises[position])
+        holder.itemView.setOnClickListener { listener.onClick(exercises[position]) }
     }
 
-    override fun getItemCount(): Int = realmExercises.size
+    override fun getItemCount(): Int = exercises.size
 }

@@ -6,4 +6,6 @@ import io.realm.annotations.PrimaryKey
 open class MuscularGroup(
     @PrimaryKey
     var name: String = "",
+    var imageURL: String = "",
+    var order: Int = 0,
 ) : RealmObject()

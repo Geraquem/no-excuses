@@ -1,8 +1,8 @@
 package com.mmfsin.noexcuses.presentation.dayexercises.interfaces
 
-import com.mmfsin.noexcuses.domain.models.RealmExercise
+import com.mmfsin.noexcuses.domain.models.Exercise
 
 interface IDayExercisesListener {
-    fun onClick(exercise: RealmExercise)
-    fun deleteDayExercise(exercise: RealmExercise)
+    fun onClick(exercise: Exercise)
+    fun deleteDayExercise(exercise: Exercise)
 }

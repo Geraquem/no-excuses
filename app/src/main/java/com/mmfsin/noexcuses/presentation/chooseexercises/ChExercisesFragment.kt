@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
-import com.mmfsin.noexcuses.domain.models.RealmExercise
+import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.chooseexercises.adapter.ChExercisesAdapter
 import com.mmfsin.noexcuses.presentation.chooseexercises.interfaces.IChExercisesListener
 import com.mmfsin.noexcuses.presentation.detailexercise.DetailExerciseDialog
@@ -48,10 +48,10 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ChExercise
         binding.toolbar.ivBack.setOnClickListener { activity?.onBackPressed() }
     }
 
-    override fun getExercises(realmExercises: List<RealmExercise>) {
+    override fun getExercises(exercises: List<Exercise>) {
         binding.rvExercises.apply {
             layoutManager = LinearLayoutManager(mContext)
-            adapter = ChExercisesAdapter(realmExercises, this@ChExercisesFragment)
+            adapter = ChExercisesAdapter(exercises, this@ChExercisesFragment)
         }
     }
 
@@ -59,7 +59,7 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ChExercise
         Toast.makeText(this@ChExercisesFragment.requireContext(), "sww", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onClick(exercise: RealmExercise) {
+    override fun onClick(exercise: Exercise) {
         val dialog = DetailExerciseDialog(true, exercise, dayName) {
             dayId?.let { dayId -> presenter.saveComoModel(dayId, exercise.id) }
         }

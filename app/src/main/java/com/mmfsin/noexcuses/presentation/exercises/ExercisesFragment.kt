@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
-import com.mmfsin.noexcuses.domain.models.RealmExercise
+import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.detailexercise.DetailExerciseDialog
 import com.mmfsin.noexcuses.presentation.exercises.adapter.ExercisesAdapter
 import com.mmfsin.noexcuses.presentation.exercises.interfaces.IExercisesListener
@@ -44,11 +43,11 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ExercisesVie
         binding.toolbar.ivBack.setOnClickListener { activity?.onBackPressed() }
     }
 
-    override fun getExecises(realmExercises: List<RealmExercise>) {
+    override fun getExecises(exercises: List<Exercise>) {
         binding.rvExercises.apply {
 //            layoutManager = LinearLayoutManager(mContext)
             layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-            adapter = ExercisesAdapter(realmExercises, this@ExercisesFragment)
+            adapter = ExercisesAdapter(exercises, this@ExercisesFragment)
         }
     }
 
@@ -56,7 +55,7 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ExercisesVie
         Toast.makeText(this@ExercisesFragment.requireContext(), "sww", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onClick(exercise: RealmExercise) {
+    override fun onClick(exercise: Exercise) {
         val dialog = DetailExerciseDialog(false, exercise)
         activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
