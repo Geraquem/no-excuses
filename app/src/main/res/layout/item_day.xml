@@ -13,8 +13,8 @@
     <include
         android:id="@+id/round_image"
         layout="@layout/include_round_image"
-        android:layout_width="@dimen/margin_padding_xxxlarge"
-        android:layout_height="@dimen/margin_padding_xxxlarge"
+        android:layout_width="@dimen/margin_padding_gigant"
+        android:layout_height="@dimen/margin_padding_gigant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,11 +22,12 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_padding_medium"
+        android:layout_marginStart="@dimen/margin_padding_medium"
+        android:layout_marginEnd="@dimen/margin_padding_small"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/round_image"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/config"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -42,7 +43,7 @@
             style="@style/MediumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 ejercicios" />
+            tools:text="0 ejercicios" />
 
     </LinearLayout>
 

@@ -1,9 +1,9 @@
 package com.mmfsin.noexcuses.presentation.days
 
-import com.mmfsin.noexcuses.domain.models.Day
+import com.mmfsin.noexcuses.domain.models.DayWithExercises
 
 interface DaysView {
-    fun getDays(days: List<Day>)
+    fun getDays(days: List<DayWithExercises>)
     fun dayDeleted()
     fun sww()
 }

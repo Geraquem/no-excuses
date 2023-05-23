@@ -10,7 +10,7 @@
     <dimen name="margin_padding_xlarge">32dp</dimen>
     <dimen name="margin_padding_xxlarge">40dp</dimen>
     <dimen name="margin_padding_xxxlarge">44dp</dimen>
-    <dimen name="margin_padding_gigant">56dp</dimen>
+    <dimen name="margin_padding_gigant">52dp</dimen>
 
     <dimen name="size_image_big">64dp</dimen>
     <dimen name="size_image_xbig">84dp</dimen>

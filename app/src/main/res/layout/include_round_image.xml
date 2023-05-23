@@ -7,8 +7,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/background"
-        android:layout_width="@dimen/margin_padding_xxxlarge"
-        android:layout_height="@dimen/margin_padding_xxxlarge"
+        android:layout_width="@dimen/margin_padding_gigant"
+        android:layout_height="@dimen/margin_padding_gigant"
         android:background="@color/soft_red"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemExerciseBinding
+import com.mmfsin.noexcuses.databinding.ItemExerciseeeeeeeeeeBinding
 import com.mmfsin.noexcuses.domain.models.RealmExercise
 import com.mmfsin.noexcuses.presentation.exercises.interfaces.IExercisesListener
 
@@ -15,7 +16,7 @@ class ExercisesAdapter(
 ) : RecyclerView.Adapter<ExercisesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemExerciseBinding.bind(view)
+        private val binding = ItemExerciseeeeeeeeeeBinding.bind(view)
         fun bind(exercise: RealmExercise) {
             binding.apply {
                 Glide.with(binding.root.context).load(exercise.imageURL).into(image);
@@ -28,7 +29,7 @@ class ExercisesAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_exercise, parent, false)
+                .inflate(R.layout.item_exerciseeeeeeeeee, parent, false)
         )
     }
 

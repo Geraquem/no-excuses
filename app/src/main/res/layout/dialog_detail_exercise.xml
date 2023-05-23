@@ -58,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_padding_medium"
+            android:textAllCaps="true"
             tools:text="PRESS DE BANCA PLANO CON BARRA" />
 
         <ImageView

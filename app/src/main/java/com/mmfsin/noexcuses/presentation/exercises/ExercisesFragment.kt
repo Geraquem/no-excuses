@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
@@ -44,7 +46,8 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding>(), ExercisesVie
 
     override fun getExecises(realmExercises: List<RealmExercise>) {
         binding.rvExercises.apply {
-            layoutManager = LinearLayoutManager(mContext)
+//            layoutManager = LinearLayoutManager(mContext)
+            layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
             adapter = ExercisesAdapter(realmExercises, this@ExercisesFragment)
         }
     }

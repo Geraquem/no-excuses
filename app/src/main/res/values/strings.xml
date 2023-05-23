@@ -32,6 +32,10 @@
     <string name="delete_phase_confirm">¿Quieres eliminar %s?</string>
     <string name="delete_day_exercise_confirm">¿Quieres eliminar %s de tu rutina?</string>
 
+    <!-- Days -->
+    <string name="day_exercise">1 ejercicio</string>
+    <string name="day_exercises">%s ejercicios</string>
+
     <!-- New Day -->
     <string name="new_day_title">Crea tu nuevo día de entrenamiento</string>
     <string name="new_day_name">Nombre</string>

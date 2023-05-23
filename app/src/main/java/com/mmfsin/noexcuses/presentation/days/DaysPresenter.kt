@@ -7,14 +7,7 @@ class DaysPresenter(val view: DaysView) {
 
     private val repository by lazy { DaysRepository() }
 
-    fun getDays(phaseId: String) {
-        val days = repository.getDays()
-        val list = mutableListOf<Day>()
-        for (day in days) {
-            if (day.phaseId == phaseId) list.add(day)
-        }
-        view.getDays(list)
-    }
+    fun getDays(phaseId: String) = view.getDays(repository.getDays(phaseId))
 
     fun deleteDay(day: Day) {
         val result = repository.deleteDay(day)

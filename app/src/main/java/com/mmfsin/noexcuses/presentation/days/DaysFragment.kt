@@ -12,6 +12,7 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentDaysBinding
 import com.mmfsin.noexcuses.domain.models.Day
+import com.mmfsin.noexcuses.domain.models.DayWithExercises
 import com.mmfsin.noexcuses.domain.models.Phase
 import com.mmfsin.noexcuses.presentation.days.DaysFragmentDirections.Companion.actionDaysToDayExercises
 import com.mmfsin.noexcuses.presentation.days.adapter.DayAdapter
@@ -36,7 +37,7 @@ class DaysFragment() : BaseFragment<FragmentDaysBinding>(), DaysView, IDayListen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        phase?.let { presenter.getDays(it.id) } ?: run {
+        phase?.let { phase -> presenter.getDays(phase.id) } ?: run {
             activity?.onBackPressed()
             sww()
         }
@@ -70,7 +71,7 @@ class DaysFragment() : BaseFragment<FragmentDaysBinding>(), DaysView, IDayListen
         }
     }
 
-    override fun getDays(days: List<Day>) {
+    override fun getDays(days: List<DayWithExercises>) {
         binding.nothingYet.root.visibility = if (days.isEmpty()) View.VISIBLE else View.GONE
         binding.rvDays.apply {
             layoutManager = LinearLayoutManager(mContext)
