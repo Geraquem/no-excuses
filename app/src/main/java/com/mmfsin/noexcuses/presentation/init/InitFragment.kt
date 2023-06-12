@@ -29,10 +29,11 @@ class InitFragment : BaseFragment<FragmentInitBinding>(), InitView {
 
     override fun setUI() {
         binding.apply {
+            /** loading on */
             background.visibility = View.GONE
             setVerticalButtons(routines, R.drawable.iv_rutinas, R.string.routines)
-            setVerticalButtons(exercises, R.drawable.iv_exercises, R.string.exercises)
-            setHorizontalButtons(myWeights, R.drawable.iv_exercises, R.string.my_weights)
+//            setVerticalButtons(exercises, R.drawable.iv_exercises, R.string.exercises)
+//            setHorizontalButtons(myWeights, R.drawable.iv_exercises, R.string.my_weights)
             setHorizontalButtons(notes, R.drawable.iv_notes, R.string.notes)
         }
     }
@@ -64,6 +65,7 @@ class InitFragment : BaseFragment<FragmentInitBinding>(), InitView {
             routines.root.setOnClickListener {
                 findNavController().navigate(actionInitToPhases())
             }
+
             exercises.root.setOnClickListener {
                 findNavController().navigate(actionPhasesToMuscularGroups())
             }
@@ -71,6 +73,7 @@ class InitFragment : BaseFragment<FragmentInitBinding>(), InitView {
     }
 
     override fun flowCompleted() {
+        /** loading off */
     }
 
     override fun sww() {

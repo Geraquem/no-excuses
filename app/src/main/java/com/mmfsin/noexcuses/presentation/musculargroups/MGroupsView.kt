@@ -1,8 +1,8 @@
 package com.mmfsin.noexcuses.presentation.musculargroups
 
-import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.domain.models.MuscularGroup
 
 interface MGroupsView {
-    fun getMGroups(exercises: List<Exercise>)
+    fun getMuscularGroups(exercises: List<MuscularGroup>)
     fun sww()
 }

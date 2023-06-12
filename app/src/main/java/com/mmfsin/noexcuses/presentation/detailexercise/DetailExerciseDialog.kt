@@ -1,6 +1,5 @@
 package com.mmfsin.noexcuses.presentation.detailexercise
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
@@ -9,7 +8,6 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogDetailExerciseBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
-import com.mmfsin.noexcuses.presentation.webview.WebViewActivity
 
 class DetailExerciseDialog(
     private val fromDay: Boolean,
@@ -48,11 +46,11 @@ class DetailExerciseDialog(
 
             ivClose.setOnClickListener { dismiss() }
 
-            btnHowToDoIt.setOnClickListener {
-                startActivity(Intent(activity, WebViewActivity::class.java).apply {
-                    putExtra("dataURL", exercise.dataURL)
-                })
-            }
+//            btnHowToDoIt.setOnClickListener {
+//                startActivity(Intent(activity, WebViewActivity::class.java).apply {
+//                    putExtra("dataURL", exercise.dataURL)
+//                })
+//            }
 
             btnVideo.setOnClickListener {
                 isYPlayerVisible = !isYPlayerVisible

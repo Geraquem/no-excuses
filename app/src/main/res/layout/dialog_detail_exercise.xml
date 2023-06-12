@@ -9,39 +9,15 @@
     android:clipToPadding="false"
     android:padding="@dimen/margin_padding_large">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tv_exercise_of"
-            style="@style/MediumTextView_Bold"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_padding_medium"
-            android:layout_marginBottom="@dimen/margin_padding_xxsmall"
-            android:textAllCaps="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/iv_close"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="EJERCICIO DE PECHO" />
-
         <ImageView
             android:id="@+id/iv_close"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="@dimen/margin_padding_xlarge"
+            android:layout_marginBottom="@dimen/margin_padding_xxsmall"
             android:layout_height="@dimen/margin_padding_xlarge"
             android:contentDescription="@string/content_description"
-            android:src="@drawable/ic_cross"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:src="@drawable/ic_cross" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -50,7 +26,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_top">
+        app:layout_constraintTop_toBottomOf="@id/iv_close">
+
+        <TextView
+            android:id="@+id/tv_exercise_of"
+            style="@style/MediumTextView_Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_padding_medium"
+            android:layout_marginBottom="@dimen/margin_padding_xxxsmall"
+            android:textAllCaps="true"
+            tools:text="EJERCICIO DE PECHO" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -68,22 +54,6 @@
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/margin_padding_medium"
             android:contentDescription="@string/content_description" />
-
-        <TextView
-            android:id="@+id/btn_how_to_do_it"
-            style="@style/MediumTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_padding_medium"
-            android:background="@drawable/bg_round_white_stroke"
-            android:elevation="@dimen/elevation_default"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="@dimen/margin_padding_medium"
-            android:text="@string/how_to_do_it"
-            android:textAllCaps="true"
-            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/btn_video"

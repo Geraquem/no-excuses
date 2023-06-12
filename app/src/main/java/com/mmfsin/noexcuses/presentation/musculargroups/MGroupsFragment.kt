@@ -3,16 +3,19 @@ package com.mmfsin.noexcuses.presentation.musculargroups
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMuscularGroupsBinding
-import com.mmfsin.noexcuses.databinding.IncludeMuscularGroupBinding
-import com.mmfsin.noexcuses.presentation.days.DaysFragmentDirections
+import com.mmfsin.noexcuses.domain.models.MuscularGroup
+import com.mmfsin.noexcuses.presentation.musculargroups.adapter.MGroupsAdapter
 import com.mmfsin.noexcuses.presentation.musculargroups.MGroupsFragmentDirections.Companion.actionMuscularGroupsToChooseExercises
 
-class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>() {
+class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>(), MGroupsView {
+
+    private val presenter by lazy { MGroupsPresenter(this) }
 
     private var dayName: String? = null
     private var dayId: String? = null
@@ -32,28 +35,20 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>() {
 
     override fun setUI() {
         getBundleArgs()
-        binding.apply {
-            toolbar.title.text = getString(R.string.muscularGroups)
-            setMuscularGroupData(hombro, R.drawable.iv_hombros, R.string.mg_hombro)
-            setMuscularGroupData(pecho, R.drawable.iv_pecho, R.string.mg_pecho)
-            setMuscularGroupData(biceps, R.drawable.iv_biceps, R.string.mg_biceps)
-            setMuscularGroupData(triceps, R.drawable.iv_triceps, R.string.mg_triceps)
-            setMuscularGroupData(espalda, R.drawable.iv_espalda, R.string.mg_espalda)
-            setMuscularGroupData(pierna, R.drawable.iv_piernas, R.string.mg_piernas)
-            setMuscularGroupData(abdominales, R.drawable.iv_torso, R.string.mg_torso)
-            setMuscularGroupData(cardio, R.drawable.iv_cardio, R.string.mg_cardio)
-        }
+        /** loading on */
+        binding.toolbar.title.text = getString(R.string.muscularGroups)
+        presenter.getMuscularGroups()
     }
 
-    private fun setMuscularGroupData(group: IncludeMuscularGroupBinding, image: Int, name: Int) {
-        group.image.setImageResource(image)
-        group.tvName.text = getString(name)
-        group.root.setOnClickListener {
-            dayId?.let {
-                navigateToChooseExercises(getString(name))
-            } ?: run {
-                navigateToExercises(getString(name))
+    override fun getMuscularGroups(exercises: List<MuscularGroup>) {
+        binding.rvMgroups.apply {
+            layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
+            adapter = MGroupsAdapter(exercises.sortedBy { it.order }) { mg ->
+                dayId?.let { navigateToChooseExercises(mg.name) } ?: run {
+                    navigateToExercises(mg.name)
+                }
             }
+            /** loading off */
         }
     }
 
@@ -74,6 +69,8 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding>() {
             }
         }
     }
+
+    override fun sww() {}
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

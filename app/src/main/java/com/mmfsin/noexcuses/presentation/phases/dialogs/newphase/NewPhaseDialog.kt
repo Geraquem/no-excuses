@@ -17,15 +17,13 @@ class NewPhaseDialog(var phase: Phase?, var completed: () -> Unit) :
     override fun setUI() {
         binding.apply {
             phase?.let { phase ->
+                /** EDIT */
                 tvTitle.text = getString(R.string.edit_phase_title, phase.name)
-                etName.hint = phase.name
-                phase.description?.let { etDescription.hint = phase.description }
-                Toast.makeText(this@NewPhaseDialog.requireContext(), "Editar", Toast.LENGTH_SHORT)
-                    .show()
+                etName.setText(phase.name)
+                phase.description?.let { etDescription.setText(phase.description) }
             } ?: run {
+                /** NEW */
                 tvTitle.text = getString(R.string.new_phase_title)
-                Toast.makeText(this@NewPhaseDialog.requireContext(), "Crear", Toast.LENGTH_SHORT)
-                    .show()
             }
         }
     }

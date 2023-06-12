@@ -5,6 +5,7 @@ import com.google.firebase.ktx.Firebase
 import com.mmfsin.noexcuses.data.database.RealmDatabase
 import com.mmfsin.noexcuses.domain.interfaces.IFirebase
 import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.domain.models.MuscularGroup
 
 class FirebaseRepository(private val listener: IFirebase) {
 
@@ -16,11 +17,9 @@ class FirebaseRepository(private val listener: IFirebase) {
     fun getMuscularGroupsFromFirebase() {
         muscularGroupsRoot.get().addOnSuccessListener {
             for (muscularName in it.children) {
-                for (exercise in muscularName.children) {
-                    exercise.getValue(Exercise::class.java)?.let { ex -> saveExercise(ex) }
-                }
+                muscularName.getValue(MuscularGroup::class.java)?.let { mg -> saveMGroup(mg) }
             }
-            listener.retrievedExercisesFromFirebase(true)
+            listener.retrievedMGroupsFromFirebase(true)
         }.addOnFailureListener {
             listener.retrievedExercisesFromFirebase(false)
         }
@@ -39,8 +38,8 @@ class FirebaseRepository(private val listener: IFirebase) {
         }
     }
 
-    private fun saveMGroup(exercise: Exercise): Boolean =
-        realm.addObject { exercise }
+    private fun saveMGroup(mGroup: MuscularGroup): Boolean =
+        realm.addObject { mGroup }
 
     private fun saveExercise(exercise: Exercise): Boolean =
         realm.addObject { exercise }

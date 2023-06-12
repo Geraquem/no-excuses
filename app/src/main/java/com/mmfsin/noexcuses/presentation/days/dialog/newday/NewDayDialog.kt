@@ -18,7 +18,7 @@ class NewDayDialog(var day: Day?, var phaseId: String, var completed: (id: Strin
         binding.apply {
             day?.let { day ->
                 tvTitle.text = getString(R.string.edit_phase_title, day.name)
-                etName.hint = day.name
+                etName.setText(day.name)
             } ?: run {
                 tvTitle.text = getString(R.string.new_day_title)
             }
