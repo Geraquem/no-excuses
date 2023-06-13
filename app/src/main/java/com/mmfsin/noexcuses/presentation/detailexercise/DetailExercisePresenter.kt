@@ -28,4 +28,8 @@ class DetailExercisePresenter(val view: DetailExerciseView) {
             }
         })
     }
+
+    fun saveNewWeight(){
+
+    }
 }

@@ -19,6 +19,7 @@ class DetailExerciseDialog(
     private val presenter by lazy { DetailExercisePresenter(this) }
 
     private var isYPlayerVisible = false
+    private var editWeightClicked = false
 
     override fun inflateView(inflater: LayoutInflater) =
         DialogDetailExerciseBinding.inflate(inflater)
@@ -29,8 +30,14 @@ class DetailExerciseDialog(
                 .into(image)
             tvExerciseOf.text = getString(R.string.exercises_of, exercise.category)
             tvName.text = exercise.name
+
+            tvWeight.text = exercise.weight.toString()
+
+
 //            exercise.videoURL?.let { presenter.playVideo(youtubePlayerView, it) }
             exercise.videoURL?.let { presenter.playVideo(youtubePlayerView, "a5uQMwRMHcs") }
+
+            etWeight.visibility = View.GONE
 
             btnAddToDay.apply {
                 if (fromDay) {
@@ -43,21 +50,29 @@ class DetailExerciseDialog(
 
     override fun setListeners() {
         binding.apply {
-
-            ivClose.setOnClickListener { dismiss() }
-
-//            btnHowToDoIt.setOnClickListener {
-//                startActivity(Intent(activity, WebViewActivity::class.java).apply {
-//                    putExtra("dataURL", exercise.dataURL)
-//                })
-//            }
+            ivEditWeight.setOnClickListener {
+                editWeightClicked = !editWeightClicked
+                if (editWeightClicked) {
+                    ivEditWeight.setImageResource(R.drawable.ic_check)
+                    etWeight.visibility = View.VISIBLE
+                } else {
+                    val newWeight = etWeight.text.toString()
+                    if (newWeight.isNotEmpty()) {
+//                        presenter.saveNewWeight(newWeight)
+                        tvWeight.text = newWeight
+                    }
+                    ivEditWeight.setImageResource(R.drawable.ic_config)
+                    etWeight.visibility = View.GONE
+                    etWeight.text = null
+                }
+            }
 
             btnVideo.setOnClickListener {
                 isYPlayerVisible = !isYPlayerVisible
-                youtubePlayerView.visibility = if (isYPlayerVisible){
+                youtubePlayerView.visibility = if (isYPlayerVisible) {
                     btnVideo.text = getString(R.string.hide_video)
                     View.VISIBLE
-                } else{
+                } else {
                     btnVideo.text = getString(R.string.watch_video)
                     View.GONE
                 }

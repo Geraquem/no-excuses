@@ -22,7 +22,7 @@ class WebViewActivity : AppCompatActivity() {
     private fun setWebView() {
         dataURL = intent.getStringExtra("dataURL")
         binding.apply {
-            toolbar.title.text = getString(R.string.how_to_do_it)
+//            toolbar.title.text = getString(R.string.how_to_do_it)
             toolbar.ivBack.setOnClickListener { finish() }
             dataURL?.let { url -> webview.loadUrl(url) }
         }

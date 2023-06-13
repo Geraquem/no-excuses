@@ -11,5 +11,6 @@ open class Exercise(
     var imageURL: String = "",
     var order: Long = 0,
     var dataURL: String? = "",
-    var videoURL: String? = ""
+    var videoURL: String? = "",
+    var weight: String? = "0"
 ) : RealmObject()
