@@ -66,7 +66,7 @@
                     style="@style/MediumTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_padding_small"
+                    android:layout_marginEnd="@dimen/margin_padding_xsmall"
                     android:gravity="start"
                     android:text="@string/detail_last_weight"
                     android:textAllCaps="true" />
@@ -79,7 +79,6 @@
                     android:layout_marginEnd="@dimen/margin_padding_xxxsmall"
                     android:gravity="start"
                     android:textAllCaps="true"
-                    android:textSize="18sp"
                     tools:text="15.5" />
 
                 <TextView
@@ -94,28 +93,29 @@
 
             <ImageView
                 android:id="@+id/iv_edit_weight"
-                android:contentDescription="@string/content_description"
                 android:layout_width="@dimen/margin_padding_large"
                 android:layout_height="@dimen/margin_padding_large"
-                android:src="@color/black"
+                android:contentDescription="@string/content_description"
+                android:src="@drawable/ic_edit"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/et_weight"
+                style="@style/MediumTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_xxsmall"
                 android:autofillHints="@null"
                 android:background="@drawable/bg_round_white_stroke"
                 android:gravity="center"
                 android:hint="@string/detail_last_weight_hint"
+                android:textCursorDrawable="@color/black"
                 android:inputType="numberDecimal"
-                style="@style/MediumTextView"
-                android:layout_marginTop="@dimen/margin_padding_xxsmall"
-                android:textAllCaps="true"
-                android:maxLength="6"
+                android:maxLength="5"
                 android:paddingHorizontal="@dimen/margin_padding_medium"
                 android:paddingVertical="@dimen/margin_padding_xsmall"
+                android:textAllCaps="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="@id/ll_weight"
                 app:layout_constraintRight_toRightOf="@id/ll_weight"
@@ -183,5 +183,23 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

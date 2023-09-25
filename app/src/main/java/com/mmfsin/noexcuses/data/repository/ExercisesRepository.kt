@@ -15,12 +15,18 @@ class ExercisesRepository {
         }
     }
 
+    fun getExerciseById(exerciseId: String): Exercise? {
+        val exercises = realm.getObjectsFromRealm {
+            where<Exercise>().equalTo("id", exerciseId).findAll()
+        }
+        return if (exercises.isNotEmpty()) exercises.first() else null
+    }
+
     fun getDayExercises(dayId: String): List<Exercise> {
         val list = mutableListOf<Exercise>()
         val exercises = realm.getObjectsFromRealm {
             where<ComboModel>().equalTo("dayId", dayId).findAll()
         }
-
         for (exercise in exercises) {
             val o = realm.getObjectsFromRealm {
                 where<Exercise>().equalTo("id", exercise.exerciseId).findAll()
@@ -41,4 +47,12 @@ class ExercisesRepository {
 
     fun deleteComboModel(comboModel: ComboModel): Boolean =
         realm.deleteObject({ comboModel }, comboModel.id)
+
+    fun changeWeight(exerciseId: String, weight: String) {
+        val exercise = getExerciseById(exerciseId)
+        exercise?.let {
+            it.weight = weight
+            realm.addObject { it }
+        }
+    }
 }

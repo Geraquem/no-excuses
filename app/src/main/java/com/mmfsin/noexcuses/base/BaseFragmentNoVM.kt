@@ -8,15 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
+abstract class BaseFragmentNoVM<VB : ViewBinding> : Fragment() {
 
     private var _binding: ViewBinding? = null
 
     @Suppress("UNCHECKED_CAST")
     protected val binding
         get() = _binding as VB
-
-    protected abstract val viewModel: VM
 
     protected abstract fun inflateView(inflater: LayoutInflater, container: ViewGroup?): VB
 

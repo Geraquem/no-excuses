@@ -5,7 +5,6 @@ import com.mmfsin.noexcuses.domain.models.ComboModel
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.DayWithExercises
 import io.realm.kotlin.where
-import java.lang.Exception
 
 class DaysRepository {
 
@@ -30,15 +29,10 @@ class DaysRepository {
 
     fun addDay(day: Day): Boolean = realm.addObject { day }
 
-    fun deleteDay(day: Day): Boolean {
+    fun deleteDay(day: Day) {
         val dayId = day.id
-        return try {
-            deleteComboModels(dayId)
-            realm.deleteObject({ day }, dayId)
-            true
-        } catch (e: Exception) {
-            false
-        }
+        deleteComboModels(dayId)
+        realm.deleteObject({ day }, dayId)
     }
 
     private fun deleteComboModels(dayId: String) {

@@ -1,8 +1,0 @@
-package com.mmfsin.noexcuses.presentation.phases.interfaces
-
-import com.mmfsin.noexcuses.domain.models.Phase
-
-interface IPhasesListener {
-    fun onClick(phase: Phase)
-    fun config(phase: Phase)
-}
