@@ -2,8 +2,10 @@ package com.mmfsin.noexcuses.data.mappers
 
 import com.mmfsin.noexcuses.data.models.ExerciseDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
+import com.mmfsin.noexcuses.data.models.RoutineDTO
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
+import com.mmfsin.noexcuses.domain.models.Routine
 
 fun MuscularGroupDTO.toMuscularGroup() = MuscularGroup(name, imageURL)
 
@@ -12,3 +14,7 @@ fun List<MuscularGroupDTO>.toMuscularGroupList() = this.map { it.toMuscularGroup
 fun ExerciseDTO.toExercise() = Exercise(id, category, imageURL, name, dataURL)
 
 fun List<ExerciseDTO>.toExerciseList() = this.map { it.toExercise() }
+
+fun RoutineDTO.toRoutine() = Routine(id, title, description, days)
+
+fun List<RoutineDTO>.toRoutineList() = this.map { it.toRoutine() }

@@ -11,6 +11,9 @@
         android:label="menuFragment"
         tools:layout="@layout/fragment_menu">
         <action
+            android:id="@+id/action_menu_to_routines"
+            app:destination="@id/routinesFragment" />
+        <action
             android:id="@+id/action_menu_to_muscularGroups"
             app:destination="@id/mGroupsFragment" />
     </fragment>
@@ -29,6 +32,11 @@
         </action>
     </fragment>
 
+    <fragment
+        android:id="@+id/routinesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.routines.RoutinesFragment"
+        android:label="routinesFragment"
+        tools:layout="@layout/fragment_routines" />
 
     <fragment
         android:id="@+id/exercisesFragment"
