@@ -9,6 +9,16 @@
         android:id="@+id/menuFragment"
         android:name="com.mmfsin.noexcuses.presentation.menu.MenuFragment"
         android:label="menuFragment"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_menu_to_muscularGroups"
+            app:destination="@id/mGroupsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mGroupsFragment"
+        android:name="com.mmfsin.noexcuses.presentation.exercises.mgroups.MGroupsFragment"
+        android:label="mGroupsFragment"
+        tools:layout="@layout/fragment_muscular_groups" />
 
 </navigation>

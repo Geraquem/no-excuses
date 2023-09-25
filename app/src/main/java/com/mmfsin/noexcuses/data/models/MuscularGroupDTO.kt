@@ -3,7 +3,7 @@ package com.mmfsin.noexcuses.data.models
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
-open class MuscularGroupsDTO(
+open class MuscularGroupDTO(
     @PrimaryKey
     var name: String = "",
     var imageURL: String = "",

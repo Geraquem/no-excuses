@@ -6,12 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
 import com.mmfsin.noexcuses.domain.models.MenuAction
+import com.mmfsin.noexcuses.domain.models.MenuAction.*
 import com.mmfsin.noexcuses.domain.models.MenuItem
+import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMuscularGroups
 import com.mmfsin.noexcuses.presentation.menu.adapter.MenuAdapter
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -63,8 +67,16 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
     }
 
     override fun onItemClick(action: MenuAction) {
-
+        when (action) {
+            ROUTINES -> {}
+            EXERCISES -> navigateTo(actionMenuToMuscularGroups())
+            NOTES -> {}
+            WEIGHTS -> {}
+            CHRONOMETER -> {}
+        }
     }
+
+    private fun navigateTo(directions: NavDirections) = findNavController().navigate(directions)
 
     private fun error() = activity?.showErrorDialog()
 

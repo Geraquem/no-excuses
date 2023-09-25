@@ -3,7 +3,7 @@ package com.mmfsin.noexcuses.data.repository
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.mmfsin.noexcuses.data.models.ExerciseDTO
-import com.mmfsin.noexcuses.data.models.MuscularGroupsDTO
+import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
 import com.mmfsin.noexcuses.data.models.VersionDTO
 import com.mmfsin.noexcuses.domain.interfaces.IMenuRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
@@ -38,7 +38,7 @@ class MenuRepository @Inject constructor(
             } else {
                 val fbMGroups = it.child(M_GROUPS)
                 for (child in fbMGroups.children) {
-                    child.getValue(MuscularGroupsDTO::class.java)?.let { deck ->
+                    child.getValue(MuscularGroupDTO::class.java)?.let { deck ->
                         saveMGroupsInRealm(deck)
                     }
                 }
@@ -64,6 +64,6 @@ class MenuRepository @Inject constructor(
         }
     }
 
-    private fun saveMGroupsInRealm(mGroup: MuscularGroupsDTO) = realmDatabase.addObject { mGroup }
+    private fun saveMGroupsInRealm(mGroup: MuscularGroupDTO) = realmDatabase.addObject { mGroup }
     private fun saveExerciseInRealm(exercise: ExerciseDTO) = realmDatabase.addObject { exercise }
 }
