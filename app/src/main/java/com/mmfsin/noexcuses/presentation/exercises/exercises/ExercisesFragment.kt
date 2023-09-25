@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.exercises.mgroups
+package com.mmfsin.noexcuses.presentation.exercises.exercises
 
 import android.content.Context
 import android.os.Bundle
@@ -6,32 +6,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
 import com.mmfsin.noexcuses.base.BaseFragment
-import com.mmfsin.noexcuses.databinding.FragmentMuscularGroupsBinding
-import com.mmfsin.noexcuses.domain.models.MuscularGroup
-import com.mmfsin.noexcuses.presentation.exercises.mgroups.MGroupsFragmentDirections.Companion.actionMuscularGroupsToExercises
-import com.mmfsin.noexcuses.presentation.exercises.mgroups.adapter.MGroupsAdapter
-import com.mmfsin.noexcuses.presentation.exercises.mgroups.interfaces.IMGroupListener
+import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
+import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.presentation.exercises.exercises.adapter.ExercisesAdapter
+import com.mmfsin.noexcuses.presentation.exercises.exercises.interfaces.IExercisesListener
+import com.mmfsin.noexcuses.utils.MGROUP_ID
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MGroupsViewModel>(),
-    IMGroupListener {
+class ExercisesFragment : BaseFragment<FragmentExercisesBinding, ExercisesViewModel>(),
+    IExercisesListener {
 
-    override val viewModel: MGroupsViewModel by viewModels()
+    override val viewModel: ExercisesViewModel by viewModels()
 
     private lateinit var mContext: Context
 
+    private var mGroup: String? = null
+
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup?) =
-        FragmentMuscularGroupsBinding.inflate(inflater, container, false)
+        FragmentExercisesBinding.inflate(inflater, container, false)
+
+    override fun getBundleArgs() {
+        arguments?.let { mGroup = it.getString(MGROUP_ID) }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getMuscularGroups()
+        mGroup?.let { viewModel.getExercises(it) } ?: run { error() }
     }
 
     override fun setUI() {
@@ -43,23 +48,23 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MGroupsViewM
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is MGroupsEvent.MGroups -> setUpMGroups(event.groups)
-                is MGroupsEvent.SomethingWentWrong -> error()
+                is ExercisesEvent.GetExercises -> setUpExercises(event.exercises)
+                is ExercisesEvent.SomethingWentWrong -> error()
             }
         }
     }
 
-    private fun setUpMGroups(items: List<MuscularGroup>) {
+    private fun setUpExercises(exercises: List<Exercise>) {
         binding.apply {
-            binding.rvMgroups.apply {
+            binding.rvExercises.apply {
                 layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-                adapter = MGroupsAdapter(items, this@MGroupsFragment)
+                adapter = ExercisesAdapter(exercises, this@ExercisesFragment)
             }
         }
     }
 
-    override fun onMGroupClick(mGroup: String) {
-        findNavController().navigate(actionMuscularGroupsToExercises(mGroup))
+    override fun onExerciseClick(id: String) {
+        //open dialog
     }
 
     private fun error() = activity?.showErrorDialog()
