@@ -19,7 +19,8 @@ class RoutinesAdapter(
         fun bind(routine: Routine) {
             binding.apply {
                 tvTitle.text = routine.title
-                tvDescription.text = routine.description
+                routine.description?.let { tvDescription.text = it }
+                    ?: run { tvDescription.visibility = View.GONE }
             }
         }
     }

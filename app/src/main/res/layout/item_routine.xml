@@ -5,11 +5,11 @@
     android:id="@+id/row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/margin_padding_medium"
+    android:layout_marginBottom="16dp"
     android:background="@drawable/bg_round_white"
     android:elevation="@dimen/elevation_default"
-    android:paddingHorizontal="@dimen/margin_padding_medium"
-    android:paddingVertical="@dimen/margin_padding_large">
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="24dp">
 
     <ImageView
         android:id="@+id/iv_config"
@@ -23,7 +23,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_padding_medium"
+        android:layout_marginEnd="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -43,7 +43,8 @@
             style="@style/MediumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_padding_small"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
             tools:text="Descripción de la fase 1" />
 
     </LinearLayout>

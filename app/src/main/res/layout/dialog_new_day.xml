@@ -25,7 +25,7 @@
         android:layout_height="@dimen/size_image_big"
         android:background="@drawable/bg_top_green"
         android:contentDescription="@string/content_description"
-        android:paddingVertical="@dimen/margin_padding_medium"
+        android:paddingVertical="16dp"
         android:src="@drawable/ic_close"
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right"
@@ -34,7 +34,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_padding_medium"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right"
@@ -45,40 +45,40 @@
             style="@style/BigTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding_small"/>
+            android:layout_marginBottom="8dp"/>
 
         <TextView
             style="@style/MediumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding_small"/>
+            android:layout_marginBottom="8dp"/>
 
         <EditText
             android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding_large"
+            android:layout_marginBottom="24dp"
             android:autofillHints="no"
             android:background="@drawable/bg_edittext"
             android:inputType="textPersonName"
             android:lines="1"
             android:maxLength="20"
             android:maxLines="1"
-            android:paddingHorizontal="@dimen/margin_padding_medium"
-            android:paddingVertical="@dimen/margin_padding_small" />
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginBottom="@dimen/margin_padding_large">
+            android:layout_marginBottom="24dp">
 
             <TextView
                 android:id="@+id/cancel"
                 style="@style/MediumTextView_Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_padding_medium"/>
+                android:layout_marginEnd="16dp"/>
 
             <TextView
                 android:id="@+id/save"

@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.exercises.exercises.dialog
+package com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs
 
 import android.app.Dialog
 import android.os.Bundle

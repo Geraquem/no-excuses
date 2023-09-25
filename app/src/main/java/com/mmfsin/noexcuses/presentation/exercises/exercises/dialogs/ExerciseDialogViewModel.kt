@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.exercises.exercises.dialog
+package com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs
 
 import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.GetExerciseUseCase

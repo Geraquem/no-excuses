@@ -7,6 +7,6 @@ open class RoutineDTO(
     @PrimaryKey
     var id: String = "",
     var title: String = "",
-    var description: String = "",
+    var description: String? = null,
     var days: Int = 0,
 ) : RealmObject()

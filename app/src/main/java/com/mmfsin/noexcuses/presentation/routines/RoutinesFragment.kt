@@ -7,25 +7,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.routines.adapter.RoutinesAdapter
+import com.mmfsin.noexcuses.presentation.routines.dialogs.AddRoutineDialog
+import com.mmfsin.noexcuses.presentation.routines.dialogs.DeleteRoutineDialog
+import com.mmfsin.noexcuses.presentation.routines.dialogs.EditRoutineDialog
+import com.mmfsin.noexcuses.presentation.routines.dialogs.interfaces.IRoutineDialogListener
 import com.mmfsin.noexcuses.presentation.routines.interfaces.IRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel>(),
-    IRoutineListener {
+    IRoutineListener, IRoutineDialogListener {
 
     override val viewModel: RoutinesViewModel by viewModels()
 
     private lateinit var mContext: Context
+
+    private var routines = emptyList<Routine>()
 
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
@@ -42,12 +48,21 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
         }
     }
 
-    override fun setListeners() {}
+    override fun setListeners() {
+        binding.apply {
+            btnAddRoutine.setOnClickListener {
+                activity?.showFragmentDialog(AddRoutineDialog.newInstance(this@RoutinesFragment))
+            }
+        }
+    }
 
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is RoutinesEvent.GetRoutines -> setUpRoutines(event.routines)
+                is RoutinesEvent.GetRoutines -> {
+                    routines = event.routines
+                    setUpRoutines(routines)
+                }
                 is RoutinesEvent.SomethingWentWrong -> error()
             }
         }
@@ -56,16 +71,25 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
     private fun setUpRoutines(routines: List<Routine>) {
         binding.apply {
             binding.rvRoutines.apply {
-                layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
+                layoutManager = LinearLayoutManager(mContext)
                 adapter = RoutinesAdapter(routines, this@RoutinesFragment)
             }
-            rvRoutines.isVisible = routines.isEmpty()
+            rvRoutines.isVisible = routines.isNotEmpty()
             tvEmpty.isVisible = routines.isEmpty()
         }
     }
 
     override fun onRoutineClick(id: String) {
+        activity?.showFragmentDialog(EditRoutineDialog.newInstance(id,this@RoutinesFragment))
+    }
 
+    override fun flowCompleted() {
+        routines = emptyList()
+        viewModel.getRoutines()
+    }
+
+    override fun deleteRoutine(id: String) {
+        activity?.showFragmentDialog(DeleteRoutineDialog.newInstance(id,this@RoutinesFragment))
     }
 
     private fun error() = activity?.showErrorDialog()

@@ -1,11 +1,14 @@
 package com.mmfsin.noexcuses.data.repository
 
+import com.mmfsin.noexcuses.data.mappers.toRoutine
 import com.mmfsin.noexcuses.data.mappers.toRoutineList
 import com.mmfsin.noexcuses.data.models.RoutineDTO
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.interfaces.IRoutinesRepository
 import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.utils.ID
 import io.realm.kotlin.where
+import java.util.*
 import javax.inject.Inject
 
 class RoutinesRepository @Inject constructor(
@@ -16,5 +19,39 @@ class RoutinesRepository @Inject constructor(
         val groups = realmDatabase.getObjectsFromRealm { where<RoutineDTO>().findAll() }
         return if (groups.isNotEmpty()) groups.toRoutineList()
         else emptyList()
+    }
+
+    override fun getRoutineById(id: String): Routine? {
+        val routines =
+            realmDatabase.getObjectsFromRealm { where<RoutineDTO>().equalTo(ID, id).findAll() }
+        return if (routines.isNotEmpty()) routines.first().toRoutine()
+        else null
+    }
+
+    override fun addRoutine(title: String, description: String?) {
+        val id = UUID.randomUUID().toString()
+        val routine = RoutineDTO(id, title, description, 0)
+        realmDatabase.addObject { routine }
+    }
+
+    override fun editRoutine(id: String, title: String, description: String?) {
+        val routine = getRoutineDTO(id)
+        routine?.let {
+            it.title = title
+            it.description = description
+            realmDatabase.addObject { it }
+        }
+    }
+
+    override fun deleteRoutine(id: String) {
+        /** DELETE DAYS AND EXERCISES IN THAT ROUTINE */
+        val routine = getRoutineDTO(id)
+        routine?.let { realmDatabase.deleteObject({ it }, id) }
+    }
+
+    private fun getRoutineDTO(id: String): RoutineDTO? {
+        val routines =
+            realmDatabase.getObjectsFromRealm { where<RoutineDTO>().equalTo(ID, id).findAll() }
+        return if (routines.isNotEmpty()) routines.first() else null
     }
 }

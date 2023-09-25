@@ -7,7 +7,7 @@
     android:background="@drawable/bg_white_box"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:padding="@dimen/margin_padding_large">
+    android:padding="24dp">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -25,7 +25,7 @@
             style="@style/MediumTextView_Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_padding_medium"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="@dimen/margin_padding_xxxsmall"
             android:textAllCaps="true"
             tools:text="EJERCICIO DE PECHO" />
@@ -35,7 +35,7 @@
             style="@style/BigTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding_medium"
+            android:layout_marginBottom="16dp"
             android:textAllCaps="true"
             tools:text="PRESS DE BANCA PLANO CON BARRA" />
 

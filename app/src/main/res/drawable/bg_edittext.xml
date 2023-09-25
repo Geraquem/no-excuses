@@ -4,5 +4,5 @@
     <stroke
         android:width="0.5dp"
         android:color="@color/black" />
-    <corners android:radius="@dimen/margin_padding_gigant" />
+    <corners android:radius="8dp" />
 </shape>
