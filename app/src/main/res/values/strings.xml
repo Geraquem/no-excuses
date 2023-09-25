@@ -4,6 +4,11 @@
     <string name="content_description">contentDescription</string>
     <string name="sww">Vaya, algo ha salido mal</string>
 
+    <!-- ERROR -->
+    <string name="error_title">Ha ocurrido un problema</string>
+    <string name="error_description">Inténtalo de nuevo más tarde</string>
+    <string name="error_btn">Aceptar</string>
+
     <!-- Main -->
     <string name="routines">Rutinas</string>
     <string name="exercises">Ejercicios</string>

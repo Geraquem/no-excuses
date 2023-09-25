@@ -1,4 +1,4 @@
-package com.mmfsin.whoami.base
+package com.mmfsin.noexcuses.base
 
 import android.app.Dialog
 import android.graphics.Color
@@ -11,7 +11,7 @@ import android.view.ViewGroup.LayoutParams.*
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewbinding.ViewBinding
-import com.mmfsin.whoami.R
+import com.mmfsin.noexcuses.R
 
 abstract class BaseDialog<VB : ViewBinding> : DialogFragment() {
 

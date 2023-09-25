@@ -6,43 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
 import com.mmfsin.noexcuses.base.BaseFragment
-import com.mmfsin.whoami.base.BaseFragment
-import com.mmfsin.whoami.databinding.FragmentQuestionsBinding
-import com.mmfsin.whoami.domain.models.Question
-import com.mmfsin.whoami.presentation.dashboard.cards.dialogs.selected.SelectedCardDialog
-import com.mmfsin.whoami.presentation.dashboard.questions.MenuEvent
-import com.mmfsin.whoami.presentation.dashboard.questions.MenuViewModel
-import com.mmfsin.whoami.presentation.dashboard.questions.dialogs.NewQuestionDialog
-import com.mmfsin.whoami.presentation.dashboard.questions.dialogs.QuestionsListDialog
-import com.mmfsin.whoami.presentation.dashboard.questions.dialogs.interfaces.INewQuestionListener
-import com.mmfsin.whoami.presentation.dashboard.viepager.interfaces.IViewPagerListener
-import com.mmfsin.whoami.utils.setExpandableView
-import com.mmfsin.whoami.utils.showErrorDialog
-import com.mmfsin.whoami.utils.showFragmentDialog
+import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MenuFragment(
-    private val selectedCardId: String,
-    private val listener: IViewPagerListener
-) : BaseFragment<FragmentQuestionsBinding, MenuViewModel>(), INewQuestionListener {
+class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
 
     override val viewModel: MenuViewModel by viewModels()
 
-    private var questions: List<Question>? = null
-    private val questionsDone = ArrayList<Question>()
-    private var cont = 0
 
     private lateinit var mContext: Context
 
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
-    ) = FragmentQuestionsBinding.inflate(inflater, container, false)
+    ) = FragmentMenuBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getQuestions()
+        viewModel.checkVersion()
     }
 
     override fun setUI() {
@@ -53,50 +36,17 @@ class MenuFragment(
 
     override fun setListeners() {
         binding.apply {
-            tvNewQuestion.setOnClickListener {
-                questions?.let { list ->
-                    if (cont < list.size) {
-                        val question = list[cont]
-                        questionsDone.add(question)
-                        activity?.showFragmentDialog(
-                            NewQuestionDialog.newInstance(this@MenuFragment, question)
-                        )
-                        cont++
-                    } else activity?.showFragmentDialog(NewQuestionDialog.newInstance(this@MenuFragment))
-                }
-            }
 
-            tvAllQuestions.setOnClickListener { showAllQuestions() }
-
-            tvMyCard.setOnClickListener {
-                activity?.showFragmentDialog(SelectedCardDialog.newInstance(selectedCardId))
-            }
-
-            cvWhatNow.setOnClickListener { setExpandableView(detailsWhatNow.linear, llWhatNow) }
         }
     }
 
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is MenuEvent.GetMenu -> {
-                    questions = event.questions
-                    binding.loading.root.visibility = View.GONE
-                }
+                is MenuEvent.Completed -> binding.loading.root.visibility = View.GONE
                 is MenuEvent.SomethingWentWrong -> error()
             }
         }
-    }
-
-    private fun showAllQuestions() =
-        activity?.showFragmentDialog(QuestionsListDialog(questionsDone.toList()))
-
-    override fun goToAllQuestions() {
-        showAllQuestions()
-    }
-
-    override fun viewCards() {
-        listener.openCardsView()
     }
 
     private fun error() = activity?.showErrorDialog()

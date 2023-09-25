@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         android:textAllCaps="true"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/margin_padding_small"
-        android:text="@string/empty_recycler" />
+        android:layout_marginBottom="@dimen/margin_padding_small" />
 
     <ImageView
         android:layout_width="@dimen/size_image_big"

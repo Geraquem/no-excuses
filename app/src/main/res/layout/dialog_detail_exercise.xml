@@ -68,7 +68,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_padding_xsmall"
                     android:gravity="start"
-                    android:text="@string/detail_last_weight"
                     android:textAllCaps="true" />
 
                 <TextView
@@ -86,8 +85,7 @@
                     style="@style/MediumTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:text="@string/detail_last_weight_kg" />
+                    android:gravity="start" />
 
             </LinearLayout>
 
@@ -109,7 +107,6 @@
                 android:autofillHints="@null"
                 android:background="@drawable/bg_round_white_stroke"
                 android:gravity="center"
-                android:hint="@string/detail_last_weight_hint"
                 android:textCursorDrawable="@color/black"
                 android:inputType="numberDecimal"
                 android:maxLength="5"
@@ -135,20 +132,19 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="@dimen/margin_padding_medium"
-            android:text="@string/watch_video"
             android:textAllCaps="true"
             android:textColor="@color/black" />
 
-        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-            android:id="@+id/youtubePlayerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_padding_small"
-            android:layout_marginBottom="@dimen/margin_padding_large"
-            android:visibility="gone"
-            app:autoPlay="false"
-            app:showFullScreenButton="false"
-            tools:visibility="visible" />
+<!--        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
+<!--            android:id="@+id/youtubePlayerView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/margin_padding_small"-->
+<!--            android:layout_marginBottom="@dimen/margin_padding_large"-->
+<!--            android:visibility="gone"-->
+<!--            app:autoPlay="false"-->
+<!--            app:showFullScreenButton="false"-->
+<!--            tools:visibility="visible" />-->
 
         <LinearLayout
             android:id="@+id/btn_add_to_day"
@@ -169,7 +165,6 @@
                 android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/margin_padding_small"
                 android:gravity="center"
-                android:text="@string/add_to_day"
                 android:textAllCaps="true"
                 android:textColor="@color/black" />
 

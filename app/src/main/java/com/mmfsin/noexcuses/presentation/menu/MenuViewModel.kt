@@ -1,22 +1,19 @@
-package com.mmfsin.whoami.presentation.dashboard.questions
+package com.mmfsin.noexcuses.presentation.menu
 
-import com.mmfsin.whoami.base.BaseViewModel
-import com.mmfsin.whoami.domain.usecases.GetQuestionsUseCase
+import com.mmfsin.noexcuses.base.BaseViewModel
+import com.mmfsin.noexcuses.domain.usecases.CheckVersionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MenuViewModel @Inject constructor(
-    private val getQuestionsUseCase: GetQuestionsUseCase
+    private val checkVersionUseCase: CheckVersionUseCase
 ) : BaseViewModel<MenuEvent>() {
 
-    fun getQuestions() {
+    fun checkVersion() {
         executeUseCase(
-            { getQuestionsUseCase.execute() },
-            { result ->
-                _event.value = result?.let { MenuEvent.GetMenu(result) }
-                    ?: run { MenuEvent.SomethingWentWrong }
-            },
+            { checkVersionUseCase.execute() },
+            { _event.value = MenuEvent.Completed },
             { _event.value = MenuEvent.SomethingWentWrong }
         )
     }

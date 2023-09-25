@@ -28,7 +28,6 @@
             android:layout_gravity="center"
             android:elevation="@dimen/elevation_default"
             android:gravity="center"
-            android:text="@string/create_new_phase"
             android:textAllCaps="true" />
 
     </LinearLayout>

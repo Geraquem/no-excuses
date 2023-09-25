@@ -73,7 +73,7 @@
                 android:elevation="@dimen/elevation_default"
                 android:gravity="center"
                 android:padding="@dimen/margin_padding_xmedium"
-                android:text="@string/delete_phase"
+                android:text="aaaaaaaaaaaaa"
                 android:textAllCaps="true" />
 
             <Space
@@ -92,7 +92,6 @@
                 android:elevation="@dimen/elevation_default"
                 android:gravity="center"
                 android:padding="@dimen/margin_padding_xmedium"
-                android:text="@string/edit_phase_edit"
                 android:textAllCaps="true" />
 
         </LinearLayout>

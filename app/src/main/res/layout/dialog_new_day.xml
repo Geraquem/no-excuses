@@ -45,15 +45,13 @@
             style="@style/BigTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding_small"
-            android:text="@string/new_day_title" />
+            android:layout_marginBottom="@dimen/margin_padding_small"/>
 
         <TextView
             style="@style/MediumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding_small"
-            android:text="@string/new_day_name" />
+            android:layout_marginBottom="@dimen/margin_padding_small"/>
 
         <EditText
             android:id="@+id/et_name"
@@ -62,7 +60,6 @@
             android:layout_marginBottom="@dimen/margin_padding_large"
             android:autofillHints="no"
             android:background="@drawable/bg_edittext"
-            android:hint="@string/new_day_name_hint"
             android:inputType="textPersonName"
             android:lines="1"
             android:maxLength="20"
@@ -81,15 +78,13 @@
                 style="@style/MediumTextView_Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_padding_medium"
-                android:text="@string/new_phase_cancel" />
+                android:layout_marginEnd="@dimen/margin_padding_medium"/>
 
             <TextView
                 android:id="@+id/save"
                 style="@style/MediumTextView_Bold"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/new_phase_save" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

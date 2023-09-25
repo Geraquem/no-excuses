@@ -1,4 +1,4 @@
-package com.mmfsin.whoami.base
+package com.mmfsin.noexcuses.base
 
 import android.app.Application
 import android.util.Log
