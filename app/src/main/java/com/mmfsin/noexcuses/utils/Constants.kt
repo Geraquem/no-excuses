@@ -7,6 +7,7 @@ const val EXERCISES = "exercises"
 
 //REALM
 const val CATEGORY = "category"
+const val EXERCISE_ID = "id"
 
 //NAVIGATION
 const val MGROUP_ID = "mGroupId"

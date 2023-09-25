@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_exercise_of"
+            android:id="@+id/tv_category"
             style="@style/MediumTextView_Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,159 +41,12 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="@dimen/size_image_muscular"
-            android:layout_height="@dimen/size_image_muscular"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/margin_padding_medium"
             android:contentDescription="@string/content_description"
-            tools:src="@mipmap/ic_launcher" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/ll_weight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    style="@style/MediumTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_padding_xsmall"
-                    android:gravity="start"
-                    android:textAllCaps="true" />
-
-                <TextView
-                    android:id="@+id/tv_weight"
-                    style="@style/MediumTextView_Bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_padding_xxxsmall"
-                    android:gravity="start"
-                    android:textAllCaps="true"
-                    tools:text="15.5" />
-
-                <TextView
-                    android:id="@+id/tv_kg"
-                    style="@style/MediumTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="start" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/iv_edit_weight"
-                android:layout_width="@dimen/margin_padding_large"
-                android:layout_height="@dimen/margin_padding_large"
-                android:contentDescription="@string/content_description"
-                android:src="@drawable/ic_edit"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/et_weight"
-                style="@style/MediumTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_padding_xxsmall"
-                android:autofillHints="@null"
-                android:background="@drawable/bg_round_white_stroke"
-                android:gravity="center"
-                android:textCursorDrawable="@color/black"
-                android:inputType="numberDecimal"
-                android:maxLength="5"
-                android:paddingHorizontal="@dimen/margin_padding_medium"
-                android:paddingVertical="@dimen/margin_padding_xsmall"
-                android:textAllCaps="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="@id/ll_weight"
-                app:layout_constraintRight_toRightOf="@id/ll_weight"
-                app:layout_constraintTop_toBottomOf="@id/ll_weight" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/btn_video"
-            style="@style/MediumTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_padding_large"
-            android:background="@drawable/bg_round_white_stroke"
-            android:elevation="@dimen/elevation_default"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="@dimen/margin_padding_medium"
-            android:textAllCaps="true"
-            android:textColor="@color/black" />
-
-<!--        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
-<!--            android:id="@+id/youtubePlayerView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/margin_padding_small"-->
-<!--            android:layout_marginBottom="@dimen/margin_padding_large"-->
-<!--            android:visibility="gone"-->
-<!--            app:autoPlay="false"-->
-<!--            app:showFullScreenButton="false"-->
-<!--            tools:visibility="visible" />-->
-
-        <LinearLayout
-            android:id="@+id/btn_add_to_day"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_padding_medium"
-            android:background="@drawable/bg_round_green"
-            android:elevation="@dimen/elevation_default"
-            android:gravity="center"
-            android:padding="@dimen/margin_padding_medium">
-
-            <TextView
-                android:id="@+id/tv_add_to_day"
-                style="@style/MediumTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="@dimen/margin_padding_small"
-                android:gravity="center"
-                android:textAllCaps="true"
-                android:textColor="@color/black" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:contentDescription="@string/content_description"
-                android:src="@drawable/ic_check" />
-
-        </LinearLayout>
+            tools:src="@color/black" />
 
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/loading"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone">
-
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-
-    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

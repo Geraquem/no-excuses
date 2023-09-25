@@ -13,11 +13,12 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.exercises.exercises.adapter.ExercisesAdapter
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialog.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.exercises.exercises.interfaces.IExercisesListener
 import com.mmfsin.noexcuses.utils.MGROUP_ID
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Locale.ROOT
 
 @AndroidEntryPoint
 class ExercisesFragment : BaseFragment<FragmentExercisesBinding, ExercisesViewModel>(),
@@ -66,7 +67,7 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding, ExercisesViewMo
     }
 
     override fun onExerciseClick(id: String) {
-        //open dialog
+        activity?.showFragmentDialog(ExerciseDialog.newInstance(id))
     }
 
     private fun error() = activity?.showErrorDialog()

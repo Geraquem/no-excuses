@@ -20,6 +20,7 @@
     <!-- MUSCULAR GROUPS -->
     <string name="mgroups_toolbar">Grupos musculares</string>
 
-    <!-- EXERCISES -->
+    <!-- EXERCISE DIALOG -->
+    <string name="exercise_dialog_category">Ejercicio de %s</string>
 
 </resources>

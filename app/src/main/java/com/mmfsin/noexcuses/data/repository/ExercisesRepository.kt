@@ -1,5 +1,6 @@
 package com.mmfsin.noexcuses.data.repository
 
+import com.mmfsin.noexcuses.data.mappers.toExercise
 import com.mmfsin.noexcuses.data.mappers.toExerciseList
 import com.mmfsin.noexcuses.data.mappers.toMuscularGroupList
 import com.mmfsin.noexcuses.data.models.ExerciseDTO
@@ -9,6 +10,7 @@ import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.utils.CATEGORY
+import com.mmfsin.noexcuses.utils.EXERCISE_ID
 import io.realm.kotlin.where
 import javax.inject.Inject
 
@@ -22,11 +24,18 @@ class ExercisesRepository @Inject constructor(
         else emptyList()
     }
 
-    override fun getExerciseByMuscularGroup(mGroup: String): List<Exercise> {
+    override fun getExercisesByMuscularGroup(mGroup: String): List<Exercise> {
         val exercises = realmDatabase.getObjectsFromRealm {
             where<ExerciseDTO>().equalTo(CATEGORY, mGroup).findAll()
         }
         return if (exercises.isNotEmpty()) exercises.sortedBy { it.order }.toExerciseList()
         else emptyList()
+    }
+
+    override fun getExerciseById(id: String): Exercise? {
+        val exercises = realmDatabase.getObjectsFromRealm {
+            where<ExerciseDTO>().equalTo(EXERCISE_ID, id).findAll()
+        }
+        return if (exercises.isNotEmpty()) exercises.first().toExercise() else null
     }
 }

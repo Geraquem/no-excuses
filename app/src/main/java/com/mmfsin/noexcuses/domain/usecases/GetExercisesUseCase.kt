@@ -9,7 +9,7 @@ class GetExercisesUseCase @Inject constructor(private val repository: IExercises
     BaseUseCase<GetExercisesUseCase.Params, List<Exercise>>() {
 
     override suspend fun execute(params: Params): List<Exercise> =
-        repository.getExerciseByMuscularGroup(params.mGroup)
+        repository.getExercisesByMuscularGroup(params.mGroup)
 
     data class Params(
         val mGroup: String
