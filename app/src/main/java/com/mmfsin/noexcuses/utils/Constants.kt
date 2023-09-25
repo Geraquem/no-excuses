@@ -1,15 +1,7 @@
 package com.mmfsin.noexcuses.utils
 
-const val INSTRUCTIONS = "instructions"
-const val INSTRUCTIONS_DETAIL = "instructions_detail"
-
 //FIREBASE
 const val VERSION = "version"
-const val DECKS = "decks"
-const val CARDS = "cards"
-const val QUESTIONS = "questions"
+const val M_GROUPS = "muscular_groups"
+const val EXERCISES = "exercises"
 
-const val DECK_ID = "deckId"
-
-//Constants
-const val NUM_OF_QUESTIONS = 5

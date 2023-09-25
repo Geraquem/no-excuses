@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
 import com.mmfsin.noexcuses.base.BaseFragment
+import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
 
     override val viewModel: MenuViewModel by viewModels()
-
 
     private lateinit var mContext: Context
 
@@ -30,15 +29,12 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
 
     override fun setUI() {
         binding.apply {
+            background.visibility = View.VISIBLE
             loading.root.visibility = View.VISIBLE
         }
     }
 
-    override fun setListeners() {
-        binding.apply {
-
-        }
-    }
+    override fun setListeners() {}
 
     override fun observe() {
         viewModel.event.observe(this) { event ->
