@@ -10,10 +10,11 @@
     <string name="error_btn">Aceptar</string>
 
     <!-- Main -->
-    <string name="routines">Rutinas</string>
-    <string name="exercises">Ejercicios</string>
-    <string name="my_weights">Mis pesos</string>
-    <string name="notes">Notas</string>
-    <string name="laziness">Pereza</string>
+    <string name="menu_routines">Rutinas</string>
+    <string name="menu_exercises">Ejercicios</string>
+    <string name="menu_weights">Mis pesos</string>
+    <string name="menu_notes">Notas</string>
+    <string name="menu_chronometer">Notas</string>
+    <string name="menu_laziness">Pereza</string>
 
 </resources>

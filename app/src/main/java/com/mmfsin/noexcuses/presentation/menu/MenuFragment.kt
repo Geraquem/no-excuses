@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
+import com.mmfsin.noexcuses.domain.models.MenuAction
+import com.mmfsin.noexcuses.domain.models.MenuItem
+import com.mmfsin.noexcuses.presentation.menu.adapter.MenuAdapter
+import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
+class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuListener {
 
     override val viewModel: MenuViewModel by viewModels()
 
@@ -29,7 +35,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
 
     override fun setUI() {
         binding.apply {
-            background.visibility = View.VISIBLE
+            background.visibility = View.GONE
             loading.root.visibility = View.VISIBLE
         }
     }
@@ -39,10 +45,25 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is MenuEvent.Completed -> binding.loading.root.visibility = View.GONE
+                is MenuEvent.Completed -> viewModel.getMenuItems()
+                is MenuEvent.MenuItems -> setUpMenu(event.items)
                 is MenuEvent.SomethingWentWrong -> error()
             }
         }
+    }
+
+    private fun setUpMenu(items: List<MenuItem>) {
+        binding.apply {
+            binding.rvMenu.apply {
+                layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
+                adapter = MenuAdapter(items, this@MenuFragment)
+            }
+            loading.root.visibility = View.GONE
+        }
+    }
+
+    override fun onItemClick(action: MenuAction) {
+
     }
 
     private fun error() = activity?.showErrorDialog()

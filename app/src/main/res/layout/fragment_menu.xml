@@ -27,10 +27,14 @@
         android:id="@+id/rv_menu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_button_menu" />
 
     <LinearLayout
         android:id="@+id/ll_laziness"
@@ -49,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/laziness"
+            android:text="@string/menu_laziness"
             android:textAllCaps="true"
             android:textSize="28sp" />
 
