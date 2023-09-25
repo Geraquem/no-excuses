@@ -9,12 +9,17 @@
     <string name="error_description">Inténtalo de nuevo más tarde</string>
     <string name="error_btn">Aceptar</string>
 
-    <!-- Main -->
+    <!-- MAIN -->
     <string name="menu_routines">Rutinas</string>
     <string name="menu_exercises">Ejercicios</string>
     <string name="menu_weights">Mis pesos</string>
     <string name="menu_notes">Notas</string>
     <string name="menu_chronometer">Notas</string>
     <string name="menu_laziness">Pereza</string>
+
+    <!-- MUSCULAR GROUPS -->
+    <string name="mgroups_toolbar">Grupos musculares</string>
+
+    <!-- EXERCISES -->
 
 </resources>

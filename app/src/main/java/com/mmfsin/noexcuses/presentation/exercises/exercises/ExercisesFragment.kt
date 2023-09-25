@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
+import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
@@ -16,6 +17,7 @@ import com.mmfsin.noexcuses.presentation.exercises.exercises.interfaces.IExercis
 import com.mmfsin.noexcuses.utils.MGROUP_ID
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale.ROOT
 
 @AndroidEntryPoint
 class ExercisesFragment : BaseFragment<FragmentExercisesBinding, ExercisesViewModel>(),
@@ -40,7 +42,7 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding, ExercisesViewMo
     }
 
     override fun setUI() {
-        binding.apply {}
+        (activity as MainActivity).setUpToolbar(title = mGroup)
     }
 
     override fun setListeners() {}

@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
+import com.mmfsin.noexcuses.MainActivity
+import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMuscularGroupsBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
@@ -35,7 +37,7 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MGroupsViewM
     }
 
     override fun setUI() {
-        binding.apply {}
+        (activity as MainActivity).setUpToolbar(title = getString(R.string.mgroups_toolbar))
     }
 
     override fun setListeners() {}
