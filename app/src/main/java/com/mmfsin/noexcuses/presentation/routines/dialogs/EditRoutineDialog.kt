@@ -3,6 +3,7 @@ package com.mmfsin.noexcuses.presentation.routines.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.base.BaseDialog
@@ -38,6 +39,7 @@ class EditRoutineDialog(val id: String, private val listener: IRoutineDialogList
 
     override fun setUI() {
         isCancelable = true
+        binding.tvError.visibility = View.GONE
     }
 
     override fun setListeners() {
@@ -55,9 +57,7 @@ class EditRoutineDialog(val id: String, private val listener: IRoutineDialogList
                     val description = etDescription.text.toString()
                     if (title.isNotEmpty() && title.isNotBlank()) {
                         viewModel.editRoutine(r.id, title, description)
-                    } else {
-                        Toast.makeText(requireContext(), "add title", Toast.LENGTH_SHORT).show()
-                    }
+                    } else binding.tvError.visibility = View.VISIBLE
                 }
             }
         }

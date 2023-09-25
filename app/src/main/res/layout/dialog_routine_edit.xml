@@ -110,6 +110,17 @@
             android:textColorHint="@color/soft_black"
             tools:ignore="LabelFor" />
 
+        <TextView
+            android:id="@+id/tv_error"
+            style="@style/MediumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="8dp"
+            android:text="@string/routines_add_title_error"
+            android:textAllCaps="true"
+            android:textColor="@color/red" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

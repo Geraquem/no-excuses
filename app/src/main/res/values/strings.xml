@@ -31,11 +31,12 @@
     <string name="routines_add_top_text">Nueva rutina</string>
     <string name="routines_add_button">Aceptar</string>
     <string name="routines_delete_button">Eliminar</string>
-    <string name="routines_add_title">Título</string>
+    <string name="routines_add_title">Nombre</string>
     <string name="routines_add_title_hint">Enfocada en torso</string>
     <string name="routines_add_description">Descripción</string>
     <string name="routines_add_description_optional">(opcional)</string>
     <string name="routines_add_description_hint">Meses Mayo y Junio</string>
+    <string name="routines_add_title_error">El nombre no puede estar vacío</string>
 
     <string name="routines_edit_top_text">Editar rutina</string>
     <string name="routines_edit_button">Editar</string>
