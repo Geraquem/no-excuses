@@ -32,6 +32,8 @@
 
     <!-- DAYS -->
     <string name="days_empty">Todavía no tienes ningun día en esta rutina.\n¡Pulsa el <b>botón +</b> para empezar a añadir!</string>
+    <string name="days_one_exercise">1 ejercicio</string>
+    <string name="days_exercises">%s ejercicios</string>
 
     <!-- ROUTINES ADD/EDIT/DELETE DIALOG -->
     <string name="routines_add_top_text">Nueva rutina</string>

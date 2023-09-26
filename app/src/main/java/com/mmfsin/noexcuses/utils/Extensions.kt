@@ -25,6 +25,12 @@ fun Activity.closeKeyboard() {
     }
 }
 
+fun Context.closeKeyboardFromDialog(){
+    val imm: InputMethodManager =
+        this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    if (imm.isActive) imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS)
+}
+
 fun FragmentActivity?.showFragmentDialog(dialog: DialogFragment) =
     this?.let { dialog.show(it.supportFragmentManager, "") }
 

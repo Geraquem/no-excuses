@@ -1,9 +1,11 @@
 package com.mmfsin.noexcuses.presentation.routines.days.fragments
 
+import android.app.Activity.INPUT_METHOD_SERVICE
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogDayAddBinding
@@ -43,6 +45,7 @@ class AddDaysConfigDialog(
             btnAccept.setOnClickListener {
                 val title = etTitle.text.toString()
                 if (title.isNotEmpty() && title.isNotBlank()) {
+                    closeKeyboard()
                     viewModel.addDay(routineId, title)
                 } else tvError.visibility = View.VISIBLE
             }
@@ -62,6 +65,12 @@ class AddDaysConfigDialog(
     }
 
     private fun error() = activity?.showErrorDialog()
+
+    private fun closeKeyboard() {
+        val imm: InputMethodManager =
+            requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        if (imm.isActive) imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
 
     companion object {
         fun newInstance(routineId: String, listener: IDaysDialogListener): AddDaysConfigDialog {

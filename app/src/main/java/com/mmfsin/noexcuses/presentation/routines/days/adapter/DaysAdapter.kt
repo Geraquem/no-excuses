@@ -16,9 +16,20 @@ class DaysAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemDayBinding.bind(view)
+        private val c = binding.root.context
         fun bind(day: Day) {
             binding.apply {
-                tvTitle.text = day.title
+                val title = day.title
+
+                val initial = if (title.isNotEmpty()) title.substring(0, 1) else "?"
+                image.firstLetter.text = initial
+
+                tvTitle.text = title
+
+                val exercises = day.exercises
+                val numOfExercises = if (exercises == 1) c.getString(R.string.days_one_exercise)
+                else c.getString(R.string.days_exercises, exercises.toString())
+                tvExercises.text = numOfExercises
             }
         }
     }
