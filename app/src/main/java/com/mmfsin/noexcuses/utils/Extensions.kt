@@ -10,6 +10,7 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import com.mmfsin.noexcuses.base.dialog.ErrorDialog
 
 fun FragmentActivity.showErrorDialog(goBack: Boolean = true) {
@@ -26,6 +27,8 @@ fun Activity.closeKeyboard() {
 
 fun FragmentActivity?.showFragmentDialog(dialog: DialogFragment) =
     this?.let { dialog.show(it.supportFragmentManager, "") }
+
+fun FragmentManager.showFragmentDialog(dialog: DialogFragment) = dialog.show(this, "")
 
 fun Dialog.animateDialog() {
     val dialogView = this.window?.decorView

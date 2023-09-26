@@ -46,8 +46,8 @@ class MenuRepository @Inject constructor(
                 val fbExercises = it.child(EXERCISES)
                 for (child in fbExercises.children) {
                     for (exercise in child.children) {
-                        exercise.getValue(ExerciseDTO::class.java)?.let { exercise ->
-                            saveExerciseInRealm(exercise)
+                        exercise.getValue(ExerciseDTO::class.java)?.let { e ->
+                            saveExerciseInRealm(e)
                         }
                     }
                 }

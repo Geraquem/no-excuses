@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_menu">
         <action
             android:id="@+id/action_menu_to_routines"
-            app:destination="@id/routinesFragment" />
+            app:destination="@id/routine_nav_graph" />
         <action
             android:id="@+id/action_menu_to_muscularGroups"
             app:destination="@id/mGroupsFragment" />
@@ -20,6 +20,8 @@
             android:id="@+id/action_menu_to_chronometer"
             app:destination="@id/chronoFragment" />
     </fragment>
+
+    <include app:graph="@navigation/routine_nav_graph" />
 
     <fragment
         android:id="@+id/mGroupsFragment"
@@ -34,12 +36,6 @@
                 app:argType="string" />
         </action>
     </fragment>
-
-    <fragment
-        android:id="@+id/routinesFragment"
-        android:name="com.mmfsin.noexcuses.presentation.routines.RoutinesFragment"
-        android:label="routinesFragment"
-        tools:layout="@layout/fragment_routines" />
 
     <fragment
         android:id="@+id/exercisesFragment"

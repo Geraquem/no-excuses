@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.routines
+package com.mmfsin.noexcuses.presentation.routines.routines
 
 import android.content.Context
 import android.os.Bundle
@@ -13,12 +13,12 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.Routine
-import com.mmfsin.noexcuses.presentation.routines.adapter.RoutinesAdapter
-import com.mmfsin.noexcuses.presentation.routines.dialogs.AddRoutineDialog
-import com.mmfsin.noexcuses.presentation.routines.dialogs.DeleteRoutineDialog
-import com.mmfsin.noexcuses.presentation.routines.dialogs.EditRoutineDialog
-import com.mmfsin.noexcuses.presentation.routines.dialogs.interfaces.IRoutineDialogListener
-import com.mmfsin.noexcuses.presentation.routines.interfaces.IRoutineListener
+import com.mmfsin.noexcuses.presentation.routines.days.DaysDialog
+import com.mmfsin.noexcuses.presentation.routines.routines.adapter.RoutinesAdapter
+import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.AddRoutineDialog
+import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.DeleteRoutineDialog
+import com.mmfsin.noexcuses.presentation.routines.routines.interfaces.IRoutineDialogListener
+import com.mmfsin.noexcuses.presentation.routines.routines.interfaces.IRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -80,7 +80,8 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
     }
 
     override fun onRoutineClick(id: String) {
-        activity?.showFragmentDialog(EditRoutineDialog.newInstance(id,this@RoutinesFragment))
+        activity?.showFragmentDialog(DaysDialog(id) {})
+//        activity?.showFragmentDialog(EditRoutineDialog.newInstance(id,this@RoutinesFragment))
     }
 
     override fun flowCompleted() {
@@ -89,7 +90,7 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
     }
 
     override fun deleteRoutine(id: String) {
-        activity?.showFragmentDialog(DeleteRoutineDialog.newInstance(id,this@RoutinesFragment))
+        activity?.showFragmentDialog(DeleteRoutineDialog.newInstance(id, this@RoutinesFragment))
     }
 
     private fun error() = activity?.showErrorDialog()

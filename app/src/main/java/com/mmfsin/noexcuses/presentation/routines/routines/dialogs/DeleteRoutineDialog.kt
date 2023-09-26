@@ -1,24 +1,28 @@
-package com.mmfsin.noexcuses.presentation.routines.dialogs
+package com.mmfsin.noexcuses.presentation.routines.routines.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import androidx.fragment.app.viewModels
+import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
-import com.mmfsin.noexcuses.databinding.DialogRoutineAddBinding
-import com.mmfsin.noexcuses.presentation.routines.dialogs.interfaces.IRoutineDialogListener
+import com.mmfsin.noexcuses.databinding.DialogRoutineDeleteBinding
+import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.presentation.routines.routines.interfaces.IRoutineDialogListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddRoutineDialog(private val listener: IRoutineDialogListener) :
-    BaseDialog<DialogRoutineAddBinding>() {
+class DeleteRoutineDialog(val id: String, private val listener: IRoutineDialogListener) :
+    BaseDialog<DialogRoutineDeleteBinding>() {
 
     private val viewModel: RoutineDialogViewModel by viewModels()
 
-    override fun inflateView(inflater: LayoutInflater) = DialogRoutineAddBinding.inflate(inflater)
+    private var routine: Routine? = null
+
+    override fun inflateView(inflater: LayoutInflater) =
+        DialogRoutineDeleteBinding.inflate(inflater)
 
     override fun setCustomViewDialog(dialog: Dialog) = centerViewDialog(dialog)
 
@@ -30,22 +34,17 @@ class AddRoutineDialog(private val listener: IRoutineDialogListener) :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         observe()
+        viewModel.getRoutine(id)
     }
 
     override fun setUI() {
         isCancelable = true
-        binding.tvError.visibility = View.GONE
     }
 
     override fun setListeners() {
         binding.apply {
-            btnAccept.setOnClickListener {
-                val title = etTitle.text.toString()
-                val description = etDescription.text.toString()
-                if (title.isNotEmpty() && title.isNotBlank()) {
-                    viewModel.addRoutine(title, description)
-                } else tvError.visibility = View.VISIBLE
-            }
+            btnNo.setOnClickListener { dismiss() }
+            btnYes.setOnClickListener { routine?.let { viewModel.deleteRoutine(it.id) } }
         }
     }
 
@@ -56,7 +55,10 @@ class AddRoutineDialog(private val listener: IRoutineDialogListener) :
                     listener.flowCompleted()
                     dismiss()
                 }
-                is RoutineDialogEvent.GetRoutine -> {}
+                is RoutineDialogEvent.GetRoutine -> {
+                    routine = event.routine
+                    binding.tvText.text = getString(R.string.routines_delete_text, routine?.title)
+                }
                 is RoutineDialogEvent.SomethingWentWrong -> error()
             }
         }
@@ -65,8 +67,8 @@ class AddRoutineDialog(private val listener: IRoutineDialogListener) :
     private fun error() = activity?.showErrorDialog()
 
     companion object {
-        fun newInstance(listener: IRoutineDialogListener): AddRoutineDialog {
-            return AddRoutineDialog(listener)
+        fun newInstance(id: String, listener: IRoutineDialogListener): DeleteRoutineDialog {
+            return DeleteRoutineDialog(id, listener)
         }
     }
 }

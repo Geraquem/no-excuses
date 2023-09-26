@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
     android:background="@drawable/bg_white_box"
-    android:elevation="@dimen/elevation_default"
+    android:elevation="4dp"
     android:paddingHorizontal="16dp"
     android:paddingVertical="24dp">
 
@@ -35,7 +35,7 @@
             style="@style/BigTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="@dimen/elevation_default"
+            android:elevation="4dp"
             tools:text="Fase 1" />
 
         <TextView

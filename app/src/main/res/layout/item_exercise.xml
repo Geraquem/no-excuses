@@ -7,7 +7,7 @@
     android:layout_marginHorizontal="4dp"
     android:layout_marginVertical="4dp"
     android:background="@drawable/bg_white_box"
-    android:elevation="@dimen/elevation_default"
+    android:elevation="4dp"
     android:paddingHorizontal="16dp"
     android:paddingTop="20dp"
     android:paddingBottom="16dp">

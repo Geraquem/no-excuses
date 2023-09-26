@@ -30,10 +30,12 @@
     <string name="routines_toolbar">Mis rutinas</string>
     <string name="routines_empty">Todavía no tienes ninguna rutina.\n¡Pulsa el <b>botón +</b> para empezar a añadir!</string>
 
+    <!-- DAYS -->
+    <string name="days_empty">Todavía no tienes ningun día en esta rutina.\n¡Pulsa el <b>botón +</b> para empezar a añadir!</string>
+
     <!-- ROUTINES ADD/EDIT/DELETE DIALOG -->
     <string name="routines_add_top_text">Nueva rutina</string>
     <string name="routines_add_button">Aceptar</string>
-    <string name="routines_delete_button">Eliminar</string>
     <string name="routines_add_title">Nombre</string>
     <string name="routines_add_title_hint">Enfocada en torso</string>
     <string name="routines_add_description">Descripción</string>
@@ -48,5 +50,20 @@
     <string name="routines_delete_text">¿Quieres eliminar %s?</string>
     <string name="routines_delete_yes">Eliminar</string>
     <string name="routines_delete_cancel">Volver</string>
+
+    <!-- DAYS ADD/EDIT/DELETE DIALOG -->
+    <string name="days_add_top_text">Nuevo día</string>
+    <string name="days_add_button">Aceptar</string>
+    <string name="days_add_title">Nombre</string>
+    <string name="days_add_title_hint">Miércoles</string>
+    <string name="days_add_title_error">El nombre no puede estar vacío</string>
+
+    <string name="days_edit_top_text">Editar día</string>
+    <string name="days_edit_button">Editar</string>
+
+    <string name="days_delete_top_text">Eliminar día</string>
+    <string name="days_delete_text">¿Quieres eliminar %s?</string>
+    <string name="days_delete_yes">Eliminar</string>
+    <string name="days_delete_cancel">Volver</string>
 
 </resources>

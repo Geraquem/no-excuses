@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.routines.dialogs.interfaces
+package com.mmfsin.noexcuses.presentation.routines.routines.interfaces
 
 interface IRoutineDialogListener {
     fun flowCompleted()

@@ -1,12 +1,16 @@
 package com.mmfsin.noexcuses.data.repository
 
+import com.mmfsin.noexcuses.data.mappers.toDayList
 import com.mmfsin.noexcuses.data.mappers.toRoutine
 import com.mmfsin.noexcuses.data.mappers.toRoutineList
+import com.mmfsin.noexcuses.data.models.DayDTO
 import com.mmfsin.noexcuses.data.models.RoutineDTO
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.interfaces.IRoutinesRepository
+import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.utils.ID
+import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import io.realm.kotlin.where
 import java.util.*
 import javax.inject.Inject
@@ -53,5 +57,19 @@ class RoutinesRepository @Inject constructor(
         val routines =
             realmDatabase.getObjectsFromRealm { where<RoutineDTO>().equalTo(ID, id).findAll() }
         return if (routines.isNotEmpty()) routines.first() else null
+    }
+
+    override fun getDays(routineId: String): List<Day> {
+        val days = realmDatabase.getObjectsFromRealm {
+            where<DayDTO>().equalTo(ROUTINE_ID, routineId).findAll()
+        }
+        return if (days.isNotEmpty()) days.toDayList()
+        else emptyList()
+    }
+
+    override fun addDay(routineId: String, title: String) {
+        val id = UUID.randomUUID().toString()
+        val day = DayDTO(id, routineId, title, 0)
+        realmDatabase.addObject { day }
     }
 }
