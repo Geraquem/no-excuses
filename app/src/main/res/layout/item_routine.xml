@@ -11,6 +11,13 @@
     android:paddingHorizontal="16dp"
     android:paddingVertical="24dp">
 
+    <include
+        android:id="@+id/image"
+        layout="@layout/include_image_routines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp" />
+
     <ImageView
         android:id="@+id/iv_config"
         android:layout_width="wrap_content"
@@ -23,10 +30,11 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/image"
         app:layout_constraintRight_toLeftOf="@id/iv_config"
         app:layout_constraintTop_toTopOf="parent">
 

@@ -68,6 +68,12 @@ class RoutinesRepository @Inject constructor(
     }
 
     override fun addDay(routineId: String, title: String) {
+        val routine = getRoutineDTO(routineId)
+        routine?.let {
+            it.days++
+            realmDatabase.addObject { it }
+        }
+
         val id = UUID.randomUUID().toString()
         val day = DayDTO(id, routineId, title, 0)
         realmDatabase.addObject { day }

@@ -18,6 +18,7 @@ class RoutinesAdapter(
         private val binding = ItemRoutineBinding.bind(view)
         fun bind(routine: Routine) {
             binding.apply {
+                image.tvNumOfDays.text = routine.days.toString()
                 tvTitle.text = routine.title
                 routine.description?.let { tvDescription.text = it }
                     ?: run { tvDescription.visibility = View.GONE }

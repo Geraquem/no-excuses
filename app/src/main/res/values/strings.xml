@@ -28,6 +28,7 @@
 
     <!-- ROUTINES -->
     <string name="routines_toolbar">Mis rutinas</string>
+    <string name="routines_days">Días</string>
     <string name="routines_empty">Todavía no tienes ninguna rutina.\n¡Pulsa el <b>botón +</b> para empezar a añadir!</string>
 
     <!-- DAYS -->
