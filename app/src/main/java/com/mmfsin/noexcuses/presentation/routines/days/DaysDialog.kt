@@ -24,9 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class DaysDialog(
     val routineId: String,
     val listener: IRoutineListener,
-    private val navigation: (id: String) -> Unit
-) :
-    BaseDialog<DialogDaysBinding>(), IDayListener, IDaysDialogListener {
+) : BaseDialog<DialogDaysBinding>(), IDayListener, IDaysDialogListener {
 
     private val viewModel: DaysViewModel by viewModels()
 
@@ -78,7 +76,8 @@ class DaysDialog(
     }
 
     override fun onDayClick(id: String) {
-        navigation(id)
+        listener.onDayClick(routineId, dayId = id)
+        dismiss()
     }
 
     override fun onDayLongClick(id: String) {

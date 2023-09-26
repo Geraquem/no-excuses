@@ -12,3 +12,4 @@ const val ID = "id"
 //NAVIGATION
 const val MGROUP_ID = "mGroupId"
 const val ROUTINE_ID = "routineId"
+const val ID_GROUP = "idGroup"

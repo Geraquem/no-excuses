@@ -7,13 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.routines.days.DaysDialog
+import com.mmfsin.noexcuses.presentation.routines.routines.RoutinesFragmentDirections.Companion.actionRoutinesToMGroups
 import com.mmfsin.noexcuses.presentation.routines.routines.adapter.RoutinesAdapter
 import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.AddRoutineDialog
 import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.DeleteRoutineDialog
@@ -80,27 +83,31 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
         }
     }
 
+    /** OPENS DAYS DIALOG WHEN CLICK ON ROUTINE */
     override fun onRoutineClick(id: String) {
-        activity?.showFragmentDialog(DaysDialog(
-            id, this@RoutinesFragment
-        ) { dayId -> /** navigate */ })
+        activity?.showFragmentDialog(DaysDialog(id, this@RoutinesFragment))
     }
 
+    /** EDIT ROUTINE ON LONG CLICK */
     override fun onRoutineLongClick(id: String) {
         activity?.showFragmentDialog(EditRoutineDialog.newInstance(id, this@RoutinesFragment))
     }
 
-    /** WHEN ADD/EDIT/DELETE DIALOGS ENDS */
+    override fun dayAddedToRoutine() {
+        updateUI()
+    }
+
+    override fun onDayClick(routineId: String, dayId: String) {
+        findNavController().navigate(actionRoutinesToMGroups(IdGroup(routineId, dayId)))
+    }
+
+    /** WHEN ADD/EDIT/DELETE ROUTINE DIALOGS ENDS */
     override fun flowCompleted() {
         updateUI()
     }
 
     override fun deleteRoutine(id: String) {
         activity?.showFragmentDialog(DeleteRoutineDialog.newInstance(id, this@RoutinesFragment))
-    }
-
-    override fun dayAddedToRoutine() {
-        updateUI()
     }
 
     private fun updateUI() {
