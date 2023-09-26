@@ -52,16 +52,6 @@
         tools:itemCount="2"
         tools:listitem="@layout/item_day" />
 
-    <include
-        android:id="@+id/nothing_yet"
-        layout="@layout/include_nothing_yet"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@id/rv_days"
-        app:layout_constraintRight_toRightOf="@id/rv_days"
-        app:layout_constraintTop_toTopOf="@id/rv_days"
-        tools:visibility="gone" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_day"
         android:layout_width="wrap_content"

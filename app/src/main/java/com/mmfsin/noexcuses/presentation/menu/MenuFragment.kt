@@ -16,6 +16,7 @@ import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
 import com.mmfsin.noexcuses.domain.models.MenuAction
 import com.mmfsin.noexcuses.domain.models.MenuAction.*
 import com.mmfsin.noexcuses.domain.models.MenuItem
+import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToChronometer
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMuscularGroups
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToRoutines
 import com.mmfsin.noexcuses.presentation.menu.adapter.MenuAdapter
@@ -75,7 +76,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             EXERCISES -> navigateTo(actionMenuToMuscularGroups())
             NOTES -> {}
             WEIGHTS -> {}
-            CHRONOMETER -> {}
+            CHRONOMETER -> navigateTo(actionMenuToChronometer())
         }
     }
 

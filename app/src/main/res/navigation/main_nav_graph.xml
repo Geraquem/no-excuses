@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_menu_to_muscularGroups"
             app:destination="@id/mGroupsFragment" />
+        <action
+            android:id="@+id/action_menu_to_chronometer"
+            app:destination="@id/chronoFragment" />
     </fragment>
 
     <fragment
@@ -43,5 +46,11 @@
         android:name="com.mmfsin.noexcuses.presentation.exercises.exercises.ExercisesFragment"
         android:label="exercisesFragment"
         tools:layout="@layout/fragment_exercises" />
+
+    <fragment
+        android:id="@+id/chronoFragment"
+        android:name="com.mmfsin.noexcuses.presentation.chronometer.ChronoFragment"
+        android:label="chronoFragment"
+        tools:layout="@layout/fragment_chrono" />
 
 </navigation>

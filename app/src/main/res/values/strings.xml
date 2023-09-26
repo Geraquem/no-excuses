@@ -14,8 +14,11 @@
     <string name="menu_exercises">Ejercicios</string>
     <string name="menu_weights">Mis pesos</string>
     <string name="menu_notes">Notas</string>
-    <string name="menu_chronometer">Notas</string>
+    <string name="menu_chronometer">Cronómetro</string>
     <string name="menu_laziness">Pereza</string>
+
+    <!-- CHRONOMETER -->
+    <string name="chrono_base">00:00:00</string>
 
     <!-- MUSCULAR GROUPS -->
     <string name="mgroups_toolbar">Grupos musculares</string>
