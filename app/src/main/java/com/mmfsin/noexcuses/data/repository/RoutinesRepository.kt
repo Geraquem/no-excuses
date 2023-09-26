@@ -48,7 +48,18 @@ class RoutinesRepository @Inject constructor(
     }
 
     override fun deleteRoutine(id: String) {
-        /** DELETE DAYS AND EXERCISES IN THAT ROUTINE */
+        /** DELETE EXERCISES RELATED WITH ROUTINE */
+        /** TODO */
+
+        /** DELETE DAYS RELATED WITH ROUTINE */
+        val days = realmDatabase.getObjectsFromRealm {
+            where<DayDTO>().equalTo(ROUTINE_ID, id).findAll()
+        }
+        for (day in days) {
+            realmDatabase.deleteObject({ day }, day.id)
+        }
+
+        /** DELTE ROUTINE */
         val routine = getRoutineDTO(id)
         routine?.let { realmDatabase.deleteObject({ it }, id) }
     }

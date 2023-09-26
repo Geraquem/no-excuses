@@ -8,11 +8,13 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:alpha="0.4"
         android:background="@drawable/bg_white_box"
-        android:backgroundTint="@color/soft_blue"
+        android:backgroundTint="@color/blue"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="8dp"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -25,16 +27,18 @@
             android:layout_height="wrap_content"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="20sp"
             tools:text="4" />
 
         <TextView
+            android:id="@+id/tv_days"
             style="@style/BigTextView_Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/routines_days"
             android:textAllCaps="true"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="@string/routines_days" />
 
     </LinearLayout>
 

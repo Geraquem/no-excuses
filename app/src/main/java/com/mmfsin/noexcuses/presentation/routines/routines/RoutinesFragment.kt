@@ -17,6 +17,7 @@ import com.mmfsin.noexcuses.presentation.routines.days.DaysDialog
 import com.mmfsin.noexcuses.presentation.routines.routines.adapter.RoutinesAdapter
 import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.AddRoutineDialog
 import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.DeleteRoutineDialog
+import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.EditRoutineDialog
 import com.mmfsin.noexcuses.presentation.routines.routines.interfaces.IRoutineDialogListener
 import com.mmfsin.noexcuses.presentation.routines.routines.interfaces.IRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -80,17 +81,31 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
     }
 
     override fun onRoutineClick(id: String) {
-        activity?.showFragmentDialog(DaysDialog(id) {})
-//        activity?.showFragmentDialog(EditRoutineDialog.newInstance(id,this@RoutinesFragment))
+        activity?.showFragmentDialog(DaysDialog(
+            id, this@RoutinesFragment
+        ) { dayId -> /** navigate */ })
     }
 
+    override fun onRoutineLongClick(id: String) {
+        activity?.showFragmentDialog(EditRoutineDialog.newInstance(id, this@RoutinesFragment))
+    }
+
+    /** WHEN ADD/EDIT/DELETE DIALOGS ENDS */
     override fun flowCompleted() {
-        routines = emptyList()
-        viewModel.getRoutines()
+        updateUI()
     }
 
     override fun deleteRoutine(id: String) {
         activity?.showFragmentDialog(DeleteRoutineDialog.newInstance(id, this@RoutinesFragment))
+    }
+
+    override fun dayAddedToRoutine() {
+        updateUI()
+    }
+
+    private fun updateUI() {
+        routines = emptyList()
+        viewModel.getRoutines()
     }
 
     private fun error() = activity?.showErrorDialog()

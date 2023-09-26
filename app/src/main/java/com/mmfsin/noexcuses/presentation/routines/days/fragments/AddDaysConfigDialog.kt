@@ -3,6 +3,7 @@ package com.mmfsin.noexcuses.presentation.routines.days.fragments
 import android.app.Activity.INPUT_METHOD_SERVICE
 import android.app.Dialog
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -46,7 +47,14 @@ class AddDaysConfigDialog(
                 val title = etTitle.text.toString()
                 if (title.isNotEmpty() && title.isNotBlank()) {
                     closeKeyboard()
-                    viewModel.addDay(routineId, title)
+
+                    object : CountDownTimer(500, 1000) {
+                        override fun onTick(millisUntilFinished: Long) {}
+                        override fun onFinish() {
+                            viewModel.addDay(routineId, title)
+                        }
+                    }.start()
+
                 } else tvError.visibility = View.VISIBLE
             }
         }

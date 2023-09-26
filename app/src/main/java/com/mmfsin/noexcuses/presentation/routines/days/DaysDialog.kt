@@ -13,12 +13,17 @@ import com.mmfsin.noexcuses.presentation.routines.days.adapter.DaysAdapter
 import com.mmfsin.noexcuses.presentation.routines.days.fragments.AddDaysConfigDialog
 import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDayListener
 import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDaysDialogListener
+import com.mmfsin.noexcuses.presentation.routines.routines.interfaces.IRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DaysDialog(val routineId: String, private val navigation: (id: String) -> Unit) :
+class DaysDialog(
+    val routineId: String,
+    val listener: IRoutineListener,
+    private val navigation: (id: String) -> Unit
+) :
     BaseDialog<DialogDaysBinding>(), IDayListener, IDaysDialogListener {
 
     private val viewModel: DaysViewModel by viewModels()
@@ -77,6 +82,7 @@ class DaysDialog(val routineId: String, private val navigation: (id: String) -> 
     override fun flowCompleted() {
         days = emptyList()
         viewModel.getDays(routineId)
+        listener.dayAddedToRoutine()
     }
 
     override fun deleteDay(id: String) {

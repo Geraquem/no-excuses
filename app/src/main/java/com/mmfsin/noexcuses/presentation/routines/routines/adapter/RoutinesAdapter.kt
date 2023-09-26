@@ -10,18 +10,19 @@ import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.routines.routines.interfaces.IRoutineListener
 
 class RoutinesAdapter(
-    private val routines: List<Routine>,
-    private val listener: IRoutineListener
+    private val routines: List<Routine>, private val listener: IRoutineListener
 ) : RecyclerView.Adapter<RoutinesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemRoutineBinding.bind(view)
+        private val c = binding.root.context
         fun bind(routine: Routine) {
             binding.apply {
                 image.tvNumOfDays.text = routine.days.toString()
                 tvTitle.text = routine.title
-                routine.description?.let { tvDescription.text = it }
-                    ?: run { tvDescription.visibility = View.GONE }
+                val description = routine.description?.let { routine.description }
+                    ?: run { c.getString(R.string.routines_no_description) }
+                tvDescription.text = description
             }
         }
     }
@@ -35,6 +36,10 @@ class RoutinesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(routines[position])
         holder.itemView.setOnClickListener { listener.onRoutineClick(routines[position].id) }
+        holder.itemView.setOnLongClickListener {
+            listener.onRoutineLongClick(routines[position].id)
+            true
+        }
     }
 
     override fun getItemCount(): Int = routines.size
