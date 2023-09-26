@@ -46,6 +46,12 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
         viewModel.getRoutines()
     }
 
+    override fun onResume() {
+        super.onResume()
+        val routineOpened = (activity as MainActivity).routineOpened
+        routineOpened?.let { onRoutineClick(it) }
+    }
+
     override fun setUI() {
         binding.apply {
             (activity as MainActivity).setUpToolbar(title = getString(R.string.routines_toolbar))
@@ -85,6 +91,7 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
 
     /** OPENS DAYS DIALOG WHEN CLICK ON ROUTINE */
     override fun onRoutineClick(id: String) {
+        (activity as MainActivity).routineOpened = id
         activity?.showFragmentDialog(DaysDialog(id, this@RoutinesFragment))
     }
 

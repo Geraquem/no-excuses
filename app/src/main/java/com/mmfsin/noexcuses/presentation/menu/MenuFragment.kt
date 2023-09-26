@@ -42,7 +42,10 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun setUI() {
         binding.apply {
-            (activity as MainActivity).setUpToolbar(false)
+            (activity as MainActivity).apply {
+                this.setUpToolbar(false)
+                this.routineOpened = null
+            }
             background.visibility = View.GONE
             loading.root.visibility = View.VISIBLE
         }
