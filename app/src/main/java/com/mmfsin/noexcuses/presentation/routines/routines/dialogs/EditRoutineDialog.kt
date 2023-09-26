@@ -14,7 +14,7 @@ import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class EditRoutineDialog(val id: String, private val listener: IRoutineDialogListener) :
+class EditRoutineDialog(val routineId: String, private val listener: IRoutineDialogListener) :
     BaseDialog<DialogRoutineEditBinding>() {
 
     private val viewModel: RoutineDialogViewModel by viewModels()
@@ -33,7 +33,7 @@ class EditRoutineDialog(val id: String, private val listener: IRoutineDialogList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         observe()
-        viewModel.getRoutine(id)
+        viewModel.getRoutine(routineId)
     }
 
     override fun setUI() {

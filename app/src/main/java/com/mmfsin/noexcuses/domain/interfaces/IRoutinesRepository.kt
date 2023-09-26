@@ -10,6 +10,9 @@ interface IRoutinesRepository {
     fun editRoutine(id: String, title: String, description: String?)
     fun deleteRoutine(id: String)
 
-    fun getDays(routineId: String): List<Day>
+    fun getRoutineDays(routineId: String): List<Day>
+    fun getDayById(dayId: String): Day?
     fun addDay(routineId: String, title: String)
+    fun editDay(id: String, title: String)
+    fun deleteDay(id: String)
 }

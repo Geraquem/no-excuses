@@ -9,20 +9,23 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.base.BaseDialog
-import com.mmfsin.noexcuses.databinding.DialogDayAddBinding
+import com.mmfsin.noexcuses.databinding.DialogDayEditBinding
+import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDaysDialogListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddDaysConfigDialog(
-    private val routineId: String, private val listener: IDaysDialogListener
-) : BaseDialog<DialogDayAddBinding>() {
+class EditDaysConfigDialog(
+    private val dayId: String, private val listener: IDaysDialogListener
+) : BaseDialog<DialogDayEditBinding>() {
 
     private val viewModel: DayConfigViewModel by viewModels()
 
-    override fun inflateView(inflater: LayoutInflater) = DialogDayAddBinding.inflate(inflater)
+    private var day: Day? = null
+
+    override fun inflateView(inflater: LayoutInflater) = DialogDayEditBinding.inflate(inflater)
 
     override fun setCustomViewDialog(dialog: Dialog) = centerViewDialog(dialog)
 
@@ -34,6 +37,7 @@ class AddDaysConfigDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         observe()
+        viewModel.getDay(dayId)
     }
 
     override fun setUI() {
@@ -43,19 +47,26 @@ class AddDaysConfigDialog(
 
     override fun setListeners() {
         binding.apply {
-            btnAccept.setOnClickListener {
-                val title = etTitle.text.toString()
-                if (title.isNotEmpty() && title.isNotBlank()) {
-                    closeKeyboard()
+            btnDelete.setOnClickListener {
+                day?.let {
+                    listener.deleteDay(it.id)
+                    dismiss()
+                }
+            }
 
-                    object : CountDownTimer(300, 1000) {
-                        override fun onTick(millisUntilFinished: Long) {}
-                        override fun onFinish() {
-                            viewModel.addDay(routineId, title)
-                        }
-                    }.start()
-
-                } else tvError.visibility = View.VISIBLE
+            btnEdit.setOnClickListener {
+                day?.let { d ->
+                    val title = etTitle.text.toString()
+                    if (title.isNotEmpty() && title.isNotBlank()) {
+                        closeKeyboard()
+                        object : CountDownTimer(300, 1000) {
+                            override fun onTick(millisUntilFinished: Long) {}
+                            override fun onFinish() {
+                                viewModel.editDay(d.id, title)
+                            }
+                        }.start()
+                    } else binding.tvError.visibility = View.VISIBLE
+                }
             }
         }
     }
@@ -67,7 +78,10 @@ class AddDaysConfigDialog(
                     listener.flowCompleted()
                     dismiss()
                 }
-                is DayConfigEvent.GetDay -> {}
+                is DayConfigEvent.GetDay -> {
+                    day = event.day
+                    binding.etTitle.setText(day?.title)
+                }
                 is DayConfigEvent.SomethingWentWrong -> error()
             }
         }
@@ -82,8 +96,8 @@ class AddDaysConfigDialog(
     }
 
     companion object {
-        fun newInstance(routineId: String, listener: IDaysDialogListener): AddDaysConfigDialog {
-            return AddDaysConfigDialog(routineId, listener)
+        fun newInstance(routineId: String, listener: IDaysDialogListener): EditDaysConfigDialog {
+            return EditDaysConfigDialog(routineId, listener)
         }
     }
 }

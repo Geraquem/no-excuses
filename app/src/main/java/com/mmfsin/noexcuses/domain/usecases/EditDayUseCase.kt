@@ -1,0 +1,16 @@
+package com.mmfsin.noexcuses.domain.usecases
+
+import com.mmfsin.noexcuses.base.BaseUseCase
+import com.mmfsin.noexcuses.domain.interfaces.IRoutinesRepository
+import javax.inject.Inject
+
+class EditDayUseCase @Inject constructor(private val repository: IRoutinesRepository) :
+    BaseUseCase<EditDayUseCase.Params, Unit>() {
+
+    override suspend fun execute(params: Params) = repository.editDay(params.id, params.title)
+
+    data class Params(
+        val id: String,
+        val title: String
+    )
+}

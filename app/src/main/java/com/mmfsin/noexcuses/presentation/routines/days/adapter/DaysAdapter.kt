@@ -43,6 +43,10 @@ class DaysAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(days[position])
         holder.itemView.setOnClickListener { listener.onDayClick(days[position].id) }
+        holder.itemView.setOnLongClickListener {
+            listener.onDayLongClick(days[position].id)
+            true
+        }
     }
 
     override fun getItemCount(): Int = days.size

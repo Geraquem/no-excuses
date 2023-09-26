@@ -5,10 +5,10 @@ import com.mmfsin.noexcuses.domain.interfaces.IRoutinesRepository
 import com.mmfsin.noexcuses.domain.models.Day
 import javax.inject.Inject
 
-class GetDaysUseCase @Inject constructor(private val repository: IRoutinesRepository) :
-    BaseUseCase<GetDaysUseCase.Params, List<Day>>() {
+class GetRoutineDaysUseCase @Inject constructor(private val repository: IRoutinesRepository) :
+    BaseUseCase<GetRoutineDaysUseCase.Params, List<Day>>() {
 
-    override suspend fun execute(params: Params): List<Day> = repository.getDays(params.routineId)
+    override suspend fun execute(params: Params): List<Day> = repository.getRoutineDays(params.routineId)
 
     data class Params(
         val routineId: String

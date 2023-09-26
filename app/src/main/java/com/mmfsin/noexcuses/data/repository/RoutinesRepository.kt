@@ -1,5 +1,6 @@
 package com.mmfsin.noexcuses.data.repository
 
+import com.mmfsin.noexcuses.data.mappers.toDay
 import com.mmfsin.noexcuses.data.mappers.toDayList
 import com.mmfsin.noexcuses.data.mappers.toRoutine
 import com.mmfsin.noexcuses.data.mappers.toRoutineList
@@ -26,10 +27,8 @@ class RoutinesRepository @Inject constructor(
     }
 
     override fun getRoutineById(id: String): Routine? {
-        val routines =
-            realmDatabase.getObjectsFromRealm { where<RoutineDTO>().equalTo(ID, id).findAll() }
-        return if (routines.isNotEmpty()) routines.first().toRoutine()
-        else null
+        val routine = getRoutineDTO(id)
+        return routine?.toRoutine() ?: run { null }
     }
 
     override fun addRoutine(title: String, description: String?) {
@@ -70,7 +69,7 @@ class RoutinesRepository @Inject constructor(
         return if (routines.isNotEmpty()) routines.first() else null
     }
 
-    override fun getDays(routineId: String): List<Day> {
+    override fun getRoutineDays(routineId: String): List<Day> {
         val days = realmDatabase.getObjectsFromRealm {
             where<DayDTO>().equalTo(ROUTINE_ID, routineId).findAll()
         }
@@ -88,5 +87,41 @@ class RoutinesRepository @Inject constructor(
         val id = UUID.randomUUID().toString()
         val day = DayDTO(id, routineId, title, 0)
         realmDatabase.addObject { day }
+    }
+
+    override fun getDayById(dayId: String): Day? {
+        val day = getDayDTO(dayId)
+        return day?.toDay() ?: run { null }
+    }
+
+    override fun editDay(id: String, title: String) {
+        val day = getDayDTO(id)
+        day?.let {
+            it.title = title
+            realmDatabase.addObject { it }
+        }
+    }
+
+    override fun deleteDay(id: String) {
+        /** DELETE EXERCISES RELATED WITH ROUTINE */
+        /** TODO */
+
+        /** DELETE DAY */
+        val day = getDayDTO(id)
+        day?.let {d->
+            /** DELETE DAYS COUNT IN ROUTINE */
+            val routine = getRoutineDTO(d.routineId)
+            routine?.let { r ->
+                r.days--
+                realmDatabase.addObject { r }
+            }
+
+            realmDatabase.deleteObject({ d }, id)
+        }
+    }
+
+    private fun getDayDTO(id: String): DayDTO? {
+        val days = realmDatabase.getObjectsFromRealm { where<DayDTO>().equalTo(ID, id).findAll() }
+        return if (days.isNotEmpty()) days.first() else null
     }
 }

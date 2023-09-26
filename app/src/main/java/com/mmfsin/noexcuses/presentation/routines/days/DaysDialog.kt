@@ -11,6 +11,8 @@ import com.mmfsin.noexcuses.databinding.DialogDaysBinding
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.presentation.routines.days.adapter.DaysAdapter
 import com.mmfsin.noexcuses.presentation.routines.days.fragments.AddDaysConfigDialog
+import com.mmfsin.noexcuses.presentation.routines.days.fragments.DeleteDayDialog
+import com.mmfsin.noexcuses.presentation.routines.days.fragments.EditDaysConfigDialog
 import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDayListener
 import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDaysDialogListener
 import com.mmfsin.noexcuses.presentation.routines.routines.interfaces.IRoutineListener
@@ -79,6 +81,12 @@ class DaysDialog(
         navigation(id)
     }
 
+    override fun onDayLongClick(id: String) {
+        childFragmentManager.showFragmentDialog(
+            EditDaysConfigDialog.newInstance(id, this@DaysDialog)
+        )
+    }
+
     override fun flowCompleted() {
         days = emptyList()
         viewModel.getDays(routineId)
@@ -86,7 +94,9 @@ class DaysDialog(
     }
 
     override fun deleteDay(id: String) {
-
+        childFragmentManager.showFragmentDialog(
+            DeleteDayDialog.newInstance(id, this@DaysDialog)
+        )
     }
 
     private fun error() = activity?.showErrorDialog()

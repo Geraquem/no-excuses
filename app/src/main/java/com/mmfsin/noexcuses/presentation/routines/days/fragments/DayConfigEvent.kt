@@ -1,7 +1,9 @@
 package com.mmfsin.noexcuses.presentation.routines.days.fragments
 
+import com.mmfsin.noexcuses.domain.models.Day
+
 sealed class DayConfigEvent {
     object FlowCompleted : DayConfigEvent()
-//    class GetRoutine(val routine: Routine) : DayConfigEvent()
+    class GetDay(val day: Day) : DayConfigEvent()
     object SomethingWentWrong : DayConfigEvent()
 }
