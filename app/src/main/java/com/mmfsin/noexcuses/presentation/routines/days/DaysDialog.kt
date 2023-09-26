@@ -59,6 +59,8 @@ class DaysDialog(
                     days = event.days
                     setUpDays(days)
                 }
+                is DaysEvent.GetDay -> {}
+                is DaysEvent.GetDayExercises -> {}
                 is DaysEvent.SomethingWentWrong -> error()
             }
         }
@@ -66,7 +68,7 @@ class DaysDialog(
 
     private fun setUpDays(days: List<Day>) {
         binding.apply {
-            binding.rvDays.apply {
+            rvDays.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = DaysAdapter(days, this@DaysDialog)
             }

@@ -52,11 +52,9 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MGroupsViewM
     }
 
     private fun setUpMGroups(items: List<MuscularGroup>) {
-        binding.apply {
-            binding.rvMgroups.apply {
-                layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-                adapter = MGroupsAdapter(items, this@MGroupsFragment)
-            }
+        binding.rvMgroups.apply {
+            layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
+            adapter = MGroupsAdapter(items, this@MGroupsFragment)
         }
     }
 

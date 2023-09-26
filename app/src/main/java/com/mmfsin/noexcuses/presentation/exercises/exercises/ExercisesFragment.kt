@@ -58,11 +58,9 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding, ExercisesViewMo
     }
 
     private fun setUpExercises(exercises: List<Exercise>) {
-        binding.apply {
-            binding.rvExercises.apply {
-                layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-                adapter = ExercisesAdapter(exercises, this@ExercisesFragment)
-            }
+        binding.rvExercises.apply {
+            layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
+            adapter = ExercisesAdapter(exercises, this@ExercisesFragment)
         }
     }
 

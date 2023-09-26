@@ -16,7 +16,7 @@ import com.mmfsin.noexcuses.databinding.FragmentRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.routines.days.DaysDialog
-import com.mmfsin.noexcuses.presentation.routines.routines.RoutinesFragmentDirections.Companion.actionRoutinesToMGroups
+import com.mmfsin.noexcuses.presentation.routines.routines.RoutinesFragmentDirections.Companion.actionRoutinesToDays
 import com.mmfsin.noexcuses.presentation.routines.routines.adapter.RoutinesAdapter
 import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.AddRoutineDialog
 import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.DeleteRoutineDialog
@@ -74,7 +74,7 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
 
     private fun setUpRoutines(routines: List<Routine>) {
         binding.apply {
-            binding.rvRoutines.apply {
+            rvRoutines.apply {
                 layoutManager = LinearLayoutManager(mContext)
                 adapter = RoutinesAdapter(routines, this@RoutinesFragment)
             }
@@ -98,7 +98,7 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
     }
 
     override fun onDayClick(routineId: String, dayId: String) {
-        findNavController().navigate(actionRoutinesToMGroups(IdGroup(routineId, dayId)))
+        findNavController().navigate(actionRoutinesToDays(IdGroup(routineId, dayId)))
     }
 
     /** WHEN ADD/EDIT/DELETE ROUTINE DIALOGS ENDS */

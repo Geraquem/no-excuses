@@ -62,7 +62,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     private fun setUpMenu(items: List<MenuItem>) {
         binding.apply {
-            binding.rvMenu.apply {
+            rvMenu.apply {
                 layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
                 adapter = MenuAdapter(items, this@MenuFragment)
             }

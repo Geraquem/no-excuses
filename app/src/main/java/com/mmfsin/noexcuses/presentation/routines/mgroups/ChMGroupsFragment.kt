@@ -18,7 +18,7 @@ import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.routines.mgroups.ChMGroupsFragmentDirections.Companion.actionMGroupsToExercises
 import com.mmfsin.noexcuses.presentation.routines.mgroups.adapter.ChMGroupsAdapter
 import com.mmfsin.noexcuses.presentation.routines.mgroups.intefaces.IChMGroupListener
-import com.mmfsin.noexcuses.utils.MGROUP_ID
+import com.mmfsin.noexcuses.utils.ID_GROUP
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +36,7 @@ class ChMGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, ChMGroupsV
         FragmentMuscularGroupsBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
-        arguments?.let { idGroup = it.getParcelable(MGROUP_ID) }
+        arguments?.let { idGroup = it.getParcelable(ID_GROUP) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,11 +60,9 @@ class ChMGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, ChMGroupsV
     }
 
     private fun setUpMGroups(items: List<MuscularGroup>) {
-        binding.apply {
-            binding.rvMgroups.apply {
-                layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-                adapter = ChMGroupsAdapter(items, this@ChMGroupsFragment)
-            }
+        binding.rvMgroups.apply {
+            layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
+            adapter = ChMGroupsAdapter(items, this@ChMGroupsFragment)
         }
     }
 

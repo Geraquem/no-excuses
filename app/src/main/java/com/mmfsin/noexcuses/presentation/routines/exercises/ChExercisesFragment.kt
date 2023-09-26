@@ -16,7 +16,7 @@ import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDia
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.routines.exercises.adapter.ChExercisesAdapter
 import com.mmfsin.noexcuses.presentation.routines.exercises.interfaces.IChExercisesListener
-import com.mmfsin.noexcuses.utils.MGROUP_ID
+import com.mmfsin.noexcuses.utils.ID_GROUP
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,7 +35,7 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
         FragmentExercisesBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
-        arguments?.let { group = it.getParcelable(MGROUP_ID) }
+        arguments?.let { group = it.getParcelable(ID_GROUP) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,11 +59,9 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
     }
 
     private fun setUpExercises(exercises: List<Exercise>) {
-        binding.apply {
-            binding.rvExercises.apply {
-                layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-                adapter = ChExercisesAdapter(exercises, this@ChExercisesFragment)
-            }
+        binding.rvExercises.apply {
+            layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
+            adapter = ChExercisesAdapter(exercises, this@ChExercisesFragment)
         }
     }
 

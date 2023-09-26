@@ -38,4 +38,8 @@ class ExercisesRepository @Inject constructor(
         }
         return if (exercises.isNotEmpty()) exercises.first().toExercise() else null
     }
+
+    override fun getDayExercises(dayId: String) {
+
+    }
 }
