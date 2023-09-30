@@ -71,4 +71,8 @@
     <string name="days_delete_yes">Eliminar</string>
     <string name="days_delete_cancel">Volver</string>
 
+    <!-- EXERCISE DIALOG -->
+    <string name="ch_exercise_dialog_category">Ejercicio de %s</string>
+    <string name="ch_exercise_dialog_add">Agregar a %s</string>
+
 </resources>

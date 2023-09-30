@@ -1,5 +1,7 @@
 package com.mmfsin.noexcuses.domain.interfaces
 
+import com.mmfsin.noexcuses.domain.models.ChExercise
+import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 
@@ -8,5 +10,6 @@ interface IExercisesRepository {
     fun getExercisesByMuscularGroup(mGroup: String): List<Exercise>
     fun getExerciseById(id: String): Exercise?
 
-    fun getDayExercises(dayId: String)
+    fun getDayExercises(dayId: String): List<CompactExercise>
+    fun addChExercise(chExercise: ChExercise)
 }

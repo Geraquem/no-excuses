@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.os.CountDownTimer
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
@@ -25,7 +26,7 @@ fun Activity.closeKeyboard() {
     }
 }
 
-fun Context.closeKeyboardFromDialog(){
+fun Context.closeKeyboardFromDialog() {
     val imm: InputMethodManager =
         this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     if (imm.isActive) imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS)
@@ -50,6 +51,15 @@ fun Dialog.animateDialog() {
             start()
         }
     }
+}
+
+fun countDown(action: () -> Unit) {
+    object : CountDownTimer(300, 1000) {
+        override fun onTick(millisUntilFinished: Long) {}
+        override fun onFinish() {
+            action()
+        }
+    }.start()
 }
 
 //fun FragmentActivity.shouldShowInterstitial(position: Int) =

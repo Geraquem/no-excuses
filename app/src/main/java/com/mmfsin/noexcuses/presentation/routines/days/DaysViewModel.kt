@@ -4,8 +4,6 @@ import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.GetDayByIdUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetDayExercisesUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetRoutineDaysUseCase
-import com.mmfsin.noexcuses.presentation.exercises.mgroups.MGroupsEvent
-import com.mmfsin.noexcuses.presentation.routines.days.fragments.DayConfigEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -38,10 +36,7 @@ class DaysViewModel @Inject constructor(
     fun getDayExercises(dayId: String) {
         executeUseCase(
             { getDayExercisesUseCase.execute(GetDayExercisesUseCase.Params(dayId)) },
-            { result -> _event.value = DaysEvent.GetDayExercises()
-//                _event.value = if (result.isNotEmpty()) DaysEvent.MGroups(result)
-//                else DaysEvent.SomethingWentWrong
-            },
+            { result -> _event.value = DaysEvent.GetDayExercises(result) },
             { _event.value = DaysEvent.SomethingWentWrong }
         )
     }

@@ -1,15 +1,18 @@
 package com.mmfsin.noexcuses.data.repository
 
-import com.mmfsin.noexcuses.data.mappers.toExercise
-import com.mmfsin.noexcuses.data.mappers.toExerciseList
-import com.mmfsin.noexcuses.data.mappers.toMuscularGroupList
+import com.mmfsin.noexcuses.data.mappers.*
+import com.mmfsin.noexcuses.data.models.ChExerciseDTO
+import com.mmfsin.noexcuses.data.models.DayDTO
 import com.mmfsin.noexcuses.data.models.ExerciseDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
 import com.mmfsin.noexcuses.domain.interfaces.IExercisesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
+import com.mmfsin.noexcuses.domain.models.ChExercise
+import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.utils.CATEGORY
+import com.mmfsin.noexcuses.utils.DAY_ID
 import com.mmfsin.noexcuses.utils.ID
 import io.realm.kotlin.where
 import javax.inject.Inject
@@ -39,7 +42,33 @@ class ExercisesRepository @Inject constructor(
         return if (exercises.isNotEmpty()) exercises.first().toExercise() else null
     }
 
-    override fun getDayExercises(dayId: String) {
+    override fun getDayExercises(dayId: String): List<CompactExercise> {
+        val exercises = realmDatabase.getObjectsFromRealm {
+            where<ChExerciseDTO>().equalTo(DAY_ID, dayId).findAll()
+        }
 
+        val resultList = mutableListOf<CompactExercise>()
+        for (exercise in exercises) {
+            exercise.exerciseId?.let { id ->
+                val ex = getExerciseById(id)
+                ex?.let { e -> resultList.add(exercise.toCompactExercise(e)) }
+            }
+        }
+        return resultList
+    }
+
+    override fun addChExercise(chExercise: ChExercise) {
+        val day = getDayDTO(chExercise.dayId)
+        day?.let {
+            it.exercises++
+            realmDatabase.addObject { it }
+        }
+        realmDatabase.addObject { chExercise.toChExerciseDTO() }
+    }
+
+
+    private fun getDayDTO(id: String): DayDTO? {
+        val days = realmDatabase.getObjectsFromRealm { where<DayDTO>().equalTo(ID, id).findAll() }
+        return if (days.isNotEmpty()) days.first() else null
     }
 }

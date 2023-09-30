@@ -9,6 +9,8 @@ import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogRoutineAddBinding
 import com.mmfsin.noexcuses.presentation.routines.routines.interfaces.IRoutineDialogListener
 import com.mmfsin.noexcuses.utils.animateDialog
+import com.mmfsin.noexcuses.utils.closeKeyboardFromDialog
+import com.mmfsin.noexcuses.utils.countDown
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,7 +45,8 @@ class AddRoutineDialog(private val listener: IRoutineDialogListener) :
                 val title = etTitle.text.toString()
                 val description = etDescription.text.toString()
                 if (title.isNotEmpty() && title.isNotBlank()) {
-                    viewModel.addRoutine(title, description)
+                    requireContext().closeKeyboardFromDialog()
+                    countDown { viewModel.addRoutine(title, description) }
                 } else tvError.visibility = View.VISIBLE
             }
         }

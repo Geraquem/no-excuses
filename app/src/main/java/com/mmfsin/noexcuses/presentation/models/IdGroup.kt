@@ -7,5 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class IdGroup(
     val routineId: String,
     val dayId: String,
+    var exerciseId: String? = null,
     var muscularGroup: String? = null
 ) : Parcelable

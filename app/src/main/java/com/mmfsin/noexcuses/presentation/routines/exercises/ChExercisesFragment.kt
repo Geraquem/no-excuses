@@ -12,9 +12,9 @@ import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
-import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.routines.exercises.adapter.ChExercisesAdapter
+import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.AddChExerciseDialog
 import com.mmfsin.noexcuses.presentation.routines.exercises.interfaces.IChExercisesListener
 import com.mmfsin.noexcuses.utils.ID_GROUP
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -66,7 +66,10 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
     }
 
     override fun onExerciseClick(id: String) {
-        activity?.showFragmentDialog(ExerciseDialog.newInstance(id))
+        group?.let { ids ->
+            ids.exerciseId = id
+            activity?.showFragmentDialog(AddChExerciseDialog.newInstance(ids))
+        }
     }
 
     private fun error() = activity?.showErrorDialog()

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentDaysBinding
+import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.routines.days.DaysFragmentDirections.Companion.actionMGroupsToExercises
 import com.mmfsin.noexcuses.presentation.routines.mgroups.intefaces.IChMGroupListener
@@ -57,18 +58,19 @@ class DaysFragment : BaseFragment<FragmentDaysBinding, DaysViewModel>(), IChMGro
                     (activity as MainActivity).setUpToolbar(title = event.day.title)
                     viewModel.getDayExercises(event.day.id)
                 }
-                is DaysEvent.GetDayExercises -> setUpDays(emptyList())
+                is DaysEvent.GetDayExercises -> setUpDays(event.exercises)
                 is DaysEvent.SomethingWentWrong -> error()
             }
         }
     }
 
-    private fun setUpDays(exercises: List<String>) {
+    private fun setUpDays(exercises: List<CompactExercise>) {
         binding.apply {
 //            rvMgroups.apply {
 //                layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
 //                adapter = ChMGroupsAdapter(items, this@ChMGroupsFragment)
 //            }
+            val a = 2
             rvExercises.isVisible = exercises.isNotEmpty()
             tvEmpty.isVisible = exercises.isEmpty()
         }

@@ -3,7 +3,6 @@ package com.mmfsin.noexcuses.presentation.routines.days.fragments
 import android.app.Activity.INPUT_METHOD_SERVICE
 import android.app.Dialog
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -13,6 +12,7 @@ import com.mmfsin.noexcuses.databinding.DialogDayEditBinding
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDaysDialogListener
 import com.mmfsin.noexcuses.utils.animateDialog
+import com.mmfsin.noexcuses.utils.countDown
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -59,12 +59,7 @@ class EditDaysConfigDialog(
                     val title = etTitle.text.toString()
                     if (title.isNotEmpty() && title.isNotBlank()) {
                         closeKeyboard()
-                        object : CountDownTimer(300, 1000) {
-                            override fun onTick(millisUntilFinished: Long) {}
-                            override fun onFinish() {
-                                viewModel.editDay(d.id, title)
-                            }
-                        }.start()
+                        countDown { viewModel.editDay(d.id, title) }
                     } else binding.tvError.visibility = View.VISIBLE
                 }
             }

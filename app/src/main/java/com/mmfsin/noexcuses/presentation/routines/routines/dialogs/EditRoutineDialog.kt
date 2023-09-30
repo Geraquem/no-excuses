@@ -10,6 +10,8 @@ import com.mmfsin.noexcuses.databinding.DialogRoutineEditBinding
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.routines.routines.interfaces.IRoutineDialogListener
 import com.mmfsin.noexcuses.utils.animateDialog
+import com.mmfsin.noexcuses.utils.closeKeyboardFromDialog
+import com.mmfsin.noexcuses.utils.countDown
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,7 +57,8 @@ class EditRoutineDialog(val routineId: String, private val listener: IRoutineDia
                     val title = etTitle.text.toString()
                     val description = etDescription.text.toString()
                     if (title.isNotEmpty() && title.isNotBlank()) {
-                        viewModel.editRoutine(r.id, title, description)
+                        requireContext().closeKeyboardFromDialog()
+                        countDown { viewModel.editRoutine(r.id, title, description) }
                     } else binding.tvError.visibility = View.VISIBLE
                 }
             }

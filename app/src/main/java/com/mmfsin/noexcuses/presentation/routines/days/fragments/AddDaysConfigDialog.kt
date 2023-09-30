@@ -1,17 +1,16 @@
 package com.mmfsin.noexcuses.presentation.routines.days.fragments
 
-import android.app.Activity.INPUT_METHOD_SERVICE
 import android.app.Dialog
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogDayAddBinding
 import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDaysDialogListener
 import com.mmfsin.noexcuses.utils.animateDialog
+import com.mmfsin.noexcuses.utils.closeKeyboardFromDialog
+import com.mmfsin.noexcuses.utils.countDown
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,15 +45,8 @@ class AddDaysConfigDialog(
             btnAccept.setOnClickListener {
                 val title = etTitle.text.toString()
                 if (title.isNotEmpty() && title.isNotBlank()) {
-                    closeKeyboard()
-
-                    object : CountDownTimer(300, 1000) {
-                        override fun onTick(millisUntilFinished: Long) {}
-                        override fun onFinish() {
-                            viewModel.addDay(routineId, title)
-                        }
-                    }.start()
-
+                    requireContext().closeKeyboardFromDialog()
+                    countDown { viewModel.addDay(routineId, title) }
                 } else tvError.visibility = View.VISIBLE
             }
         }
@@ -75,11 +67,6 @@ class AddDaysConfigDialog(
 
     private fun error() = activity?.showErrorDialog()
 
-    private fun closeKeyboard() {
-        val imm: InputMethodManager =
-            requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        if (imm.isActive) imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS)
-    }
 
     companion object {
         fun newInstance(routineId: String, listener: IDaysDialogListener): AddDaysConfigDialog {
