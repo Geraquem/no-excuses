@@ -22,16 +22,22 @@ class DayExercisesAdapter(
                 Glide.with(binding.root.context).load(exercise.imageURL).into(image)
                 tvCategory.text = exercise.category
                 tvName.text = exercise.name
-                val question = c.getText(R.string.days_exercises_empty_data)
 
-                val series = exercise.series?.toString() ?: run { question }
-                tvSeries.text = series
+                val series = exercise.series
+                series?.let {
+                    llReps.visibility = if (it == 0) View.GONE else View.VISIBLE
+                    if (it == 1) tvSeries.text = c.getString(R.string.days_exercises_serie)
+                    tvSeries.text = it.toString()
+                } ?: run { llReps.visibility = View.GONE }
 
-                if (exercise.series == 1) tvSeriesText.text =
-                    c.getString(R.string.days_exercises_serie)
+                val time = exercise.time
+                tvWait.text = time.toString()
+                time?.let {
+                    tvWait.text = it
+                    llTime.visibility = View.VISIBLE
+                } ?: run { llTime.visibility = View.GONE }
 
-                val time = exercise.time ?: run { question }
-                tvWait.text = time
+                llData.visibility = if (series == null && time == null) View.GONE else View.VISIBLE
             }
         }
     }

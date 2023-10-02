@@ -62,5 +62,11 @@ fun countDown(action: () -> Unit) {
     }.start()
 }
 
+fun Double?.formatTime(): String? {
+    return this?.let { d ->
+        String.format("%.2f", d).replace(",", ":").replace(":00", "")
+    }
+        ?: run { null }
+}
 //fun FragmentActivity.shouldShowInterstitial(position: Int) =
 //    (this as MainActivity).showInterstitial(position)

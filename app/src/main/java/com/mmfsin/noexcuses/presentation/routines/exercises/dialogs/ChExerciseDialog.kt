@@ -16,6 +16,7 @@ import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.adapter.ChExerciseAdapter
 import com.mmfsin.noexcuses.utils.animateDialog
+import com.mmfsin.noexcuses.utils.formatTime
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -75,8 +76,10 @@ class ChExerciseDialog(private val chExerciseId: String) : BaseDialog<DialogChEx
     private fun setData(chExercise: ChExercise) {
         binding.apply {
             chExercise.data?.let { data -> setUpSeriesRV(data) }
-            chExercise.time?.let { time -> binding.tvTime.text = time.toString() }
+            chExercise.time?.let { time -> tvTime.text = time.formatTime() }
                 ?: run { llTime.visibility = View.GONE }
+            chExercise.notes?.let { notes -> tvNotes.text = notes }
+                ?: run { tvNotes.visibility = View.GONE }
             chExercise.exerciseId?.let { id -> viewModel.getExercise(id) }
                 ?: run { error() }
         }

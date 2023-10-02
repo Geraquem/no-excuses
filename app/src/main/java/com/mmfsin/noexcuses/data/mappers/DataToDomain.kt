@@ -2,6 +2,7 @@ package com.mmfsin.noexcuses.data.mappers
 
 import com.mmfsin.noexcuses.data.models.*
 import com.mmfsin.noexcuses.domain.models.*
+import com.mmfsin.noexcuses.utils.formatTime
 
 /** MuscularGroup */
 fun MuscularGroupDTO.toMuscularGroup() = MuscularGroup(name, imageURL)
@@ -35,7 +36,3 @@ fun ChExerciseDTO.toCompactExercise(e: Exercise) =
 /** Data */
 fun DataDTO.toData() = Data(id, exerciseDayId, reps, weight)
 fun List<DataDTO>.toDataList() = this.map { it.toData() }
-
-fun Double?.formatTime(): String? {
-    return this?.let { d -> String.format("%.2f", d).replace(",",":")} ?: run { null }
-}

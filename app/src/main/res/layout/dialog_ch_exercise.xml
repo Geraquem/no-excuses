@@ -126,6 +126,17 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tv_notes"
+                style="@style/MediumTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_small_edit_text"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="12dp"
+                tools:text="Notas que se hayan apuntado" />
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

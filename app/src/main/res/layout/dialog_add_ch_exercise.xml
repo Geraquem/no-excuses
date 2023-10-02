@@ -76,6 +76,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <include
+                android:id="@+id/rv_header"
+                layout="@layout/item_data_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_series"
                 style="@style/scroll_no_effects"
@@ -117,7 +124,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp">
+                android:layout_marginTop="32dp">
 
                 <TextView
                     style="@style/MediumTextView"
@@ -152,6 +159,29 @@
                     android:text="@string/days_exercise_dialog_time_minutes" />
 
             </LinearLayout>
+
+            <TextView
+                style="@style/MediumTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="@string/days_exercise_dialog_add_notes" />
+
+            <EditText
+                android:id="@+id/et_notes"
+                style="@style/MediumTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@null"
+                android:background="@drawable/bg_small_edit_text"
+                android:hint="@string/days_exercise_dialog_add_notes_hint"
+                android:inputType="text"
+                android:maxLength="150"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:textColorHint="@color/soft_black" />
 
             <TextView
                 android:id="@+id/btn_add"

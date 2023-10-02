@@ -15,19 +15,14 @@ import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.interfaces.I
 class AddChExerciseAdapter(
     private val data: MutableList<Data>,
     private val listener: IAddChExerciseListener
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<AddChExerciseAdapter.ViewHolder>() {
 
-    companion object {
-        const val TYPE_HEADER = 1
-        const val TYPE_DATA = 2
-    }
-
-    class DataViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemAddDataBinding.bind(view)
         private val c = binding.root.context
         private var pos = 0
         private var listener: IAddChExerciseListener? = null
-        fun bind(data: Data, position: Int, addListener: IAddChExerciseListener) {
+        fun bind(position: Int, addListener: IAddChExerciseListener) {
             binding.apply {
                 tvSerie.text = c.getString(R.string.days_exercise_dialog_serie, position.toString())
                 etRep.addTextChangedListener(repsTextWatcher)
@@ -65,35 +60,14 @@ class AddChExerciseAdapter(
         }
     }
 
-    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {}
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            TYPE_HEADER -> {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_data_header, parent, false)
-                HeaderViewHolder(view)
-            }
-            else -> {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_add_data, parent, false)
-                DataViewHolder(view)
-            }
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_add_data, parent, false)
+        )
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is DataViewHolder -> holder.bind(data[position], position, listener)
-            else -> {}
-        }
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            0 -> TYPE_HEADER
-            else -> TYPE_DATA
-        }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(position + 1, listener)
     }
 
     override fun getItemCount(): Int = data.size

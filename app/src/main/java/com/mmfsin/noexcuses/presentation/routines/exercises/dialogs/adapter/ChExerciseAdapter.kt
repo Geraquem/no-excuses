@@ -30,7 +30,7 @@ class ChExerciseAdapter(private val data: List<Data>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(data[position], position)
+        holder.bind(data[position], position + 1)
     }
 
     override fun getItemCount(): Int = data.size

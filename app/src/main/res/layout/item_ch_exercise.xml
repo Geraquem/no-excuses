@@ -14,13 +14,13 @@
 
     <ImageView
         android:id="@+id/image"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginBottom="6dp"
         android:contentDescription="@string/content_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:src="@color/black" />
 
     <LinearLayout
@@ -48,38 +48,48 @@
             style="@style/MediumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
             android:textAllCaps="true"
             tools:text="Press banca en banco plano" />
 
         <LinearLayout
+            android:id="@+id/ll_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_series"
-                style="@style/MediumTextView"
+            <LinearLayout
+                android:id="@+id/ll_reps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="4dp"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                tools:text="4" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_series_text"
-                style="@style/MediumTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="16dp"
-                android:text="@string/days_exercises_series"
-                android:textAllCaps="true" />
+                <TextView
+                    android:id="@+id/tv_series"
+                    style="@style/MediumTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="4dp"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    tools:text="4" />
+
+                <TextView
+                    android:id="@+id/tv_series_text"
+                    style="@style/MediumTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/days_exercises_series"
+                    android:textAllCaps="true" />
+
+            </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -94,15 +104,16 @@
                     android:layout_marginEnd="4dp"
                     android:textAllCaps="true"
                     android:textStyle="bold"
-                    tools:text="@string/days_exercises_empty_data" />
+                    tools:text="2" />
 
-                <ImageView
+                <TextView
                     style="@style/MediumTextView"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_wait"/>
+                    android:text="@string/days_exercise_dialog_time_minutes_sybol"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

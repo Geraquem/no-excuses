@@ -54,7 +54,6 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
                 tvCategory.text = getString(R.string.exercise_dialog_category, it.category)
                 tvName.text = it.name
                 Glide.with(requireContext()).load(it.imageURL).into(image)
-                addSerie()
                 setUpSeriesRV()
             }
         }
@@ -65,14 +64,8 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
             btnAddSerie.setOnClickListener { addSerie() }
 
             btnAdd.setOnClickListener {
-                /** Remove Header of Series Recycler */
-                val iterator = series.iterator()
-                while (iterator.hasNext()) {
-                    val serie = iterator.next()
-                    if (serie.id == "0") {
-                        iterator.remove()
-                    }
-                }
+                /** For Series */
+                val mSeries = if (series.isEmpty()) null else series
 
                 /** For Time */
                 val time = etTime.text.toString()
@@ -85,7 +78,11 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
                     }
                 }
 
-                val data = DataChExercise(dataList = series, time = restTime)
+                /** For Notes */
+                val notes = etNotes.text.toString()
+                val notesStr = notes.ifEmpty { null }
+
+                val data = DataChExercise(dataList = mSeries, time = restTime, notes = notesStr)
                 viewModel.addChExercise(idGroup, data)
             }
         }
