@@ -29,7 +29,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -76,96 +75,56 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <include
+                android:id="@+id/rv_header"
+                layout="@layout/item_data_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_series"
                 style="@style/scroll_no_effects"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:itemCount="3"
-                tools:listitem="@layout/item_add_data" />
+                tools:listitem="@layout/item_data" />
 
             <LinearLayout
-                android:id="@+id/btn_add_serie"
+                android:id="@+id/ll_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:paddingVertical="6dp"
-                tools:ignore="UseCompoundDrawables">
+                android:layout_marginTop="16dp">
 
-                <ImageView
+                <TextView
                     style="@style/MediumTextView"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="6dp"
-                    android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_add" />
-
-                <TextView
-                    style="@style/MediumTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:gravity="center"
-                    android:text="@string/days_exercise_dialog_add_serie"
-                    android:textAllCaps="true" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp">
-
-                <TextView
-                    style="@style/MediumTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
                     android:gravity="center"
                     android:text="@string/days_exercise_dialog_time_text" />
 
-                <EditText
-                    android:id="@+id/et_time"
+                <TextView
+                    android:id="@+id/tv_time"
                     style="@style/MediumTextView"
-                    android:layout_width="85dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="6dp"
                     android:autofillHints="@null"
-                    android:background="@drawable/bg_small_edit_text"
                     android:gravity="center"
-                    android:hint="@string/days_exercise_dialog_time_hint"
-                    android:inputType="numberDecimal"
                     android:maxLength="5"
-                    android:paddingHorizontal="18dp"
-                    android:paddingVertical="6dp"
-                    android:textColorHint="@color/soft_black" />
+                    android:textColorHint="@color/soft_black"
+                    android:textStyle="bold"
+                    tools:text="2:00" />
 
                 <TextView
                     style="@style/MediumTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
                     android:gravity="center"
                     android:text="@string/days_exercise_dialog_time_minutes" />
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/btn_add"
-                style="@style/MediumTextView_Bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/bg_white_box"
-                android:elevation="6dp"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="12dp"
-                tools:text="@string/days_exercise_dialog_add" />
 
         </LinearLayout>
 

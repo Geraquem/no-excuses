@@ -109,10 +109,7 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
                     binding.btnAdd.text =
                         getString(R.string.days_exercise_dialog_add, event.day.title)
                 }
-                is ChExerciseDialogEvent.InitialDataRV -> {
-                    series = event.data as MutableList<Data>
-                    setUpSeriesRV()
-                }
+                is ChExerciseDialogEvent.GetChExercise -> {}
                 is ChExerciseDialogEvent.AddedCompleted -> {
                     /** Mensaje de todo correto */
                     dismiss()
@@ -136,7 +133,6 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
             if (s.id == id) s.reps = reps
         }
     }
-
 
     override fun addWeightToSerie(id: String, weight: Double) {
         for (s in series) {

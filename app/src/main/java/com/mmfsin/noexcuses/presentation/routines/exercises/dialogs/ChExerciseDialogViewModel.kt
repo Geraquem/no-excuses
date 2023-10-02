@@ -2,6 +2,7 @@ package com.mmfsin.noexcuses.presentation.routines.exercises.dialogs
 
 import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.AddChExerciseUseCase
+import com.mmfsin.noexcuses.domain.usecases.GetChExerciseUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetDayByIdUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetExerciseUseCase
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
@@ -13,7 +14,8 @@ import javax.inject.Inject
 class ChExerciseDialogViewModel @Inject constructor(
     private val getExerciseUseCase: GetExerciseUseCase,
     private val getDayByIdUseCase: GetDayByIdUseCase,
-    private val addChExerciseUseCase: AddChExerciseUseCase
+    private val addChExerciseUseCase: AddChExerciseUseCase,
+    private val getChExerciseUseCase: GetChExerciseUseCase,
 ) : BaseViewModel<ChExerciseDialogEvent>() {
 
     fun getExercise(id: String) {
@@ -42,6 +44,17 @@ class ChExerciseDialogViewModel @Inject constructor(
         executeUseCase(
             { addChExerciseUseCase.execute(AddChExerciseUseCase.Params(idGroup, dataChExercise)) },
             { _event.value = ChExerciseDialogEvent.AddedCompleted },
+            { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
+        )
+    }
+
+    fun getChExercise(chExerciseId: String){
+        executeUseCase(
+            { getChExerciseUseCase.execute(GetChExerciseUseCase.Params(chExerciseId)) },
+            { result ->
+                _event.value = result?.let { ChExerciseDialogEvent.GetChExercise(it) }
+                    ?: run { ChExerciseDialogEvent.SomethingWentWrong }
+            },
             { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
         )
     }

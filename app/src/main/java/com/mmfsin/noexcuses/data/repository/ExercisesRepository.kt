@@ -71,4 +71,11 @@ class ExercisesRepository @Inject constructor(
         val days = realmDatabase.getObjectsFromRealm { where<DayDTO>().equalTo(ID, id).findAll() }
         return if (days.isNotEmpty()) days.first() else null
     }
+
+    override fun getChExercise(chExerciseId: String): ChExercise? {
+        val exercises = realmDatabase.getObjectsFromRealm {
+            where<ChExerciseDTO>().equalTo(ID, chExerciseId).findAll()
+        }
+        return if (exercises.isNotEmpty()) exercises.first().toChExercise() else null
+    }
 }
