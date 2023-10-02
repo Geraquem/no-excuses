@@ -70,6 +70,7 @@
                 tools:text="4" />
 
             <TextView
+                android:id="@+id/tv_series_text"
                 style="@style/MediumTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,9 +102,7 @@
                     android:layout_height="16dp"
                     android:layout_gravity="center"
                     android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_wait"
-                    android:text="@string/days_exercises_reps"
-                    android:textAllCaps="true" />
+                    android:src="@drawable/ic_wait"/>
 
             </LinearLayout>
 

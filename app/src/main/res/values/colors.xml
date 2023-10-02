@@ -14,7 +14,8 @@
     <color name="red">#AA0000</color>
     <color name="background">#EDEDED</color>
 
-    <color name="soft_black">#A5A5A5</color>
+    <color name="soft_black">#757575</color>
+    <color name="soft_grey">#A5A5A5</color>
     <color name="soft_green">#4FB7FF9C</color>
     <color name="soft_red">#66F27474</color>
     <color name="soft_blue">#83B9E9FF</color>

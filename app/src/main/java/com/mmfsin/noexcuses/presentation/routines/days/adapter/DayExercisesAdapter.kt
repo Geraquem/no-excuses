@@ -9,11 +9,9 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemChExerciseBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDayExerciseListener
-import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDayListener
 
 class DayExercisesAdapter(
-    private val exercises: List<CompactExercise>,
-    private val listener: IDayExerciseListener
+    private val exercises: List<CompactExercise>, private val listener: IDayExerciseListener
 ) : RecyclerView.Adapter<DayExercisesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -28,6 +26,9 @@ class DayExercisesAdapter(
 
                 val series = exercise.series?.toString() ?: run { question }
                 tvSeries.text = series
+
+                if (exercise.series == 1) tvSeriesText.text =
+                    c.getString(R.string.days_exercises_serie)
 
                 val time = exercise.time?.toString() ?: run { question }
                 tvWait.text = time

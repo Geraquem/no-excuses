@@ -37,11 +37,19 @@
     <string name="days_exercises_empty">Todavía no tienes ningun ejercicio para este día.\n¡Pulsa el <b>botón +</b> para empezar a añadir!</string>
     <string name="days_one_exercise">1 ejercicio</string>
     <string name="days_exercises">%s ejercicios</string>
-    <string name="days_exercises_kg">Kg</string>
     <string name="days_exercises_serie">Serie</string>
     <string name="days_exercises_series">Series</string>
-    <string name="days_exercises_reps">Reps</string>
     <string name="days_exercises_empty_data">\?</string>
+
+    <!-- DAY EXERCISE ADD/EDIT/DELETE DIALOG -->
+    <string name="days_exercise_dialog_serie">Serie %s</string>
+    <string name="days_exercise_dialog_kg">Kg</string>
+    <string name="days_exercises_reps">Reps</string>
+    <string name="days_exercise_dialog_weight_hint">00.00</string>
+    <string name="days_exercise_dialog_reps_hint">00</string>
+    <string name="days_exercise_dialog_time_text">Descanso (mins)</string>
+    <string name="days_exercise_dialog_time_hint">00.00</string>
+    <string name="days_exercise_dialog_add">Agregar a %s</string>
 
     <!-- ROUTINES ADD/EDIT/DELETE DIALOG -->
     <string name="routines_add_top_text">Nueva rutina</string>
@@ -75,9 +83,5 @@
     <string name="days_delete_text">¿Quieres eliminar %s?</string>
     <string name="days_delete_yes">Eliminar</string>
     <string name="days_delete_cancel">Volver</string>
-
-    <!-- EXERCISE DIALOG -->
-    <string name="ch_exercise_dialog_category">Ejercicio de %s</string>
-    <string name="ch_exercise_dialog_add">Agregar a %s</string>
 
 </resources>

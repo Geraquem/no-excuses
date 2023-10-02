@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Data(
-    var id: String?,
-    var reps: Int?,
-    var weight: Double?
+    var id: String? = null,
+    var reps: Int? = null,
+    var weight: Double? = null
 ) : Parcelable
