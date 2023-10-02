@@ -26,7 +26,7 @@ class DayExercisesAdapter(
                 val series = exercise.series
                 series?.let {
                     llReps.visibility = if (it == 0) View.GONE else View.VISIBLE
-                    if (it == 1) tvSeries.text = c.getString(R.string.days_exercises_serie)
+                    if (it == 1) tvSeriesText.text = c.getString(R.string.days_exercises_serie)
                     tvSeries.text = it.toString()
                 } ?: run { llReps.visibility = View.GONE }
 
