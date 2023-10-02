@@ -30,8 +30,12 @@ fun ChExerciseDTO.toChExercise() =
 fun List<ChExerciseDTO>.toChExerciseList() = this.map { it.toChExercise() }
 
 fun ChExerciseDTO.toCompactExercise(e: Exercise) =
-    CompactExercise(id, e.name, e.category, e.imageURL, data?.size, time)
+    CompactExercise(id, e.name, e.category, e.imageURL, data?.size, time.formatTime())
 
 /** Data */
 fun DataDTO.toData() = Data(id, reps, weight)
 fun List<DataDTO>.toDataList() = this.map { it.toData() }
+
+fun Double?.formatTime(): String? {
+    return this?.let { d -> String.format("%.2f", d).replace(",",":")} ?: run { null }
+}

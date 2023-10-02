@@ -6,5 +6,5 @@ open class CompactExercise(
     var category: String,
     var imageURL: String,
     var series: Int?,
-    var time: Double?,
+    var time: String?,
 )
