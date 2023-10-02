@@ -11,6 +11,12 @@ class AddChExerciseUseCase @Inject constructor(private val repository: IExercise
     BaseUseCase<AddChExerciseUseCase.Params, Unit>() {
 
     override suspend fun execute(params: Params) {
+        params.dataChExercise.dataList?.let { data ->
+            for (serie in data) {
+                serie.id = params.idGroup.exerciseId
+            }
+        }
+
         val chExercise = createChExercise(params.idGroup, params.dataChExercise)
         repository.addChExercise(chExercise)
     }

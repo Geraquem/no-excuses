@@ -14,16 +14,22 @@ import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.adapter.AddChExerciseAdapter
+import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.interfaces.IAddChExerciseListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddChExerciseBinding>() {
+class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddChExerciseBinding>(),
+    IAddChExerciseListener {
 
     private val viewModel: ChExerciseDialogViewModel by viewModels()
 
+    private var mAdapter: AddChExerciseAdapter? = null
+
     private var exercise: Exercise? = null
+    private var series = mutableListOf<Data>()
+    private var seriesCont = -1
 
     override fun inflateView(inflater: LayoutInflater) =
         DialogAddChExerciseBinding.inflate(inflater)
@@ -48,14 +54,23 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
                 tvCategory.text = getString(R.string.exercise_dialog_category, it.category)
                 tvName.text = it.name
                 Glide.with(requireContext()).load(it.imageURL).into(image)
+                addSerie()
+                setUpSeriesRV()
             }
         }
     }
 
     override fun setListeners() {
         binding.apply {
+            btnAddSerie.setOnClickListener { addSerie() }
+
             btnAdd.setOnClickListener {
-                /** get info from screen */
+                /** Remove Header of Series Recycler */
+//                for (serie in series) {
+//                    if (serie.id == "0") series.remove(serie)
+//                }
+
+                /** For Time */
                 val time = etTime.text.toString()
                 var restTime: Double? = null
                 if (time.isNotEmpty()) {
@@ -66,10 +81,16 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
                     }
                 }
 
-                val data = DataChExercise(time = restTime)
+                val data = DataChExercise(dataList = series, time = restTime)
                 viewModel.addChExercise(idGroup, data)
             }
         }
+    }
+
+    private fun addSerie() {
+        seriesCont++
+        series.add(Data(id = seriesCont.toString()))
+        mAdapter?.notifyItemInserted(series.size - 1)
     }
 
     private fun observe() {
@@ -83,9 +104,11 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
                 is ChExerciseDialogEvent.GetDay -> {
                     binding.btnAdd.text =
                         getString(R.string.days_exercise_dialog_add, event.day.title)
-                    viewModel.initialDataRV()
                 }
-                is ChExerciseDialogEvent.InitialDataRV -> setUpSeriesRV(event.data)
+                is ChExerciseDialogEvent.InitialDataRV -> {
+                    series = event.data as MutableList<Data>
+                    setUpSeriesRV()
+                }
                 is ChExerciseDialogEvent.AddedCompleted -> {
                     /** Mensaje de todo correto */
                     dismiss()
@@ -96,10 +119,24 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
         }
     }
 
-    private fun setUpSeriesRV(data: List<Data>) {
+    private fun setUpSeriesRV() {
         binding.rvSeries.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = AddChExerciseAdapter(data)
+            mAdapter = AddChExerciseAdapter(series, this@AddChExerciseDialog)
+            adapter = mAdapter
+        }
+    }
+
+    override fun addRepToSerie(id: String, reps: Int) {
+        for (s in series) {
+            if (s.id == id) s.reps = reps
+        }
+    }
+
+
+    override fun addWeightToSerie(id: String, weight: Double) {
+        for (s in series) {
+            if (s.id == id) s.weight = weight
         }
     }
 

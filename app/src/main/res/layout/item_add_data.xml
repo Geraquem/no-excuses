@@ -36,6 +36,7 @@
             app:layout_constraintGuide_percent="0.5" />
 
         <EditText
+            android:id="@+id/et_rep"
             style="@style/MediumTextView"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
@@ -54,6 +55,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/et_weight"
             style="@style/MediumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

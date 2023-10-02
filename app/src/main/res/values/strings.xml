@@ -49,6 +49,7 @@
     <string name="days_exercise_dialog_reps_hint">00</string>
     <string name="days_exercise_dialog_time_text">Descanso (mins)</string>
     <string name="days_exercise_dialog_time_hint">00.00</string>
+    <string name="days_exercise_dialog_add_serie">Añadir serie</string>
     <string name="days_exercise_dialog_add">Agregar a %s</string>
 
     <!-- ROUTINES ADD/EDIT/DELETE DIALOG -->

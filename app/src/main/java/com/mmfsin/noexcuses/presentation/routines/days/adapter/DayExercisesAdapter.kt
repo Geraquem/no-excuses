@@ -30,7 +30,7 @@ class DayExercisesAdapter(
                 if (exercise.series == 1) tvSeriesText.text =
                     c.getString(R.string.days_exercises_serie)
 
-                val time = exercise.time?.toString() ?: run { question }
+                val time = exercise.time ?: run { question }
                 tvWait.text = time
             }
         }

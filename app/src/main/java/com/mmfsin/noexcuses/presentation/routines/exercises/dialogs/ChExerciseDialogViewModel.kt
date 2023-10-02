@@ -4,7 +4,6 @@ import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.AddChExerciseUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetDayByIdUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetExerciseUseCase
-import com.mmfsin.noexcuses.domain.usecases.SetUpAddDataRVUseCase
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,8 +13,7 @@ import javax.inject.Inject
 class ChExerciseDialogViewModel @Inject constructor(
     private val getExerciseUseCase: GetExerciseUseCase,
     private val getDayByIdUseCase: GetDayByIdUseCase,
-    private val addChExerciseUseCase: AddChExerciseUseCase,
-    private val setUpAddDataRVUseCase: SetUpAddDataRVUseCase
+    private val addChExerciseUseCase: AddChExerciseUseCase
 ) : BaseViewModel<ChExerciseDialogEvent>() {
 
     fun getExercise(id: String) {
@@ -44,14 +42,6 @@ class ChExerciseDialogViewModel @Inject constructor(
         executeUseCase(
             { addChExerciseUseCase.execute(AddChExerciseUseCase.Params(idGroup, dataChExercise)) },
             { _event.value = ChExerciseDialogEvent.AddedCompleted },
-            { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
-        )
-    }
-
-    fun initialDataRV() {
-        executeUseCase(
-            { setUpAddDataRVUseCase.execute() },
-            { result -> _event.value = ChExerciseDialogEvent.InitialDataRV(result) },
             { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
         )
     }
