@@ -33,7 +33,7 @@ fun ChExerciseDTO.toCompactExercise(e: Exercise) =
     CompactExercise(id, e.name, e.category, e.imageURL, data?.size, time.formatTime())
 
 /** Data */
-fun DataDTO.toData() = Data(id, reps, weight)
+fun DataDTO.toData() = Data(id, exerciseDayId, reps, weight)
 fun List<DataDTO>.toDataList() = this.map { it.toData() }
 
 fun Double?.formatTime(): String? {

@@ -6,6 +6,7 @@ import io.realm.annotations.PrimaryKey
 open class DataDTO(
     @PrimaryKey
     var id: String? = null,
+    var exerciseDayId: String? = null,
     var reps: Int? = null,
     var weight: Double? = null
 ) : RealmObject()

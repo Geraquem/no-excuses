@@ -27,4 +27,4 @@ fun setExerciseData(data: List<Data>?): RealmList<DataDTO>? {
     } ?: run { null }
 }
 
-fun Data.toDataDTO() = DataDTO(id, reps, weight)
+fun Data.toDataDTO() = DataDTO(id, exerciseDayId, reps, weight)

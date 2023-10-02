@@ -66,9 +66,13 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
 
             btnAdd.setOnClickListener {
                 /** Remove Header of Series Recycler */
-//                for (serie in series) {
-//                    if (serie.id == "0") series.remove(serie)
-//                }
+                val iterator = series.iterator()
+                while (iterator.hasNext()) {
+                    val serie = iterator.next()
+                    if (serie.id == "0") {
+                        iterator.remove()
+                    }
+                }
 
                 /** For Time */
                 val time = etTime.text.toString()

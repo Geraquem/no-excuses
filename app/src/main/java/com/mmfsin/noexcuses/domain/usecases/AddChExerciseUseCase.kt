@@ -13,7 +13,7 @@ class AddChExerciseUseCase @Inject constructor(private val repository: IExercise
     override suspend fun execute(params: Params) {
         params.dataChExercise.dataList?.let { data ->
             for (serie in data) {
-                serie.id = params.idGroup.exerciseId
+                serie.exerciseDayId = params.idGroup.exerciseId + params.idGroup.dayId
             }
         }
 
