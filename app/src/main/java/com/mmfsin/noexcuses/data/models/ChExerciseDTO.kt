@@ -1,5 +1,6 @@
 package com.mmfsin.noexcuses.data.models
 
+import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
@@ -9,8 +10,7 @@ open class ChExerciseDTO(
     var routineId: String = "",
     var dayId: String = "",
     var exerciseId: String? = null,
-    var weight: Double? = null,
-    var series: Int? = null,
-    var reps: Int? = null,
+    var data: RealmList<DataDTO>? = null,
+    var time: Double? = null,
     var notes: String? = null,
 ) : RealmObject()

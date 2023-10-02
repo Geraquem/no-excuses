@@ -8,19 +8,21 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentDaysBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.routines.days.DaysFragmentDirections.Companion.actionMGroupsToExercises
-import com.mmfsin.noexcuses.presentation.routines.mgroups.intefaces.IChMGroupListener
+import com.mmfsin.noexcuses.presentation.routines.days.adapter.DayExercisesAdapter
+import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDayExerciseListener
 import com.mmfsin.noexcuses.utils.ID_GROUP
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DaysFragment : BaseFragment<FragmentDaysBinding, DaysViewModel>(), IChMGroupListener {
+class DaysFragment : BaseFragment<FragmentDaysBinding, DaysViewModel>(), IDayExerciseListener {
 
     override val viewModel: DaysViewModel by viewModels()
 
@@ -66,18 +68,21 @@ class DaysFragment : BaseFragment<FragmentDaysBinding, DaysViewModel>(), IChMGro
 
     private fun setUpDays(exercises: List<CompactExercise>) {
         binding.apply {
-//            rvMgroups.apply {
-//                layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-//                adapter = ChMGroupsAdapter(items, this@ChMGroupsFragment)
-//            }
-            val a = 2
+            rvExercises.apply {
+                layoutManager = LinearLayoutManager(mContext)
+                adapter = DayExercisesAdapter(exercises, this@DaysFragment)
+            }
             rvExercises.isVisible = exercises.isNotEmpty()
             tvEmpty.isVisible = exercises.isEmpty()
         }
     }
 
-    override fun onMGroupClick(mGroup: String) {
+    override fun onExerciseClick(exerciseId: String) {
+        /** OPEN VIEW EXERCISE */
+    }
 
+    override fun onExerciseLongClick(exerciseId: String) {
+        /** EDIT EXERCISE */
     }
 
     private fun error() = activity?.showErrorDialog()

@@ -5,7 +5,6 @@ open class CompactExercise(
     var name: String,
     var category: String,
     var imageURL: String,
-    var weight: Double?,
     var series: Int?,
-    var reps: Int?,
+    var time: Double?,
 )

@@ -25,9 +25,13 @@ fun List<DayDTO>.toDayList() = this.map { it.toDay() }
 
 /** ChExercise */
 fun ChExerciseDTO.toChExercise() =
-    ChExercise(id, routineId, dayId, exerciseId, weight, series, reps, notes)
+    ChExercise(id, routineId, dayId, exerciseId, data?.toDataList(), time, notes)
 
 fun List<ChExerciseDTO>.toChExerciseList() = this.map { it.toChExercise() }
 
-fun ChExerciseDTO.toCompactExercise(exercise: Exercise) =
-    CompactExercise(id, exercise.name, exercise.category, exercise.imageURL, weight, series, reps)
+fun ChExerciseDTO.toCompactExercise(e: Exercise) =
+    CompactExercise(id, e.name, e.category, e.imageURL, data?.size, time)
+
+/** Data */
+fun DataDTO.toData() = Data(id, reps, weight)
+fun List<DataDTO>.toDataList() = this.map { it.toData() }

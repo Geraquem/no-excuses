@@ -11,9 +11,8 @@ fun createChExercise(idGroup: IdGroup, dataChExercise: DataChExercise): ChExerci
         routineId = idGroup.routineId,
         dayId = idGroup.dayId,
         exerciseId = idGroup.exerciseId,
-        weight = dataChExercise.weight,
-        series = dataChExercise.series,
-        reps = dataChExercise.reps,
+        data = dataChExercise.dataList,
+        time = dataChExercise.time,
         notes = dataChExercise.notes
     )
 }

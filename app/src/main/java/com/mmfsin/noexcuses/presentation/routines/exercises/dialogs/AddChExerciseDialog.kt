@@ -70,7 +70,8 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
                     getString(R.string.ch_exercise_dialog_add, event.day.title)
 
                 is ChExerciseDialogEvent.AddedCompleted -> {
-
+                    /** Mensaje de todo correto */
+                    dismiss()
                 }
 
                 is ChExerciseDialogEvent.SomethingWentWrong -> error()

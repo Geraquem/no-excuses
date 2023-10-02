@@ -1,12 +1,12 @@
 package com.mmfsin.noexcuses.presentation.models
 
 import android.os.Parcelable
+import com.mmfsin.noexcuses.domain.models.Data
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class DataChExercise(
-    var weight: Double? = null,
-    var series: Int? = null,
-    var reps: Int? = null,
+    var dataList: List<Data>? = null,
+    var time: Double? = null,
     var notes: String? = null
 ) : Parcelable
