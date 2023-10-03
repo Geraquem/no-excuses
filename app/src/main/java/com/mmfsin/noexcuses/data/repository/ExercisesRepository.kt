@@ -8,10 +8,7 @@ import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
-import com.mmfsin.noexcuses.utils.CATEGORY
-import com.mmfsin.noexcuses.utils.DATA_ID
-import com.mmfsin.noexcuses.utils.DAY_ID
-import com.mmfsin.noexcuses.utils.ID
+import com.mmfsin.noexcuses.utils.*
 import io.realm.kotlin.where
 import javax.inject.Inject
 
@@ -107,6 +104,24 @@ class ExercisesRepository @Inject constructor(
         }
         for (d in data) {
             d.id?.let { id -> realmDatabase.deleteObject({ d }, id) }
+        }
+    }
+
+    override fun deleteExercisesFromDeletedDay(dayId: String) {
+        val exercises = realmDatabase.getObjectsFromRealm {
+            where<ChExerciseDTO>().equalTo(DAY_ID, dayId).findAll()
+        }
+        for (e in exercises) {
+            deleteChExercise(e.id)
+        }
+    }
+
+    override fun deleteExercisesFromDeletedRoutine(routineId: String) {
+        val exercises = realmDatabase.getObjectsFromRealm {
+            where<ChExerciseDTO>().equalTo(ROUTINE_ID, routineId).findAll()
+        }
+        for (e in exercises) {
+            deleteChExercise(e.id)
         }
     }
 }
