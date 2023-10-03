@@ -16,7 +16,7 @@ import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
 import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDayExerciseListener
-import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.adapter.AddChExerciseAdapter
+import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.adapter.EditChExerciseAdapter
 import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.interfaces.IAddChExerciseListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.formatTime
@@ -30,7 +30,7 @@ class EditChExerciseDialog(
 
     private val viewModel: ChExerciseDialogViewModel by viewModels()
 
-    private var mAdapter: AddChExerciseAdapter? = null
+    private var mAdapter: EditChExerciseAdapter? = null
 
     private var exercise: Exercise? = null
     private var series = mutableListOf<Data>()
@@ -93,7 +93,7 @@ class EditChExerciseDialog(
                 val notesStr = notes.ifEmpty { null }
 
                 val data = DataChExercise(dataList = mSeries, time = restTime, notes = notesStr)
-//                viewModel.addChExercise(idGroup, data)
+                viewModel.editChExercise(chExerciseId, data)
             }
         }
     }
@@ -121,7 +121,11 @@ class EditChExerciseDialog(
 
     private fun setData(chExercise: ChExercise) {
         binding.apply {
-//            chExercise.data?.let { data -> setUpSeriesRV(data) }
+            chExercise.data?.let { data ->
+                series = data.toMutableList()
+                seriesCont = series.size
+                setUpSeriesRV()
+            }
             chExercise.time?.let { time -> etTime.hint = time.formatTime() }
             chExercise.notes?.let { notes -> etNotes.setText(notes) }
             chExercise.exerciseId?.let { id -> viewModel.getExercise(id) } ?: run { error() }
@@ -131,7 +135,7 @@ class EditChExerciseDialog(
     private fun setUpSeriesRV() {
         binding.rvSeries.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            mAdapter = AddChExerciseAdapter(series, this@EditChExerciseDialog)
+            mAdapter = EditChExerciseAdapter(series, this@EditChExerciseDialog)
             adapter = mAdapter
         }
     }

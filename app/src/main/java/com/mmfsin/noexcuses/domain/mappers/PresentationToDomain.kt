@@ -16,3 +16,15 @@ fun createChExercise(idGroup: IdGroup, dataChExercise: DataChExercise): ChExerci
         notes = dataChExercise.notes
     )
 }
+
+fun editChExercise(chExercise: ChExercise, dataChExercise: DataChExercise): ChExercise {
+    return ChExercise(
+        id = chExercise.id,
+        routineId = chExercise.routineId,
+        dayId = chExercise.dayId,
+        exerciseId = chExercise.exerciseId,
+        data = dataChExercise.dataList,
+        time = dataChExercise.time,
+        notes = dataChExercise.notes
+    )
+}

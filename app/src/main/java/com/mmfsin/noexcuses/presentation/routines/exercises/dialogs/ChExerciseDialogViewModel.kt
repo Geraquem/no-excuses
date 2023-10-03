@@ -1,10 +1,7 @@
 package com.mmfsin.noexcuses.presentation.routines.exercises.dialogs
 
 import com.mmfsin.noexcuses.base.BaseViewModel
-import com.mmfsin.noexcuses.domain.usecases.AddChExerciseUseCase
-import com.mmfsin.noexcuses.domain.usecases.GetChExerciseUseCase
-import com.mmfsin.noexcuses.domain.usecases.GetDayByIdUseCase
-import com.mmfsin.noexcuses.domain.usecases.GetExerciseUseCase
+import com.mmfsin.noexcuses.domain.usecases.*
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +13,7 @@ class ChExerciseDialogViewModel @Inject constructor(
     private val getDayByIdUseCase: GetDayByIdUseCase,
     private val addChExerciseUseCase: AddChExerciseUseCase,
     private val getChExerciseUseCase: GetChExerciseUseCase,
+    private val editChExerciseUseCase: EditChExerciseUseCase
 ) : BaseViewModel<ChExerciseDialogEvent>() {
 
     fun getExercise(id: String) {
@@ -48,7 +46,19 @@ class ChExerciseDialogViewModel @Inject constructor(
         )
     }
 
-    fun getChExercise(chExerciseId: String){
+    fun editChExercise(chExerciseId: String, dataChExercise: DataChExercise) {
+        executeUseCase(
+            {
+                editChExerciseUseCase.execute(
+                    EditChExerciseUseCase.Params(chExerciseId, dataChExercise)
+                )
+            },
+            { _event.value = ChExerciseDialogEvent.AddedCompleted },
+            { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
+        )
+    }
+
+    fun getChExercise(chExerciseId: String) {
         executeUseCase(
             { getChExerciseUseCase.execute(GetChExerciseUseCase.Params(chExerciseId)) },
             { result ->
