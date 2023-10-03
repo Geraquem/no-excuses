@@ -62,6 +62,15 @@ fun countDown(action: () -> Unit) {
     }.start()
 }
 
+fun countDown(millis: Long, action: () -> Unit) {
+    object : CountDownTimer(millis, 1000) {
+        override fun onTick(millisUntilFinished: Long) {}
+        override fun onFinish() {
+            action()
+        }
+    }.start()
+}
+
 fun Double?.formatTime(): String? {
     return this?.let { d ->
         String.format("%.2f", d).replace(",", ":").replace(":00", "")

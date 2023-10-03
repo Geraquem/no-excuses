@@ -1,8 +1,10 @@
 package com.mmfsin.noexcuses.presentation.routines.exercises.dialogs
 
+import android.animation.Animator
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -29,7 +31,7 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
 
     private var exercise: Exercise? = null
     private var series = mutableListOf<Data>()
-    private var seriesCont = -1
+    private var seriesCont = 0
 
     override fun inflateView(inflater: LayoutInflater) =
         DialogAddChExerciseBinding.inflate(inflater)
@@ -50,6 +52,7 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
     override fun setUI() {
         isCancelable = true
         binding.apply {
+            lottie.visibility = View.GONE
             exercise?.let {
                 tvCategory.text = getString(R.string.exercise_dialog_category, it.category)
                 tvName.text = it.name
@@ -64,6 +67,8 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
             btnAddSerie.setOnClickListener { addSerie() }
 
             btnAdd.setOnClickListener {
+                btnAdd.isEnabled = false
+
                 /** For Series */
                 val mSeries = if (series.isEmpty()) null else series
 
@@ -107,11 +112,7 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
                         getString(R.string.days_exercise_dialog_add, event.day.title)
                 }
                 is ChExerciseDialogEvent.GetChExercise -> {}
-                is ChExerciseDialogEvent.AddedCompleted -> {
-                    /** Mensaje de todo correto */
-                    dismiss()
-                }
-
+                is ChExerciseDialogEvent.AddedCompleted -> endFlow()
                 is ChExerciseDialogEvent.SomethingWentWrong -> error()
             }
         }
@@ -134,6 +135,24 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogAddCh
     override fun addWeightToSerie(id: String, weight: Double) {
         for (s in series) {
             if (s.id == id) s.weight = weight
+        }
+    }
+
+    private fun endFlow() {
+        binding.apply {
+            lottie.visibility = View.VISIBLE
+            lottie.addAnimatorListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(animation: Animator?) {}
+                override fun onAnimationEnd(animation: Animator?) {
+                    dismiss()
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {}
+                override fun onAnimationRepeat(animation: Animator?) {}
+            })
+
+            lottie.setAnimation(R.raw.flow_completed)
+            lottie.playAnimation()
         }
     }
 
