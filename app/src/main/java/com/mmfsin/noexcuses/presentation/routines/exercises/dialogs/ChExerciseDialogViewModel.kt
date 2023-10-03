@@ -13,7 +13,8 @@ class ChExerciseDialogViewModel @Inject constructor(
     private val getDayByIdUseCase: GetDayByIdUseCase,
     private val addChExerciseUseCase: AddChExerciseUseCase,
     private val getChExerciseUseCase: GetChExerciseUseCase,
-    private val editChExerciseUseCase: EditChExerciseUseCase
+    private val editChExerciseUseCase: EditChExerciseUseCase,
+    private val deleteChExerciseUseCase: DeleteChExerciseUseCase
 ) : BaseViewModel<ChExerciseDialogEvent>() {
 
     fun getExercise(id: String) {
@@ -65,6 +66,14 @@ class ChExerciseDialogViewModel @Inject constructor(
                 _event.value = result?.let { ChExerciseDialogEvent.GetChExercise(it) }
                     ?: run { ChExerciseDialogEvent.SomethingWentWrong }
             },
+            { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
+        )
+    }
+
+    fun deleteChExercise(chExerciseId: String) {
+        executeUseCase(
+            { deleteChExerciseUseCase.execute(DeleteChExerciseUseCase.Params(chExerciseId)) },
+            { _event.value = ChExerciseDialogEvent.FlowCompleted },
             { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
         )
     }

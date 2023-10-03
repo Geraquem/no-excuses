@@ -58,7 +58,7 @@
 
     <string name="days_exercise_dialog_edit">Editar</string>
 
-    <string name="days_exercise_dialog_delete_top_text">Eliminar rutina</string>
+    <string name="days_exercise_dialog_delete_top_text">Eliminar ejercicio</string>
     <string name="days_exercise_dialog_delete_text">¿Quieres eliminar %s de %s?</string>
     <string name="days_exercise_dialog_delete_yes">Eliminar</string>
     <string name="days_exercise_dialog_delete_cancel">Volver</string>

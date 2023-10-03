@@ -9,6 +9,7 @@ const val EXERCISES = "exercises"
 const val CATEGORY = "category"
 const val ID = "id"
 const val DAY_ID = "dayId"
+const val DATA_ID = "exerciseDayId"
 
 //NAVIGATION
 const val MGROUP_ID = "mGroupId"

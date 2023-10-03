@@ -52,7 +52,7 @@ class DeleteChExerciseDialog(
     override fun setListeners() {
         binding.apply {
             btnNo.setOnClickListener { dismiss() }
-            btnYes.setOnClickListener {  }
+            btnYes.setOnClickListener { viewModel.deleteChExercise(chExerciseId) }
         }
     }
 
