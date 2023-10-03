@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ import com.mmfsin.noexcuses.presentation.routines.days.DaysFragmentDirections.Co
 import com.mmfsin.noexcuses.presentation.routines.days.adapter.DayExercisesAdapter
 import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDayExerciseListener
 import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.ChExerciseDialog
+import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.EditChExerciseDialog
 import com.mmfsin.noexcuses.utils.ID_GROUP
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
@@ -80,12 +82,17 @@ class DaysFragment : BaseFragment<FragmentDaysBinding, DaysViewModel>(), IDayExe
     }
 
     override fun onExerciseClick(chExerciseId: String) {
-        /** OPEN VIEW EXERCISE */
         activity?.showFragmentDialog(ChExerciseDialog.newInstance(chExerciseId))
     }
 
-    override fun onExerciseLongClick(exerciseId: String) {
-        /** EDIT EXERCISE */
+    override fun onExerciseLongClick(chExerciseId: String) {
+        activity?.showFragmentDialog(
+            EditChExerciseDialog.newInstance(chExerciseId, this@DaysFragment)
+        )
+    }
+
+    override fun deleteExerciseFromDay(chExerciseId: String) {
+        Toast.makeText(mContext, "borrar ejercicio", Toast.LENGTH_SHORT).show()
     }
 
     private fun error() = activity?.showErrorDialog()

@@ -10,20 +10,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
-import com.mmfsin.noexcuses.databinding.DialogChExerciseAddBinding
+import com.mmfsin.noexcuses.databinding.DialogChExerciseEditBinding
+import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
-import com.mmfsin.noexcuses.presentation.models.IdGroup
+import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDayExerciseListener
 import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.adapter.AddChExerciseAdapter
 import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.interfaces.IAddChExerciseListener
 import com.mmfsin.noexcuses.utils.animateDialog
+import com.mmfsin.noexcuses.utils.formatTime
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExerciseAddBinding>(),
-    IAddChExerciseListener {
+class EditChExerciseDialog(
+    private val chExerciseId: String, private val listener: IDayExerciseListener
+) : BaseDialog<DialogChExerciseEditBinding>(), IAddChExerciseListener {
 
     private val viewModel: ChExerciseDialogViewModel by viewModels()
 
@@ -34,7 +37,7 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
     private var seriesCont = 0
 
     override fun inflateView(inflater: LayoutInflater) =
-        DialogChExerciseAddBinding.inflate(inflater)
+        DialogChExerciseEditBinding.inflate(inflater)
 
     override fun setCustomViewDialog(dialog: Dialog) = centerViewDialog(dialog)
 
@@ -46,7 +49,7 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         observe()
-        idGroup.exerciseId?.let { id -> viewModel.getExercise(id) } ?: run { error() }
+        viewModel.getChExercise(chExerciseId)
     }
 
     override fun setUI() {
@@ -57,7 +60,6 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
                 tvCategory.text = getString(R.string.exercise_dialog_category, it.category)
                 tvName.text = it.name
                 Glide.with(requireContext()).load(it.imageURL).into(image)
-                setUpSeriesRV()
             }
         }
     }
@@ -66,9 +68,12 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
         binding.apply {
             btnAddSerie.setOnClickListener { addSerie() }
 
-            btnAdd.setOnClickListener {
-                btnAdd.isEnabled = false
+            btnDelete.setOnClickListener {
+                listener.deleteExerciseFromDay(chExerciseId)
+                dismiss()
+            }
 
+            btnEdit.setOnClickListener {
                 /** For Series */
                 val mSeries = if (series.isEmpty()) null else series
 
@@ -88,7 +93,7 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
                 val notesStr = notes.ifEmpty { null }
 
                 val data = DataChExercise(dataList = mSeries, time = restTime, notes = notesStr)
-                viewModel.addChExercise(idGroup, data)
+//                viewModel.addChExercise(idGroup, data)
             }
         }
     }
@@ -105,23 +110,28 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
                 is ChExerciseDialogEvent.GetExercise -> {
                     this.exercise = event.exercise
                     setUI()
-                    viewModel.getDay(idGroup.dayId)
                 }
-                is ChExerciseDialogEvent.GetDay -> {
-                    binding.btnAdd.text =
-                        getString(R.string.days_exercise_dialog_add, event.day.title)
-                }
-                is ChExerciseDialogEvent.GetChExercise -> {}
+                is ChExerciseDialogEvent.GetDay -> {}
+                is ChExerciseDialogEvent.GetChExercise -> setData(event.chExercise)
                 is ChExerciseDialogEvent.AddedCompleted -> endFlow()
                 is ChExerciseDialogEvent.SomethingWentWrong -> error()
             }
         }
     }
 
+    private fun setData(chExercise: ChExercise) {
+        binding.apply {
+//            chExercise.data?.let { data -> setUpSeriesRV(data) }
+            chExercise.time?.let { time -> etTime.hint = time.formatTime() }
+            chExercise.notes?.let { notes -> etNotes.setText(notes) }
+            chExercise.exerciseId?.let { id -> viewModel.getExercise(id) } ?: run { error() }
+        }
+    }
+
     private fun setUpSeriesRV() {
         binding.rvSeries.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            mAdapter = AddChExerciseAdapter(series, this@AddChExerciseDialog)
+            mAdapter = AddChExerciseAdapter(series, this@EditChExerciseDialog)
             adapter = mAdapter
         }
     }
@@ -159,8 +169,10 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
     private fun error() = activity?.showErrorDialog()
 
     companion object {
-        fun newInstance(idGroup: IdGroup): AddChExerciseDialog {
-            return AddChExerciseDialog(idGroup)
+        fun newInstance(
+            chExerciseId: String, listener: IDayExerciseListener
+        ): EditChExerciseDialog {
+            return EditChExerciseDialog(chExerciseId, listener)
         }
     }
 }

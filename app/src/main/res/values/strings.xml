@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">noexcuses</string>
 
-    <string name="content_description">contentDescription</string>
+    <string name="content_description">image</string>
     <string name="sww">Vaya, algo ha salido mal</string>
 
     <!-- ERROR -->
@@ -55,6 +55,8 @@
     <string name="days_exercise_dialog_add_notes">¿Quieres añadir alguna nota?</string>
     <string name="days_exercise_dialog_add_notes_hint">Escribe aquí</string>
     <string name="days_exercise_dialog_add">Agregar a %s</string>
+
+    <string name="days_exercise_dialog_edit">Editar</string>
 
     <!-- ROUTINES ADD/EDIT/DELETE DIALOG -->
     <string name="routines_add_top_text">Nueva rutina</string>

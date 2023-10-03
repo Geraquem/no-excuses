@@ -65,8 +65,8 @@ class ChExerciseDialog(private val chExerciseId: String) : BaseDialog<DialogChEx
                     setUI()
                 }
 
-                is ChExerciseDialogEvent.GetChExercise -> setData(event.chExercise)
                 is ChExerciseDialogEvent.GetDay -> {}
+                is ChExerciseDialogEvent.GetChExercise -> setData(event.chExercise)
                 is ChExerciseDialogEvent.AddedCompleted -> {}
                 is ChExerciseDialogEvent.SomethingWentWrong -> error()
             }
@@ -78,10 +78,10 @@ class ChExerciseDialog(private val chExerciseId: String) : BaseDialog<DialogChEx
             chExercise.data?.let { data -> setUpSeriesRV(data) }
             chExercise.time?.let { time -> tvTime.text = time.formatTime() }
                 ?: run { llTime.visibility = View.GONE }
-            chExercise.notes?.let { notes -> tvNotes.text = notes }
-                ?: run { tvNotes.visibility = View.GONE }
-            chExercise.exerciseId?.let { id -> viewModel.getExercise(id) }
-                ?: run { error() }
+            chExercise.notes?.let { notes -> tvNotes.text = notes } ?: run {
+                tvNotes.visibility = View.GONE
+            }
+            chExercise.exerciseId?.let { id -> viewModel.getExercise(id) } ?: run { error() }
         }
     }
 
