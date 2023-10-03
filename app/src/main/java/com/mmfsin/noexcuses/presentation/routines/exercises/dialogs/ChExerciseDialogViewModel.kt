@@ -41,7 +41,7 @@ class ChExerciseDialogViewModel @Inject constructor(
     fun addChExercise(idGroup: IdGroup, dataChExercise: DataChExercise) {
         executeUseCase(
             { addChExerciseUseCase.execute(AddChExerciseUseCase.Params(idGroup, dataChExercise)) },
-            { _event.value = ChExerciseDialogEvent.AddedCompleted },
+            { _event.value = ChExerciseDialogEvent.FlowCompleted },
             { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
         )
     }
@@ -53,7 +53,7 @@ class ChExerciseDialogViewModel @Inject constructor(
                     EditChExerciseUseCase.Params(chExerciseId, dataChExercise)
                 )
             },
-            { _event.value = ChExerciseDialogEvent.AddedCompleted },
+            { _event.value = ChExerciseDialogEvent.FlowCompleted },
             { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
         )
     }

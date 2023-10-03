@@ -8,6 +8,6 @@ sealed class ChExerciseDialogEvent {
     class GetExercise(val exercise: Exercise) : ChExerciseDialogEvent()
     class GetDay(val day: Day) : ChExerciseDialogEvent()
     class GetChExercise(val chExercise: ChExercise) : ChExerciseDialogEvent()
-    object AddedCompleted : ChExerciseDialogEvent()
+    object FlowCompleted : ChExerciseDialogEvent()
     object SomethingWentWrong : ChExerciseDialogEvent()
 }

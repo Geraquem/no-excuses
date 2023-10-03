@@ -112,7 +112,7 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
                         getString(R.string.days_exercise_dialog_add, event.day.title)
                 }
                 is ChExerciseDialogEvent.GetChExercise -> {}
-                is ChExerciseDialogEvent.AddedCompleted -> endFlow()
+                is ChExerciseDialogEvent.FlowCompleted -> endFlow()
                 is ChExerciseDialogEvent.SomethingWentWrong -> error()
             }
         }

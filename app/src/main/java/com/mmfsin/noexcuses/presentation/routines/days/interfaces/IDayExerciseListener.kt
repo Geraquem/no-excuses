@@ -5,4 +5,5 @@ interface IDayExerciseListener {
     fun onExerciseLongClick(chExerciseId: String)
 
     fun deleteExerciseFromDay(chExerciseId: String)
+    fun updateView()
 }

@@ -113,7 +113,7 @@ class EditChExerciseDialog(
                 }
                 is ChExerciseDialogEvent.GetDay -> {}
                 is ChExerciseDialogEvent.GetChExercise -> setData(event.chExercise)
-                is ChExerciseDialogEvent.AddedCompleted -> endFlow()
+                is ChExerciseDialogEvent.FlowCompleted -> endFlow()
                 is ChExerciseDialogEvent.SomethingWentWrong -> error()
             }
         }
@@ -153,6 +153,7 @@ class EditChExerciseDialog(
     }
 
     private fun endFlow() {
+        listener.updateView()
         binding.apply {
             lottie.visibility = View.VISIBLE
             lottie.addAnimatorListener(object : Animator.AnimatorListener {
