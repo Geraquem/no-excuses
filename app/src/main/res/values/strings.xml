@@ -45,8 +45,8 @@
     <string name="days_exercise_dialog_serie">Serie %s</string>
     <string name="days_exercise_dialog_kg">Kg</string>
     <string name="days_exercises_reps">Reps</string>
-    <string name="days_exercise_dialog_weight_hint">00.00</string>
     <string name="days_exercise_dialog_reps_hint">00</string>
+    <string name="days_exercise_dialog_weight_hint">00.00</string>
     <string name="days_exercise_dialog_time_text">Descanso</string>
     <string name="days_exercise_dialog_time_minutes">minuto(s) / serie</string>
     <string name="days_exercise_dialog_time_minutes_sybol">\' \'</string>

@@ -11,6 +11,7 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemDataAddBinding
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.interfaces.IAddChExerciseListener
+import com.mmfsin.noexcuses.utils.deletePointZero
 
 class EditChExerciseAdapter(
     private val data: MutableList<Data>,
@@ -24,19 +25,17 @@ class EditChExerciseAdapter(
         private var listener: IAddChExerciseListener? = null
         fun bind(data: Data, position: Int, addListener: IAddChExerciseListener) {
             binding.apply {
+                pos = position
+                listener = addListener
+
                 tvSerie.text = c.getString(R.string.days_exercise_dialog_serie, position.toString())
-
-                val reps = data.reps
-                reps?.let { etRep.setText(it.toString()) }
-
-                val weight = data.weight
-                weight?.let { etWeight.setText(it.toString()) }
+                data.reps?.let { etRep.setText(it.toString()) }
+                data.weight?.let { etWeight.setText(it.deletePointZero()) }
 
                 etRep.addTextChangedListener(repsTextWatcher)
                 etWeight.addTextChangedListener(weightTextWatcher)
 
-                pos = position
-                listener = addListener
+                ivDelete.setOnClickListener { listener?.deleteSerie(pos.toString()) }
             }
         }
 

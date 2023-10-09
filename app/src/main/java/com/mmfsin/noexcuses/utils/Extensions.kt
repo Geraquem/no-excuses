@@ -14,6 +14,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.mmfsin.noexcuses.base.dialog.ErrorDialog
 
+//fun FragmentActivity.shouldShowInterstitial(position: Int) =
+//    (this as MainActivity).showInterstitial(position)
+
 fun FragmentActivity.showErrorDialog(goBack: Boolean = true) {
     val dialog = ErrorDialog(goBack)
     this.let { dialog.show(it.supportFragmentManager, "") }
@@ -74,8 +77,12 @@ fun countDown(millis: Long, action: () -> Unit) {
 fun Double?.formatTime(): String? {
     return this?.let { d ->
         String.format("%.2f", d).replace(",", ":").replace(":00", "")
-    }
-        ?: run { null }
+    } ?: run { null }
 }
-//fun FragmentActivity.shouldShowInterstitial(position: Int) =
-//    (this as MainActivity).showInterstitial(position)
+
+fun Double?.deletePointZero(): String {
+    val formatted = this.toString()
+    return if (formatted.endsWith(".0")) {
+        formatted.replace(".0", "")
+    } else formatted
+}

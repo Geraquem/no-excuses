@@ -3,6 +3,8 @@ package com.mmfsin.noexcuses.presentation.routines.exercises.dialogs
 import android.animation.Animator
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -19,6 +21,8 @@ import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDayExerciseLi
 import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.adapter.EditChExerciseAdapter
 import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.interfaces.IAddChExerciseListener
 import com.mmfsin.noexcuses.utils.animateDialog
+import com.mmfsin.noexcuses.utils.deletePointZero
+import com.mmfsin.noexcuses.utils.formatTime
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -125,17 +129,26 @@ class EditChExerciseDialog(
                 seriesCont = series.size
                 setUpSeriesRV()
             }
-            chExercise.time?.let { time -> etTime.setText(time.toString()) }
+            chExercise.time?.let { time -> etTime.setText(time.deletePointZero()) }
             chExercise.notes?.let { notes -> etNotes.setText(notes) }
             chExercise.exerciseId?.let { id -> viewModel.getExercise(id) } ?: run { error() }
         }
     }
 
     private fun setUpSeriesRV() {
+        setUpSeriesData()
         binding.rvSeries.apply {
             layoutManager = LinearLayoutManager(requireContext())
             mAdapter = EditChExerciseAdapter(series, this@EditChExerciseDialog)
             adapter = mAdapter
+        }
+    }
+
+    private fun setUpSeriesData() {
+        if (series.isNotEmpty()) {
+            for (i in 0 until series.size) {
+                series[i].id = (i + 1).toString()
+            }
         }
     }
 
@@ -152,7 +165,15 @@ class EditChExerciseDialog(
     }
 
     override fun deleteSerie(id: String) {
-        TODO("Not yet implemented")
+        val iterator = series.iterator()
+        while (iterator.hasNext()) {
+            val item = iterator.next()
+            if (item.id == id) {
+                seriesCont--
+                iterator.remove()
+            }
+        }
+        setUpSeriesRV()
     }
 
     private fun endFlow() {

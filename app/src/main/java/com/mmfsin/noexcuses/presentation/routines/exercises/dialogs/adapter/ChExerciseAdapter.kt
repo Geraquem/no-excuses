@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemDataBinding
 import com.mmfsin.noexcuses.domain.models.Data
+import com.mmfsin.noexcuses.utils.deletePointZero
 
 class ChExerciseAdapter(private val data: List<Data>) :
     RecyclerView.Adapter<ChExerciseAdapter.ViewHolder>() {
@@ -17,8 +18,8 @@ class ChExerciseAdapter(private val data: List<Data>) :
         fun bind(data: Data, position: Int) {
             binding.apply {
                 tvSerie.text = c.getString(R.string.days_exercise_dialog_serie, position.toString())
-                tvRep.text = data.reps.toString()
-                tvWeight.text = data.weight.toString()
+                data.reps?.let { tvRep.text = data.reps.toString() }
+                data.weight?.let { tvWeight.text = data.weight.deletePointZero() }
                 ivDelete.visibility = View.GONE
             }
         }
