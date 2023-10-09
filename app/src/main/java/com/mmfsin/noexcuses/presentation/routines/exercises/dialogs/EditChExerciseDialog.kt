@@ -19,7 +19,6 @@ import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDayExerciseLi
 import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.adapter.EditChExerciseAdapter
 import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.interfaces.IAddChExerciseListener
 import com.mmfsin.noexcuses.utils.animateDialog
-import com.mmfsin.noexcuses.utils.formatTime
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -126,7 +125,7 @@ class EditChExerciseDialog(
                 seriesCont = series.size
                 setUpSeriesRV()
             }
-            chExercise.time?.let { time -> etTime.hint = time.formatTime() }
+            chExercise.time?.let { time -> etTime.setText(time.toString()) }
             chExercise.notes?.let { notes -> etNotes.setText(notes) }
             chExercise.exerciseId?.let { id -> viewModel.getExercise(id) } ?: run { error() }
         }
@@ -150,6 +149,10 @@ class EditChExerciseDialog(
         for (s in series) {
             if (s.id == id) s.weight = weight
         }
+    }
+
+    override fun deleteSerie(id: String) {
+        TODO("Not yet implemented")
     }
 
     private fun endFlow() {

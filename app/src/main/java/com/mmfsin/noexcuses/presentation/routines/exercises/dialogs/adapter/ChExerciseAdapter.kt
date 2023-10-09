@@ -19,6 +19,7 @@ class ChExerciseAdapter(private val data: List<Data>) :
                 tvSerie.text = c.getString(R.string.days_exercise_dialog_serie, position.toString())
                 tvRep.text = data.reps.toString()
                 tvWeight.text = data.weight.toString()
+                ivDelete.visibility = View.GONE
             }
         }
     }

@@ -45,6 +45,7 @@ class ChExerciseDialog(private val chExerciseId: String) : BaseDialog<DialogChEx
     override fun setUI() {
         isCancelable = true
         binding.apply {
+            rvHeader.ivDelete.visibility = View.GONE
             exercise?.let {
                 tvCategory.text = getString(R.string.exercise_dialog_category, it.category)
                 tvName.text = it.name

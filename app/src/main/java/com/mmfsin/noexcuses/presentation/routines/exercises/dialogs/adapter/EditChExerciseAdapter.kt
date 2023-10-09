@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
-import com.mmfsin.noexcuses.databinding.ItemAddDataBinding
+import com.mmfsin.noexcuses.databinding.ItemDataAddBinding
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.presentation.routines.exercises.dialogs.interfaces.IAddChExerciseListener
 
@@ -18,7 +18,7 @@ class EditChExerciseAdapter(
 ) : RecyclerView.Adapter<EditChExerciseAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemAddDataBinding.bind(view)
+        private val binding = ItemDataAddBinding.bind(view)
         private val c = binding.root.context
         private var pos = 0
         private var listener: IAddChExerciseListener? = null
@@ -69,7 +69,7 @@ class EditChExerciseAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_add_data, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_data_add, parent, false)
         )
     }
 

@@ -89,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:itemCount="3"
-                tools:listitem="@layout/item_add_data" />
+                tools:listitem="@layout/item_data_add" />
 
             <LinearLayout
                 android:id="@+id/btn_add_serie"

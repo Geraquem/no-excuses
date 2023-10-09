@@ -119,10 +119,19 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
     }
 
     private fun setUpSeriesRV() {
+        setUpSeriesData()
         binding.rvSeries.apply {
             layoutManager = LinearLayoutManager(requireContext())
             mAdapter = AddChExerciseAdapter(series, this@AddChExerciseDialog)
             adapter = mAdapter
+        }
+    }
+
+    private fun setUpSeriesData() {
+        if (series.isNotEmpty()) {
+            for (i in 0 until series.size) {
+                series[i].id = (i + 1).toString()
+            }
         }
     }
 
@@ -136,6 +145,18 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
         for (s in series) {
             if (s.id == id) s.weight = weight
         }
+    }
+
+    override fun deleteSerie(id: String) {
+        val iterator = series.iterator()
+        while (iterator.hasNext()) {
+            val item = iterator.next()
+            if (item.id == id) {
+                seriesCont--
+                iterator.remove()
+            }
+        }
+        setUpSeriesRV()
     }
 
     private fun endFlow() {
