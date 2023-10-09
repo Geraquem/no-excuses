@@ -63,6 +63,7 @@
                 android:id="@+id/ll_reps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -82,7 +83,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="16dp"
                     android:text="@string/days_exercises_series"
                     android:textAllCaps="true" />
 
@@ -94,6 +94,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MediumTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="2dp"
+                    android:text="@string/days_exercise_dialog_time_rest"
+                    android:textAllCaps="true" />
 
                 <TextView
                     android:id="@+id/tv_wait"
@@ -111,11 +120,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/days_exercise_dialog_time_minutes_sybol"
+                    android:text="@string/days_exercise_dialog_time_minutes_symbol"
                     android:textAllCaps="true"
                     android:textStyle="bold" />
 
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_has_notes"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
+                android:contentDescription="@string/content_description"
+                android:src="@drawable/ic_notes" />
 
         </LinearLayout>
 

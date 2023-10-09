@@ -7,4 +7,5 @@ open class CompactExercise(
     var imageURL: String,
     var series: Int?,
     var time: String?,
+    var hasNotes: Boolean,
 )

@@ -49,7 +49,8 @@
     <string name="days_exercise_dialog_weight_hint">00.00</string>
     <string name="days_exercise_dialog_time_text">Descanso</string>
     <string name="days_exercise_dialog_time_minutes">minuto(s) / serie</string>
-    <string name="days_exercise_dialog_time_minutes_sybol">\' \'</string>
+    <string name="days_exercise_dialog_time_rest">Desc.</string>
+    <string name="days_exercise_dialog_time_minutes_symbol">\'\'</string>
     <string name="days_exercise_dialog_time_hint">0:00</string>
     <string name="days_exercise_dialog_add_serie">Añadir serie</string>
     <string name="days_exercise_dialog_add_notes">¿Quieres añadir alguna nota?</string>

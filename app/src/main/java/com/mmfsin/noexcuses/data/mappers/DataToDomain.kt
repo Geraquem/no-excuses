@@ -30,8 +30,13 @@ fun ChExerciseDTO.toChExercise() =
 
 fun List<ChExerciseDTO>.toChExerciseList() = this.map { it.toChExercise() }
 
-fun ChExerciseDTO.toCompactExercise(e: Exercise) =
-    CompactExercise(id, e.name, e.category, e.imageURL, data?.size, time.formatTime())
+fun ChExerciseDTO.toCompactExercise(e: Exercise) = CompactExercise(
+    id, e.name, e.category, e.imageURL, data?.size, time.formatTime(), hasNotes(this.notes)
+)
+
+private fun hasNotes(notes: String?): Boolean {
+    return !notes.isNullOrEmpty()
+}
 
 /** Data */
 fun DataDTO.toData() = Data(id, exerciseDayId, reps, weight)
