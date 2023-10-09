@@ -19,7 +19,7 @@ class EditChExerciseUseCase @Inject constructor(private val repository: IExercis
             }
 
             val editedChExercise = editChExercise(chE, params.dataChExercise)
-            repository.addChExercise(editedChExercise)
+            repository.editChExercise(editedChExercise)
         }
     }
 

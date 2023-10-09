@@ -61,6 +61,9 @@ class ExercisesRepository @Inject constructor(
         realmDatabase.addObject { chExercise.toChExerciseDTO() }
     }
 
+    override fun editChExercise(chExercise: ChExercise) {
+        realmDatabase.addObject { chExercise.toChExerciseDTO() }
+    }
 
     private fun getDayDTO(id: String): DayDTO? {
         val days = realmDatabase.getObjectsFromRealm { where<DayDTO>().equalTo(ID, id).findAll() }
