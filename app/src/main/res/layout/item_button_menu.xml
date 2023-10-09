@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipChildren="false"
+    android:layout_marginBottom="8dp"
+    android:layout_marginHorizontal="4dp"
     android:clipToPadding="false">
 
     <LinearLayout
@@ -13,7 +15,8 @@
         android:background="@drawable/bg_muscular_group"
         android:elevation="4dp"
         android:orientation="vertical"
-        android:padding="24dp"
+        android:paddingVertical="24dp"
+        android:paddingHorizontal="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -22,6 +25,7 @@
             android:layout_width="@dimen/size_image_muscular"
             android:layout_height="@dimen/size_image_muscular"
             android:layout_gravity="center"
+            tools:src="@drawable/iv_notes"
             android:contentDescription="@string/content_description"
             android:gravity="center" />
 
@@ -40,7 +44,7 @@
             android:layout_marginBottom="8dp"
             android:gravity="center"
             android:textAllCaps="true"
-            tools:text="PECHO" />
+            tools:text="Mis rutinas" />
 
         <TextView
             android:id="@+id/tv_description"
@@ -50,7 +54,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textAllCaps="true"
-            tools:text="PECHO" />
+            tools:text="Bla bla bla bla" />
 
     </LinearLayout>
 

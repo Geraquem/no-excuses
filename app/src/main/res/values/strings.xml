@@ -10,11 +10,15 @@
     <string name="error_btn">Aceptar</string>
 
     <!-- MAIN -->
-    <string name="menu_routines">Rutinas</string>
+    <string name="menu_routines">Mis rutinas</string>
+    <string name="menu_routines_desc">Crea tus rutinas de entrenamiento</string>
     <string name="menu_exercises">Ejercicios</string>
+    <string name="menu_exercises_desc">Todos los ejercicios de la aplicación</string>
     <string name="menu_weights">Mis pesos</string>
     <string name="menu_notes">Notas</string>
+    <string name="menu_notes_desc">¡Que no se olviden las cosas!</string>
     <string name="menu_chronometer">Cronómetro</string>
+    <string name="menu_chronometer_desc">Para llevar el tiempo de entrenamiento</string>
     <string name="menu_laziness">Pereza</string>
 
     <!-- CHRONOMETER -->

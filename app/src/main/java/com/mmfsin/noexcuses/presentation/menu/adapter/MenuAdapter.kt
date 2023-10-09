@@ -18,8 +18,9 @@ class MenuAdapter(
         private val binding = ItemButtonMenuBinding.bind(view)
         fun bind(item: MenuItem) {
             binding.apply {
-                tvName.text = item.name
                 image.setImageResource(item.image)
+                tvName.text = item.title
+                tvDescription.text = item.description
             }
         }
     }

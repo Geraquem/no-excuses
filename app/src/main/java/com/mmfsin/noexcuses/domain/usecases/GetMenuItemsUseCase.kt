@@ -13,9 +13,34 @@ class GetMenuItemsUseCase @Inject constructor(@ApplicationContext val context: C
 
     override suspend fun execute(): List<MenuItem> {
         val items = listOf(
-            MenuItem(1, gs(R.string.menu_routines), R.drawable.iv_routines, ROUTINES),
-            MenuItem(2, gs(R.string.menu_exercises), R.drawable.iv_exercises, EXERCISES),
-            MenuItem(3, gs(R.string.menu_chronometer), R.drawable.iv_exercises, CHRONOMETER)
+            MenuItem(
+                1,
+                R.drawable.iv_routines,
+                gs(R.string.menu_routines),
+                gs(R.string.menu_routines_desc),
+                ROUTINES
+            ),
+            MenuItem(
+                2,
+                R.drawable.iv_exercises,
+                gs(R.string.menu_exercises),
+                gs(R.string.menu_exercises_desc),
+                EXERCISES
+            ),
+            MenuItem(
+                3,
+                R.drawable.iv_exercises,
+                gs(R.string.menu_chronometer),
+                gs(R.string.menu_chronometer_desc),
+                CHRONOMETER
+            ),
+            MenuItem(
+                4,
+                R.drawable.iv_notes,
+                gs(R.string.menu_notes),
+                gs(R.string.menu_notes_desc),
+                NOTES
+            )
         )
         return items.sortedBy { it.order }
     }
