@@ -177,8 +177,8 @@
                 android:autofillHints="@null"
                 android:background="@drawable/bg_small_edit_text"
                 android:hint="@string/days_exercise_dialog_add_notes_hint"
-                android:inputType="text"
-                android:maxLength="150"
+                android:inputType="textMultiLine|textCapWords"
+                android:maxLength="500"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="8dp"
                 android:textColorHint="@color/soft_black" />

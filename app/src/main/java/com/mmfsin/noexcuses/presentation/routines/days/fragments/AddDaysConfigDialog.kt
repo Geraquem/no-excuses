@@ -9,7 +9,6 @@ import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogDayAddBinding
 import com.mmfsin.noexcuses.presentation.routines.days.interfaces.IDaysDialogListener
 import com.mmfsin.noexcuses.utils.animateDialog
-import com.mmfsin.noexcuses.utils.closeKeyboardFromDialog
 import com.mmfsin.noexcuses.utils.countDown
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,7 +44,6 @@ class AddDaysConfigDialog(
             btnAccept.setOnClickListener {
                 val title = etTitle.text.toString()
                 if (title.isNotEmpty() && title.isNotBlank()) {
-                    requireContext().closeKeyboardFromDialog()
                     countDown { viewModel.addDay(routineId, title) }
                 } else tvError.visibility = View.VISIBLE
             }

@@ -20,5 +20,8 @@
     <color name="soft_red">#66F27474</color>
     <color name="soft_blue">#83B9E9FF</color>
 
+    <color name="light_red">#FBA3A3</color>
+    <color name="light_blue">#91B3E4</color>
+
     <color name="add_button">#44F3E2</color>
 </resources>

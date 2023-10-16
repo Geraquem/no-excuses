@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:background="@drawable/bg_white_box"
     android:paddingBottom="32dp">
 
@@ -59,7 +61,7 @@
             android:layout_marginBottom="24dp"
             android:autofillHints="no"
             android:background="@drawable/bg_big_edit_text"
-            android:inputType="textPersonName"
+            android:inputType="textPersonName|textCapWords"
             android:lines="1"
             android:maxLength="30"
             android:maxLines="1"

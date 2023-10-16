@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_white_box"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:paddingBottom="32dp">
 
     <androidx.constraintlayout.widget.Guideline
@@ -39,6 +41,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right"
@@ -59,7 +63,7 @@
             android:autofillHints="no"
             android:background="@drawable/bg_big_edit_text"
             android:hint="@string/days_add_title_hint"
-            android:inputType="textPersonName"
+            android:inputType="textPersonName|textCapWords"
             android:lines="1"
             android:maxLength="30"
             android:maxLines="1"
