@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity() {
     var routineOpened: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Thread.sleep(500)
+        setTheme(R.style.Theme_Noexcuses)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
