@@ -13,7 +13,6 @@ import com.mmfsin.noexcuses.databinding.FragmentNoteDetailBinding
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.utils.ID_NOTE
 import com.mmfsin.noexcuses.utils.NO_ID_NOTE
-import com.mmfsin.noexcuses.utils.checkNotNulls
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,17 +36,15 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        noteId?.let { id -> viewModel.getNoteById(id) }
+        noteId?.let { id -> if (id != NO_ID_NOTE) viewModel.getNoteById(id) }
     }
 
     override fun setUI() {
         binding.apply {
             (activity as MainActivity).setUpToolbar(title = getString(R.string.notes_toolbar))
-            checkNotNulls(noteId, note) { id, note ->
-                if (id != NO_ID_NOTE) {
-                    etTitle.setText(note.title)
-                    etDescription.setText(note.description)
-                }
+            note?.let {
+                etTitle.setText(it.title)
+                etDescription.setText(it.description)
             }
         }
     }
@@ -61,9 +58,21 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
                     note = event.note
                     setUI()
                 }
+                is NoteDetailEvent.NoteCreated -> {}
                 is NoteDetailEvent.SomethingWentWrong -> error()
             }
         }
+    }
+
+    override fun onStop() {
+        binding.apply {
+            viewModel.addNote(
+                etTitle.text.toString(),
+                etDescription.text.toString(),
+                System.currentTimeMillis().toString()
+            )
+        }
+        super.onStop()
     }
 
     private fun error() = activity?.showErrorDialog()

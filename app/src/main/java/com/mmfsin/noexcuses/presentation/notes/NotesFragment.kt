@@ -14,12 +14,13 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentNotesBinding
 import com.mmfsin.noexcuses.domain.models.Note
-import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.notes.NotesFragmentDirections.Companion.actionNotesToNoteDetail
 import com.mmfsin.noexcuses.presentation.notes.adapter.NotesAdapter
+import com.mmfsin.noexcuses.presentation.notes.dialogs.DeleteNoteDialog
 import com.mmfsin.noexcuses.presentation.notes.interfaces.INotesListener
 import com.mmfsin.noexcuses.utils.NO_ID_NOTE
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,8 +29,6 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
     override val viewModel: NotesViewModel by viewModels()
 
     private lateinit var mContext: Context
-
-    private var routines = emptyList<Routine>()
 
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
@@ -48,9 +47,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
 
     override fun setListeners() {
         binding.apply {
-            btnAddNote.setOnClickListener {
-                findNavController().navigate(actionNotesToNoteDetail(NO_ID_NOTE))
-            }
+            btnAddNote.setOnClickListener { navigateToDetail(NO_ID_NOTE) }
         }
     }
 
@@ -69,17 +66,22 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
                 layoutManager = LinearLayoutManager(mContext)
                 adapter = NotesAdapter(notes, this@NotesFragment)
             }
-            rvNotes.isVisible = routines.isNotEmpty()
-            tvEmpty.isVisible = routines.isEmpty()
+            rvNotes.isVisible = notes.isNotEmpty()
+            tvEmpty.isVisible = notes.isEmpty()
         }
     }
 
-    override fun onNoteClick(id: String) {
-        TODO("Not yet implemented")
-    }
+    override fun onNoteClick(id: String) = navigateToDetail(id)
 
     override fun onNoteLongClick(id: String) {
-        TODO("Not yet implemented")
+        activity?.showFragmentDialog(DeleteNoteDialog.newInstance(id, this@NotesFragment))
+    }
+
+    private fun navigateToDetail(id: String) =
+        findNavController().navigate(actionNotesToNoteDetail(id))
+
+    override fun deletedComplete() {
+        viewModel.getNotes()
     }
 
     private fun error() = activity?.showErrorDialog()

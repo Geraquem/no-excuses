@@ -1,8 +1,14 @@
 package com.mmfsin.noexcuses.data.repository
 
+import com.mmfsin.noexcuses.data.mappers.toNote
+import com.mmfsin.noexcuses.data.mappers.toNoteList
+import com.mmfsin.noexcuses.data.models.NoteDTO
 import com.mmfsin.noexcuses.domain.interfaces.INotesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Note
+import com.mmfsin.noexcuses.utils.ID
+import io.realm.kotlin.where
+import java.util.*
 import javax.inject.Inject
 
 class NotesRepository @Inject constructor(
@@ -10,10 +16,30 @@ class NotesRepository @Inject constructor(
 ) : INotesRepository {
 
     override fun getNotes(): List<Note> {
-        return emptyList()
+        val notes = realmDatabase.getObjectsFromRealm { where<NoteDTO>().findAll() }
+        return if (notes.isNotEmpty()) notes.toNoteList() else emptyList()
     }
 
-    override fun getNoteById(id: String): Note {
-        return Note("", "", "", "")
+    override fun getNoteById(id: String): Note? {
+        val note = getNoteDTO(id)
+        return note?.toNote() ?: run { null }
+    }
+
+    override fun addNote(title: String, description: String, date: String) {
+        val id = UUID.randomUUID().toString()
+        val note = NoteDTO(id, title, description, date)
+        realmDatabase.addObject { note }
+    }
+
+    override fun deleteNote(id: String) {
+        val note = getNoteDTO(id)
+        note?.let { realmDatabase.deleteObject({ note }, note.id) }
+    }
+
+    private fun getNoteDTO(id: String): NoteDTO? {
+        val notes = realmDatabase.getObjectsFromRealm {
+            where<NoteDTO>().equalTo(ID, id).findAll()
+        }
+        return if (notes.isNotEmpty()) notes.first() else null
     }
 }

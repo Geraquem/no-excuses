@@ -41,3 +41,12 @@ private fun hasNotes(notes: String?): Boolean {
 /** Data */
 fun DataDTO.toData() = Data(id, exerciseDayId, reps, weight)
 fun List<DataDTO>.toDataList() = this.map { it.toData() }
+
+/** Notes */
+fun NoteDTO.toNote() = Note(id, title, description, formatDate(date))
+
+private fun formatDate(date: String): String {
+    return "jeje"
+}
+
+fun List<NoteDTO>.toNoteList() = this.map { it.toNote() }
