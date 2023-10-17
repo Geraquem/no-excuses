@@ -39,19 +39,34 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="2" />
 
-    <TextView
-        android:id="@+id/tv_empty"
-        style="@style/MediumTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_empty"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
         android:layout_marginTop="48dp"
-        android:gravity="center"
-        android:text="@string/days_exercises_empty"
-        android:textSize="18sp"
+        android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            style="@style/MediumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/days_exercises_empty"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:alpha="0.75"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/iv_exercises" />
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add_exercise"

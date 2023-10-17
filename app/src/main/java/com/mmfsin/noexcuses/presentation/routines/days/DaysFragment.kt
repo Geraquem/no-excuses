@@ -77,7 +77,7 @@ class DaysFragment : BaseFragment<FragmentDaysBinding, DaysViewModel>(), IDayExe
                 adapter = DayExercisesAdapter(exercises, this@DaysFragment)
             }
             rvExercises.isVisible = exercises.isNotEmpty()
-            tvEmpty.isVisible = exercises.isEmpty()
+            llEmpty.isVisible = exercises.isEmpty()
         }
     }
 
