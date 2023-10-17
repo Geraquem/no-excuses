@@ -44,10 +44,7 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        activity?.showFragmentDialog(InitInfoDialog.newInstance())
-
-        viewModel.getRoutines()
+        viewModel.getFirstTime()
     }
 
     override fun onResume() {
@@ -58,7 +55,10 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
 
     override fun setUI() {
         binding.apply {
-            (activity as MainActivity).setUpToolbar(title = getString(R.string.routines_toolbar), info = true)
+            (activity as MainActivity).setUpToolbar(
+                title = getString(R.string.routines_toolbar),
+                info = true
+            )
         }
     }
 
@@ -73,6 +73,7 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
+                is RoutinesEvent.IsFistTime -> firstTimeFlow(event.firstTime)
                 is RoutinesEvent.GetRoutines -> {
                     routines = event.routines
                     setUpRoutines(routines)
@@ -80,6 +81,11 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
                 is RoutinesEvent.SomethingWentWrong -> error()
             }
         }
+    }
+
+    private fun firstTimeFlow(firstTime: Boolean) {
+        if (firstTime) activity?.showFragmentDialog(InitInfoDialog.newInstance())
+        viewModel.getRoutines()
     }
 
     private fun setUpRoutines(routines: List<Routine>) {
