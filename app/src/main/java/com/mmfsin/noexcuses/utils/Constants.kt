@@ -15,6 +15,8 @@ const val DATA_ID = "exerciseDayId"
 const val MGROUP_ID = "mGroupId"
 const val ROUTINE_ID = "routineId"
 const val ID_GROUP = "idGroup"
+const val ID_NOTE = "idNote"
+const val NO_ID_NOTE = "noIdNote"
 
 //SHARED PREFS
 const val MY_SHARED_PREFS = "mSharedPrefs"

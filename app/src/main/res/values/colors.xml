@@ -12,6 +12,7 @@
     <color name="grey">#ECECEC</color>
     <color name="green">#99E49A</color>
     <color name="red">#AA0000</color>
+    <color name="yellow">#F0F817</color>
     <color name="background">#EDEDED</color>
 
     <color name="soft_black">#757575</color>
@@ -19,9 +20,11 @@
     <color name="soft_green">#4FB7FF9C</color>
     <color name="soft_red">#66F27474</color>
     <color name="soft_blue">#83B9E9FF</color>
+    <color name="soft_yellow">#66F0F817</color>
 
     <color name="light_red">#FBA3A3</color>
     <color name="light_blue">#91B3E4</color>
+    <color name="light_yellow">#C9CC92</color>
 
     <color name="add_button">#44F3E2</color>
 </resources>

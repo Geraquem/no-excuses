@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/exercises_nav_graph"
+    app:startDestination="@id/mGroupsFragment">
+
+    <fragment
+        android:id="@+id/mGroupsFragment"
+        android:name="com.mmfsin.noexcuses.presentation.exercises.mgroups.MGroupsFragment"
+        android:label="mGroupsFragment"
+        tools:layout="@layout/fragment_muscular_groups">
+        <action
+            android:id="@+id/action_muscularGroups_to_exercises"
+            app:destination="@id/exercisesFragment">
+            <argument
+                android:name="mGroupId"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/exercisesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.exercises.exercises.ExercisesFragment"
+        android:label="exercisesFragment"
+        tools:layout="@layout/fragment_exercises" />
+
+</navigation>
