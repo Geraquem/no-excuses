@@ -21,6 +21,7 @@ import com.mmfsin.noexcuses.presentation.routines.routines.adapter.RoutinesAdapt
 import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.AddRoutineDialog
 import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.DeleteRoutineDialog
 import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.EditRoutineDialog
+import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.InitInfoDialog
 import com.mmfsin.noexcuses.presentation.routines.routines.interfaces.IRoutineDialogListener
 import com.mmfsin.noexcuses.presentation.routines.routines.interfaces.IRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -43,6 +44,9 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activity?.showFragmentDialog(InitInfoDialog.newInstance())
+
         viewModel.getRoutines()
     }
 
@@ -54,7 +58,7 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
 
     override fun setUI() {
         binding.apply {
-            (activity as MainActivity).setUpToolbar(title = getString(R.string.routines_toolbar))
+            (activity as MainActivity).setUpToolbar(title = getString(R.string.routines_toolbar), info = true)
         }
     }
 

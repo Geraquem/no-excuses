@@ -30,6 +30,16 @@
     <!-- EXERCISE DIALOG -->
     <string name="exercise_dialog_category">Ejercicio de %s</string>
 
+    <!-- FIRST DIALOG -->
+    <string name="first_dialog_explanation_info">Información</string>
+    <string name="first_dialog_explanation_one">Una <b>rutina</b> está compuesta por una serie de días.</string>
+    <string name="first_dialog_explanation_two">Por lo general, para que el músculo progrese adecuadamente y no se adapte al entrenamiento, las rutinas deberían durar de <b>4 a 6 semanas</b></string>
+    <string name="first_dialog_explanation_three">Los <b>días</b> contienen los ejercicios que conforman tu entrenamiento</string>
+    <string name="first_dialog_edit"><b>Mantén pulsado</b> sobre un elemento para <b>editarlo</b></string>
+    <string name="first_dialog_routine_days">4</string>
+    <string name="first_dialog_routine_title">Mes de mayo</string>
+    <string name="first_dialog_routine_description">Enfocada en pierna</string>
+
     <!-- ROUTINES -->
     <string name="routines_toolbar">Mis rutinas</string>
     <string name="routines_days">Días</string>

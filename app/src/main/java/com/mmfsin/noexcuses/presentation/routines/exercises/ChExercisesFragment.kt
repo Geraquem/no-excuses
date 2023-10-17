@@ -44,7 +44,7 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
     }
 
     override fun setUI() {
-        (activity as MainActivity).setUpToolbar(title = group?.muscularGroup)
+        (activity as MainActivity).setUpToolbar(title = group?.muscularGroup, info = true)
     }
 
     override fun setListeners() {}

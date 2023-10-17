@@ -54,9 +54,7 @@ class ChExerciseDialog(private val chExerciseId: String) : BaseDialog<DialogChEx
         }
     }
 
-    override fun setListeners() {
-        binding.apply { }
-    }
+    override fun setListeners() {}
 
     private fun observe() {
         viewModel.event.observe(this) { event ->

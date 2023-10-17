@@ -45,7 +45,7 @@ class ChMGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, ChMGroupsV
     }
 
     override fun setUI() {
-        (activity as MainActivity).setUpToolbar(title = getString(R.string.mgroups_toolbar))
+        (activity as MainActivity).setUpToolbar(title = getString(R.string.mgroups_toolbar), info = true)
     }
 
     override fun setListeners() {}

@@ -61,7 +61,7 @@ class DaysFragment : BaseFragment<FragmentDaysBinding, DaysViewModel>(), IDayExe
             when (event) {
                 is DaysEvent.GetDays -> {}
                 is DaysEvent.GetDay -> {
-                    (activity as MainActivity).setUpToolbar(title = event.day.title)
+                    (activity as MainActivity).setUpToolbar(title = event.day.title, info = true)
                     viewModel.getDayExercises(event.day.id)
                 }
                 is DaysEvent.GetDayExercises -> setUpDays(event.exercises)
