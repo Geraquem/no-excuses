@@ -22,20 +22,27 @@ class GetMenuItemsUseCase @Inject constructor(@ApplicationContext val context: C
             ),
             MenuItem(
                 2,
+                R.drawable.iv_routines,
+                gs(R.string.menu_my_routines),
+                gs(R.string.menu_my_routines_desc),
+                MY_ROUTINES
+            ),
+            MenuItem(
+                3,
                 R.drawable.iv_exercises,
                 gs(R.string.menu_exercises),
                 gs(R.string.menu_exercises_desc),
                 EXERCISES
             ),
             MenuItem(
-                3,
+                4,
                 R.drawable.iv_exercises,
                 gs(R.string.menu_chronometer),
                 gs(R.string.menu_chronometer_desc),
                 CHRONOMETER
             ),
             MenuItem(
-                4,
+                5,
                 R.drawable.iv_notes,
                 gs(R.string.menu_notes),
                 gs(R.string.menu_notes_desc),

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_routines_nav_graph"
+    app:startDestination="@id/myRoutinesFragment">
+
+    <fragment
+        android:id="@+id/myRoutinesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.myroutines.routines.MyRoutinesFragment"
+        android:label="routinesFragment"
+        tools:layout="@layout/fragment_my_routines">
+        <action
+            android:id="@+id/action_routines_to_days"
+            app:destination="@id/daysFragment">
+            <argument
+                android:name="idGroup"
+                app:argType="com.mmfsin.noexcuses.presentation.models.IdGroup" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/daysFragment"
+        android:name="com.mmfsin.noexcuses.presentation.myroutines.days.DaysFragment"
+        android:label="daysFragment"
+        tools:layout="@layout/fragment_days">
+        <action
+            android:id="@+id/action_mGroups_to_exercises"
+            app:destination="@id/chMGroupsFragment">
+            <argument
+                android:name="idGroup"
+                app:argType="com.mmfsin.noexcuses.presentation.models.IdGroup" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/chMGroupsFragment"
+        android:name="com.mmfsin.noexcuses.presentation.myroutines.mgroups.ChMGroupsFragment"
+        android:label="chMGroupsFragment"
+        tools:layout="@layout/fragment_muscular_groups">
+        <action
+            android:id="@+id/action_mGroups_to_exercises"
+            app:destination="@id/chExercisesFragment">
+            <argument
+                android:name="idGroup"
+                app:argType="com.mmfsin.noexcuses.presentation.models.IdGroup" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/chExercisesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.myroutines.exercises.ChExercisesFragment"
+        android:label="chExercisesFragment"
+        tools:layout="@layout/fragment_exercises" />
+
+</navigation>

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.mmfsin.noexcuses.databinding.ActivityMainBinding
-import com.mmfsin.noexcuses.presentation.routines.routines.dialogs.InitInfoDialog
+import com.mmfsin.noexcuses.presentation.myroutines.routines.dialogs.InitInfoDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 import io.realm.Realm

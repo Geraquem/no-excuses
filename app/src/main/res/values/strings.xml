@@ -10,8 +10,10 @@
     <string name="error_btn">Aceptar</string>
 
     <!-- MAIN -->
-    <string name="menu_routines">Mis rutinas</string>
-    <string name="menu_routines_desc">Crea tus rutinas de entrenamiento</string>
+    <string name="menu_routines">Rutinas predefinidas</string>
+    <string name="menu_routines_desc">Rutinas predefinidas</string>
+    <string name="menu_my_routines">Mis rutinas</string>
+    <string name="menu_my_routines_desc">Crea tus rutinas de entrenamiento</string>
     <string name="menu_exercises">Ejercicios</string>
     <string name="menu_exercises_desc">Todos los ejercicios de la aplicación</string>
     <string name="menu_weights">Mis pesos</string>
