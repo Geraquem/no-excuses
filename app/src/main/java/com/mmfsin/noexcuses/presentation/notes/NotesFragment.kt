@@ -77,8 +77,9 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
         activity?.showFragmentDialog(DeleteNoteDialog.newInstance(id, this@NotesFragment))
     }
 
-    private fun navigateToDetail(id: String) =
+    private fun navigateToDetail(id: String) {
         findNavController().navigate(actionNotesToNoteDetail(id))
+    }
 
     override fun deletedComplete() {
         viewModel.getNotes()

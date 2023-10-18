@@ -31,7 +31,7 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
     ) = FragmentNoteDetailBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
-        arguments?.let { noteId = it.getString(ID_NOTE) }
+        arguments?.let { noteId = it.getString(ID_NOTE) } ?: run { error() }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,6 +67,7 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
     override fun onStop() {
         binding.apply {
             viewModel.addNote(
+                noteId,
                 etTitle.text.toString(),
                 etDescription.text.toString(),
                 System.currentTimeMillis().toString()

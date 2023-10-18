@@ -6,9 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
     android:background="@drawable/bg_round_yellow"
-    android:backgroundTint="@color/soft_yellow"
     android:elevation="4dp"
-    android:paddingHorizontal="12dp"
+    android:paddingHorizontal="8dp"
     android:paddingVertical="16dp">
 
     <LinearLayout
@@ -28,6 +27,7 @@
             style="@style/BigTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
             android:textStyle="bold"
             tools:text="Título de la nota" />
 

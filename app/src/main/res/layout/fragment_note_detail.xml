@@ -60,33 +60,37 @@
 
                 <EditText
                     android:id="@+id/et_title"
+                    style="@style/MediumTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
+                    android:layout_marginBottom="12dp"
                     android:autofillHints="no"
-                    android:background="@drawable/bg_big_edit_text"
-                    android:inputType="textPersonName|textCapWords"
-                    android:lines="1"
+                    android:background="@drawable/bg_note_edit_text"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:maxLength="50"
-                    android:maxLines="1"
+                    android:maxLines="2"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="12dp"
                     android:textColorHint="@color/soft_grey"
+                    android:textCursorDrawable="@drawable/et_cursor_color"
                     tools:ignore="LabelFor" />
 
                 <EditText
                     android:id="@+id/et_description"
+                    style="@style/MediumTextView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:autofillHints="no"
-                    android:background="@drawable/bg_big_edit_text"
-                    android:inputType="textMultiLine|textCapWords"
-                    android:lines="1"
-                    android:maxLength="30"
+                    android:background="@drawable/bg_note_edit_text"
+                    android:gravity="top"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLength="2000"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="12dp"
                     android:textColorHint="@color/soft_grey"
-                    tools:ignore="LabelFor" />
+                    android:textCursorDrawable="@drawable/et_cursor_color"
+                    tools:ignore="LabelFor"
+                    tools:text="Descripción de la nota" />
 
             </LinearLayout>
 

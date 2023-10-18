@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_box"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:background="@drawable/bg_white_box"
     android:paddingBottom="32dp">
 
     <androidx.constraintlayout.widget.Guideline
@@ -56,18 +56,20 @@
 
         <EditText
             android:id="@+id/et_title"
+            style="@style/MediumTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:autofillHints="no"
             android:background="@drawable/bg_big_edit_text"
-            android:inputType="textPersonName|textCapWords"
+            android:inputType="textPersonName|textCapSentences"
             android:lines="1"
             android:maxLength="30"
             android:maxLines="1"
             android:paddingHorizontal="16dp"
             android:paddingVertical="12dp"
             android:textColorHint="@color/soft_grey"
+            android:textCursorDrawable="@drawable/et_cursor_color"
             tools:ignore="LabelFor" />
 
         <TextView

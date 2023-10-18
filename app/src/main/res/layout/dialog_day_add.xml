@@ -57,19 +57,21 @@
 
         <EditText
             android:id="@+id/et_title"
+            style="@style/MediumTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:autofillHints="no"
             android:background="@drawable/bg_big_edit_text"
             android:hint="@string/days_add_title_hint"
-            android:inputType="textPersonName|textCapWords"
+            android:inputType="textPersonName|textCapSentences"
             android:lines="1"
             android:maxLength="30"
             android:maxLines="1"
             android:paddingHorizontal="16dp"
             android:paddingVertical="12dp"
-            android:textColorHint="@color/soft_grey" />
+            android:textColorHint="@color/soft_grey"
+            android:textCursorDrawable="@drawable/et_cursor_color" />
 
         <TextView
             android:id="@+id/tv_error"

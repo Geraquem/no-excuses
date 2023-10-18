@@ -31,6 +31,16 @@ class NotesRepository @Inject constructor(
         realmDatabase.addObject { note }
     }
 
+    override fun editNote(id: String, title: String, description: String, date: String) {
+        val note = getNoteDTO(id)
+        note?.let {
+            it.title = title
+            it.description = description
+            it.date = date
+            realmDatabase.addObject { it }
+        }
+    }
+
     override fun deleteNote(id: String) {
         val note = getNoteDTO(id)
         note?.let { realmDatabase.deleteObject({ note }, note.id) }

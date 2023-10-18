@@ -23,8 +23,8 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:layout_marginVertical="24dp"
+        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right"
@@ -32,12 +32,12 @@
 
         <Chronometer
             android:id="@+id/chrono"
+            style="@style/BigTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            style="@style/BigTextView"
             android:textSize="46sp"
-            tools:text="20:50"/>
+            tools:text="20:50" />
 
         <Button
             android:id="@+id/btn_play"

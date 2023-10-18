@@ -133,8 +133,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_small_edit_text"
-                android:paddingVertical="8dp"
                 android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
                 tools:text="Notas que se hayan apuntado" />
 
         </LinearLayout>
