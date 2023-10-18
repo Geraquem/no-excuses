@@ -2,14 +2,14 @@ package com.mmfsin.noexcuses.presentation.myroutines.routines
 
 import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.FirstTimeUseCase
-import com.mmfsin.noexcuses.domain.usecases.GetRoutinesUseCase
+import com.mmfsin.noexcuses.domain.usecases.GetMyRoutinesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MyRoutinesViewModel @Inject constructor(
     private val firstTimeUseCase: FirstTimeUseCase,
-    private val getRoutinesUseCase: GetRoutinesUseCase
+    private val getMyRoutinesUseCase: GetMyRoutinesUseCase
 ) : BaseViewModel<MyRoutinesEvent>() {
 
     fun getFirstTime() {
@@ -22,7 +22,7 @@ class MyRoutinesViewModel @Inject constructor(
 
     fun getRoutines() {
         executeUseCase(
-            { getRoutinesUseCase.execute() },
+            { getMyRoutinesUseCase.execute() },
             { result -> _event.value = MyRoutinesEvent.GetMyRoutines(result) },
             { _event.value = MyRoutinesEvent.SomethingWentWrong }
         )

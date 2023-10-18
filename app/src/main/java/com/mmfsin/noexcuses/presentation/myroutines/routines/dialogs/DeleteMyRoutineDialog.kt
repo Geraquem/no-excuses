@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogMyRoutineDeleteBinding
-import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.domain.models.MyRoutine
 import com.mmfsin.noexcuses.presentation.myroutines.routines.interfaces.IMyRoutineDialogListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -19,7 +19,7 @@ class DeleteMyRoutineDialog(val id: String, private val listener: IMyRoutineDial
 
     private val viewModel: MyRoutineDialogViewModel by viewModels()
 
-    private var routine: Routine? = null
+    private var myRoutine: MyRoutine? = null
 
     override fun inflateView(inflater: LayoutInflater) =
         DialogMyRoutineDeleteBinding.inflate(inflater)
@@ -44,7 +44,7 @@ class DeleteMyRoutineDialog(val id: String, private val listener: IMyRoutineDial
     override fun setListeners() {
         binding.apply {
             btnNo.setOnClickListener { dismiss() }
-            btnYes.setOnClickListener { routine?.let { viewModel.deleteRoutine(it.id) } }
+            btnYes.setOnClickListener { myRoutine?.let { viewModel.deleteRoutine(it.id) } }
         }
     }
 
@@ -56,8 +56,8 @@ class DeleteMyRoutineDialog(val id: String, private val listener: IMyRoutineDial
                     dismiss()
                 }
                 is MyRoutineDialogEvent.GetMyRoutine -> {
-                    routine = event.routine
-                    binding.tvText.text = getString(R.string.routines_delete_text, routine?.title)
+                    myRoutine = event.myRoutine
+                    binding.tvText.text = getString(R.string.routines_delete_text, myRoutine?.title)
                 }
                 is MyRoutineDialogEvent.SomethingWentWrong -> error()
             }

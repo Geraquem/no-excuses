@@ -1,24 +1,24 @@
 package com.mmfsin.noexcuses.presentation.myroutines.routines.dialogs
 
 import com.mmfsin.noexcuses.base.BaseViewModel
-import com.mmfsin.noexcuses.domain.usecases.AddRoutineUseCase
-import com.mmfsin.noexcuses.domain.usecases.DeleteRoutineUseCase
-import com.mmfsin.noexcuses.domain.usecases.EditRoutineUseCase
-import com.mmfsin.noexcuses.domain.usecases.GetRoutineByIdUseCase
+import com.mmfsin.noexcuses.domain.usecases.AddMyRoutineUseCase
+import com.mmfsin.noexcuses.domain.usecases.DeleteMyRoutineUseCase
+import com.mmfsin.noexcuses.domain.usecases.EditMyRoutineUseCase
+import com.mmfsin.noexcuses.domain.usecases.GetMyRoutineByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MyRoutineDialogViewModel @Inject constructor(
-    private val addRoutineUseCase: AddRoutineUseCase,
-    private val getRoutineByIdUseCase: GetRoutineByIdUseCase,
-    private val editRoutineUseCase: EditRoutineUseCase,
-    private val deleteRoutineUseCase: DeleteRoutineUseCase
+    private val addMyRoutineUseCase: AddMyRoutineUseCase,
+    private val getMyRoutineByIdUseCase: GetMyRoutineByIdUseCase,
+    private val editMyRoutineUseCase: EditMyRoutineUseCase,
+    private val deleteMyRoutineUseCase: DeleteMyRoutineUseCase
 ) : BaseViewModel<MyRoutineDialogEvent>() {
 
     fun addRoutine(title: String, description: String) {
         executeUseCase(
-            { addRoutineUseCase.execute(AddRoutineUseCase.Params(title, description)) },
+            { addMyRoutineUseCase.execute(AddMyRoutineUseCase.Params(title, description)) },
             { _event.value = MyRoutineDialogEvent.FlowCompleted },
             { _event.value = MyRoutineDialogEvent.SomethingWentWrong }
         )
@@ -26,7 +26,7 @@ class MyRoutineDialogViewModel @Inject constructor(
 
     fun getRoutine(id: String) {
         executeUseCase(
-            { getRoutineByIdUseCase.execute(GetRoutineByIdUseCase.Params(id)) },
+            { getMyRoutineByIdUseCase.execute(GetMyRoutineByIdUseCase.Params(id)) },
             { result ->
                 _event.value = result?.let { MyRoutineDialogEvent.GetMyRoutine(it) }
                     ?: run { MyRoutineDialogEvent.SomethingWentWrong }
@@ -37,7 +37,7 @@ class MyRoutineDialogViewModel @Inject constructor(
 
     fun editRoutine(id: String, title: String, description: String) {
         executeUseCase(
-            { editRoutineUseCase.execute(EditRoutineUseCase.Params(id, title, description)) },
+            { editMyRoutineUseCase.execute(EditMyRoutineUseCase.Params(id, title, description)) },
             { _event.value = MyRoutineDialogEvent.FlowCompleted },
             { _event.value = MyRoutineDialogEvent.SomethingWentWrong }
         )
@@ -45,7 +45,7 @@ class MyRoutineDialogViewModel @Inject constructor(
 
     fun deleteRoutine(id: String) {
         executeUseCase(
-            { deleteRoutineUseCase.execute(DeleteRoutineUseCase.Params(id)) },
+            { deleteMyRoutineUseCase.execute(DeleteMyRoutineUseCase.Params(id)) },
             { _event.value = MyRoutineDialogEvent.FlowCompleted },
             { _event.value = MyRoutineDialogEvent.SomethingWentWrong }
         )

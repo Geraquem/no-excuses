@@ -1,11 +1,11 @@
 package com.mmfsin.noexcuses.domain.interfaces
 
 import com.mmfsin.noexcuses.domain.models.Day
-import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.domain.models.MyRoutine
 
-interface IRoutinesRepository {
-    fun getRoutines(): List<Routine>
-    fun getRoutineById(id: String): Routine?
+interface IMyRoutinesRepository {
+    fun getRoutines(): List<MyRoutine>
+    fun getRoutineById(id: String): MyRoutine?
     fun addRoutine(title: String, description: String?)
     fun editRoutine(id: String, title: String, description: String?)
     fun deleteRoutine(id: String)

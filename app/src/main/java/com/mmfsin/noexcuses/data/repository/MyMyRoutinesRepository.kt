@@ -2,38 +2,38 @@ package com.mmfsin.noexcuses.data.repository
 
 import com.mmfsin.noexcuses.data.mappers.toDay
 import com.mmfsin.noexcuses.data.mappers.toDayList
-import com.mmfsin.noexcuses.data.mappers.toRoutine
-import com.mmfsin.noexcuses.data.mappers.toRoutineList
+import com.mmfsin.noexcuses.data.mappers.toMyRoutine
+import com.mmfsin.noexcuses.data.mappers.toMyRoutineList
 import com.mmfsin.noexcuses.data.models.DayDTO
-import com.mmfsin.noexcuses.data.models.RoutineDTO
+import com.mmfsin.noexcuses.data.models.MyRoutineDTO
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
-import com.mmfsin.noexcuses.domain.interfaces.IRoutinesRepository
+import com.mmfsin.noexcuses.domain.interfaces.IMyRoutinesRepository
 import com.mmfsin.noexcuses.domain.models.Day
-import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.domain.models.MyRoutine
 import com.mmfsin.noexcuses.utils.ID
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import io.realm.kotlin.where
 import java.util.*
 import javax.inject.Inject
 
-class RoutinesRepository @Inject constructor(
+class MyMyRoutinesRepository @Inject constructor(
     private val realmDatabase: IRealmDatabase
-) : IRoutinesRepository {
+) : IMyRoutinesRepository {
 
-    override fun getRoutines(): List<Routine> {
-        val groups = realmDatabase.getObjectsFromRealm { where<RoutineDTO>().findAll() }
-        return if (groups.isNotEmpty()) groups.toRoutineList()
+    override fun getRoutines(): List<MyRoutine> {
+        val groups = realmDatabase.getObjectsFromRealm { where<MyRoutineDTO>().findAll() }
+        return if (groups.isNotEmpty()) groups.toMyRoutineList()
         else emptyList()
     }
 
-    override fun getRoutineById(id: String): Routine? {
+    override fun getRoutineById(id: String): MyRoutine? {
         val routine = getRoutineDTO(id)
-        return routine?.toRoutine() ?: run { null }
+        return routine?.toMyRoutine() ?: run { null }
     }
 
     override fun addRoutine(title: String, description: String?) {
         val id = UUID.randomUUID().toString()
-        val routine = RoutineDTO(id, title, description, 0)
+        val routine = MyRoutineDTO(id, title, description, 0)
         realmDatabase.addObject { routine }
     }
 
@@ -60,9 +60,9 @@ class RoutinesRepository @Inject constructor(
         routine?.let { realmDatabase.deleteObject({ it }, id) }
     }
 
-    private fun getRoutineDTO(id: String): RoutineDTO? {
+    private fun getRoutineDTO(id: String): MyRoutineDTO? {
         val routines =
-            realmDatabase.getObjectsFromRealm { where<RoutineDTO>().equalTo(ID, id).findAll() }
+            realmDatabase.getObjectsFromRealm { where<MyRoutineDTO>().equalTo(ID, id).findAll() }
         return if (routines.isNotEmpty()) routines.first() else null
     }
 

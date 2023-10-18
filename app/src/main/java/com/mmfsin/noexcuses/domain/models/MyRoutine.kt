@@ -1,6 +1,6 @@
 package com.mmfsin.noexcuses.domain.models
 
-open class Routine(
+open class MyRoutine(
     var id: String,
     var title: String,
     var description: String?,

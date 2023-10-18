@@ -1,9 +1,7 @@
 package com.mmfsin.noexcuses.presentation.notes
 
 import com.mmfsin.noexcuses.base.BaseViewModel
-import com.mmfsin.noexcuses.domain.usecases.FirstTimeUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetNotesUseCase
-import com.mmfsin.noexcuses.domain.usecases.GetRoutinesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -13,7 +13,7 @@ import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMyRoutinesBinding
-import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.domain.models.MyRoutine
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.days.DaysDialog
 import com.mmfsin.noexcuses.presentation.myroutines.routines.MyRoutinesFragmentDirections.Companion.actionRoutinesToDays
@@ -36,7 +36,7 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
 
     private lateinit var mContext: Context
 
-    private var routines = emptyList<Routine>()
+    private var myRoutines = emptyList<MyRoutine>()
 
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
@@ -75,8 +75,8 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
             when (event) {
                 is MyRoutinesEvent.IsFistTime -> firstTimeFlow(event.firstTime)
                 is MyRoutinesEvent.GetMyRoutines -> {
-                    routines = event.routines
-                    setUpRoutines(routines)
+                    myRoutines = event.myRoutines
+                    setUpRoutines(myRoutines)
                 }
                 is MyRoutinesEvent.SomethingWentWrong -> error()
             }
@@ -88,14 +88,14 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
         viewModel.getRoutines()
     }
 
-    private fun setUpRoutines(routines: List<Routine>) {
+    private fun setUpRoutines(myRoutines: List<MyRoutine>) {
         binding.apply {
             rvRoutines.apply {
                 layoutManager = LinearLayoutManager(mContext)
-                adapter = MyRoutinesAdapter(routines, this@MyRoutinesFragment)
+                adapter = MyRoutinesAdapter(myRoutines, this@MyRoutinesFragment)
             }
-            rvRoutines.isVisible = routines.isNotEmpty()
-            tvEmpty.isVisible = routines.isEmpty()
+            rvRoutines.isVisible = myRoutines.isNotEmpty()
+            tvEmpty.isVisible = myRoutines.isEmpty()
         }
     }
 
@@ -128,7 +128,7 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
     }
 
     private fun updateUI() {
-        routines = emptyList()
+        myRoutines = emptyList()
         viewModel.getRoutines()
     }
 

@@ -3,20 +3,20 @@ package com.mmfsin.noexcuses.presentation.myroutines.days
 import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.GetDayByIdUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetDayExercisesUseCase
-import com.mmfsin.noexcuses.domain.usecases.GetRoutineDaysUseCase
+import com.mmfsin.noexcuses.domain.usecases.GetMyRoutineDaysUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class DaysViewModel @Inject constructor(
-    private val getRoutineDaysUseCase: GetRoutineDaysUseCase,
+    private val getMyRoutineDaysUseCase: GetMyRoutineDaysUseCase,
     private val getDayByIdUseCase: GetDayByIdUseCase,
     private val getDayExercisesUseCase: GetDayExercisesUseCase
 ) : BaseViewModel<DaysEvent>() {
 
     fun getDays(routineId: String) {
         executeUseCase(
-            { getRoutineDaysUseCase.execute(GetRoutineDaysUseCase.Params(routineId)) },
+            { getMyRoutineDaysUseCase.execute(GetMyRoutineDaysUseCase.Params(routineId)) },
             { result -> _event.value = DaysEvent.GetDays(result) },
             { _event.value = DaysEvent.SomethingWentWrong }
         )

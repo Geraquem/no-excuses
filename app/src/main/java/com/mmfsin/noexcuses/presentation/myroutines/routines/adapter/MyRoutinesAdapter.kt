@@ -6,21 +6,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemRoutineBinding
-import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.domain.models.MyRoutine
 import com.mmfsin.noexcuses.presentation.myroutines.routines.interfaces.IMyRoutineListener
 
 class MyRoutinesAdapter(
-    private val routines: List<Routine>, private val listener: IMyRoutineListener
+    private val myRoutines: List<MyRoutine>, private val listener: IMyRoutineListener
 ) : RecyclerView.Adapter<MyRoutinesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemRoutineBinding.bind(view)
         private val c = binding.root.context
-        fun bind(routine: Routine) {
+        fun bind(myRoutine: MyRoutine) {
             binding.apply {
-                image.tvNumOfDays.text = routine.days.toString()
-                tvTitle.text = routine.title
-                val description = routine.description?.let { routine.description }
+                image.tvNumOfDays.text = myRoutine.days.toString()
+                tvTitle.text = myRoutine.title
+                val description = myRoutine.description?.let { myRoutine.description }
                     ?: run { c.getString(R.string.routines_no_description) }
                 tvDescription.text = description
             }
@@ -34,13 +34,13 @@ class MyRoutinesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(routines[position])
-        holder.itemView.setOnClickListener { listener.onRoutineClick(routines[position].id) }
+        holder.bind(myRoutines[position])
+        holder.itemView.setOnClickListener { listener.onRoutineClick(myRoutines[position].id) }
         holder.itemView.setOnLongClickListener {
-            listener.onRoutineLongClick(routines[position].id)
+            listener.onRoutineLongClick(myRoutines[position].id)
             true
         }
     }
 
-    override fun getItemCount(): Int = routines.size
+    override fun getItemCount(): Int = myRoutines.size
 }

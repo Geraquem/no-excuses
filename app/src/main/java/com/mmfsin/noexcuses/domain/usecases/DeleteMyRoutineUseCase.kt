@@ -2,13 +2,13 @@ package com.mmfsin.noexcuses.domain.usecases
 
 import com.mmfsin.noexcuses.base.BaseUseCase
 import com.mmfsin.noexcuses.domain.interfaces.IExercisesRepository
-import com.mmfsin.noexcuses.domain.interfaces.IRoutinesRepository
+import com.mmfsin.noexcuses.domain.interfaces.IMyRoutinesRepository
 import javax.inject.Inject
 
-class DeleteRoutineUseCase @Inject constructor(
-    private val routinesRepository: IRoutinesRepository,
+class DeleteMyRoutineUseCase @Inject constructor(
+    private val routinesRepository: IMyRoutinesRepository,
     private val exercisesRepository: IExercisesRepository
-) : BaseUseCase<DeleteRoutineUseCase.Params, Unit>() {
+) : BaseUseCase<DeleteMyRoutineUseCase.Params, Unit>() {
 
     override suspend fun execute(params: Params) {
         /** delete all exercises in routine */
