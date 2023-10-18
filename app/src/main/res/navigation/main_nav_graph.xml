@@ -11,6 +11,9 @@
         android:label="menuFragment"
         tools:layout="@layout/fragment_menu">
         <action
+            android:id="@+id/action_menu_to_routines"
+            app:destination="@id/routines_nav_graph" />
+        <action
             android:id="@+id/action_menu_to_my_routines"
             app:destination="@id/my_routines_nav_graph" />
         <action
@@ -23,6 +26,8 @@
             android:id="@+id/action_menu_to_notes"
             app:destination="@id/notes_nav_graph" />
     </fragment>
+
+    <include app:graph="@navigation/routines_nav_graph" />
 
     <include app:graph="@navigation/my_routines_nav_graph" />
 

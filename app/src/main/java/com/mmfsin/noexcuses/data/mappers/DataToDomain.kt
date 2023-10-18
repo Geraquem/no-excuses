@@ -14,10 +14,17 @@ fun ExerciseDTO.toExercise() = Exercise(id, category, imageURL, name, dataURL)
 
 fun List<ExerciseDTO>.toExerciseList() = this.map { it.toExercise() }
 
-/** Routine */
+/** My Routine */
 fun MyRoutineDTO.toMyRoutine() = MyRoutine(id, title, description, days)
 
 fun List<MyRoutineDTO>.toMyRoutineList() = this.map { it.toMyRoutine() }
+
+/** Routine */
+fun RoutineDTO.toRoutine() = Routine(id, name, description, days.daysCount(), days)
+
+fun List<RoutineDTO>.toRoutineList() = this.map { it.toRoutine() }
+
+private fun String.daysCount(): Int = this.split(",").size
 
 /** Day */
 fun DayDTO.toDay() = Day(id, routineId, title, exercises)

@@ -20,6 +20,7 @@ import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.a
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMuscularGroups
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMyRoutines
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToNotes
+import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToRoutines
 import com.mmfsin.noexcuses.presentation.menu.adapter.MenuAdapter
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -76,7 +77,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun onItemClick(action: MenuAction) {
         when (action) {
-            ROUTINES -> {}
+            ROUTINES ->  navigateTo(actionMenuToRoutines())
             MY_ROUTINES -> navigateTo(actionMenuToMyRoutines())
             EXERCISES -> navigateTo(actionMenuToMuscularGroups())
             CHRONOMETER -> navigateTo(actionMenuToChronometer())

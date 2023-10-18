@@ -56,7 +56,7 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
     override fun setUI() {
         binding.apply {
             (activity as MainActivity).setUpToolbar(
-                title = getString(R.string.routines_toolbar),
+                title = getString(R.string.my_routines_toolbar),
                 info = true
             )
         }

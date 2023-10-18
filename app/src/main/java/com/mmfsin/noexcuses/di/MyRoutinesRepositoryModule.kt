@@ -1,6 +1,6 @@
 package com.mmfsin.noexcuses.di
 
-import com.mmfsin.noexcuses.data.repository.MyMyRoutinesRepository
+import com.mmfsin.noexcuses.data.repository.MyRoutinesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IMyRoutinesRepository
 import dagger.Binds
 import dagger.Module
@@ -11,5 +11,5 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 interface MyRoutinesRepositoryModule {
     @Binds
-    fun bind(repository: MyMyRoutinesRepository): IMyRoutinesRepository
+    fun bind(repository: MyRoutinesRepository): IMyRoutinesRepository
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/routines_nav_graph"
+    app:startDestination="@id/routinesFragment">
+
+    <fragment
+        android:id="@+id/routinesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.routines.RoutinesFragment"
+        android:label="routinesFragment"
+        tools:layout="@layout/fragment_routines">
+        <action
+            android:id="@+id/action_routines_to_days"
+            app:destination="@id/daysFragment">
+            <argument
+                android:name="idGroup"
+                app:argType="com.mmfsin.noexcuses.presentation.models.IdGroup" />
+        </action>
+    </fragment>
+
+</navigation>

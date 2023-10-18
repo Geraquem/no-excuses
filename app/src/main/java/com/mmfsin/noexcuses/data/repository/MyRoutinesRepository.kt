@@ -16,7 +16,7 @@ import io.realm.kotlin.where
 import java.util.*
 import javax.inject.Inject
 
-class MyMyRoutinesRepository @Inject constructor(
+class MyRoutinesRepository @Inject constructor(
     private val realmDatabase: IRealmDatabase
 ) : IMyRoutinesRepository {
 

@@ -21,7 +21,7 @@ class MyRoutinesAdapter(
                 image.tvNumOfDays.text = myRoutine.days.toString()
                 tvTitle.text = myRoutine.title
                 val description = myRoutine.description?.let { myRoutine.description }
-                    ?: run { c.getString(R.string.routines_no_description) }
+                    ?: run { c.getString(R.string.my_routines_no_description) }
                 tvDescription.text = description
             }
         }

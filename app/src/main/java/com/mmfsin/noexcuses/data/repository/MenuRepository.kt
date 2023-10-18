@@ -5,6 +5,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.mmfsin.noexcuses.data.models.ExerciseDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
+import com.mmfsin.noexcuses.data.models.RoutineDTO
 import com.mmfsin.noexcuses.domain.interfaces.IMenuRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.utils.*
@@ -15,8 +16,7 @@ import java.util.concurrent.CountDownLatch
 import javax.inject.Inject
 
 class MenuRepository @Inject constructor(
-    @ApplicationContext val context: Context,
-    private val realmDatabase: IRealmDatabase
+    @ApplicationContext val context: Context, private val realmDatabase: IRealmDatabase
 ) : IMenuRepository {
 
     private val reference = Firebase.database.reference
@@ -34,19 +34,24 @@ class MenuRepository @Inject constructor(
             } else {
                 saveVersion(newVersion = version)
 
+                val routines = it.child(ROUTINES)
+                for (child in routines.children) {
+                    child.getValue(RoutineDTO::class.java)?.let { r ->
+                        saveRoutineInRealm(r)
+                    }
+                }
+
                 val fbMGroups = it.child(M_GROUPS)
                 for (child in fbMGroups.children) {
-                    child.getValue(MuscularGroupDTO::class.java)?.let { deck ->
-                        saveMGroupsInRealm(deck)
-                    }
+                    child.getValue(MuscularGroupDTO::class.java)
+                        ?.let { mGroup -> saveMGroupsInRealm(mGroup) }
                 }
 
                 val fbExercises = it.child(EXERCISES)
                 for (child in fbExercises.children) {
                     for (exercise in child.children) {
-                        exercise.getValue(ExerciseDTO::class.java)?.let { e ->
-                            saveExerciseInRealm(e)
-                        }
+                        exercise.getValue(ExerciseDTO::class.java)
+                            ?.let { e -> saveExerciseInRealm(e) }
                     }
                 }
 
@@ -73,6 +78,7 @@ class MenuRepository @Inject constructor(
     private fun getSharedPreferences() =
         context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
 
+    private fun saveRoutineInRealm(routine: RoutineDTO) = realmDatabase.addObject { routine }
     private fun saveMGroupsInRealm(mGroup: MuscularGroupDTO) = realmDatabase.addObject { mGroup }
     private fun saveExerciseInRealm(exercise: ExerciseDTO) = realmDatabase.addObject { exercise }
 
