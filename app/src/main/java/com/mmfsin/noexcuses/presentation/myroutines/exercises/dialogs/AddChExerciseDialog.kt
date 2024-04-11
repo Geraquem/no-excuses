@@ -107,10 +107,12 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
                     setUI()
                     viewModel.getDay(idGroup.dayId)
                 }
+
                 is ChExerciseDialogEvent.GetDay -> {
                     binding.btnAdd.text =
                         getString(R.string.days_exercise_dialog_add, event.day.title)
                 }
+
                 is ChExerciseDialogEvent.GetChExercise -> {}
                 is ChExerciseDialogEvent.FlowCompleted -> endFlow()
                 is ChExerciseDialogEvent.SomethingWentWrong -> error()
@@ -163,13 +165,15 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
         binding.apply {
             lottie.visibility = View.VISIBLE
             lottie.addAnimatorListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator?) {}
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationStart(animation: Animator) {}
+                override fun onAnimationEnd(animation: Animator, isReverse: Boolean) {
+                    super.onAnimationEnd(animation, isReverse)
                     dismiss()
                 }
 
-                override fun onAnimationCancel(animation: Animator?) {}
-                override fun onAnimationRepeat(animation: Animator?) {}
+                override fun onAnimationEnd(animation: Animator) {}
+                override fun onAnimationCancel(animation: Animator) {}
+                override fun onAnimationRepeat(animation: Animator) {}
             })
 
             lottie.setAnimation(R.raw.flow_completed)

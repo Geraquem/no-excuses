@@ -178,13 +178,15 @@ class EditChExerciseDialog(
         binding.apply {
             lottie.visibility = View.VISIBLE
             lottie.addAnimatorListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator?) {}
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationStart(animation: Animator) {}
+                override fun onAnimationEnd(animation: Animator, isReverse: Boolean) {
+                    super.onAnimationEnd(animation, isReverse)
                     dismiss()
                 }
 
-                override fun onAnimationCancel(animation: Animator?) {}
-                override fun onAnimationRepeat(animation: Animator?) {}
+                override fun onAnimationEnd(animation: Animator) {}
+                override fun onAnimationCancel(animation: Animator) {}
+                override fun onAnimationRepeat(animation: Animator) {}
             })
 
             lottie.setAnimation(R.raw.flow_completed)
