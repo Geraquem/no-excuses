@@ -88,7 +88,7 @@
 
     <!-- ROUTINES ADD/EDIT/DELETE DIALOG -->
     <string name="routines_add_top_text">Nueva rutina</string>
-    <string name="routines_add_button">Aceptar</string>
+    <string name="routines_add_button">Añadir</string>
     <string name="routines_add_title">Nombre</string>
     <string name="routines_add_title_hint">Mes de Mayo</string>
     <string name="routines_add_description">Descripción</string>

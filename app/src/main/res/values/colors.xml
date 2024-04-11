@@ -19,7 +19,7 @@
     <color name="soft_yellow">#D8FFFEC4</color>
 
     <color name="red">#AA0000</color>
-    <color name="light_red">#FBA3A3</color>
+    <color name="light_red">#FFC0C0</color>
 
     <color name="blue">#8AB5F4</color>
     <color name="dark_blue">#1D5FC3</color>
@@ -31,7 +31,7 @@
     <color name="orange">#F8BB5D</color>
     <color name="light_orange">#FFE4B9</color>
 
-    <color name="green">#99E49A</color>
+    <color name="green">#9EE8B6</color>
     <color name="light_green">#EEFFE7</color>
 
     <color name="add_button">#44F3E2</color>
