@@ -15,14 +15,13 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMyRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.MyRoutine
 import com.mmfsin.noexcuses.presentation.models.IdGroup
-import com.mmfsin.noexcuses.presentation.myroutines.days.DaysDialog
+import com.mmfsin.noexcuses.presentation.myroutines.days.dialogs.DaysSheet
 import com.mmfsin.noexcuses.presentation.myroutines.routines.MyRoutinesFragmentDirections.Companion.actionRoutinesToDays
 import com.mmfsin.noexcuses.presentation.myroutines.routines.adapter.MyRoutinesAdapter
 import com.mmfsin.noexcuses.presentation.myroutines.routines.dialogs.AddMyRoutineDialog
 import com.mmfsin.noexcuses.presentation.myroutines.routines.dialogs.DeleteMyRoutineDialog
 import com.mmfsin.noexcuses.presentation.myroutines.routines.dialogs.EditMyRoutineDialog
 import com.mmfsin.noexcuses.presentation.myroutines.routines.dialogs.InitInfoDialog
-import com.mmfsin.noexcuses.presentation.myroutines.routines.interfaces.IMyRoutineDialogListener
 import com.mmfsin.noexcuses.presentation.myroutines.routines.interfaces.IMyRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
@@ -30,7 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesViewModel>(),
-    IMyRoutineListener, IMyRoutineDialogListener {
+    IMyRoutineListener {
 
     override val viewModel: MyRoutinesViewModel by viewModels()
 
@@ -103,29 +102,26 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
         }
     }
 
-    /** OPENS DAYS DIALOG WHEN CLICK ON ROUTINE */
     override fun onRoutineClick(id: String) {
-        (activity as MainActivity).routineOpened = id
-        activity?.showFragmentDialog(DaysDialog(id, this@MyRoutinesFragment))
+//        (activity as MainActivity).routineOpened = id
+//        activity?.showFragmentDialog(DaysDialog(id, this@MyRoutinesFragment))
+
+        val modalBottomSheet = DaysSheet(routineId = id, this@MyRoutinesFragment)
+        activity?.let { modalBottomSheet.show(it.supportFragmentManager, "") }
     }
 
-    /** EDIT ROUTINE ON LONG CLICK */
     override fun onRoutineLongClick(id: String) {
         activity?.showFragmentDialog(EditMyRoutineDialog.newInstance(id, this@MyRoutinesFragment))
     }
 
-    override fun dayAddedToRoutine() {
-        updateUI()
-    }
+    override fun dayAddedToRoutine() = updateUI()
 
     override fun onDayClick(routineId: String, dayId: String) {
         findNavController().navigate(actionRoutinesToDays(IdGroup(routineId, dayId)))
     }
 
     /** WHEN ADD/EDIT/DELETE ROUTINE DIALOGS ENDS */
-    override fun flowCompleted() {
-        updateUI()
-    }
+    override fun flowCompleted() = updateUI()
 
     override fun deleteRoutine(id: String) {
         activity?.showFragmentDialog(DeleteMyRoutineDialog.newInstance(id, this@MyRoutinesFragment))

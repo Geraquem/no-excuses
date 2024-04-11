@@ -6,4 +6,7 @@ interface IMyRoutineListener {
 
     fun onDayClick(routineId: String, dayId: String)
     fun dayAddedToRoutine()
+
+    fun flowCompleted()
+    fun deleteRoutine(id: String)
 }

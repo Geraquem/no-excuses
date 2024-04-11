@@ -8,13 +8,13 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogMyRoutineDeleteBinding
 import com.mmfsin.noexcuses.domain.models.MyRoutine
-import com.mmfsin.noexcuses.presentation.myroutines.routines.interfaces.IMyRoutineDialogListener
+import com.mmfsin.noexcuses.presentation.myroutines.routines.interfaces.IMyRoutineListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DeleteMyRoutineDialog(val id: String, private val listener: IMyRoutineDialogListener) :
+class DeleteMyRoutineDialog(val id: String, private val listener: IMyRoutineListener) :
     BaseDialog<DialogMyRoutineDeleteBinding>() {
 
     private val viewModel: MyRoutineDialogViewModel by viewModels()
@@ -67,7 +67,7 @@ class DeleteMyRoutineDialog(val id: String, private val listener: IMyRoutineDial
     private fun error() = activity?.showErrorDialog()
 
     companion object {
-        fun newInstance(id: String, listener: IMyRoutineDialogListener): DeleteMyRoutineDialog {
+        fun newInstance(id: String, listener: IMyRoutineListener): DeleteMyRoutineDialog {
             return DeleteMyRoutineDialog(id, listener)
         }
     }

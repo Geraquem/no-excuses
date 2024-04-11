@@ -8,14 +8,14 @@ import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogMyRoutineEditBinding
 import com.mmfsin.noexcuses.domain.models.MyRoutine
-import com.mmfsin.noexcuses.presentation.myroutines.routines.interfaces.IMyRoutineDialogListener
+import com.mmfsin.noexcuses.presentation.myroutines.routines.interfaces.IMyRoutineListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.countDown
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class EditMyRoutineDialog(val routineId: String, private val listener: IMyRoutineDialogListener) :
+class EditMyRoutineDialog(val routineId: String, private val listener: IMyRoutineListener) :
     BaseDialog<DialogMyRoutineEditBinding>() {
 
     private val viewModel: MyRoutineDialogViewModel by viewModels()
@@ -71,11 +71,13 @@ class EditMyRoutineDialog(val routineId: String, private val listener: IMyRoutin
                     listener.flowCompleted()
                     dismiss()
                 }
+
                 is MyRoutineDialogEvent.GetMyRoutine -> {
                     myRoutine = event.myRoutine
                     binding.etTitle.setText(myRoutine?.title)
                     binding.etDescription.setText(myRoutine?.description)
                 }
+
                 is MyRoutineDialogEvent.SomethingWentWrong -> error()
             }
         }
@@ -84,7 +86,7 @@ class EditMyRoutineDialog(val routineId: String, private val listener: IMyRoutin
     private fun error() = activity?.showErrorDialog()
 
     companion object {
-        fun newInstance(id: String, listener: IMyRoutineDialogListener): EditMyRoutineDialog {
+        fun newInstance(id: String, listener: IMyRoutineListener): EditMyRoutineDialog {
             return EditMyRoutineDialog(id, listener)
         }
     }

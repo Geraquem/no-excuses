@@ -7,14 +7,14 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogMyRoutineAddBinding
-import com.mmfsin.noexcuses.presentation.myroutines.routines.interfaces.IMyRoutineDialogListener
+import com.mmfsin.noexcuses.presentation.myroutines.routines.interfaces.IMyRoutineListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.countDown
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddMyRoutineDialog(private val listener: IMyRoutineDialogListener) :
+class AddMyRoutineDialog(private val listener: IMyRoutineListener) :
     BaseDialog<DialogMyRoutineAddBinding>() {
 
     private val viewModel: MyRoutineDialogViewModel by viewModels()
@@ -57,6 +57,7 @@ class AddMyRoutineDialog(private val listener: IMyRoutineDialogListener) :
                     listener.flowCompleted()
                     dismiss()
                 }
+
                 is MyRoutineDialogEvent.GetMyRoutine -> {}
                 is MyRoutineDialogEvent.SomethingWentWrong -> error()
             }
@@ -66,7 +67,7 @@ class AddMyRoutineDialog(private val listener: IMyRoutineDialogListener) :
     private fun error() = activity?.showErrorDialog()
 
     companion object {
-        fun newInstance(listener: IMyRoutineDialogListener): AddMyRoutineDialog {
+        fun newInstance(listener: IMyRoutineListener): AddMyRoutineDialog {
             return AddMyRoutineDialog(listener)
         }
     }
