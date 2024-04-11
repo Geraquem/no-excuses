@@ -29,6 +29,15 @@ fun Activity.closeKeyboard() {
     }
 }
 
+fun DialogFragment.closeKeyboard() {
+    val inputMethodManager =
+        requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    val currentFocusView = dialog?.window?.currentFocus
+    if (currentFocusView != null) {
+        inputMethodManager.hideSoftInputFromWindow(currentFocusView.windowToken, 0)
+    }
+}
+
 fun FragmentActivity?.showFragmentDialog(dialog: DialogFragment) =
     this?.let { dialog.show(it.supportFragmentManager, "") }
 
@@ -50,7 +59,7 @@ fun Dialog.animateDialog() {
     }
 }
 
-fun countDown(action: () -> Unit) {
+fun countDown300(action: () -> Unit) {
     object : CountDownTimer(300, 1000) {
         override fun onTick(millisUntilFinished: Long) {}
         override fun onFinish() {
@@ -59,7 +68,7 @@ fun countDown(action: () -> Unit) {
     }.start()
 }
 
-fun countDown(millis: Long, action: () -> Unit) {
+fun countDown300(millis: Long, action: () -> Unit) {
     object : CountDownTimer(millis, 1000) {
         override fun onTick(millisUntilFinished: Long) {}
         override fun onFinish() {
@@ -79,6 +88,11 @@ fun Double?.deletePointZero(): String {
     return if (formatted.endsWith(".0")) {
         formatted.replace(".0", "")
     } else formatted
+}
+
+fun isKeyboardVisible(view: View): Boolean {
+    val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    return imm.isAcceptingText
 }
 
 fun <T1 : Any, T2 : Any, R : Any> checkNotNulls(p1: T1?, p2: T2?, block: (T1, T2) -> R): R? {

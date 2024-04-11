@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemDayBinding
 import com.mmfsin.noexcuses.domain.models.Day
-import com.mmfsin.noexcuses.presentation.myroutines.days.interfaces.IDayListener
+import com.mmfsin.noexcuses.presentation.myroutines.days.interfaces.IDaysListener
 
 class DaysAdapter(
     private val days: List<Day>,
-    private val listener: IDayListener
+    private val listener: IDaysListener
 ) : RecyclerView.Adapter<DaysAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -20,12 +20,9 @@ class DaysAdapter(
         fun bind(day: Day) {
             binding.apply {
                 val title = day.title
-
                 val initial = if (title.isNotEmpty()) title.substring(0, 1) else "?"
                 image.firstLetter.text = initial
-
                 tvTitle.text = title
-
                 val exercises = day.exercises
                 val numOfExercises = if (exercises == 1) c.getString(R.string.days_one_exercise)
                 else c.getString(R.string.days_exercises, exercises.toString())
