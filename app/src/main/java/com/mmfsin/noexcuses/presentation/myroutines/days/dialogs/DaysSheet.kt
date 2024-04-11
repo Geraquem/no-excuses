@@ -28,7 +28,7 @@ class DaysSheet(
 
     private lateinit var binding: DialogDaysBinding
 
-    private val viewModel: DaysViewModel by viewModels()
+    private val viewModel: DaysSheetViewModel by viewModels()
 
     private var days = emptyList<Day>()
 
@@ -63,13 +63,13 @@ class DaysSheet(
 
     private fun setupFullHeight(bottomSheet: View) {
         val layoutParams = bottomSheet.layoutParams
-        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+        layoutParams.height = (resources.displayMetrics.heightPixels * 0.9).toInt()
         bottomSheet.layoutParams = layoutParams
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getDays(routineId)
+        viewModel.getRoutine(routineId)
         observe()
         setListeners()
     }
@@ -85,13 +85,13 @@ class DaysSheet(
     private fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is DaysEvent.GetDays -> {
-                    days = event.days
-                    setUpDays(days)
+                is DaysSheetEvent.GetRoutine -> {
+                    binding.tvRoutineName.text = event.routine.title
+                    viewModel.getDays(routineId)
                 }
-                is DaysEvent.GetDay -> {}
-                is DaysEvent.GetDayExercises -> {}
-                is DaysEvent.SomethingWentWrong -> error()
+
+                is DaysSheetEvent.GetDays -> setUpDays(event.days)
+                is DaysSheetEvent.SWW -> error()
             }
         }
     }
