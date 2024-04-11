@@ -19,6 +19,9 @@ class MyRoutinesAdapter(
         fun bind(myRoutine: MyRoutine) {
             binding.apply {
                 image.tvNumOfDays.text = myRoutine.days.toString()
+                val days =
+                    if (myRoutine.days == 1) R.string.my_routines_day else R.string.my_routines_days
+                image.tvDays.text = c.getString(days)
                 tvTitle.text = myRoutine.title
                 val description = myRoutine.description?.let { myRoutine.description }
                     ?: run { c.getString(R.string.my_routines_no_description) }

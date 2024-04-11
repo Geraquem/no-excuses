@@ -30,7 +30,9 @@ class InitInfoDialog : BaseDialog<DialogFirstExplicationBinding>() {
         }
     }
 
-    override fun setListeners() {}
+    override fun setListeners() {
+        binding.btnAccept.setOnClickListener { dismiss() }
+    }
 
     companion object {
         fun newInstance(): InitInfoDialog {

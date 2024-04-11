@@ -35,21 +35,24 @@
     <!-- FIRST DIALOG -->
     <string name="first_dialog_explanation_info">Información</string>
     <string name="first_dialog_explanation_one">Una <b>rutina</b> está compuesta por una serie de días.</string>
-    <string name="first_dialog_explanation_two">Por lo general, para que el músculo progrese adecuadamente y no se adapte al entrenamiento, las rutinas deberían durar de <b>4 a 6 semanas</b></string>
+    <string name="first_dialog_explanation_two">Por lo general, para que el músculo progrese adecuadamente y no se acostumbre al entrenamiento, las rutinas deberían durar de <b>6 a 8 semanas</b></string>
     <string name="first_dialog_explanation_three">Los <b>días</b> contienen los ejercicios que conforman tu entrenamiento</string>
     <string name="first_dialog_edit"><b>Mantén pulsado</b> sobre un elemento para <b>editarlo</b></string>
     <string name="first_dialog_routine_days">4</string>
     <string name="first_dialog_routine_title">Mes de mayo</string>
     <string name="first_dialog_routine_description">Enfocada en pierna</string>
+    <string name="first_dialog_routine_accept">Entendido</string>
 
     <!-- ROUTINES PREDET-->
     <string name="routines_toolbar">Rutinas</string>
 
     <!-- MY ROUTINES -->
     <string name="my_routines_toolbar">Mis rutinas</string>
+    <string name="my_routines_day">Día</string>
     <string name="my_routines_days">Días</string>
+    <string name="my_routines_add_btn">Añadir rutina</string>
     <string name="my_routines_no_description">Sin descripción</string>
-    <string name="my_routines_empty">Todavía no tienes ninguna rutina.\n¡Pulsa el <b>botón +</b> para empezar a añadir!</string>
+    <string name="my_routines_empty">Todavía no tienes ninguna rutina.</string>
 
     <!-- DAYS -->
     <string name="days_empty">Todavía no tienes ningun día en esta rutina.\n¡Pulsa el <b>botón +</b> para empezar a añadir!</string>

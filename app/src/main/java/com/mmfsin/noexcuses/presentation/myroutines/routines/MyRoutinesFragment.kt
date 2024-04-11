@@ -73,11 +73,16 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is MyRoutinesEvent.IsFistTime -> firstTimeFlow(event.firstTime)
+                is MyRoutinesEvent.IsFistTime -> {
+                    firstTimeFlow(event.firstTime)
+                    viewModel.getRoutines()
+                }
+
                 is MyRoutinesEvent.GetMyRoutines -> {
                     myRoutines = event.myRoutines
                     setUpRoutines(myRoutines)
                 }
+
                 is MyRoutinesEvent.SomethingWentWrong -> error()
             }
         }
@@ -85,7 +90,6 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
 
     private fun firstTimeFlow(firstTime: Boolean) {
         if (firstTime) activity?.showFragmentDialog(InitInfoDialog.newInstance())
-        viewModel.getRoutines()
     }
 
     private fun setUpRoutines(myRoutines: List<MyRoutine>) {

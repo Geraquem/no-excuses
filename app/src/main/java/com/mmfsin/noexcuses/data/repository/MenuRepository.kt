@@ -84,13 +84,11 @@ class MenuRepository @Inject constructor(
 
     override fun isFirstTime(): Boolean {
         val firstTime = getSharedPreferences().getBoolean(FIRST_TIME, true)
-        if (firstTime) setNotFirstTime()
+        if (firstTime) {
+            val editor = getSharedPreferences().edit()
+            editor.putBoolean(FIRST_TIME, false)
+            editor.apply()
+        }
         return firstTime
-    }
-
-    private fun setNotFirstTime() {
-        val editor = getSharedPreferences().edit()
-        editor.putBoolean(FIRST_TIME, false)
-        editor.apply()
     }
 }
