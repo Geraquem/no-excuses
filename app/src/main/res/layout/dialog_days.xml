@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_rv_routine"
+    android:background="@drawable/bg_header_dialog"
     android:clickable="true"
     android:focusable="true">
 
@@ -27,7 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@color/white"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -38,7 +37,6 @@
             android:layout_width="48dp"
             android:layout_height="4.5dp"
             android:layout_marginBottom="8dp"
-            android:alpha="0.7"
             android:background="@drawable/bg_top_line" />
 
         <TextView
@@ -64,26 +62,23 @@
         style="@style/scroll_no_effects"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/gl_left"
+        app:layout_constraintRight_toRightOf="@id/gl_right"
+        app:layout_constraintTop_toBottomOf="@id/ll_top"
         tools:itemCount="2"
         tools:listitem="@layout/item_day" />
 
     <TextView
         android:id="@+id/tv_empty"
         style="@style/MediumTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="36dp"
         android:gravity="center"
         android:text="@string/days_empty"
-        android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/ll_top" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add_day"

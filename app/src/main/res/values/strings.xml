@@ -55,8 +55,8 @@
     <string name="my_routines_empty">Todavía no tienes ninguna rutina.</string>
 
     <!-- DAYS -->
-    <string name="days_empty">Todavía no tienes ningun día en esta rutina.\n¡Pulsa el <b>botón +</b> para empezar a añadir!</string>
-    <string name="days_exercises_empty">Todavía no tienes ningun ejercicio para este día.\n¡Pulsa el <b>botón +</b> para empezar a añadir!</string>
+    <string name="days_empty">Todavía no tienes ningún día\npara esta rutina.</string>
+    <string name="days_exercises_empty">Todavía no tienes ningún ejercicio para este día.\n¡Pulsa el <b>botón +</b> para empezar a añadir!</string>
     <string name="days_one_exercise">1 ejercicio</string>
     <string name="days_exercises">%s ejercicios</string>
     <string name="days_exercises_serie">Serie</string>
