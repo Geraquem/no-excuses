@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title">
 
         <TextView
-            style="@style/BigTextView"
+            style="@style/MediumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
@@ -58,7 +58,7 @@
             android:maxLines="1"
             android:paddingHorizontal="16dp"
             android:paddingVertical="12dp"
-            android:textColorHint="@color/soft_grey"
+            android:textColorHint="@color/grey"
             android:textCursorDrawable="@drawable/et_cursor_color" />
 
         <LinearLayout
@@ -75,7 +75,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/BigTextView"
+                    style="@style/MediumTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
@@ -84,14 +84,14 @@
                     android:text="@string/routines_add_description" />
 
                 <TextView
-                    style="@style/BigTextView"
+                    style="@style/MediumTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:alpha="0.5"
                     android:text="@string/routines_add_description_optional"
                     android:textAllCaps="true"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -109,7 +109,7 @@
                 android:maxLines="1"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="12dp"
-                android:textColorHint="@color/soft_grey"
+                android:textColorHint="@color/grey"
                 android:textCursorDrawable="@drawable/et_cursor_color" />
 
         </LinearLayout>

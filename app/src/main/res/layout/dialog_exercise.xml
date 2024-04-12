@@ -6,16 +6,15 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_white_box"
     android:clipChildren="false"
-    android:clipToPadding="false"
-    android:padding="24dp">
+    android:clipToPadding="false">
 
-    <LinearLayout
-        android:layout_width="0dp"
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/bg_header_dialog"
+        android:backgroundTint="@color/light_grey"
+        android:padding="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,18 +25,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="@dimen/margin_padding_xxxsmall"
             android:textAllCaps="true"
             tools:text="EJERCICIO DE PECHO" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rl_top"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
             android:id="@+id/tv_name"
             style="@style/BigTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginBottom="16dp"
             android:textAllCaps="true"
-            tools:text="PRESS DE BANCA PLANO CON BARRA" />
+            tools:text="PRESS DE BANCA PLA" />
 
         <ImageView
             android:id="@+id/image"

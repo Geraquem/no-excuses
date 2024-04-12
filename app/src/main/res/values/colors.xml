@@ -8,15 +8,16 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="grey">#ECECEC</color>
     <color name="background">#EDEDED</color>
 
     <color name="soft_black">#757575</color>
-    <color name="soft_grey">#A5A5A5</color>
     <color name="soft_green">#4FB7FF9C</color>
     <color name="soft_red">#66F27474</color>
     <color name="soft_blue">#83B9E9FF</color>
     <color name="soft_yellow">#D8FFFEC4</color>
+
+    <color name="grey">#9C9C9C</color>
+    <color name="light_grey">#ECECEC</color>
 
     <color name="red">#AA0000</color>
     <color name="light_red">#FFC0C0</color>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey">
+    android:background="@color/light_grey">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_left"
@@ -71,7 +71,7 @@
                     android:maxLines="2"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="12dp"
-                    android:textColorHint="@color/soft_grey"
+                    android:textColorHint="@color/grey"
                     android:textCursorDrawable="@drawable/et_cursor_color"
                     tools:ignore="LabelFor" />
 
@@ -87,7 +87,7 @@
                     android:maxLength="2000"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="12dp"
-                    android:textColorHint="@color/soft_grey"
+                    android:textColorHint="@color/grey"
                     android:textCursorDrawable="@drawable/et_cursor_color"
                     tools:ignore="LabelFor"
                     tools:text="Descripción de la nota" />
