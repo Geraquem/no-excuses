@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs
+package com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
@@ -6,16 +6,18 @@ import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
-import com.mmfsin.noexcuses.databinding.DialogChExerciseDeleteBinding
-import com.mmfsin.noexcuses.presentation.myroutines.days.interfaces.IDayExerciseListener
+import com.mmfsin.noexcuses.databinding.DialogItemDeleteBinding
+import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialogEvent
+import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialogViewModel
+import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExerciseListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DeleteChExerciseDialog(
-    private val chExerciseId: String, private val listener: IDayExerciseListener
-) : BaseDialog<DialogChExerciseDeleteBinding>() {
+    private val chExerciseId: String, private val listener: IMExerciseListener
+) : BaseDialog<DialogItemDeleteBinding>() {
 
     private val viewModel: ChExerciseDialogViewModel by viewModels()
 
@@ -24,7 +26,7 @@ class DeleteChExerciseDialog(
     private var dayName: String? = null
 
     override fun inflateView(inflater: LayoutInflater) =
-        DialogChExerciseDeleteBinding.inflate(inflater)
+        DialogItemDeleteBinding.inflate(inflater)
 
     override fun setCustomViewDialog(dialog: Dialog) = centerViewDialog(dialog)
 
@@ -42,6 +44,7 @@ class DeleteChExerciseDialog(
     override fun setUI() {
         isCancelable = true
         binding.apply {
+            tvTitle.text = getString(R.string.days_exercise_dialog_delete_top_text)
             if (exerciseName != null && dayName != null) {
                 tvText.text =
                     getString(R.string.days_exercise_dialog_delete_text, exerciseName, dayName)
@@ -87,7 +90,7 @@ class DeleteChExerciseDialog(
 
     companion object {
         fun newInstance(
-            chExerciseId: String, listener: IDayExerciseListener
+            chExerciseId: String, listener: IMExerciseListener
         ): DeleteChExerciseDialog {
             return DeleteChExerciseDialog(chExerciseId, listener)
         }

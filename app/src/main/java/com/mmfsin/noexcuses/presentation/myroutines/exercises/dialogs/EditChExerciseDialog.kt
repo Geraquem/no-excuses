@@ -15,9 +15,9 @@ import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
-import com.mmfsin.noexcuses.presentation.myroutines.days.interfaces.IDayExerciseListener
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.adapter.EditChExerciseAdapter
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.interfaces.IAddChExerciseListener
+import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExerciseListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.deletePointZero
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -25,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class EditChExerciseDialog(
-    private val chExerciseId: String, private val listener: IDayExerciseListener
+    private val chExerciseId: String, private val listener: IMExerciseListener
 ) : BaseDialog<DialogChExerciseEditBinding>(), IAddChExerciseListener {
 
     private val viewModel: ChExerciseDialogViewModel by viewModels()
@@ -111,6 +111,7 @@ class EditChExerciseDialog(
                     this.exercise = event.exercise
                     setUI()
                 }
+
                 is ChExerciseDialogEvent.GetDay -> {}
                 is ChExerciseDialogEvent.GetChExercise -> setData(event.chExercise)
                 is ChExerciseDialogEvent.FlowCompleted -> endFlow()
@@ -198,7 +199,7 @@ class EditChExerciseDialog(
 
     companion object {
         fun newInstance(
-            chExerciseId: String, listener: IDayExerciseListener
+            chExerciseId: String, listener: IMExerciseListener
         ): EditChExerciseDialog {
             return EditChExerciseDialog(chExerciseId, listener)
         }

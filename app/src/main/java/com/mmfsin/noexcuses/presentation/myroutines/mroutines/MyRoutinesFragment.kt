@@ -118,7 +118,6 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
         findNavController().navigate(actionRoutinesToMexercises(IdGroup(routineId, dayId)))
     }
 
-    /** WHEN ADD/EDIT/DELETE ROUTINE DIALOGS ENDS */
     override fun flowCompleted() = updateUI()
 
     override fun deleteRoutine(id: String) {

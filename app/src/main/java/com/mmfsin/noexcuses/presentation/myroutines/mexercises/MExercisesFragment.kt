@@ -14,10 +14,10 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMexercisesBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.presentation.models.IdGroup
-import com.mmfsin.noexcuses.presentation.myroutines.days.adapter.DayExercisesAdapter
-import com.mmfsin.noexcuses.presentation.myroutines.days.interfaces.IDayExerciseListener
+import com.mmfsin.noexcuses.presentation.myroutines.mexercises.adapter.MExercisesAdapter
+import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExerciseListener
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialog
-import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.DeleteChExerciseDialog
+import com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs.DeleteChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.EditChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.MExercisesFragmentDirections.Companion.actionMGroupsToExercises
 import com.mmfsin.noexcuses.utils.ID_GROUP
@@ -28,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesViewModel>(),
-    IDayExerciseListener {
+    IMExerciseListener {
 
     override val viewModel: MExercisesViewModel by viewModels()
 
@@ -78,7 +78,7 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
         binding.apply {
             rvExercises.apply {
                 layoutManager = LinearLayoutManager(mContext)
-                adapter = DayExercisesAdapter(exercises, this@MExercisesFragment)
+                adapter = MExercisesAdapter(exercises, this@MExercisesFragment)
             }
             rvExercises.isVisible = exercises.isNotEmpty()
             llEmpty.isVisible = exercises.isEmpty()

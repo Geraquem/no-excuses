@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.days.adapter
+package com.mmfsin.noexcuses.presentation.myroutines.mexercises.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +9,11 @@ import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemChExerciseBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
-import com.mmfsin.noexcuses.presentation.myroutines.days.interfaces.IDayExerciseListener
+import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExerciseListener
 
-class DayExercisesAdapter(
-    private val exercises: List<CompactExercise>, private val listener: IDayExerciseListener
-) : RecyclerView.Adapter<DayExercisesAdapter.ViewHolder>() {
+class MExercisesAdapter(
+    private val exercises: List<CompactExercise>, private val listener: IMExerciseListener
+) : RecyclerView.Adapter<MExercisesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemChExerciseBinding.bind(view)

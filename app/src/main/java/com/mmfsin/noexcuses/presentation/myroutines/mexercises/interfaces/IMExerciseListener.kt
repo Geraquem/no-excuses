@@ -1,6 +1,6 @@
-package com.mmfsin.noexcuses.presentation.myroutines.days.interfaces
+package com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces
 
-interface IDayExerciseListener {
+interface IMExerciseListener {
     fun onExerciseClick(chExerciseId: String)
     fun onExerciseLongClick(chExerciseId: String)
 
