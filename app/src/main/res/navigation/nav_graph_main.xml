@@ -27,11 +27,11 @@
             app:destination="@id/notes_nav_graph" />
     </fragment>
 
-    <include app:graph="@navigation/routines_nav_graph" />
+    <include app:graph="@navigation/nav_graph_routines" />
 
-    <include app:graph="@navigation/my_routines_nav_graph" />
+    <include app:graph="@navigation/nav_graph_my_routines" />
 
-    <include app:graph="@navigation/exercises_nav_graph" />
+    <include app:graph="@navigation/nav_graph_exercises" />
 
     <fragment
         android:id="@+id/chronoFragment"
@@ -39,6 +39,6 @@
         android:label="chronoFragment"
         tools:layout="@layout/fragment_chrono" />
 
-    <include app:graph="@navigation/notes_nav_graph" />
+    <include app:graph="@navigation/nav_graph_notes" />
 
 </navigation>

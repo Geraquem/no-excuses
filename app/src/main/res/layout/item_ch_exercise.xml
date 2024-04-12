@@ -4,13 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="4dp"
-    android:layout_marginBottom="16dp"
+    android:layout_marginBottom="8dp"
     android:background="@drawable/bg_white_box"
     android:elevation="4dp"
-    android:paddingHorizontal="16dp"
-    android:paddingTop="20dp"
-    android:paddingBottom="16dp">
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/image"
@@ -83,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/days_exercises_series"
+                    android:text="@string/mexercises_series"
                     android:textAllCaps="true" />
 
             </LinearLayout>

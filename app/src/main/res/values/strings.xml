@@ -60,10 +60,12 @@
     <string name="days_one_exercise">1 ejercicio</string>
     <string name="days_exercises">%s ejercicios</string>
 
-    <string name="days_exercises_empty">Todavía no tienes ningún ejercicio para este día.\n¡Pulsa el <b>botón +</b> para empezar a añadir!</string>
-    <string name="days_exercises_serie">Serie</string>
-    <string name="days_exercises_series">Series</string>
-    <string name="days_exercises_empty_data">\?</string>
+    <!-- MY EXERCISES -->
+    <string name="mexercises_empty">Todavía no tienes ningún ejercicio\nasignado a este día.</string>
+    <string name="mexercises_serie">Serie</string>
+    <string name="mexercises_series">Series</string>
+    <string name="mexercises_empty_data">\?</string>
+    <string name="mexercises_add_btn">Añadir ejercicio</string>
 
     <!-- DAY EXERCISE ADD/EDIT/DELETE DIALOG -->
     <string name="days_exercise_dialog_serie">Serie %s</string>
@@ -72,7 +74,7 @@
     <string name="days_exercise_dialog_reps_hint">00</string>
     <string name="days_exercise_dialog_weight_hint">00.00</string>
     <string name="days_exercise_dialog_time_text">Descanso</string>
-    <string name="days_exercise_dialog_time_minutes">minuto(s) / serie</string>
+    <string name="days_exercise_dialog_time_minutes">min / serie</string>
     <string name="days_exercise_dialog_time_rest">Desc.</string>
     <string name="days_exercise_dialog_time_minutes_symbol">\'\'</string>
     <string name="days_exercise_dialog_time_hint">0:00</string>

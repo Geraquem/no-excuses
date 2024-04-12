@@ -10,13 +10,13 @@
         android:name="com.mmfsin.noexcuses.presentation.routines.RoutinesFragment"
         android:label="routinesFragment"
         tools:layout="@layout/fragment_routines">
-        <action
-            android:id="@+id/action_routines_to_days"
-            app:destination="@id/daysFragment">
-            <argument
-                android:name="idGroup"
-                app:argType="com.mmfsin.noexcuses.presentation.models.IdGroup" />
-        </action>
+<!--        <action-->
+<!--            android:id="@+id/action_routines_to_days"-->
+<!--            app:destination="@id/daysFragment">-->
+<!--            <argument-->
+<!--                android:name="idGroup"-->
+<!--                app:argType="com.mmfsin.noexcuses.presentation.models.IdGroup" />-->
+<!--        </action>-->
     </fragment>
 
 </navigation>

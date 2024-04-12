@@ -16,12 +16,12 @@ import com.mmfsin.noexcuses.databinding.FragmentMyRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.MyRoutine
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.days.DaysDialog
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.MyRoutinesFragmentDirections.Companion.actionRoutinesToDays
+import com.mmfsin.noexcuses.presentation.myroutines.mroutines.MyRoutinesFragmentDirections.Companion.actionRoutinesToMexercises
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.adapter.MyRoutinesAdapter
+import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineAddDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineDeleteDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineEditDialog
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces.IMyRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
@@ -115,7 +115,7 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
     override fun dayAddedToRoutine() = updateUI()
 
     override fun onDayClick(routineId: String, dayId: String) {
-        findNavController().navigate(actionRoutinesToDays(IdGroup(routineId, dayId)))
+        findNavController().navigate(actionRoutinesToMexercises(IdGroup(routineId, dayId)))
     }
 
     /** WHEN ADD/EDIT/DELETE ROUTINE DIALOGS ENDS */

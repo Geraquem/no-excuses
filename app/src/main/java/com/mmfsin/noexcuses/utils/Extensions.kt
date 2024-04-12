@@ -5,6 +5,8 @@ import android.animation.ObjectAnimator
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.os.Build
+import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -20,6 +22,11 @@ import com.mmfsin.noexcuses.base.dialog.ErrorDialog
 fun FragmentActivity.showErrorDialog(goBack: Boolean = true) {
     val dialog = ErrorDialog(goBack)
     this.let { dialog.show(it.supportFragmentManager, "") }
+}
+
+fun isKeyboardVisible(view: View): Boolean {
+    val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    return imm.isAcceptingText
 }
 
 fun Activity.closeKeyboard() {
@@ -68,7 +75,7 @@ fun countDown300(action: () -> Unit) {
     }.start()
 }
 
-fun countDown300(millis: Long, action: () -> Unit) {
+fun countDown(millis: Long, action: () -> Unit) {
     object : CountDownTimer(millis, 1000) {
         override fun onTick(millisUntilFinished: Long) {}
         override fun onFinish() {
@@ -90,9 +97,10 @@ fun Double?.deletePointZero(): String {
     } else formatted
 }
 
-fun isKeyboardVisible(view: View): Boolean {
-    val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    return imm.isAcceptingText
+fun <T> Bundle.getBundleParcelableArgs(identifier: String, clazz: Class<T>): T? {
+    return if (Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) {
+        this.getParcelable(identifier, clazz)
+    } else @Suppress("DEPRECATION") this.getParcelable(identifier)
 }
 
 fun <T1 : Any, T2 : Any, R : Any> checkNotNulls(p1: T1?, p2: T2?, block: (T1, T2) -> R): R? {

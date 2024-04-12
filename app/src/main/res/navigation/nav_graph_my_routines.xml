@@ -11,8 +11,8 @@
         android:label="routinesFragment"
         tools:layout="@layout/fragment_my_routines">
         <action
-            android:id="@+id/action_routines_to_days"
-            app:destination="@id/daysFragment">
+            android:id="@+id/action_routines_to_mexercises"
+            app:destination="@id/mExercisesFragment">
             <argument
                 android:name="idGroup"
                 app:argType="com.mmfsin.noexcuses.presentation.models.IdGroup" />
@@ -20,10 +20,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/daysFragment"
-        android:name="com.mmfsin.noexcuses.presentation.myroutines.mexercises.DaysFragment"
-        android:label="daysFragment"
-        tools:layout="@layout/fragment_days">
+        android:id="@+id/mExercisesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.myroutines.mexercises.MExercisesFragment"
+        android:label="mExercisesFragment"
+        tools:layout="@layout/fragment_mexercises">
         <action
             android:id="@+id/action_mGroups_to_exercises"
             app:destination="@id/chMGroupsFragment">

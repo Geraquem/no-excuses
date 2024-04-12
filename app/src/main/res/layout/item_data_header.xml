@@ -12,7 +12,7 @@
         style="@style/MediumTextView"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:text="@string/days_exercises_series"
+        android:text="@string/mexercises_series"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
