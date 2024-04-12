@@ -133,5 +133,4 @@
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

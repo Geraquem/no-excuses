@@ -45,13 +45,12 @@
 
         <TextView
             android:id="@+id/tv_name"
-            style="@style/BigTextView"
+            style="@style/MediumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="12dp"
             android:textAllCaps="true"
-            tools:text="PRESS DE BANCA PLA" />
+            tools:text="PRESS DE BANCA PLANO" />
 
         <ImageView
             android:id="@+id/image"
