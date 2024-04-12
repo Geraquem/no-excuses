@@ -1,5 +1,6 @@
 package com.mmfsin.noexcuses.presentation.myroutines.days
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.base.BaseDialog
+import com.mmfsin.noexcuses.base.swipelistener.OnSwipeListener
 import com.mmfsin.noexcuses.databinding.DialogDaysBinding
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.presentation.myroutines.days.adapter.DaysAdapter
@@ -43,9 +45,17 @@ class DaysDialog(
         isCancelable = true
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun setListeners() {
         binding.apply {
             ivDismiss.setOnClickListener { dismiss() }
+
+            rvDays.setOnTouchListener(object : OnSwipeListener(requireContext()) {
+                override fun onSwipeBottom() {
+                    dismiss()
+                }
+            })
+
             btnAddDay.setOnClickListener {
                 childFragmentManager.showFragmentDialog(
                     DayAddDialog.newInstance(routineId, this@DaysDialog)
