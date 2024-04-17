@@ -15,6 +15,7 @@ open class DefaultDayDTO(
     @PrimaryKey
     var id: String = "",
     var name: String = "",
-    var routineId: String = ""
+    var routineId: String = "",
+    var exercises: Long = 0
 ) : RealmObject()
 

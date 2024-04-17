@@ -68,9 +68,10 @@ class DefaultDaysDialog(
             when (event) {
                 is DefaultDaysDialogEvent.GetDefaultRoutine -> {
                     binding.tvRoutineName.text = event.routine.title
-//                    viewModel.getDays(routineId)
+                    viewModel.getDefaultDays(routineId)
                 }
 
+                is DefaultDaysDialogEvent.GetDefaultDays -> setUpDays(event.days)
                 is DefaultDaysDialogEvent.SWW -> error()
             }
         }

@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.mmfsin.noexcuses.data.models.DayDTO
+import com.mmfsin.noexcuses.data.models.DefaultDayDTO
 import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
 import com.mmfsin.noexcuses.data.models.ExerciseDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
 import com.mmfsin.noexcuses.domain.interfaces.IMenuRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
+import com.mmfsin.noexcuses.utils.DAYS
 import com.mmfsin.noexcuses.utils.DEFAULT_ROUTINES
 import com.mmfsin.noexcuses.utils.EXERCISES
 import com.mmfsin.noexcuses.utils.FIRST_TIME
@@ -57,10 +60,15 @@ class MenuRepository @Inject constructor(
             }
 
             val defaultRoutines = it.child(DEFAULT_ROUTINES)
+
             val routines = defaultRoutines.child(ROUTINES)
             for (routine in routines.children) {
-                routine.getValue(DefaultRoutineDTO::class.java)
-                    ?.let { r -> saveDefaultRoutine(r) }
+                routine.getValue(DefaultRoutineDTO::class.java)?.let { r -> saveDefaultRoutine(r) }
+            }
+
+            val days = defaultRoutines.child(DAYS)
+            for (day in days.children) {
+                day.getValue(DefaultDayDTO::class.java)?.let { d -> saveDefaultDay(d) }
             }
 
 
@@ -102,6 +110,7 @@ class MenuRepository @Inject constructor(
     private fun saveExercise(exercise: ExerciseDTO) = realmDatabase.addObject { exercise }
 
     private fun saveDefaultRoutine(routine: DefaultRoutineDTO) = realmDatabase.addObject { routine }
+    private fun saveDefaultDay(day: DefaultDayDTO) = realmDatabase.addObject { day }
 
 //    private fun saveExercisePredInRealm(exercise: ExercisePredDTO) =
 //        realmDatabase.addObject { exercise }

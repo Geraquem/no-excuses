@@ -32,9 +32,17 @@ fun List<DefaultRoutineDTO>.toDefaultRoutineList() = this.map { it.toDefaultRout
 private fun String.daysCount(): Int = this.split(",").size
 
 /** Day */
+fun DefaultDayDTO.toDay() = Day(
+    id = id,
+    routineId = routineId,
+    title = name,
+    exercises = exercises.toInt()
+)
+
 fun DayDTO.toDay() = Day(id, routineId, title, exercises)
 
-fun List<DayDTO>.toDayList() = this.map { it.toDay() }
+fun List<DayDTO>.toDayListaaa() = this.map { it.toDay() }
+fun List<DefaultDayDTO>.toDayList() = this.map { it.toDay() }
 
 /** ChExercise */
 fun ChExerciseDTO.toChExercise() =

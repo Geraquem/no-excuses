@@ -2,12 +2,14 @@ package com.mmfsin.noexcuses.presentation.dfroutines.dfdays
 
 import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.GetDefaultRoutineByIdUseCase
+import com.mmfsin.noexcuses.domain.usecases.GetDefaultRoutineDaysUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class DefaultDaysDialogViewModel @Inject constructor(
     private val getDefaultRoutineByIdUseCase: GetDefaultRoutineByIdUseCase,
+    private val getDefaultRoutineDaysUseCase: GetDefaultRoutineDaysUseCase
 ) : BaseViewModel<DefaultDaysDialogEvent>() {
 
     fun getDefaultRoutine(routineId: String) {
@@ -21,11 +23,11 @@ class DefaultDaysDialogViewModel @Inject constructor(
         )
     }
 
-//    fun getDays(routineId: String) {
-//        executeUseCase(
-//            { getMyRoutineDaysUseCase.execute(GetMyRoutineDaysUseCase.Params(routineId)) },
-//            { result -> _event.value = DaysDialogEvent.GetDays(result) },
-//            { _event.value = DaysDialogEvent.SWW }
-//        )
-//    }
+    fun getDefaultDays(routineId: String) {
+        executeUseCase(
+            { getDefaultRoutineDaysUseCase.execute(GetDefaultRoutineDaysUseCase.Params(routineId)) },
+            { result -> _event.value = DefaultDaysDialogEvent.GetDefaultDays(result) },
+            { _event.value = DefaultDaysDialogEvent.SWW }
+        )
+    }
 }

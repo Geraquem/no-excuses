@@ -20,8 +20,7 @@ class DefaultDaysAdapter(
         fun bind(day: Day) {
             binding.apply {
                 val title = day.title
-                val initial = if (title.isNotEmpty()) title.substring(0, 1) else "?"
-                image.firstLetter.text = initial
+                image.firstLetter.text = day.id.last().toString()
                 tvTitle.text = title
                 val exercises = day.exercises
                 val numOfExercises = if (exercises == 1) c.getString(R.string.days_one_exercise)
