@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.defaultroutines.dfroutines
+package com.mmfsin.noexcuses.presentation.dfroutines.dfroutines
 
 import com.mmfsin.noexcuses.domain.models.DefaultRoutine
 

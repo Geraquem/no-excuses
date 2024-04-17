@@ -8,7 +8,7 @@ import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.utils.ID
 import io.realm.kotlin.where
-import java.util.*
+import java.util.UUID
 import javax.inject.Inject
 
 class NotesRepository @Inject constructor(
@@ -42,8 +42,7 @@ class NotesRepository @Inject constructor(
     }
 
     override fun deleteNote(id: String) {
-        val note = getNoteDTO(id)
-        note?.let { realmDatabase.deleteObject({ note }, note.id) }
+        realmDatabase.deleteObject(NoteDTO::class.java, ID, id)
     }
 
     private fun getNoteDTO(id: String): NoteDTO? {

@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.defaultroutines.dfroutines
+package com.mmfsin.noexcuses.presentation.dfroutines.dfroutines
 
 import android.content.Context
 import android.os.Bundle
@@ -13,15 +13,16 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentDefaultRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.DefaultRoutine
-import com.mmfsin.noexcuses.presentation.defaultroutines.dfroutines.adapter.RoutinesAdapter
-import com.mmfsin.noexcuses.presentation.defaultroutines.dfroutines.interfaces.IRoutineListener
+import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.DefaultDaysDialog
+import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.adapter.DefaultRoutinesAdapter
+import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.interfaces.IDefaultRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DefaultRoutinesFragment :
     BaseFragment<FragmentDefaultRoutinesBinding, DefaultRoutinesViewModel>(),
-    IRoutineListener {
+    IDefaultRoutineListener {
 
     override val viewModel: DefaultRoutinesViewModel by viewModels()
 
@@ -33,13 +34,13 @@ class DefaultRoutinesFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getRoutines()
+        viewModel.getDefaultRoutines()
     }
 
     override fun onResume() {
         super.onResume()
-//        val routineOpened = (activity as MainActivity).routineOpened
-//        routineOpened?.let { onRoutineClick(it) }
+        val routineOpened = (activity as MainActivity).routineOpened
+        routineOpened?.let { onRoutineClick(it) }
     }
 
     override fun setUI() {
@@ -63,13 +64,19 @@ class DefaultRoutinesFragment :
         binding.apply {
             rvRoutines.apply {
                 layoutManager = LinearLayoutManager(mContext)
-                adapter = RoutinesAdapter(defaultRoutines, this@DefaultRoutinesFragment)
+                adapter = DefaultRoutinesAdapter(defaultRoutines, this@DefaultRoutinesFragment)
             }
         }
     }
 
-    override fun onRoutineClick(id: String, days: String) {
-        Toast.makeText(mContext, days, Toast.LENGTH_SHORT).show()
+    override fun onRoutineClick(id: String) {
+        (activity as MainActivity).routineOpened = id
+        val dialog = DefaultDaysDialog(routineId = id, this@DefaultRoutinesFragment)
+        activity?.let { dialog.show(it.supportFragmentManager, "") }
+    }
+
+    override fun onDayClick(id: String) {
+        Toast.makeText(mContext, id, Toast.LENGTH_SHORT).show()
     }
 
     private fun error() = activity?.showErrorDialog()

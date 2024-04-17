@@ -1,18 +1,18 @@
-package com.mmfsin.noexcuses.presentation.defaultroutines.dfroutines
+package com.mmfsin.noexcuses.presentation.dfroutines.dfroutines
 
 import com.mmfsin.noexcuses.base.BaseViewModel
-import com.mmfsin.noexcuses.domain.usecases.GetPredRoutinesUseCase
+import com.mmfsin.noexcuses.domain.usecases.GetDefaultRoutinesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class DefaultRoutinesViewModel @Inject constructor(
-    private val getPredRoutinesUseCase: GetPredRoutinesUseCase
+    private val getDefaultRoutinesUseCase: GetDefaultRoutinesUseCase
 ) : BaseViewModel<DefaultRoutinesEvent>() {
 
-    fun getRoutines() {
+    fun getDefaultRoutines() {
         executeUseCase(
-            { getPredRoutinesUseCase.execute() },
+            { getDefaultRoutinesUseCase.execute() },
             { result -> _event.value = DefaultRoutinesEvent.GetDefaultRoutines(result) },
             { _event.value = DefaultRoutinesEvent.SomethingWentWrong }
         )

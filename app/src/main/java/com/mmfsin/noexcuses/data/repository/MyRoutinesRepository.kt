@@ -52,12 +52,11 @@ class MyRoutinesRepository @Inject constructor(
             where<DayDTO>().equalTo(ROUTINE_ID, id).findAll()
         }
         for (day in days) {
-            realmDatabase.deleteObject({ day }, day.id)
+            realmDatabase.deleteObject(DayDTO::class.java, ID, day.id)
         }
 
         /** DELTE ROUTINE */
-        val routine = getRoutineDTO(id)
-        routine?.let { realmDatabase.deleteObject({ it }, id) }
+        realmDatabase.deleteObject(MyRoutineDTO::class.java, ID, id)
     }
 
     private fun getRoutineDTO(id: String): MyRoutineDTO? {
@@ -105,15 +104,14 @@ class MyRoutinesRepository @Inject constructor(
 
         /** DELETE DAY */
         val day = getDayDTO(id)
-        day?.let {d->
+        day?.let { d ->
             /** DELETE DAYS COUNT IN ROUTINE */
             val routine = getRoutineDTO(d.routineId)
             routine?.let { r ->
                 r.days--
                 realmDatabase.addObject { r }
             }
-
-            realmDatabase.deleteObject({ d }, id)
+            realmDatabase.deleteObject(MyRoutineDTO::class.java, ID, id)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.defaultroutines.dfroutines.adapter
+package com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemRoutineBinding
 import com.mmfsin.noexcuses.domain.models.DefaultRoutine
-import com.mmfsin.noexcuses.presentation.defaultroutines.dfroutines.interfaces.IRoutineListener
+import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.interfaces.IDefaultRoutineListener
 
-class RoutinesAdapter(
+class DefaultRoutinesAdapter(
     private val myDefaultRoutines: List<DefaultRoutine>,
-    private val listener: IRoutineListener
-) : RecyclerView.Adapter<RoutinesAdapter.ViewHolder>() {
+    private val listener: IDefaultRoutineListener
+) : RecyclerView.Adapter<DefaultRoutinesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemRoutineBinding.bind(view)
@@ -35,7 +35,7 @@ class RoutinesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val routine = myDefaultRoutines[position]
         holder.bind(routine)
-        holder.itemView.setOnClickListener { listener.onRoutineClick(routine.id, "routine.days") }
+        holder.itemView.setOnClickListener { listener.onRoutineClick(routine.id) }
     }
 
     override fun getItemCount(): Int = myDefaultRoutines.size

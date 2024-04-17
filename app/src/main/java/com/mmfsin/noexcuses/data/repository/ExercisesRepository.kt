@@ -97,7 +97,7 @@ class ExercisesRepository @Inject constructor(
                 it.exercises--
                 realmDatabase.addObject { it }
             }
-            realmDatabase.deleteObject({ e }, e.id)
+            realmDatabase.deleteObject(ChExerciseDTO::class.java, ID, e.id)
         }
     }
 
@@ -106,7 +106,7 @@ class ExercisesRepository @Inject constructor(
             where<DataDTO>().equalTo(DATA_ID, dataId).findAll()
         }
         for (d in data) {
-            d.id?.let { id -> realmDatabase.deleteObject({ d }, id) }
+            d.id?.let { id -> realmDatabase.deleteObject(DataDTO::class.java, ID, id) }
         }
     }
 
