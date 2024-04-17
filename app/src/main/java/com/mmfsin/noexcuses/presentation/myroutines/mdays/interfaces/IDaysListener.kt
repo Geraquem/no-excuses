@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.days.interfaces
+package com.mmfsin.noexcuses.presentation.myroutines.mdays.interfaces
 
 interface IDaysListener {
     fun flowCompleted()

@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.days.dialogs
+package com.mmfsin.noexcuses.presentation.myroutines.mdays.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
@@ -7,8 +7,9 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
-import com.mmfsin.noexcuses.databinding.DialogItemAddBinding
-import com.mmfsin.noexcuses.presentation.myroutines.days.interfaces.IDaysListener
+import com.mmfsin.noexcuses.databinding.DialogItemEditBinding
+import com.mmfsin.noexcuses.domain.models.Day
+import com.mmfsin.noexcuses.presentation.myroutines.mdays.interfaces.IDaysListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.closeKeyboard
 import com.mmfsin.noexcuses.utils.countDown300
@@ -17,14 +18,16 @@ import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DayAddDialog(
-    private val routineId: String,
+class DayEditDialog(
+    private val dayId: String,
     private val listener: IDaysListener
-) : BaseDialog<DialogItemAddBinding>() {
+) : BaseDialog<DialogItemEditBinding>() {
 
     private val viewModel: DayConfigViewModel by viewModels()
 
-    override fun inflateView(inflater: LayoutInflater) = DialogItemAddBinding.inflate(inflater)
+    private var day: Day? = null
+
+    override fun inflateView(inflater: LayoutInflater) = DialogItemEditBinding.inflate(inflater)
 
     override fun setCustomViewDialog(dialog: Dialog) = centerViewDialog(dialog)
 
@@ -36,12 +39,13 @@ class DayAddDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         observe()
+        viewModel.getDay(dayId)
     }
 
     override fun setUI() {
         isCancelable = true
         binding.apply {
-            tvTitle.text = getString(R.string.days_add_top_text)
+            tvTitle.text = getString(R.string.days_edit_top_text)
             llDescription.visibility = View.GONE
             tvError.visibility = View.GONE
         }
@@ -49,12 +53,21 @@ class DayAddDialog(
 
     override fun setListeners() {
         binding.apply {
-            btnAccept.setOnClickListener {
-                val title = etTitle.text.toString()
-                if (title.isNotEmpty() && title.isNotBlank()) {
-                    if (isKeyboardVisible(btnAccept)) closeKeyboard()
-                    countDown300 { viewModel.addDay(routineId, title) }
-                } else tvError.visibility = View.VISIBLE
+            btnDelete.setOnClickListener {
+                day?.let {
+                    listener.openDeleteDayDialog(it.id)
+                    dismiss()
+                }
+            }
+
+            btnEdit.setOnClickListener {
+                day?.let { d ->
+                    val title = etTitle.text.toString()
+                    if (title.isNotEmpty() && title.isNotBlank()) {
+                        if (isKeyboardVisible(btnEdit)) closeKeyboard()
+                        countDown300 { viewModel.editDay(d.id, title) }
+                    } else binding.tvError.visibility = View.VISIBLE
+                }
             }
         }
     }
@@ -67,7 +80,11 @@ class DayAddDialog(
                     dismiss()
                 }
 
-                is DayConfigEvent.GetDay -> {}
+                is DayConfigEvent.GetDay -> {
+                    day = event.day
+                    binding.etTitle.setText(day?.title)
+                }
+
                 is DayConfigEvent.SomethingWentWrong -> error()
             }
         }
@@ -75,10 +92,9 @@ class DayAddDialog(
 
     private fun error() = activity?.showErrorDialog()
 
-
     companion object {
-        fun newInstance(routineId: String, listener: IDaysListener): DayAddDialog {
-            return DayAddDialog(routineId, listener)
+        fun newInstance(routineId: String, listener: IDaysListener): DayEditDialog {
+            return DayEditDialog(routineId, listener)
         }
     }
 }

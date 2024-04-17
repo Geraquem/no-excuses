@@ -15,7 +15,7 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMyRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.MyRoutine
 import com.mmfsin.noexcuses.presentation.models.IdGroup
-import com.mmfsin.noexcuses.presentation.myroutines.days.DaysDialog
+import com.mmfsin.noexcuses.presentation.myroutines.mdays.DaysDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.MyRoutinesFragmentDirections.Companion.actionRoutinesToMexercises
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.adapter.MyRoutinesAdapter
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.InfoDialog

@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.defaultroutines
+package com.mmfsin.noexcuses.presentation.defaultroutines.dfroutines
 
 import android.content.Context
 import android.os.Bundle
@@ -13,8 +13,8 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentDefaultRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.DefaultRoutine
-import com.mmfsin.noexcuses.presentation.defaultroutines.adapter.RoutinesAdapter
-import com.mmfsin.noexcuses.presentation.defaultroutines.interfaces.IRoutineListener
+import com.mmfsin.noexcuses.presentation.defaultroutines.dfroutines.adapter.RoutinesAdapter
+import com.mmfsin.noexcuses.presentation.defaultroutines.dfroutines.interfaces.IRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 

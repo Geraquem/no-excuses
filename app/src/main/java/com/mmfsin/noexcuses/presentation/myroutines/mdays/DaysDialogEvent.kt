@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.days
+package com.mmfsin.noexcuses.presentation.myroutines.mdays
 
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.MyRoutine

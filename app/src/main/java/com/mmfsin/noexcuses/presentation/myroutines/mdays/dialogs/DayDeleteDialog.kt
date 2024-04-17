@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.days.dialogs
+package com.mmfsin.noexcuses.presentation.myroutines.mdays.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
@@ -8,7 +8,7 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogItemDeleteBinding
 import com.mmfsin.noexcuses.domain.models.Day
-import com.mmfsin.noexcuses.presentation.myroutines.days.interfaces.IDaysListener
+import com.mmfsin.noexcuses.presentation.myroutines.mdays.interfaces.IDaysListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint

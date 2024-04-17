@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.days
+package com.mmfsin.noexcuses.presentation.myroutines.mdays
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -11,11 +11,11 @@ import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.base.swipelistener.OnSwipeListener
 import com.mmfsin.noexcuses.databinding.DialogDaysBinding
 import com.mmfsin.noexcuses.domain.models.Day
-import com.mmfsin.noexcuses.presentation.myroutines.days.adapter.DaysAdapter
-import com.mmfsin.noexcuses.presentation.myroutines.days.dialogs.DayAddDialog
-import com.mmfsin.noexcuses.presentation.myroutines.days.dialogs.DayDeleteDialog
-import com.mmfsin.noexcuses.presentation.myroutines.days.dialogs.DayEditDialog
-import com.mmfsin.noexcuses.presentation.myroutines.days.interfaces.IDaysListener
+import com.mmfsin.noexcuses.presentation.myroutines.mdays.adapter.DaysAdapter
+import com.mmfsin.noexcuses.presentation.myroutines.mdays.dialogs.DayAddDialog
+import com.mmfsin.noexcuses.presentation.myroutines.mdays.dialogs.DayDeleteDialog
+import com.mmfsin.noexcuses.presentation.myroutines.mdays.dialogs.DayEditDialog
+import com.mmfsin.noexcuses.presentation.myroutines.mdays.interfaces.IDaysListener
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces.IMyRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog

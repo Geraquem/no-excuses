@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.days.adapter
+package com.mmfsin.noexcuses.presentation.myroutines.mdays.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemDayBinding
 import com.mmfsin.noexcuses.domain.models.Day
-import com.mmfsin.noexcuses.presentation.myroutines.days.interfaces.IDaysListener
+import com.mmfsin.noexcuses.presentation.myroutines.mdays.interfaces.IDaysListener
 
 class DaysAdapter(
     private val days: List<Day>,
