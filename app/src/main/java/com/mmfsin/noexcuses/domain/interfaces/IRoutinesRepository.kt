@@ -1,7 +1,7 @@
 package com.mmfsin.noexcuses.domain.interfaces
 
-import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.domain.models.DefaultRoutine
 
 interface IRoutinesRepository {
-    fun getRoutines(): List<Routine>
+    suspend fun getPredeterminatedRoutines(): List<DefaultRoutine>
 }

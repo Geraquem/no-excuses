@@ -1,14 +1,22 @@
 package com.mmfsin.noexcuses.data.repository
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
 import com.mmfsin.noexcuses.data.models.ExerciseDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
-import com.mmfsin.noexcuses.data.models.RoutineDTO
 import com.mmfsin.noexcuses.domain.interfaces.IMenuRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
-import com.mmfsin.noexcuses.utils.*
+import com.mmfsin.noexcuses.utils.DEFAULT_ROUTINES
+import com.mmfsin.noexcuses.utils.EXERCISES
+import com.mmfsin.noexcuses.utils.FIRST_TIME
+import com.mmfsin.noexcuses.utils.MY_SHARED_PREFS
+import com.mmfsin.noexcuses.utils.M_GROUPS
+import com.mmfsin.noexcuses.utils.ROUTINES
+import com.mmfsin.noexcuses.utils.SAVED_VERSION
+import com.mmfsin.noexcuses.utils.VERSION
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -29,34 +37,49 @@ class MenuRepository @Inject constructor(
         val latch = CountDownLatch(1)
         reference.get().addOnSuccessListener {
             val version = it.child(VERSION).value as Long
-            if (version == savedVersion) {
-                latch.countDown()
-            } else {
-                saveVersion(newVersion = version)
+//            if (version == savedVersion) {
+//                latch.countDown()
+//            } else {
+            saveVersion(newVersion = version)
 
-                val routines = it.child(ROUTINES)
-                for (child in routines.children) {
-                    child.getValue(RoutineDTO::class.java)?.let { r ->
-                        saveRoutineInRealm(r)
-                    }
-                }
-
-                val fbMGroups = it.child(M_GROUPS)
-                for (child in fbMGroups.children) {
-                    child.getValue(MuscularGroupDTO::class.java)
-                        ?.let { mGroup -> saveMGroupsInRealm(mGroup) }
-                }
-
-                val fbExercises = it.child(EXERCISES)
-                for (child in fbExercises.children) {
-                    for (exercise in child.children) {
-                        exercise.getValue(ExerciseDTO::class.java)
-                            ?.let { e -> saveExerciseInRealm(e) }
-                    }
-                }
-
-                latch.countDown()
+            val fbMGroups = it.child(M_GROUPS)
+            for (child in fbMGroups.children) {
+                child.getValue(MuscularGroupDTO::class.java)
+                    ?.let { mGroup -> saveMGroups(mGroup) }
             }
+
+            val fbExercises = it.child(EXERCISES)
+            for (child in fbExercises.children) {
+                for (exercise in child.children) {
+                    exercise.getValue(ExerciseDTO::class.java)
+                        ?.let { e -> saveExercise(e) }
+                }
+            }
+
+            val defaultRoutines = it.child(DEFAULT_ROUTINES)
+            val routines = defaultRoutines.child(ROUTINES)
+            for (routine in routines.children) {
+                routine.getValue(DefaultRoutineDTO::class.java)
+                    ?.let { r -> saveDefaultRoutine(r) }
+            }
+
+
+//            for (child in routines.children) {
+//                try {
+//                    child.getValue(RoutineDTO::class.java)
+//                        ?.let { r -> saveRoutinePredInRealm(r) }
+//                    for (exercise in child.child(DAY_ONE).children) {
+//                        exercise.getValue(ExercisePredDTO::class.java)?.let { e ->
+//                            saveExercisePredInRealm(e)
+//                        }
+//                    }
+//                } catch (e: Exception) {
+//                    Log.e("Error parsing RoutinePreDTO", e.message.toString())
+//                }
+////                }
+//            }
+//
+            latch.countDown()
 
         }.addOnFailureListener {
             latch.countDown()
@@ -75,12 +98,13 @@ class MenuRepository @Inject constructor(
 
     private fun getSavedVersion(): Long = getSharedPreferences().getLong(SAVED_VERSION, -1)
 
-    private fun getSharedPreferences() =
-        context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
+    private fun saveMGroups(mGroup: MuscularGroupDTO) = realmDatabase.addObject { mGroup }
+    private fun saveExercise(exercise: ExerciseDTO) = realmDatabase.addObject { exercise }
 
-    private fun saveRoutineInRealm(routine: RoutineDTO) = realmDatabase.addObject { routine }
-    private fun saveMGroupsInRealm(mGroup: MuscularGroupDTO) = realmDatabase.addObject { mGroup }
-    private fun saveExerciseInRealm(exercise: ExerciseDTO) = realmDatabase.addObject { exercise }
+    private fun saveDefaultRoutine(routine: DefaultRoutineDTO) = realmDatabase.addObject { routine }
+
+//    private fun saveExercisePredInRealm(exercise: ExercisePredDTO) =
+//        realmDatabase.addObject { exercise }
 
     override fun isFirstTime(): Boolean {
         val firstTime = getSharedPreferences().getBoolean(FIRST_TIME, true)
@@ -91,4 +115,7 @@ class MenuRepository @Inject constructor(
         }
         return firstTime
     }
+
+    private fun getSharedPreferences() =
+        context.getSharedPreferences(MY_SHARED_PREFS, MODE_PRIVATE)
 }

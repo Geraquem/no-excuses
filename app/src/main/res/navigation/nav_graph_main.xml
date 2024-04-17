@@ -27,7 +27,7 @@
             app:destination="@id/notes_nav_graph" />
     </fragment>
 
-    <include app:graph="@navigation/nav_graph_routines" />
+    <include app:graph="@navigation/nav_graph_default_routines" />
 
     <include app:graph="@navigation/nav_graph_my_routines" />
 

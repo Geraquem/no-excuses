@@ -19,10 +19,15 @@ fun MyRoutineDTO.toMyRoutine() = MyRoutine(id, title, description, days)
 
 fun List<MyRoutineDTO>.toMyRoutineList() = this.map { it.toMyRoutine() }
 
-/** Routine */
-fun RoutineDTO.toRoutine() = Routine(id, name, description, days.daysCount(), days)
+/** Default Routine */
+fun DefaultRoutineDTO.toDefaultRoutine() = DefaultRoutine(
+    id = id,
+    title = name,
+    description = description,
+    days = days
+)
 
-fun List<RoutineDTO>.toRoutineList() = this.map { it.toRoutine() }
+fun List<DefaultRoutineDTO>.toDefaultRoutineList() = this.map { it.toDefaultRoutine() }
 
 private fun String.daysCount(): Int = this.split(",").size
 

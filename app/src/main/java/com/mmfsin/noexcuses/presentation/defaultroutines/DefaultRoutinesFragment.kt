@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.routines
+package com.mmfsin.noexcuses.presentation.defaultroutines
 
 import android.content.Context
 import android.os.Bundle
@@ -11,24 +11,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
-import com.mmfsin.noexcuses.databinding.FragmentRoutinesBinding
-import com.mmfsin.noexcuses.domain.models.Routine
-import com.mmfsin.noexcuses.presentation.routines.adapter.RoutinesAdapter
-import com.mmfsin.noexcuses.presentation.routines.interfaces.IRoutineListener
+import com.mmfsin.noexcuses.databinding.FragmentDefaultRoutinesBinding
+import com.mmfsin.noexcuses.domain.models.DefaultRoutine
+import com.mmfsin.noexcuses.presentation.defaultroutines.adapter.RoutinesAdapter
+import com.mmfsin.noexcuses.presentation.defaultroutines.interfaces.IRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel>(),
+class DefaultRoutinesFragment :
+    BaseFragment<FragmentDefaultRoutinesBinding, DefaultRoutinesViewModel>(),
     IRoutineListener {
 
-    override val viewModel: RoutinesViewModel by viewModels()
+    override val viewModel: DefaultRoutinesViewModel by viewModels()
 
     private lateinit var mContext: Context
 
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
-    ) = FragmentRoutinesBinding.inflate(inflater, container, false)
+    ) = FragmentDefaultRoutinesBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,17 +53,17 @@ class RoutinesFragment : BaseFragment<FragmentRoutinesBinding, RoutinesViewModel
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is RoutinesEvent.GetRoutines -> setUpRoutines(event.routines)
-                is RoutinesEvent.SomethingWentWrong -> error()
+                is DefaultRoutinesEvent.GetDefaultRoutines -> setUpRoutines(event.defaultRoutines)
+                is DefaultRoutinesEvent.SomethingWentWrong -> error()
             }
         }
     }
 
-    private fun setUpRoutines(routines: List<Routine>) {
+    private fun setUpRoutines(defaultRoutines: List<DefaultRoutine>) {
         binding.apply {
             rvRoutines.apply {
                 layoutManager = LinearLayoutManager(mContext)
-                adapter = RoutinesAdapter(routines, this@RoutinesFragment)
+                adapter = RoutinesAdapter(defaultRoutines, this@DefaultRoutinesFragment)
             }
         }
     }

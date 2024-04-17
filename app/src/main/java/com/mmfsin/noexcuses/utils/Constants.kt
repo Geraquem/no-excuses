@@ -4,7 +4,10 @@ package com.mmfsin.noexcuses.utils
 const val VERSION = "version"
 const val M_GROUPS = "muscular_groups"
 const val EXERCISES = "exercises"
-const val ROUTINES = "routines_predet"
+
+const val DEFAULT_ROUTINES = "default_routines"
+const val ROUTINES = "routines"
+const val DAYS = "days"
 
 //REALM
 const val CATEGORY = "category"
