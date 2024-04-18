@@ -16,9 +16,9 @@ class ChExercisesViewModel @Inject constructor(
                 { getExercisesUseCase.execute(GetExercisesUseCase.Params(mGroupName)) },
                 { result ->
                     _event.value = if (result.isNotEmpty()) ChExercisesEvent.GetExercises(result)
-                    else ChExercisesEvent.SomethingWentWrong
+                    else ChExercisesEvent.SWW
                 },
-                { _event.value = ChExercisesEvent.SomethingWentWrong }
+                { _event.value = ChExercisesEvent.SWW }
             )
         }
     }

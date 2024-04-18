@@ -55,7 +55,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
         viewModel.event.observe(this) { event ->
             when (event) {
                 is NotesEvent.GetNotes -> setUpNotes(event.notes)
-                is NotesEvent.SomethingWentWrong -> error()
+                is NotesEvent.SWW -> error()
             }
         }
     }

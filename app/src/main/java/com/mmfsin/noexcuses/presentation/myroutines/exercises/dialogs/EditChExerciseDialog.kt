@@ -115,7 +115,7 @@ class EditChExerciseDialog(
                 is ChExerciseDialogEvent.GetDay -> {}
                 is ChExerciseDialogEvent.GetChExercise -> setData(event.chExercise)
                 is ChExerciseDialogEvent.FlowCompleted -> endFlow()
-                is ChExerciseDialogEvent.SomethingWentWrong -> error()
+                is ChExerciseDialogEvent.SWW -> error()
             }
         }
     }

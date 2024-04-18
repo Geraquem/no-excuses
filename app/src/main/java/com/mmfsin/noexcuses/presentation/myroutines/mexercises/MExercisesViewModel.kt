@@ -17,9 +17,9 @@ class MExercisesViewModel @Inject constructor(
             { getDayByIdUseCase.execute(GetDayByIdUseCase.Params(dayId)) },
             { result ->
                 _event.value = result?.let { MExercisesEvent.GetDay(it) }
-                    ?: run { MExercisesEvent.SomethingWentWrong }
+                    ?: run { MExercisesEvent.SWW }
             },
-            { _event.value = MExercisesEvent.SomethingWentWrong }
+            { _event.value = MExercisesEvent.SWW }
         )
     }
 
@@ -27,7 +27,7 @@ class MExercisesViewModel @Inject constructor(
         executeUseCase(
             { getDayExercisesUseCase.execute(GetDayExercisesUseCase.Params(dayId)) },
             { result -> _event.value = MExercisesEvent.GetDayExercises(result) },
-            { _event.value = MExercisesEvent.SomethingWentWrong }
+            { _event.value = MExercisesEvent.SWW }
         )
     }
 }

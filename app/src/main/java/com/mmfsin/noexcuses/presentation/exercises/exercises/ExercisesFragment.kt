@@ -52,7 +52,7 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding, ExercisesViewMo
         viewModel.event.observe(this) { event ->
             when (event) {
                 is ExercisesEvent.GetExercises -> setUpExercises(event.exercises)
-                is ExercisesEvent.SomethingWentWrong -> error()
+                is ExercisesEvent.SWW -> error()
             }
         }
     }

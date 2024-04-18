@@ -5,5 +5,5 @@ import com.mmfsin.noexcuses.domain.models.Note
 sealed class DeleteNoteEvent {
     class GetNote(val note: Note) : DeleteNoteEvent()
     object DeletedCompleted : DeleteNoteEvent()
-    object SomethingWentWrong : DeleteNoteEvent()
+    object SWW : DeleteNoteEvent()
 }

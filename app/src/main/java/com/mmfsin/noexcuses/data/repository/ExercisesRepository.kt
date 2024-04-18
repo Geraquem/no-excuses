@@ -1,14 +1,27 @@
 package com.mmfsin.noexcuses.data.repository
 
-import com.mmfsin.noexcuses.data.mappers.*
-import com.mmfsin.noexcuses.data.models.*
+import com.mmfsin.noexcuses.data.mappers.toChExercise
+import com.mmfsin.noexcuses.data.mappers.toChExerciseDTO
+import com.mmfsin.noexcuses.data.mappers.toCompactExercise
+import com.mmfsin.noexcuses.data.mappers.toExercise
+import com.mmfsin.noexcuses.data.mappers.toExerciseList
+import com.mmfsin.noexcuses.data.mappers.toMuscularGroupList
+import com.mmfsin.noexcuses.data.models.ChExerciseDTO
+import com.mmfsin.noexcuses.data.models.DataDTO
+import com.mmfsin.noexcuses.data.models.DayDTO
+import com.mmfsin.noexcuses.data.models.ExerciseDTO
+import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
 import com.mmfsin.noexcuses.domain.interfaces.IExercisesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
-import com.mmfsin.noexcuses.utils.*
+import com.mmfsin.noexcuses.utils.CATEGORY
+import com.mmfsin.noexcuses.utils.DATA_ID
+import com.mmfsin.noexcuses.utils.DAY_ID
+import com.mmfsin.noexcuses.utils.ID
+import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import io.realm.kotlin.where
 import javax.inject.Inject
 
@@ -31,10 +44,8 @@ class ExercisesRepository @Inject constructor(
     }
 
     override fun getExerciseById(id: String): Exercise? {
-        val exercises = realmDatabase.getObjectsFromRealm {
-            where<ExerciseDTO>().equalTo(ID, id).findAll()
-        }
-        return if (exercises.isNotEmpty()) exercises.first().toExercise() else null
+        val exercises = realmDatabase.getObjectFromRealm(ExerciseDTO::class.java, ID, id)
+        return exercises?.toExercise()
     }
 
     override fun getDayExercises(dayId: String): List<CompactExercise> {
@@ -65,24 +76,14 @@ class ExercisesRepository @Inject constructor(
         realmDatabase.addObject { chExercise.toChExerciseDTO() }
     }
 
-    private fun getDayDTO(id: String): DayDTO? {
-        val days = realmDatabase.getObjectsFromRealm { where<DayDTO>().equalTo(ID, id).findAll() }
-        return if (days.isNotEmpty()) days.first() else null
-    }
+    private fun getDayDTO(id: String): DayDTO? =
+        realmDatabase.getObjectFromRealm(DayDTO::class.java, ID, id)
 
-    override fun getChExercise(chExerciseId: String): ChExercise? {
-        val exercises = realmDatabase.getObjectsFromRealm {
-            where<ChExerciseDTO>().equalTo(ID, chExerciseId).findAll()
-        }
-        return if (exercises.isNotEmpty()) exercises.first().toChExercise() else null
-    }
+    override fun getChExerciseById(chExerciseId: String): ChExercise? =
+        getChExerciseDTO(chExerciseId)?.toChExercise()
 
-    private fun getChExerciseDTO(chExerciseId: String): ChExerciseDTO? {
-        val exercises = realmDatabase.getObjectsFromRealm {
-            where<ChExerciseDTO>().equalTo(ID, chExerciseId).findAll()
-        }
-        return if (exercises.isNotEmpty()) exercises.first() else null
-    }
+    private fun getChExerciseDTO(chExerciseId: String): ChExerciseDTO? =
+        realmDatabase.getObjectFromRealm(ChExerciseDTO::class.java, ID, chExerciseId)
 
     override fun deleteChExercise(chExerciseId: String) {
         val chExercise = getChExerciseDTO(chExerciseId)

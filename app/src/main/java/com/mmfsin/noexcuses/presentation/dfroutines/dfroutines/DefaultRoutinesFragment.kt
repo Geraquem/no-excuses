@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
@@ -14,6 +15,7 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentDefaultRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.DefaultRoutine
 import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.DefaultDaysDialog
+import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.DefaultRoutinesFragmentDirections.Companion.actionDefaultRoutinesToDefaultExercises
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.adapter.DefaultRoutinesAdapter
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.interfaces.IDefaultRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -55,7 +57,7 @@ class DefaultRoutinesFragment :
         viewModel.event.observe(this) { event ->
             when (event) {
                 is DefaultRoutinesEvent.GetDefaultRoutines -> setUpRoutines(event.defaultRoutines)
-                is DefaultRoutinesEvent.SomethingWentWrong -> error()
+                is DefaultRoutinesEvent.SWW -> error()
             }
         }
     }
@@ -75,9 +77,8 @@ class DefaultRoutinesFragment :
         activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
 
-    override fun onDayClick(id: String) {
-        Toast.makeText(mContext, id, Toast.LENGTH_SHORT).show()
-    }
+    override fun onDayClick(id: String) =
+        findNavController().navigate(actionDefaultRoutinesToDefaultExercises(id))
 
     private fun error() = activity?.showErrorDialog()
 

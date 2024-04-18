@@ -17,7 +17,7 @@ class DayConfigViewModel @Inject constructor(
         executeUseCase(
             { addDayUseCase.execute(AddDayUseCase.Params(routineId, title)) },
             { _event.value = DayConfigEvent.FlowCompleted },
-            { _event.value = DayConfigEvent.SomethingWentWrong }
+            { _event.value = DayConfigEvent.SWW }
         )
     }
 
@@ -26,9 +26,9 @@ class DayConfigViewModel @Inject constructor(
             { getDayByIdUseCase.execute(GetDayByIdUseCase.Params(dayId)) },
             { result ->
                 _event.value = result?.let { DayConfigEvent.GetDay(it) }
-                    ?: run { DayConfigEvent.SomethingWentWrong }
+                    ?: run { DayConfigEvent.SWW }
             },
-            { _event.value = DayConfigEvent.SomethingWentWrong }
+            { _event.value = DayConfigEvent.SWW }
         )
     }
 
@@ -36,7 +36,7 @@ class DayConfigViewModel @Inject constructor(
         executeUseCase(
             { editDayUseCase.execute(EditDayUseCase.Params(id, title)) },
             { _event.value = DayConfigEvent.FlowCompleted },
-            { _event.value = DayConfigEvent.SomethingWentWrong }
+            { _event.value = DayConfigEvent.SWW }
         )
     }
 
@@ -44,7 +44,7 @@ class DayConfigViewModel @Inject constructor(
         executeUseCase(
             { deleteDayUseCase.execute(DeleteDayUseCase.Params(id)) },
             { _event.value = DayConfigEvent.FlowCompleted },
-            { _event.value = DayConfigEvent.SomethingWentWrong }
+            { _event.value = DayConfigEvent.SWW }
         )
     }
 }

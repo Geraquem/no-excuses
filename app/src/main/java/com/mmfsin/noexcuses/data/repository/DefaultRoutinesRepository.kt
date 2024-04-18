@@ -1,16 +1,23 @@
 package com.mmfsin.noexcuses.data.repository
 
 import android.content.Context
-import com.mmfsin.noexcuses.data.mappers.toDayList
-import com.mmfsin.noexcuses.data.mappers.toDayListaaa
+import com.mmfsin.noexcuses.data.mappers.toDay
+import com.mmfsin.noexcuses.data.mappers.toDayListFromDefaultDayDTO
+import com.mmfsin.noexcuses.data.mappers.toDefaultExercise
 import com.mmfsin.noexcuses.data.mappers.toDefaultRoutine
 import com.mmfsin.noexcuses.data.mappers.toDefaultRoutineList
+import com.mmfsin.noexcuses.data.mappers.toExercise
 import com.mmfsin.noexcuses.data.models.DefaultDayDTO
+import com.mmfsin.noexcuses.data.models.DefaultExerciseDTO
 import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
+import com.mmfsin.noexcuses.data.models.ExerciseDTO
 import com.mmfsin.noexcuses.domain.interfaces.IDefaultRoutinesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Day
+import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.domain.models.DefaultRoutine
+import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.utils.DAY_ID
 import com.mmfsin.noexcuses.utils.ID
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -38,6 +45,32 @@ class DefaultRoutinesRepository @Inject constructor(
         val days = realmDatabase.getObjectsFromRealm {
             where<DefaultDayDTO>().equalTo(ROUTINE_ID, routineId).findAll()
         }
-        return days.toDayList()
+        return days.toDayListFromDefaultDayDTO()
+    }
+
+    override fun getDefaultDayById(id: String): Day? {
+        val routine = realmDatabase.getObjectFromRealm(DefaultDayDTO::class.java, ID, id)
+        return routine?.toDay()
+    }
+
+    override fun getDefaultExercises(dayId: String): List<DefaultExercise> {
+        val result = mutableListOf<DefaultExercise>()
+        val dfExercises = realmDatabase.getObjectsFromRealm {
+            where<DefaultExerciseDTO>().equalTo(DAY_ID, dayId).findAll()
+        }
+        dfExercises.forEach { dfExercise ->
+            val exercise = getExerciseFromDefaultExercise(dfExercise.exerciseId)
+            exercise?.let { e -> result.add(dfExercise.toDefaultExercise(e)) }
+        }
+        return result
+    }
+
+    private fun getExerciseFromDefaultExercise(exerciseId: String): Exercise? {
+        val exercise = realmDatabase.getObjectFromRealm(ExerciseDTO::class.java, ID, exerciseId)
+        return exercise?.toExercise()
+    }
+
+    override fun getDefaultExerciseById(id: String): DefaultExercise? {
+        return null
     }
 }

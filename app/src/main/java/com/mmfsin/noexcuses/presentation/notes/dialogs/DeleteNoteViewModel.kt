@@ -17,9 +17,9 @@ class DeleteNoteViewModel @Inject constructor(
             { getNoteByIdUseCase.execute(GetNoteByIdUseCase.Params(id)) },
             { result ->
                 _event.value = result?.let { DeleteNoteEvent.GetNote(it) }
-                    ?: run { DeleteNoteEvent.SomethingWentWrong }
+                    ?: run { DeleteNoteEvent.SWW }
             },
-            { _event.value = DeleteNoteEvent.SomethingWentWrong }
+            { _event.value = DeleteNoteEvent.SWW }
         )
     }
 
@@ -27,7 +27,7 @@ class DeleteNoteViewModel @Inject constructor(
         executeUseCase(
             { deleteNoteUseCase.execute(DeleteNoteUseCase.Params(id)) },
             { _event.value = DeleteNoteEvent.DeletedCompleted },
-            { _event.value = DeleteNoteEvent.SomethingWentWrong }
+            { _event.value = DeleteNoteEvent.SWW }
         )
     }
 }

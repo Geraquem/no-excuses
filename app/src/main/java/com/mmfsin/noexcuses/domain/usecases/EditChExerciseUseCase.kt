@@ -10,7 +10,7 @@ class EditChExerciseUseCase @Inject constructor(private val repository: IExercis
     BaseUseCase<EditChExerciseUseCase.Params, Unit>() {
 
     override suspend fun execute(params: Params) {
-        val chExercise = repository.getChExercise(params.chExerciseId)
+        val chExercise = repository.getChExerciseById(params.chExerciseId)
         chExercise?.let { chE ->
             params.dataChExercise.dataList?.let { data ->
                 for (serie in data) {

@@ -54,7 +54,7 @@ class DeleteNoteDialog(private val noteId: String, private val listener: INotesL
                     listener.deletedComplete()
                     dismiss()
                 }
-                is DeleteNoteEvent.SomethingWentWrong -> error()
+                is DeleteNoteEvent.SWW -> error()
             }
         }
     }

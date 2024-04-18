@@ -55,7 +55,7 @@ class ExerciseDialog(private val exerciseId: String) : BaseDialog<DialogExercise
                     this.exercise = event.exercise
                     setUI()
                 }
-                is ExerciseDialogEvent.SomethingWentWrong -> error()
+                is ExerciseDialogEvent.SWW -> error()
             }
         }
     }

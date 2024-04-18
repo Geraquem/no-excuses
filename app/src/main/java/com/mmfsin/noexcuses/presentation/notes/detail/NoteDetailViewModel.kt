@@ -17,9 +17,9 @@ class NoteDetailViewModel @Inject constructor(
             { getNoteByIdUseCase.execute(GetNoteByIdUseCase.Params(id)) },
             { result ->
                 _event.value = result?.let { NoteDetailEvent.GetNote(it) }
-                    ?: run { NoteDetailEvent.SomethingWentWrong }
+                    ?: run { NoteDetailEvent.SWW }
             },
-            { _event.value = NoteDetailEvent.SomethingWentWrong }
+            { _event.value = NoteDetailEvent.SWW }
         )
     }
 
@@ -27,7 +27,7 @@ class NoteDetailViewModel @Inject constructor(
         executeUseCase(
             { addNoteUseCase.execute(AddNoteUseCase.Params(id, title, description, date)) },
             { _event.value = NoteDetailEvent.NoteCreated },
-            { _event.value = NoteDetailEvent.SomethingWentWrong }
+            { _event.value = NoteDetailEvent.SWW }
         )
     }
 }

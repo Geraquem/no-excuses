@@ -15,9 +15,9 @@ class ExercisesViewModel @Inject constructor(
             { getExercisesUseCase.execute(GetExercisesUseCase.Params(mGroup)) },
             { result ->
                 _event.value = if (result.isNotEmpty()) ExercisesEvent.GetExercises(result)
-                else ExercisesEvent.SomethingWentWrong
+                else ExercisesEvent.SWW
             },
-            { _event.value = ExercisesEvent.SomethingWentWrong }
+            { _event.value = ExercisesEvent.SWW }
         )
     }
 }

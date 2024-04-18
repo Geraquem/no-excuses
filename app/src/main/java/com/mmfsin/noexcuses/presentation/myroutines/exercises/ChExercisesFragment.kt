@@ -53,7 +53,7 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
         viewModel.event.observe(this) { event ->
             when (event) {
                 is ChExercisesEvent.GetExercises -> setUpExercises(event.exercises)
-                is ChExercisesEvent.SomethingWentWrong -> error()
+                is ChExercisesEvent.SWW -> error()
             }
         }
     }

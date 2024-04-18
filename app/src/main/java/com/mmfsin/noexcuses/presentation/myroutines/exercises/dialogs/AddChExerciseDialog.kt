@@ -115,7 +115,7 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
 
                 is ChExerciseDialogEvent.GetChExercise -> {}
                 is ChExerciseDialogEvent.FlowCompleted -> endFlow()
-                is ChExerciseDialogEvent.SomethingWentWrong -> error()
+                is ChExerciseDialogEvent.SWW -> error()
             }
         }
     }

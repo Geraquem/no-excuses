@@ -85,7 +85,7 @@ class DayEditDialog(
                     binding.etTitle.setText(day?.title)
                 }
 
-                is DayConfigEvent.SomethingWentWrong -> error()
+                is DayConfigEvent.SWW -> error()
             }
         }
     }

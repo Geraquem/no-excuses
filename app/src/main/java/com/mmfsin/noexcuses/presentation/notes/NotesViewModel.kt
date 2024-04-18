@@ -14,7 +14,7 @@ class NotesViewModel @Inject constructor(
         executeUseCase(
             { getNotesUseCase.execute() },
             { result -> _event.value = NotesEvent.GetNotes(result) },
-            { _event.value = NotesEvent.SomethingWentWrong }
+            { _event.value = NotesEvent.SWW }
         )
     }
 }

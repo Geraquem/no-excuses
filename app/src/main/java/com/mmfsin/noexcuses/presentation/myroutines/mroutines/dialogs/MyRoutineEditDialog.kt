@@ -82,7 +82,7 @@ class MyRoutineEditDialog(val routineId: String, private val listener: IMyRoutin
                     binding.etDescription.setText(myRoutine?.description)
                 }
 
-                is MyRoutineDialogEvent.SomethingWentWrong -> error()
+                is MyRoutineDialogEvent.SWW -> error()
             }
         }
     }

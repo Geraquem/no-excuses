@@ -15,9 +15,9 @@ class ExerciseDialogViewModel @Inject constructor(
             { getExerciseUseCase.execute(GetExerciseUseCase.Params(id)) },
             { result ->
                 _event.value = result?.let { ExerciseDialogEvent.GetExercise(it) }
-                    ?: run { ExerciseDialogEvent.SomethingWentWrong }
+                    ?: run { ExerciseDialogEvent.SWW }
             },
-            { _event.value = ExerciseDialogEvent.SomethingWentWrong }
+            { _event.value = ExerciseDialogEvent.SWW }
         )
     }
 }

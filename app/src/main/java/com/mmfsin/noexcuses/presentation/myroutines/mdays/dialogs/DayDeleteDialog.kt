@@ -64,7 +64,7 @@ class DayDeleteDialog(private val dayId: String, private val listener: IDaysList
                     binding.tvText.text = getString(R.string.routines_delete_text, day?.title)
                 }
 
-                is DayConfigEvent.SomethingWentWrong -> error()
+                is DayConfigEvent.SWW -> error()
             }
         }
     }

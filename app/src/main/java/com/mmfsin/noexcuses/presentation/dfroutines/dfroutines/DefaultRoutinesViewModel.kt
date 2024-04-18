@@ -14,7 +14,7 @@ class DefaultRoutinesViewModel @Inject constructor(
         executeUseCase(
             { getDefaultRoutinesUseCase.execute() },
             { result -> _event.value = DefaultRoutinesEvent.GetDefaultRoutines(result) },
-            { _event.value = DefaultRoutinesEvent.SomethingWentWrong }
+            { _event.value = DefaultRoutinesEvent.SWW }
         )
     }
 }

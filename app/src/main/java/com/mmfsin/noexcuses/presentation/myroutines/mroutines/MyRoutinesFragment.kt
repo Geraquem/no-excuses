@@ -82,7 +82,7 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
                     setUpRoutines(myRoutines)
                 }
 
-                is MyRoutinesEvent.SomethingWentWrong -> error()
+                is MyRoutinesEvent.SWW -> error()
             }
         }
     }

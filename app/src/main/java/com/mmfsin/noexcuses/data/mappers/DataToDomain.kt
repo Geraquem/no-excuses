@@ -1,7 +1,25 @@
 package com.mmfsin.noexcuses.data.mappers
 
-import com.mmfsin.noexcuses.data.models.*
-import com.mmfsin.noexcuses.domain.models.*
+import com.mmfsin.noexcuses.data.models.ChExerciseDTO
+import com.mmfsin.noexcuses.data.models.DataDTO
+import com.mmfsin.noexcuses.data.models.DayDTO
+import com.mmfsin.noexcuses.data.models.DefaultDayDTO
+import com.mmfsin.noexcuses.data.models.DefaultExerciseDTO
+import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
+import com.mmfsin.noexcuses.data.models.ExerciseDTO
+import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
+import com.mmfsin.noexcuses.data.models.MyRoutineDTO
+import com.mmfsin.noexcuses.data.models.NoteDTO
+import com.mmfsin.noexcuses.domain.models.ChExercise
+import com.mmfsin.noexcuses.domain.models.CompactExercise
+import com.mmfsin.noexcuses.domain.models.Data
+import com.mmfsin.noexcuses.domain.models.Day
+import com.mmfsin.noexcuses.domain.models.DefaultExercise
+import com.mmfsin.noexcuses.domain.models.DefaultRoutine
+import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.domain.models.MuscularGroup
+import com.mmfsin.noexcuses.domain.models.MyRoutine
+import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.utils.formatTime
 
 /** MuscularGroup */
@@ -41,8 +59,18 @@ fun DefaultDayDTO.toDay() = Day(
 
 fun DayDTO.toDay() = Day(id, routineId, title, exercises)
 
-fun List<DayDTO>.toDayListaaa() = this.map { it.toDay() }
-fun List<DefaultDayDTO>.toDayList() = this.map { it.toDay() }
+fun List<DayDTO>.toDayListFromDayDTO() = this.map { it.toDay() }
+fun List<DefaultDayDTO>.toDayListFromDefaultDayDTO() = this.map { it.toDay() }
+
+/** Default Exercise */
+fun DefaultExerciseDTO.toDefaultExercise(exercise: Exercise) = DefaultExercise(
+    id = id,
+    exercise = exercise,
+    dayId = dayId,
+    desc = desc,
+    reps = reps,
+    series = series
+)
 
 /** ChExercise */
 fun ChExerciseDTO.toChExercise() =

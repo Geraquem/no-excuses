@@ -19,3 +19,14 @@ open class DefaultDayDTO(
     var exercises: Long = 0
 ) : RealmObject()
 
+
+open class DefaultExerciseDTO(
+    @PrimaryKey
+    var id: String = "",
+    var dayId: String = "",
+    var exerciseId: String = "",
+    var desc: String = "",
+    var reps: String = "",
+    var series: String = "",
+) : RealmObject()
+

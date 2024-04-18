@@ -45,10 +45,6 @@ class NotesRepository @Inject constructor(
         realmDatabase.deleteObject(NoteDTO::class.java, ID, id)
     }
 
-    private fun getNoteDTO(id: String): NoteDTO? {
-        val notes = realmDatabase.getObjectsFromRealm {
-            where<NoteDTO>().equalTo(ID, id).findAll()
-        }
-        return if (notes.isNotEmpty()) notes.first() else null
-    }
+    private fun getNoteDTO(id: String): NoteDTO? =
+        realmDatabase.getObjectFromRealm(NoteDTO::class.java, ID, id)
 }

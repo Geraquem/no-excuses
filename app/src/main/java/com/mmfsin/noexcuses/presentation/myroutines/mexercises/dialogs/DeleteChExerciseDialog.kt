@@ -76,7 +76,7 @@ class DeleteChExerciseDialog(
                     exerciseId?.let { id -> viewModel.getExercise(id) }
                 }
                 is ChExerciseDialogEvent.FlowCompleted -> endFlow()
-                is ChExerciseDialogEvent.SomethingWentWrong -> error()
+                is ChExerciseDialogEvent.SWW -> error()
             }
         }
     }

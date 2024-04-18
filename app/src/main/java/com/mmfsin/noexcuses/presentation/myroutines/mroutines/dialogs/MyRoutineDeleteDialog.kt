@@ -62,7 +62,7 @@ class MyRoutineDeleteDialog(val id: String, private val listener: IMyRoutineList
                     myRoutine = event.myRoutine
                     binding.tvText.text = getString(R.string.routines_delete_text, myRoutine?.title)
                 }
-                is MyRoutineDialogEvent.SomethingWentWrong -> error()
+                is MyRoutineDialogEvent.SWW -> error()
             }
         }
     }

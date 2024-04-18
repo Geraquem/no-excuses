@@ -68,7 +68,7 @@ class DayAddDialog(
                 }
 
                 is DayConfigEvent.GetDay -> {}
-                is DayConfigEvent.SomethingWentWrong -> error()
+                is DayConfigEvent.SWW -> error()
             }
         }
     }

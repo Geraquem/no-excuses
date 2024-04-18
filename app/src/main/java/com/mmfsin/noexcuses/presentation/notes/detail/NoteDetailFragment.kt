@@ -59,7 +59,7 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
                     setUI()
                 }
                 is NoteDetailEvent.NoteCreated -> {}
-                is NoteDetailEvent.SomethingWentWrong -> error()
+                is NoteDetailEvent.SWW -> error()
             }
         }
     }

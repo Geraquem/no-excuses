@@ -46,7 +46,7 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MGroupsViewM
         viewModel.event.observe(this) { event ->
             when (event) {
                 is MGroupsEvent.MGroups -> setUpMGroups(event.groups)
-                is MGroupsEvent.SomethingWentWrong -> error()
+                is MGroupsEvent.SWW -> error()
             }
         }
     }

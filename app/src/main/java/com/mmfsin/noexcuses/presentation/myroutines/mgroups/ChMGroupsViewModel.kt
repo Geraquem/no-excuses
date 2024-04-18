@@ -15,9 +15,9 @@ class ChMGroupsViewModel @Inject constructor(
             { getMuscularGroupsUseCase.execute() },
             { result ->
                 _event.value = if (result.isNotEmpty()) ChMGroupsEvent.MGroups(result)
-                else ChMGroupsEvent.SomethingWentWrong
+                else ChMGroupsEvent.SWW
             },
-            { _event.value = ChMGroupsEvent.SomethingWentWrong }
+            { _event.value = ChMGroupsEvent.SWW }
         )
     }
 }

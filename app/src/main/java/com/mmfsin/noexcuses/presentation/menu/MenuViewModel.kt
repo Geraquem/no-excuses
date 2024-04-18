@@ -16,7 +16,7 @@ class MenuViewModel @Inject constructor(
         executeUseCase(
             { checkVersionUseCase.execute() },
             { _event.value = MenuEvent.Completed },
-            { _event.value = MenuEvent.SomethingWentWrong }
+            { _event.value = MenuEvent.SWW }
         )
     }
 
@@ -24,7 +24,7 @@ class MenuViewModel @Inject constructor(
         executeUseCase(
             { getMenuItemsUseCase.execute() },
             { result -> _event.value = MenuEvent.MenuItems(result) },
-            { _event.value = MenuEvent.SomethingWentWrong }
+            { _event.value = MenuEvent.SWW }
         )
     }
 }

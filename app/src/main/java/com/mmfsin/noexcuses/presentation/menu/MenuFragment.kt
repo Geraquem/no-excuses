@@ -60,7 +60,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             when (event) {
                 is MenuEvent.Completed -> viewModel.getMenuItems()
                 is MenuEvent.MenuItems -> setUpMenu(event.items)
-                is MenuEvent.SomethingWentWrong -> error()
+                is MenuEvent.SWW -> error()
             }
         }
     }

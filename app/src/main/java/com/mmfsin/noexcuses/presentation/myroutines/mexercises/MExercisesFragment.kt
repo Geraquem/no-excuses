@@ -68,13 +68,13 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
                     viewModel.getDayExercises(event.day.id)
                 }
 
-                is MExercisesEvent.GetDayExercises -> setUpDays(event.exercises)
-                is MExercisesEvent.SomethingWentWrong -> error()
+                is MExercisesEvent.GetDayExercises -> setUpExercises(event.exercises)
+                is MExercisesEvent.SWW -> error()
             }
         }
     }
 
-    private fun setUpDays(exercises: List<CompactExercise>) {
+    private fun setUpExercises(exercises: List<CompactExercise>) {
         binding.apply {
             rvExercises.apply {
                 layoutManager = LinearLayoutManager(mContext)

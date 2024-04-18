@@ -54,7 +54,7 @@ class ChMGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, ChMGroupsV
         viewModel.event.observe(this) { event ->
             when (event) {
                 is ChMGroupsEvent.MGroups -> setUpMGroups(event.groups)
-                is ChMGroupsEvent.SomethingWentWrong -> error()
+                is ChMGroupsEvent.SWW -> error()
             }
         }
     }

@@ -63,7 +63,7 @@ class MyRoutineAddDialog(private val listener: IMyRoutineListener) :
                 }
 
                 is MyRoutineDialogEvent.GetMyRoutine -> {}
-                is MyRoutineDialogEvent.SomethingWentWrong -> error()
+                is MyRoutineDialogEvent.SWW -> error()
             }
         }
     }

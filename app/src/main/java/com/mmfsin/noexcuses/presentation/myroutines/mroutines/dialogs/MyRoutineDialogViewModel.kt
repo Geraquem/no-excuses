@@ -20,7 +20,7 @@ class MyRoutineDialogViewModel @Inject constructor(
         executeUseCase(
             { addMyRoutineUseCase.execute(AddMyRoutineUseCase.Params(title, description)) },
             { _event.value = MyRoutineDialogEvent.FlowCompleted },
-            { _event.value = MyRoutineDialogEvent.SomethingWentWrong }
+            { _event.value = MyRoutineDialogEvent.SWW }
         )
     }
 
@@ -29,9 +29,9 @@ class MyRoutineDialogViewModel @Inject constructor(
             { getMyRoutineByIdUseCase.execute(GetMyRoutineByIdUseCase.Params(id)) },
             { result ->
                 _event.value = result?.let { MyRoutineDialogEvent.GetMyRoutine(it) }
-                    ?: run { MyRoutineDialogEvent.SomethingWentWrong }
+                    ?: run { MyRoutineDialogEvent.SWW }
             },
-            { _event.value = MyRoutineDialogEvent.SomethingWentWrong }
+            { _event.value = MyRoutineDialogEvent.SWW }
         )
     }
 
@@ -39,7 +39,7 @@ class MyRoutineDialogViewModel @Inject constructor(
         executeUseCase(
             { editMyRoutineUseCase.execute(EditMyRoutineUseCase.Params(id, title, description)) },
             { _event.value = MyRoutineDialogEvent.FlowCompleted },
-            { _event.value = MyRoutineDialogEvent.SomethingWentWrong }
+            { _event.value = MyRoutineDialogEvent.SWW }
         )
     }
 
@@ -47,7 +47,7 @@ class MyRoutineDialogViewModel @Inject constructor(
         executeUseCase(
             { deleteMyRoutineUseCase.execute(DeleteMyRoutineUseCase.Params(id)) },
             { _event.value = MyRoutineDialogEvent.FlowCompleted },
-            { _event.value = MyRoutineDialogEvent.SomethingWentWrong }
+            { _event.value = MyRoutineDialogEvent.SWW }
         )
     }
 }

@@ -67,7 +67,7 @@ class ChExerciseDialog(private val chExerciseId: String) : BaseDialog<DialogChEx
                 is ChExerciseDialogEvent.GetDay -> {}
                 is ChExerciseDialogEvent.GetChExercise -> setData(event.chExercise)
                 is ChExerciseDialogEvent.FlowCompleted -> {}
-                is ChExerciseDialogEvent.SomethingWentWrong -> error()
+                is ChExerciseDialogEvent.SWW -> error()
             }
         }
     }

@@ -6,6 +6,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.mmfsin.noexcuses.data.models.DayDTO
 import com.mmfsin.noexcuses.data.models.DefaultDayDTO
+import com.mmfsin.noexcuses.data.models.DefaultExerciseDTO
 import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
 import com.mmfsin.noexcuses.data.models.ExerciseDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
@@ -71,22 +72,12 @@ class MenuRepository @Inject constructor(
                 day.getValue(DefaultDayDTO::class.java)?.let { d -> saveDefaultDay(d) }
             }
 
+            val exercises = defaultRoutines.child(EXERCISES)
+            for (exercise in exercises.children) {
+                exercise.getValue(DefaultExerciseDTO::class.java)
+                    ?.let { e -> saveDefaultExercise(e) }
+            }
 
-//            for (child in routines.children) {
-//                try {
-//                    child.getValue(RoutineDTO::class.java)
-//                        ?.let { r -> saveRoutinePredInRealm(r) }
-//                    for (exercise in child.child(DAY_ONE).children) {
-//                        exercise.getValue(ExercisePredDTO::class.java)?.let { e ->
-//                            saveExercisePredInRealm(e)
-//                        }
-//                    }
-//                } catch (e: Exception) {
-//                    Log.e("Error parsing RoutinePreDTO", e.message.toString())
-//                }
-////                }
-//            }
-//
             latch.countDown()
 
         }.addOnFailureListener {
@@ -111,6 +102,8 @@ class MenuRepository @Inject constructor(
 
     private fun saveDefaultRoutine(routine: DefaultRoutineDTO) = realmDatabase.addObject { routine }
     private fun saveDefaultDay(day: DefaultDayDTO) = realmDatabase.addObject { day }
+    private fun saveDefaultExercise(exercise: DefaultExerciseDTO) =
+        realmDatabase.addObject { exercise }
 
 //    private fun saveExercisePredInRealm(exercise: ExercisePredDTO) =
 //        realmDatabase.addObject { exercise }

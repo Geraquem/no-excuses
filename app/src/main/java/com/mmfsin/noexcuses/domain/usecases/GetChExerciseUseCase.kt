@@ -9,7 +9,7 @@ class GetChExerciseUseCase @Inject constructor(private val repository: IExercise
     BaseUseCase<GetChExerciseUseCase.Params, ChExercise?>() {
 
     override suspend fun execute(params: Params): ChExercise? =
-        repository.getChExercise(params.chExerciseId)
+        repository.getChExerciseById(params.chExerciseId)
 
     data class Params(
         val chExerciseId: String

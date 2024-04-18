@@ -11,9 +11,9 @@ interface IExercisesRepository {
     fun getExerciseById(id: String): Exercise?
 
     fun getDayExercises(dayId: String): List<CompactExercise>
+    fun getChExerciseById(chExerciseId: String): ChExercise?
     fun addChExercise(chExercise: ChExercise)
     fun editChExercise(chExercise: ChExercise)
-    fun getChExercise(chExerciseId: String): ChExercise?
     fun deleteChExercise(chExerciseId: String)
 
     fun deleteExercisesFromDeletedDay(dayId: String)

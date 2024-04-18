@@ -1,7 +1,7 @@
 package com.mmfsin.noexcuses.data.repository
 
 import com.mmfsin.noexcuses.data.mappers.toDay
-import com.mmfsin.noexcuses.data.mappers.toDayListaaa
+import com.mmfsin.noexcuses.data.mappers.toDayListFromDayDTO
 import com.mmfsin.noexcuses.data.mappers.toMyRoutine
 import com.mmfsin.noexcuses.data.mappers.toMyRoutineList
 import com.mmfsin.noexcuses.data.models.DayDTO
@@ -66,7 +66,7 @@ class MyRoutinesRepository @Inject constructor(
         val days = realmDatabase.getObjectsFromRealm {
             where<DayDTO>().equalTo(ROUTINE_ID, routineId).findAll()
         }
-        return days.toDayListaaa()
+        return days.toDayListFromDayDTO()
     }
 
     override fun addDay(routineId: String, title: String) {
@@ -111,8 +111,6 @@ class MyRoutinesRepository @Inject constructor(
         }
     }
 
-    private fun getDayDTO(id: String): DayDTO? {
-        val days = realmDatabase.getObjectsFromRealm { where<DayDTO>().equalTo(ID, id).findAll() }
-        return if (days.isNotEmpty()) days.first() else null
-    }
+    private fun getDayDTO(id: String): DayDTO? =
+        realmDatabase.getObjectFromRealm(DayDTO::class.java, ID, id)
 }

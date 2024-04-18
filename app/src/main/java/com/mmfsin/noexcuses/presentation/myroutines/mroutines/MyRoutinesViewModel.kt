@@ -16,7 +16,7 @@ class MyRoutinesViewModel @Inject constructor(
         executeUseCase(
             { firstTimeUseCase.execute() },
             { result -> _event.value = MyRoutinesEvent.IsFistTime(result) },
-            { _event.value = MyRoutinesEvent.SomethingWentWrong }
+            { _event.value = MyRoutinesEvent.SWW }
         )
     }
 
@@ -24,7 +24,7 @@ class MyRoutinesViewModel @Inject constructor(
         executeUseCase(
             { getMyRoutinesUseCase.execute() },
             { result -> _event.value = MyRoutinesEvent.GetMyRoutines(result) },
-            { _event.value = MyRoutinesEvent.SomethingWentWrong }
+            { _event.value = MyRoutinesEvent.SWW }
         )
     }
 }

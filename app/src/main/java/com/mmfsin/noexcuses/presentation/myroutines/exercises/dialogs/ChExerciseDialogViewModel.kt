@@ -22,9 +22,9 @@ class ChExerciseDialogViewModel @Inject constructor(
             { getExerciseUseCase.execute(GetExerciseUseCase.Params(id)) },
             { result ->
                 _event.value = result?.let { ChExerciseDialogEvent.GetExercise(it) }
-                    ?: run { ChExerciseDialogEvent.SomethingWentWrong }
+                    ?: run { ChExerciseDialogEvent.SWW }
             },
-            { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
+            { _event.value = ChExerciseDialogEvent.SWW }
         )
     }
 
@@ -33,9 +33,9 @@ class ChExerciseDialogViewModel @Inject constructor(
             { getDayByIdUseCase.execute(GetDayByIdUseCase.Params(id)) },
             { result ->
                 _event.value = result?.let { ChExerciseDialogEvent.GetDay(it) }
-                    ?: run { ChExerciseDialogEvent.SomethingWentWrong }
+                    ?: run { ChExerciseDialogEvent.SWW }
             },
-            { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
+            { _event.value = ChExerciseDialogEvent.SWW }
         )
     }
 
@@ -43,7 +43,7 @@ class ChExerciseDialogViewModel @Inject constructor(
         executeUseCase(
             { addChExerciseUseCase.execute(AddChExerciseUseCase.Params(idGroup, dataChExercise)) },
             { _event.value = ChExerciseDialogEvent.FlowCompleted },
-            { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
+            { _event.value = ChExerciseDialogEvent.SWW }
         )
     }
 
@@ -55,7 +55,7 @@ class ChExerciseDialogViewModel @Inject constructor(
                 )
             },
             { _event.value = ChExerciseDialogEvent.FlowCompleted },
-            { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
+            { _event.value = ChExerciseDialogEvent.SWW }
         )
     }
 
@@ -64,9 +64,9 @@ class ChExerciseDialogViewModel @Inject constructor(
             { getChExerciseUseCase.execute(GetChExerciseUseCase.Params(chExerciseId)) },
             { result ->
                 _event.value = result?.let { ChExerciseDialogEvent.GetChExercise(it) }
-                    ?: run { ChExerciseDialogEvent.SomethingWentWrong }
+                    ?: run { ChExerciseDialogEvent.SWW }
             },
-            { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
+            { _event.value = ChExerciseDialogEvent.SWW }
         )
     }
 
@@ -74,7 +74,7 @@ class ChExerciseDialogViewModel @Inject constructor(
         executeUseCase(
             { deleteChExerciseUseCase.execute(DeleteChExerciseUseCase.Params(chExerciseId)) },
             { _event.value = ChExerciseDialogEvent.FlowCompleted },
-            { _event.value = ChExerciseDialogEvent.SomethingWentWrong }
+            { _event.value = ChExerciseDialogEvent.SWW }
         )
     }
 }
