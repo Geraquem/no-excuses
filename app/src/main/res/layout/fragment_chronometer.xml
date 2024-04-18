@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Chronometer
-            android:id="@+id/tv_chronometer"
+            android:id="@+id/chronometer"
             style="@style/BigTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

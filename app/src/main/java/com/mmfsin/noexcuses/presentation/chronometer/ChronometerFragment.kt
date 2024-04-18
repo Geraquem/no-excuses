@@ -1,7 +1,9 @@
 package com.mmfsin.noexcuses.presentation.chronometer
 
 import android.content.Context
+import android.os.SystemClock
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
@@ -16,7 +18,7 @@ class ChronometerFragment : BaseFragmentNoVM<FragmentChronometerBinding>() {
     private lateinit var mContext: Context
 
     private var running = false
-    var pauseOffSet = 0
+    private var pauseOffSet: Long = 0
 
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
@@ -25,6 +27,7 @@ class ChronometerFragment : BaseFragmentNoVM<FragmentChronometerBinding>() {
     override fun setUI() {
         binding.apply {
             (activity as MainActivity).setUpToolbar(title = getString(R.string.menu_chronometer))
+            btnStop.visibility = View.INVISIBLE
         }
     }
 
@@ -37,15 +40,59 @@ class ChronometerFragment : BaseFragmentNoVM<FragmentChronometerBinding>() {
     }
 
     private fun startChronometer() {
+        binding.apply {
+            if (!running) {
+                chronometer.base = SystemClock.elapsedRealtime() - pauseOffSet
+                chronometer.start()
 
+                btnPlay.visibility = View.INVISIBLE
+                btnStop.visibility = View.VISIBLE
+
+                running = true
+            } else {
+                chronometer.base = SystemClock.elapsedRealtime()
+                pauseOffSet = 0
+                chronometer.stop()
+
+                btnPlay.visibility = View.VISIBLE
+                btnStop.visibility = View.INVISIBLE
+
+                running = false
+            }
+        }
     }
 
     private fun pauseChronometer() {
+        binding.apply {
+            if (running) {
+                chronometer.stop()
+                pauseOffSet = SystemClock.elapsedRealtime() - chronometer.base
 
+                btnPlay.visibility = View.VISIBLE
+                btnStop.visibility = View.INVISIBLE
+
+                running = false
+            } else {
+                chronometer.base = SystemClock.elapsedRealtime() - pauseOffSet
+                chronometer.start()
+
+                btnPlay.visibility = View.INVISIBLE
+                btnStop.visibility = View.VISIBLE
+
+                running = true
+            }
+        }
     }
 
     private fun resetChronometer() {
+        binding.apply {
+            chronometer.base = 0
+            chronometer.stop()
+            running = false
 
+            btnPlay.visibility = View.VISIBLE
+            btnStop.visibility = View.INVISIBLE
+        }
     }
 
 
