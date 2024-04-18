@@ -21,7 +21,7 @@
             app:destination="@id/exercises_nav_graph" />
         <action
             android:id="@+id/action_menu_to_chronometer"
-            app:destination="@id/chronoFragment" />
+            app:destination="@id/chronometerFragment" />
         <action
             android:id="@+id/action_menu_to_notes"
             app:destination="@id/notes_nav_graph" />
@@ -34,10 +34,10 @@
     <include app:graph="@navigation/nav_graph_exercises" />
 
     <fragment
-        android:id="@+id/chronoFragment"
-        android:name="com.mmfsin.noexcuses.presentation.chronometer.ChronoFragment"
-        android:label="chronoFragment"
-        tools:layout="@layout/fragment_chrono" />
+        android:id="@+id/chronometerFragment"
+        android:name="com.mmfsin.noexcuses.presentation.chronometer.ChronometerFragment"
+        android:label="chronometerFragment"
+        tools:layout="@layout/fragment_chronometer" />
 
     <include app:graph="@navigation/nav_graph_notes" />
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_grey">
@@ -31,13 +30,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Chronometer
-            android:id="@+id/chrono"
+            android:id="@+id/tv_chronometer"
             style="@style/BigTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:textSize="46sp"
-            tools:text="20:50" />
+            android:textSize="46sp" />
 
         <Button
             android:id="@+id/btn_play"
@@ -46,6 +44,14 @@
             android:layout_marginBottom="24dp"
             android:paddingVertical="16dp"
             android:text="PLAY" />
+
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:paddingVertical="16dp"
+            android:text="STOP" />
 
         <Button
             android:id="@+id/btn_reset"
