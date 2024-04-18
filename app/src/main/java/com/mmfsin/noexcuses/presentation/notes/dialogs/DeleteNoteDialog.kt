@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
-import com.mmfsin.noexcuses.databinding.DialogNoteDeleteBinding
+import com.mmfsin.noexcuses.databinding.DialogItemDeleteBinding
 import com.mmfsin.noexcuses.presentation.notes.interfaces.INotesListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -14,11 +14,11 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DeleteNoteDialog(private val noteId: String, private val listener: INotesListener) :
-    BaseDialog<DialogNoteDeleteBinding>() {
+    BaseDialog<DialogItemDeleteBinding>() {
 
     private val viewModel: DeleteNoteViewModel by viewModels()
 
-    override fun inflateView(inflater: LayoutInflater) = DialogNoteDeleteBinding.inflate(inflater)
+    override fun inflateView(inflater: LayoutInflater) = DialogItemDeleteBinding.inflate(inflater)
 
     override fun setCustomViewDialog(dialog: Dialog) = centerViewDialog(dialog)
 
