@@ -65,12 +65,18 @@ class DefaultRoutinesRepository @Inject constructor(
         return result
     }
 
+    override fun getDefaultExerciseById(id: String): DefaultExercise? {
+        var result: DefaultExercise? = null
+        val dfExercise = realmDatabase.getObjectFromRealm(DefaultExerciseDTO::class.java, ID, id)
+        dfExercise?.let { dfE ->
+            val exercise = getExerciseFromDefaultExercise(dfE.exerciseId)
+            exercise?.let { e -> result = dfE.toDefaultExercise(e) }
+        }
+        return result
+    }
+
     private fun getExerciseFromDefaultExercise(exerciseId: String): Exercise? {
         val exercise = realmDatabase.getObjectFromRealm(ExerciseDTO::class.java, ID, exerciseId)
         return exercise?.toExercise()
-    }
-
-    override fun getDefaultExerciseById(id: String): DefaultExercise? {
-        return null
     }
 }

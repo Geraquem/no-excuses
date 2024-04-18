@@ -69,7 +69,7 @@ fun DefaultExerciseDTO.toDefaultExercise(exercise: Exercise) = DefaultExercise(
     dayId = dayId,
     desc = desc,
     reps = reps,
-    series = series
+    series = reps.split(",").size.toString()
 )
 
 /** ChExercise */

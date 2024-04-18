@@ -26,7 +26,6 @@ open class DefaultExerciseDTO(
     var dayId: String = "",
     var exerciseId: String = "",
     var desc: String = "",
-    var reps: String = "",
-    var series: String = "",
+    var reps: String = ""
 ) : RealmObject()
 
