@@ -36,13 +36,6 @@ class GetMenuItemsUseCase @Inject constructor(@ApplicationContext val context: C
             ),
             MenuItem(
                 4,
-                R.drawable.iv_exercises,
-                gs(R.string.menu_chronometer),
-                gs(R.string.menu_chronometer_desc),
-                CHRONOMETER
-            ),
-            MenuItem(
-                5,
                 R.drawable.iv_notes,
                 gs(R.string.menu_notes),
                 gs(R.string.menu_notes_desc),

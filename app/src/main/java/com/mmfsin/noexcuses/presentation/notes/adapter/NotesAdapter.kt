@@ -15,10 +15,12 @@ class NotesAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemNoteBinding.bind(view)
+        private val c = binding.root.context
         fun bind(note: Note) {
             binding.apply {
                 tvTitle.text = note.title
                 tvDescription.text = note.description
+                tvDate.text = c.getString(R.string.notes_date, note.date)
             }
         }
     }

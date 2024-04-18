@@ -23,7 +23,7 @@ class NoteDetailViewModel @Inject constructor(
         )
     }
 
-    fun addNote(id: String?, title: String, description: String, date: String) {
+    fun addNote(id: String?, title: String, description: String, date: Long) {
         executeUseCase(
             { addNoteUseCase.execute(AddNoteUseCase.Params(id, title, description, date)) },
             { _event.value = NoteDetailEvent.NoteCreated },

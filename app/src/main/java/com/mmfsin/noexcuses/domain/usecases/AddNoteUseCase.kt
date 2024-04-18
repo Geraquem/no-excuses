@@ -21,6 +21,9 @@ class AddNoteUseCase @Inject constructor(private val repository: INotesRepositor
     }
 
     data class Params(
-        val id: String?, val title: String, val description: String, val date: String
+        val id: String?,
+        val title: String,
+        val description: String,
+        val date: Long
     )
 }

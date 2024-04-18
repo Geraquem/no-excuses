@@ -8,5 +8,5 @@ open class NoteDTO(
     var id: String = "",
     var title: String = "",
     var description: String = "",
-    var date: String = ""
+    var date: Long = 0
 ) : RealmObject()

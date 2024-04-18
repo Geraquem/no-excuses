@@ -21,6 +21,11 @@ import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.domain.models.MyRoutine
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.utils.formatTime
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Date
+import java.util.Locale
 
 /** MuscularGroup */
 fun MuscularGroupDTO.toMuscularGroup() = MuscularGroup(name, imageURL)
@@ -93,8 +98,9 @@ fun List<DataDTO>.toDataList() = this.map { it.toData() }
 /** Notes */
 fun NoteDTO.toNote() = Note(id, title, description, formatDate(date))
 
-private fun formatDate(date: String): String {
-    return "jeje"
+private fun formatDate(date: Long): String {
+    val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    return sdf.format(Date(date))
 }
 
 fun List<NoteDTO>.toNoteList() = this.map { it.toNote() }

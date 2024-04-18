@@ -14,14 +14,12 @@ import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
 import com.mmfsin.noexcuses.domain.models.MenuAction
-import com.mmfsin.noexcuses.domain.models.MenuAction.CHRONOMETER
 import com.mmfsin.noexcuses.domain.models.MenuAction.EXERCISES
 import com.mmfsin.noexcuses.domain.models.MenuAction.MY_ROUTINES
 import com.mmfsin.noexcuses.domain.models.MenuAction.NOTES
 import com.mmfsin.noexcuses.domain.models.MenuAction.ROUTINES
 import com.mmfsin.noexcuses.domain.models.MenuAction.WEIGHTS
 import com.mmfsin.noexcuses.domain.models.MenuItem
-import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToChronometer
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMuscularGroups
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMyRoutines
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToNotes
@@ -85,7 +83,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             ROUTINES -> navigateTo(actionMenuToRoutines())
             MY_ROUTINES -> navigateTo(actionMenuToMyRoutines())
             EXERCISES -> navigateTo(actionMenuToMuscularGroups())
-            CHRONOMETER -> navigateTo(actionMenuToChronometer())
             NOTES -> navigateTo(actionMenuToNotes())
             WEIGHTS -> {}
         }

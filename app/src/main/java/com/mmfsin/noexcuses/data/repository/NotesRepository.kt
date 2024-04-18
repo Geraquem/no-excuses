@@ -17,7 +17,8 @@ class NotesRepository @Inject constructor(
 
     override fun getNotes(): List<Note> {
         val notes = realmDatabase.getObjectsFromRealm { where<NoteDTO>().findAll() }
-        return if (notes.isNotEmpty()) notes.toNoteList() else emptyList()
+        return if (notes.isNotEmpty()) notes.sortedBy { it.date }.toNoteList()
+            .reversed() else emptyList()
     }
 
     override fun getNoteById(id: String): Note? {
@@ -25,13 +26,13 @@ class NotesRepository @Inject constructor(
         return note?.toNote() ?: run { null }
     }
 
-    override fun addNote(title: String, description: String, date: String) {
+    override fun addNote(title: String, description: String, date: Long) {
         val id = UUID.randomUUID().toString()
         val note = NoteDTO(id, title, description, date)
         realmDatabase.addObject { note }
     }
 
-    override fun editNote(id: String, title: String, description: String, date: String) {
+    override fun editNote(id: String, title: String, description: String, date: Long) {
         val note = getNoteDTO(id)
         note?.let {
             it.title = title

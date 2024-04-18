@@ -124,7 +124,8 @@
 
     <!-- NOTES -->
     <string name="notes_toolbar">Notas</string>
-    <string name="notes_empty">Todavía no has escrito nada…</string>
+    <string name="notes_empty">Todavía no has escrito nada</string>
+    <string name="notes_date">Última modificación %s</string>
 
     <string name="notes_delete_top_text">Eliminar nota</string>
     <string name="notes_delete_text">¿Quieres eliminar %s?</string>

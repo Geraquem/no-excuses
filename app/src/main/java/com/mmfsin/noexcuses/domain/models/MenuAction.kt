@@ -4,7 +4,6 @@ enum class MenuAction {
     ROUTINES,
     MY_ROUTINES,
     EXERCISES,
-    CHRONOMETER,
     NOTES,
     WEIGHTS
 }

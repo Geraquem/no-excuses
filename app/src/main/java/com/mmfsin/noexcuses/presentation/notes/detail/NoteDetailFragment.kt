@@ -78,7 +78,7 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
                 noteId,
                 etTitle.text.toString(),
                 etDescription.text.toString(),
-                System.currentTimeMillis().toString()
+                System.currentTimeMillis()
             )
         }
     }
