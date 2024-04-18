@@ -38,7 +38,7 @@ fun ExerciseDTO.toExercise() = Exercise(id, category, imageURL, name, dataURL)
 fun List<ExerciseDTO>.toExerciseList() = this.map { it.toExercise() }
 
 /** My Routine */
-fun MyRoutineDTO.toMyRoutine() = MyRoutine(id, title, description, days)
+fun MyRoutineDTO.toMyRoutine() = MyRoutine(id, title, description, days, doingIt)
 
 fun List<MyRoutineDTO>.toMyRoutineList() = this.map { it.toMyRoutine() }
 

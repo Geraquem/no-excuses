@@ -31,6 +31,16 @@ class MyRoutinesRepository @Inject constructor(
         return routine?.toMyRoutine() ?: run { null }
     }
 
+    override fun updateRoutinePushPin(id: String) {
+        val myRoutines = realmDatabase.getObjectsFromRealm { where<MyRoutineDTO>().findAll() }
+        myRoutines.forEach { routine ->
+            if (routine.id == id) routine.doingIt = !routine.doingIt
+            else routine.doingIt = false
+            realmDatabase.addObject { routine }
+        }
+
+    }
+
     override fun addRoutine(title: String, description: String?) {
         val id = UUID.randomUUID().toString()
         val routine = MyRoutineDTO(id, title, description, 0)

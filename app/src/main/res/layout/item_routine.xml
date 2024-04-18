@@ -27,7 +27,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/image"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/iv_pushpin"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -43,9 +43,17 @@
             style="@style/MediumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
             tools:text="Descripción de la fase 1" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_pushpin"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_pushpin_off" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

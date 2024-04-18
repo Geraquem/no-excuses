@@ -84,6 +84,7 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
                     setUpRoutines(myRoutines)
                 }
 
+                is MyRoutinesEvent.PushPinUpdated -> viewModel.getRoutines()
                 is MyRoutinesEvent.SWW -> error()
             }
         }
@@ -113,6 +114,8 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
     override fun onRoutineLongClick(id: String) {
         activity?.showFragmentDialog(MyRoutineEditDialog.newInstance(id, this@MyRoutinesFragment))
     }
+
+    override fun onRoutinePushPinClick(id: String) = viewModel.updateMyRoutinePushPin(id)
 
     override fun dayAddedToRoutine() = updateUI()
 

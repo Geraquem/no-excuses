@@ -5,4 +5,5 @@ open class MyRoutine(
     var title: String,
     var description: String?,
     var days: Int,
+    var doingIt: Boolean
 )

@@ -10,13 +10,14 @@ import com.mmfsin.noexcuses.domain.models.MyRoutine
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces.IMyRoutineListener
 
 class MyRoutinesAdapter(
-    private val myRoutines: List<MyRoutine>, private val listener: IMyRoutineListener
+    private val myRoutines: List<MyRoutine>,
+    private val listener: IMyRoutineListener
 ) : RecyclerView.Adapter<MyRoutinesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemRoutineBinding.bind(view)
         private val c = binding.root.context
-        fun bind(myRoutine: MyRoutine) {
+        fun bind(myRoutine: MyRoutine, listener: IMyRoutineListener) {
             binding.apply {
                 image.tvNumOfDays.text = myRoutine.days.toString()
                 val days =
@@ -26,6 +27,12 @@ class MyRoutinesAdapter(
                 val description = myRoutine.description?.let { myRoutine.description }
                     ?: run { c.getString(R.string.my_routines_no_description) }
                 tvDescription.text = description
+
+                val pushPinIcon = if (myRoutine.doingIt) R.drawable.ic_pushpin
+                else R.drawable.ic_pushpin_off
+                ivPushpin.setImageResource(pushPinIcon)
+
+                ivPushpin.setOnClickListener { listener.onRoutinePushPinClick(myRoutine.id) }
             }
         }
     }
@@ -37,7 +44,7 @@ class MyRoutinesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(myRoutines[position])
+        holder.bind(myRoutines[position], listener)
         holder.itemView.setOnClickListener { listener.onRoutineClick(myRoutines[position].id) }
         holder.itemView.setOnLongClickListener {
             listener.onRoutineLongClick(myRoutines[position].id)
