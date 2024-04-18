@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
-    android:background="@drawable/bg_round_yellow"
+    android:background="@drawable/bg_white_box"
+    android:backgroundTint="@color/light_yellow"
     android:elevation="4dp"
     android:paddingHorizontal="8dp"
     android:paddingVertical="16dp">

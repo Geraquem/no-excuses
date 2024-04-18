@@ -54,10 +54,12 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
 
     override fun setUI() {
         binding.apply {
-            (activity as MainActivity).setUpToolbar(
-                title = getString(R.string.my_routines_toolbar),
-                info = true
-            )
+            (activity as MainActivity).apply {
+                setUpToolbar(title = getString(R.string.my_routines_toolbar))
+                rightIconToolbar(isVisible = true,
+                    icon = R.drawable.ic_info,
+                    action = { supportFragmentManager.showFragmentDialog(InfoDialog.newInstance()) })
+            }
         }
     }
 

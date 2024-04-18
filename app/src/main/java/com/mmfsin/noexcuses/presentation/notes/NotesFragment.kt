@@ -41,7 +41,10 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
 
     override fun setUI() {
         binding.apply {
-            (activity as MainActivity).setUpToolbar(title = getString(R.string.notes_toolbar))
+            (activity as MainActivity).apply {
+                setUpToolbar(title = getString(R.string.notes_toolbar))
+                rightIconToolbar(isVisible = false)
+            }
         }
     }
 

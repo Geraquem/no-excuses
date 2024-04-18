@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
 import com.mmfsin.noexcuses.MainActivity
+import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
@@ -16,6 +17,7 @@ import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.adapter.ChExercisesAdapter
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.AddChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.interfaces.IChExercisesListener
+import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.utils.ID_GROUP
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
@@ -44,7 +46,12 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
     }
 
     override fun setUI() {
-        (activity as MainActivity).setUpToolbar(title = group?.muscularGroup, info = true)
+        (activity as MainActivity).apply {
+            setUpToolbar(title = group?.muscularGroup)
+            rightIconToolbar(isVisible = true,
+                icon = R.drawable.ic_info,
+                action = { supportFragmentManager.showFragmentDialog(InfoDialog.newInstance()) })
+        }
     }
 
     override fun setListeners() {}

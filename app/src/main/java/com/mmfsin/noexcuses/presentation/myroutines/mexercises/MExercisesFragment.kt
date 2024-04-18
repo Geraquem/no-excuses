@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.MainActivity
+import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMexercisesBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
@@ -20,6 +21,7 @@ import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExercise
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs.DeleteChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.EditChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.MExercisesFragmentDirections.Companion.actionMGroupsToExercises
+import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.utils.ID_GROUP
 import com.mmfsin.noexcuses.utils.getBundleParcelableArgs
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -64,7 +66,12 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
         viewModel.event.observe(this) { event ->
             when (event) {
                 is MExercisesEvent.GetDay -> {
-                    (activity as MainActivity).setUpToolbar(title = event.day.title, info = true)
+                    (activity as MainActivity).apply {
+                        setUpToolbar(title = event.day.title)
+                        rightIconToolbar(isVisible = true,
+                            icon = R.drawable.ic_info,
+                            action = { supportFragmentManager.showFragmentDialog(InfoDialog.newInstance()) })
+                    }
                     viewModel.getDayExercises(event.day.id)
                 }
 

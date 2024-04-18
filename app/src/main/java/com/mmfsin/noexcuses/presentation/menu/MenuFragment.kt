@@ -14,7 +14,12 @@ import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
 import com.mmfsin.noexcuses.domain.models.MenuAction
-import com.mmfsin.noexcuses.domain.models.MenuAction.*
+import com.mmfsin.noexcuses.domain.models.MenuAction.CHRONOMETER
+import com.mmfsin.noexcuses.domain.models.MenuAction.EXERCISES
+import com.mmfsin.noexcuses.domain.models.MenuAction.MY_ROUTINES
+import com.mmfsin.noexcuses.domain.models.MenuAction.NOTES
+import com.mmfsin.noexcuses.domain.models.MenuAction.ROUTINES
+import com.mmfsin.noexcuses.domain.models.MenuAction.WEIGHTS
 import com.mmfsin.noexcuses.domain.models.MenuItem
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToChronometer
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMuscularGroups
@@ -45,10 +50,10 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
     override fun setUI() {
         binding.apply {
             (activity as MainActivity).apply {
-                this.setUpToolbar(false)
-                this.routineOpened = null
+                setUpToolbar(false)
+                rightIconToolbar(isVisible = false)
+                routineOpened = null
             }
-            background.visibility = View.GONE
             loading.root.visibility = View.VISIBLE
         }
     }
@@ -77,7 +82,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun onItemClick(action: MenuAction) {
         when (action) {
-            ROUTINES ->  navigateTo(actionMenuToRoutines())
+            ROUTINES -> navigateTo(actionMenuToRoutines())
             MY_ROUTINES -> navigateTo(actionMenuToMyRoutines())
             EXERCISES -> navigateTo(actionMenuToMuscularGroups())
             CHRONOMETER -> navigateTo(actionMenuToChronometer())

@@ -26,18 +26,21 @@ class MainActivity : AppCompatActivity() {
         Realm.init(this)
     }
 
-    fun setUpToolbar(showBack: Boolean = true, title: String? = "", info: Boolean = false) {
+    fun setUpToolbar(showBack: Boolean = true, title: String? = "") {
         binding.toolbar.apply {
             val toolbarTitle = if (showBack) title else getString(R.string.app_name)
             tvTitle.text = toolbarTitle
 
             ivBack.isVisible = showBack
-            ivBack.setOnClickListener { onBackPressed() }
+            ivBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        }
+    }
 
-            ivInfo.isVisible = info
-            ivInfo.setOnClickListener {
-                supportFragmentManager.showFragmentDialog(InfoDialog.newInstance())
-            }
+    fun rightIconToolbar(isVisible: Boolean, icon: Int? = null, action: () -> Unit = {}) {
+        binding.toolbar.apply {
+            ivRightIcon.isVisible = isVisible
+            icon?.let { ivRightIcon.setImageResource(icon) }
+            ivRightIcon.setOnClickListener { action() }
         }
     }
 }

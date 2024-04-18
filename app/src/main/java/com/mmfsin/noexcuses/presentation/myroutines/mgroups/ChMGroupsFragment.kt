@@ -18,8 +18,10 @@ import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.mgroups.ChMGroupsFragmentDirections.Companion.actionMGroupsToExercises
 import com.mmfsin.noexcuses.presentation.myroutines.mgroups.adapter.ChMGroupsAdapter
 import com.mmfsin.noexcuses.presentation.myroutines.mgroups.intefaces.IChMGroupListener
+import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.utils.ID_GROUP
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,7 +47,12 @@ class ChMGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, ChMGroupsV
     }
 
     override fun setUI() {
-        (activity as MainActivity).setUpToolbar(title = getString(R.string.mgroups_toolbar), info = true)
+        (activity as MainActivity).apply {
+            setUpToolbar(title = getString(R.string.mgroups_toolbar))
+            rightIconToolbar(isVisible = true,
+                icon = R.drawable.ic_info,
+                action = { supportFragmentManager.showFragmentDialog(InfoDialog.newInstance()) })
+        }
     }
 
     override fun setListeners() {}

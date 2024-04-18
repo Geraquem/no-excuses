@@ -40,8 +40,8 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
     }
 
     override fun setUI() {
+        setUpToolbar()
         binding.apply {
-            (activity as MainActivity).setUpToolbar(title = getString(R.string.notes_toolbar))
             note?.let {
                 etTitle.setText(it.title)
                 etDescription.setText(it.description)
@@ -49,7 +49,14 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
         }
     }
 
-    override fun setListeners() {}
+    private fun setUpToolbar() {
+        (activity as MainActivity).apply {
+            setUpToolbar(title = getString(R.string.notes_toolbar))
+            rightIconToolbar(isVisible = true,
+                icon = R.drawable.ic_check,
+                action = { addNote() })
+        }
+    }
 
     override fun observe() {
         viewModel.event.observe(this) { event ->
@@ -58,13 +65,14 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
                     note = event.note
                     setUI()
                 }
-                is NoteDetailEvent.NoteCreated -> {}
+
+                is NoteDetailEvent.NoteCreated -> activity?.onBackPressedDispatcher?.onBackPressed()
                 is NoteDetailEvent.SWW -> error()
             }
         }
     }
 
-    override fun onStop() {
+    private fun addNote() {
         binding.apply {
             viewModel.addNote(
                 noteId,
@@ -73,6 +81,10 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
                 System.currentTimeMillis().toString()
             )
         }
+    }
+
+    override fun onStop() {
+        addNote()
         super.onStop()
     }
 

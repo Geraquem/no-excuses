@@ -21,7 +21,6 @@
     <string name="menu_notes_desc">¡Que no se olviden las cosas!</string>
     <string name="menu_chronometer">Cronómetro</string>
     <string name="menu_chronometer_desc">Para llevar el tiempo de entrenamiento</string>
-    <string name="menu_laziness">Pereza</string>
 
     <!-- CHRONOMETER -->
     <string name="chrono_base">00:00:00</string>
