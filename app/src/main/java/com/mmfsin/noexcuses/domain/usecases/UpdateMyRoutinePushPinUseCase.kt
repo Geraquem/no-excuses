@@ -1,9 +1,7 @@
 package com.mmfsin.noexcuses.domain.usecases
 
 import com.mmfsin.noexcuses.base.BaseUseCase
-import com.mmfsin.noexcuses.domain.interfaces.IDefaultRoutinesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IMyRoutinesRepository
-import com.mmfsin.noexcuses.domain.models.DefaultRoutine
 import javax.inject.Inject
 
 class UpdateMyRoutinePushPinUseCase @Inject constructor(

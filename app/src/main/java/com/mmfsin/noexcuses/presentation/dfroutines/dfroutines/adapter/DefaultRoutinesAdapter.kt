@@ -6,22 +6,28 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemRoutineBinding
-import com.mmfsin.noexcuses.domain.models.DefaultRoutine
+import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.interfaces.IDefaultRoutineListener
 
 class DefaultRoutinesAdapter(
-    private val myDefaultRoutines: List<DefaultRoutine>,
+    private val myDefaultRoutines: List<Routine>,
     private val listener: IDefaultRoutineListener
 ) : RecyclerView.Adapter<DefaultRoutinesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemRoutineBinding.bind(view)
         private val c = binding.root.context
-        fun bind(defaultRoutine: DefaultRoutine) {
+        fun bind(defaultRoutine: Routine, listener: IDefaultRoutineListener) {
             binding.apply {
                 image.tvNumOfDays.text = defaultRoutine.days.toString()
                 tvTitle.text = defaultRoutine.title
                 tvDescription.text = defaultRoutine.description
+
+                val pushPinIcon = if (defaultRoutine.doingIt) R.drawable.ic_pushpin
+                else R.drawable.ic_pushpin_off
+                ivPushpin.setImageResource(pushPinIcon)
+
+                ivPushpin.setOnClickListener { listener.onRoutinePushPinClick(defaultRoutine.id) }
             }
         }
     }
@@ -34,7 +40,7 @@ class DefaultRoutinesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val routine = myDefaultRoutines[position]
-        holder.bind(routine)
+        holder.bind(routine, listener)
         holder.itemView.setOnClickListener { listener.onRoutineClick(routine.id) }
     }
 

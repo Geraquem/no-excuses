@@ -15,8 +15,8 @@ import com.mmfsin.noexcuses.domain.interfaces.IDefaultRoutinesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
-import com.mmfsin.noexcuses.domain.models.DefaultRoutine
 import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.utils.DAY_ID
 import com.mmfsin.noexcuses.utils.ID
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
@@ -29,16 +29,25 @@ class DefaultRoutinesRepository @Inject constructor(
     private val realmDatabase: IRealmDatabase
 ) : IDefaultRoutinesRepository {
 
-    override fun getDefaultRoutines(): List<DefaultRoutine> {
-        val exercises = realmDatabase.getObjectsFromRealm {
+    override fun getDefaultRoutines(): List<Routine> {
+        val routines = realmDatabase.getObjectsFromRealm {
             where<DefaultRoutineDTO>().findAll()
         }
-        return exercises.toDefaultRoutineList()
+        return routines.toDefaultRoutineList()
     }
 
-    override fun getDefaultRoutineById(id: String): DefaultRoutine? {
+    override fun getDefaultRoutineById(id: String): Routine? {
         val routine = realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class.java, ID, id)
         return routine?.toDefaultRoutine()
+    }
+
+    override fun updateRoutinePushPin(id: String) {
+        val dfRoutines = realmDatabase.getObjectsFromRealm { where<DefaultRoutineDTO>().findAll() }
+        dfRoutines.forEach { routine ->
+            if (routine.id == id) routine.doingIt = !routine.doingIt
+            else routine.doingIt = false
+            realmDatabase.addObject { routine }
+        }
     }
 
     override fun getDefaultDays(routineId: String): List<Day> {

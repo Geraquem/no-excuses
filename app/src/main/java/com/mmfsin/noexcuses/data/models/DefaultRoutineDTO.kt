@@ -8,7 +8,8 @@ open class DefaultRoutineDTO(
     var id: String = "",
     var name: String = "",
     var description: String = "",
-    var days: Long = 0
+    var days: Long = 0,
+    var doingIt: Boolean = false
 ) : RealmObject()
 
 open class DefaultDayDTO(

@@ -2,11 +2,11 @@ package com.mmfsin.noexcuses.domain.usecases
 
 import com.mmfsin.noexcuses.base.BaseUseCaseNoParams
 import com.mmfsin.noexcuses.domain.interfaces.IDefaultRoutinesRepository
-import com.mmfsin.noexcuses.domain.models.DefaultRoutine
+import com.mmfsin.noexcuses.domain.models.Routine
 import javax.inject.Inject
 
 class GetDefaultRoutinesUseCase @Inject constructor(private val repository: IDefaultRoutinesRepository) :
-    BaseUseCaseNoParams<List<DefaultRoutine>>() {
+    BaseUseCaseNoParams<List<Routine>>() {
 
-    override suspend fun execute(): List<DefaultRoutine> = repository.getDefaultRoutines()
+    override suspend fun execute(): List<Routine> = repository.getDefaultRoutines()
 }

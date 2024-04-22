@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +12,7 @@ import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentDefaultRoutinesBinding
-import com.mmfsin.noexcuses.domain.models.DefaultRoutine
+import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.DefaultDaysDialog
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.DefaultRoutinesFragmentDirections.Companion.actionDefaultRoutinesToDefaultExercises
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.adapter.DefaultRoutinesAdapter
@@ -57,12 +56,13 @@ class DefaultRoutinesFragment :
         viewModel.event.observe(this) { event ->
             when (event) {
                 is DefaultRoutinesEvent.GetDefaultRoutines -> setUpRoutines(event.defaultRoutines)
+                is DefaultRoutinesEvent.PushPinUpdated -> viewModel.getDefaultRoutines()
                 is DefaultRoutinesEvent.SWW -> error()
             }
         }
     }
 
-    private fun setUpRoutines(defaultRoutines: List<DefaultRoutine>) {
+    private fun setUpRoutines(defaultRoutines: List<Routine>) {
         binding.apply {
             rvRoutines.apply {
                 layoutManager = LinearLayoutManager(mContext)
@@ -76,6 +76,8 @@ class DefaultRoutinesFragment :
         val dialog = DefaultDaysDialog(routineId = id, this@DefaultRoutinesFragment)
         activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
+
+    override fun onRoutinePushPinClick(id: String) = viewModel.updateDefaultRoutinePushPin(id)
 
     override fun onDayClick(id: String) =
         findNavController().navigate(actionDefaultRoutinesToDefaultExercises(id))

@@ -47,45 +47,46 @@ class MenuRepository @Inject constructor(
         val latch = CountDownLatch(1)
         reference.get().addOnSuccessListener {
             val version = it.child(VERSION).value as Long
-//            if (version == savedVersion) {
-//                latch.countDown()
-//            } else {
-            saveVersion(newVersion = version)
+            if (version == savedVersion) {
+                latch.countDown()
+            } else {
+                saveVersion(newVersion = version)
 
-            val fbMGroups = it.child(M_GROUPS)
-            for (child in fbMGroups.children) {
-                child.getValue(MuscularGroupDTO::class.java)
-                    ?.let { mGroup -> saveMGroups(mGroup) }
-            }
-
-            val fbExercises = it.child(EXERCISES)
-            for (child in fbExercises.children) {
-                for (exercise in child.children) {
-                    exercise.getValue(ExerciseDTO::class.java)
-                        ?.let { e -> saveExercise(e) }
+                val fbMGroups = it.child(M_GROUPS)
+                for (child in fbMGroups.children) {
+                    child.getValue(MuscularGroupDTO::class.java)
+                        ?.let { mGroup -> saveMGroups(mGroup) }
                 }
+
+                val fbExercises = it.child(EXERCISES)
+                for (child in fbExercises.children) {
+                    for (exercise in child.children) {
+                        exercise.getValue(ExerciseDTO::class.java)
+                            ?.let { e -> saveExercise(e) }
+                    }
+                }
+
+                val defaultRoutines = it.child(DEFAULT_ROUTINES)
+
+                val routines = defaultRoutines.child(ROUTINES)
+                for (routine in routines.children) {
+                    routine.getValue(DefaultRoutineDTO::class.java)
+                        ?.let { r -> saveDefaultRoutine(r) }
+                }
+
+                val days = defaultRoutines.child(DAYS)
+                for (day in days.children) {
+                    day.getValue(DefaultDayDTO::class.java)?.let { d -> saveDefaultDay(d) }
+                }
+
+                val exercises = defaultRoutines.child(EXERCISES)
+                for (exercise in exercises.children) {
+                    exercise.getValue(DefaultExerciseDTO::class.java)
+                        ?.let { e -> saveDefaultExercise(e) }
+                }
+
+                latch.countDown()
             }
-
-            val defaultRoutines = it.child(DEFAULT_ROUTINES)
-
-            val routines = defaultRoutines.child(ROUTINES)
-            for (routine in routines.children) {
-                routine.getValue(DefaultRoutineDTO::class.java)?.let { r -> saveDefaultRoutine(r) }
-            }
-
-            val days = defaultRoutines.child(DAYS)
-            for (day in days.children) {
-                day.getValue(DefaultDayDTO::class.java)?.let { d -> saveDefaultDay(d) }
-            }
-
-            val exercises = defaultRoutines.child(EXERCISES)
-            for (exercise in exercises.children) {
-                exercise.getValue(DefaultExerciseDTO::class.java)
-                    ?.let { e -> saveDefaultExercise(e) }
-            }
-
-            latch.countDown()
-
         }.addOnFailureListener {
             latch.countDown()
         }
@@ -110,9 +111,6 @@ class MenuRepository @Inject constructor(
     private fun saveDefaultDay(day: DefaultDayDTO) = realmDatabase.addObject { day }
     private fun saveDefaultExercise(exercise: DefaultExerciseDTO) =
         realmDatabase.addObject { exercise }
-
-//    private fun saveExercisePredInRealm(exercise: ExercisePredDTO) =
-//        realmDatabase.addObject { exercise }
 
     override fun isFirstTime(): Boolean {
         val firstTime = getSharedPreferences().getBoolean(FIRST_TIME, true)

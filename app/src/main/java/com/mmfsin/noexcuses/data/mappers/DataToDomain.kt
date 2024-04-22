@@ -15,7 +15,6 @@ import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
-import com.mmfsin.noexcuses.domain.models.DefaultRoutine
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.domain.models.Routine
@@ -41,16 +40,15 @@ fun MyRoutineDTO.toMyRoutine() = Routine(id, title, description, days, doingIt)
 fun List<MyRoutineDTO>.toMyRoutineList() = this.map { it.toMyRoutine() }
 
 /** Default Routine */
-fun DefaultRoutineDTO.toDefaultRoutine() = DefaultRoutine(
+fun DefaultRoutineDTO.toDefaultRoutine() = Routine(
     id = id,
     title = name,
     description = description,
-    days = days
+    days = days.toInt(),
+    doingIt = doingIt
 )
 
 fun List<DefaultRoutineDTO>.toDefaultRoutineList() = this.map { it.toDefaultRoutine() }
-
-private fun String.daysCount(): Int = this.split(",").size
 
 /** Day */
 fun DefaultDayDTO.toDay() = Day(
