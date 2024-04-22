@@ -5,6 +5,7 @@ import com.mmfsin.noexcuses.data.mappers.toDayListFromDayDTO
 import com.mmfsin.noexcuses.data.mappers.toMyRoutine
 import com.mmfsin.noexcuses.data.mappers.toMyRoutineList
 import com.mmfsin.noexcuses.data.models.DayDTO
+import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
 import com.mmfsin.noexcuses.domain.interfaces.IMyRoutinesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
@@ -32,6 +33,12 @@ class MyRoutinesRepository @Inject constructor(
     }
 
     override fun updateRoutinePushPin(id: String) {
+        val dfRoutines = realmDatabase.getObjectsFromRealm { where<DefaultRoutineDTO>().findAll() }
+        dfRoutines.forEach { routine ->
+            routine.doingIt = false
+            realmDatabase.addObject { routine }
+        }
+
         val myRoutines = realmDatabase.getObjectsFromRealm { where<MyRoutineDTO>().findAll() }
         myRoutines.forEach { routine ->
             if (routine.id == id) routine.doingIt = !routine.doingIt
