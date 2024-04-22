@@ -5,5 +5,6 @@ open class Routine(
     var title: String,
     var description: String?,
     var days: Int,
-    var doingIt: Boolean
+    var doingIt: Boolean,
+    val createdByUser: Boolean
 )

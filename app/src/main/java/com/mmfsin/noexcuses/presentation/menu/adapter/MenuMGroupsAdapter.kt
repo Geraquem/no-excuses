@@ -8,11 +8,11 @@ import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemMenuMuscularGroupBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
-import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuMGroupListener
+import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 
 class MenuMGroupsAdapter(
     private val groups: List<MuscularGroup>,
-    private val listener: IMenuMGroupListener
+    private val listener: IMenuListener
 ) : RecyclerView.Adapter<MenuMGroupsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

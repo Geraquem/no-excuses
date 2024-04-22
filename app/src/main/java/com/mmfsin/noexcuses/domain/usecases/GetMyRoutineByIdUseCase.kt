@@ -5,8 +5,9 @@ import com.mmfsin.noexcuses.domain.interfaces.IMyRoutinesRepository
 import com.mmfsin.noexcuses.domain.models.Routine
 import javax.inject.Inject
 
-class GetMyRoutineByIdUseCase @Inject constructor(private val repository: IMyRoutinesRepository) :
-    BaseUseCase<GetMyRoutineByIdUseCase.Params, Routine?>() {
+class GetMyRoutineByIdUseCase @Inject constructor(
+    private val repository: IMyRoutinesRepository
+) : BaseUseCase<GetMyRoutineByIdUseCase.Params, Routine?>() {
 
     override suspend fun execute(params: Params): Routine? = repository.getRoutineById(params.id)
 

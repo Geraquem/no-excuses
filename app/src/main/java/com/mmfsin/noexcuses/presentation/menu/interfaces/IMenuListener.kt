@@ -1,5 +1,6 @@
 package com.mmfsin.noexcuses.presentation.menu.interfaces
 
-interface IMenuMGroupListener {
+interface IMenuListener {
+    fun onMenuDayClick(id: String)
     fun onMenuMGroupClick(id: String)
 }

@@ -24,12 +24,13 @@ import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.a
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToNotes
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToRoutines
 import com.mmfsin.noexcuses.presentation.menu.adapter.MenuMGroupsAdapter
-import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuMGroupListener
+import com.mmfsin.noexcuses.presentation.menu.dialogs.MenuDaysDialog
+import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuMGroupListener {
+class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuListener {
 
     override val viewModel: MenuViewModel by viewModels()
 
@@ -89,13 +90,23 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuMG
     private fun setUpActualRoutine(routine: Routine?) {
         binding.apply {
             routine?.let {
-                actualRoutine.image.tvNumOfDays.text = routine.days.toString()
-                actualRoutine.tvTitle.text = routine.title
-                actualRoutine.tvDescription.text = routine.description
-                actualRoutine.ivPushpin.setImageResource(R.drawable.ic_pushpin)
+                actualRoutine.apply {
+                    image.tvNumOfDays.text = routine.days.toString()
+                    tvTitle.text = routine.title
+                    tvDescription.text = routine.description
+                    ivPushpin.setImageResource(R.drawable.ic_pushpin)
+                    root.setOnClickListener {
+                        val dialog = MenuDaysDialog(routineId = routine.id, this@MenuFragment)
+                        activity?.let { dialog.show(it.supportFragmentManager, "") }
+                    }
+                }
                 llMyActualRoutine.visibility = View.VISIBLE
             }
         }
+    }
+
+    override fun onMenuDayClick(id: String) {
+
     }
 
     private fun setUpMuscularGroups(mGroups: List<MuscularGroup>) {

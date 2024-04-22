@@ -9,5 +9,6 @@ open class MyRoutineDTO(
     var title: String = "",
     var description: String? = null,
     var days: Int = 0,
-    var doingIt: Boolean = false
+    var doingIt: Boolean = false,
+    var createdByUser: Boolean = true
 ) : RealmObject()

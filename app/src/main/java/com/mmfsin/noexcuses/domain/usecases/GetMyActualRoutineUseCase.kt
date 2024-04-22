@@ -10,8 +10,4 @@ class GetMyActualRoutineUseCase @Inject constructor(
 ) : BaseUseCaseNoParams<Routine?>() {
 
     override suspend fun execute(): Routine? = repository.getMyActualRoutine()
-
-    data class Params(
-        val routineId: String
-    )
 }

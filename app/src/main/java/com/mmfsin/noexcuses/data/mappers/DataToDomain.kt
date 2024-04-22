@@ -17,25 +17,41 @@ import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
-import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.domain.models.Note
+import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.utils.formatTime
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 /** MuscularGroup */
-fun MuscularGroupDTO.toMuscularGroup() = MuscularGroup(name, imageURL)
+fun MuscularGroupDTO.toMuscularGroup() = MuscularGroup(
+    name = name,
+    imageURL = imageURL
+)
 
 fun List<MuscularGroupDTO>.toMuscularGroupList() = this.map { it.toMuscularGroup() }
 
 /** Exercise */
-fun ExerciseDTO.toExercise() = Exercise(id, category, imageURL, name, dataURL)
+fun ExerciseDTO.toExercise() = Exercise(
+    id = id,
+    category = category,
+    imageURL = imageURL,
+    name = name,
+    dataURL = dataURL
+)
 
 fun List<ExerciseDTO>.toExerciseList() = this.map { it.toExercise() }
 
 /** My Routine */
-fun MyRoutineDTO.toMyRoutine() = Routine(id, title, description, days, doingIt)
+fun MyRoutineDTO.toMyRoutine() = Routine(
+    id = id,
+    title = title,
+    description = description,
+    days,
+    doingIt = doingIt,
+    createdByUser = createdByUser
+)
 
 fun List<MyRoutineDTO>.toMyRoutineList() = this.map { it.toMyRoutine() }
 
@@ -45,7 +61,8 @@ fun DefaultRoutineDTO.toDefaultRoutine() = Routine(
     title = name,
     description = description,
     days = days.toInt(),
-    doingIt = doingIt
+    doingIt = doingIt,
+    createdByUser = createdByUser
 )
 
 fun List<DefaultRoutineDTO>.toDefaultRoutineList() = this.map { it.toDefaultRoutine() }
@@ -58,7 +75,12 @@ fun DefaultDayDTO.toDay() = Day(
     exercises = exercises.toInt()
 )
 
-fun DayDTO.toDay() = Day(id, routineId, title, exercises)
+fun DayDTO.toDay() = Day(
+    id = id,
+    routineId = routineId,
+    title = title,
+    exercises = exercises
+)
 
 fun List<DayDTO>.toDayListFromDayDTO() = this.map { it.toDay() }
 fun List<DefaultDayDTO>.toDayListFromDefaultDayDTO() = this.map { it.toDay() }
@@ -74,21 +96,34 @@ fun DefaultExerciseDTO.toDefaultExercise(exercise: Exercise) = DefaultExercise(
 )
 
 /** ChExercise */
-fun ChExerciseDTO.toChExercise() =
-    ChExercise(id, routineId, dayId, exerciseId, data?.toDataList(), time, notes)
-
-fun List<ChExerciseDTO>.toChExerciseList() = this.map { it.toChExercise() }
-
-fun ChExerciseDTO.toCompactExercise(e: Exercise) = CompactExercise(
-    id, e.name, e.category, e.imageURL, data?.size, time.formatTime(), hasNotes(this.notes)
+fun ChExerciseDTO.toChExercise() = ChExercise(
+    id = id,
+    routineId = routineId,
+    dayId = dayId,
+    exerciseId = exerciseId,
+    data = data?.toDataList(),
+    time = time,
+    notes = notes
 )
 
-private fun hasNotes(notes: String?): Boolean {
-    return !notes.isNullOrEmpty()
-}
+fun ChExerciseDTO.toCompactExercise(e: Exercise) = CompactExercise(
+    chExerciseId = id,
+    name = e.name,
+    category = e.category,
+    imageURL = e.imageURL,
+    series = data?.size,
+    time = time.formatTime(),
+    hasNotes = !notes.isNullOrEmpty()
+)
 
 /** Data */
-fun DataDTO.toData() = Data(id, exerciseDayId, reps, weight)
+fun DataDTO.toData() = Data(
+    id = id,
+    exerciseDayId = exerciseDayId,
+    reps = reps,
+    weight = weight
+)
+
 fun List<DataDTO>.toDataList() = this.map { it.toData() }
 
 /** Notes */
