@@ -9,8 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.mmfsin.noexcuses.MainActivity
+import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
+import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMyRoutines
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToRoutines
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -39,6 +41,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
                 rightIconToolbar(isVisible = false)
                 routineOpened = null
             }
+            llMyActualRoutine.visibility = View.GONE
             loading.root.visibility = View.VISIBLE
         }
     }
@@ -60,10 +63,14 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
         }
     }
 
-    private fun setUpActualRoutine(routine: Any?) {
+    private fun setUpActualRoutine(routine: Routine?) {
         binding.apply {
-            routine?.let { } ?: run {
-                llMyActualRoutine.visibility = View.GONE
+            routine?.let {
+                actualRoutine.image.tvNumOfDays.text = routine.days.toString()
+                actualRoutine.tvTitle.text = routine.title
+                actualRoutine.tvDescription.text = routine.description
+                actualRoutine.ivPushpin.setImageResource(R.drawable.ic_pushpin)
+                llMyActualRoutine.visibility = View.VISIBLE
             }
             loading.root.visibility = View.GONE
         }

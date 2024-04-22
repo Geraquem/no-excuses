@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.mmfsin.noexcuses.data.mappers.toDefaultRoutine
 import com.mmfsin.noexcuses.data.mappers.toMyRoutine
 import com.mmfsin.noexcuses.data.models.ChExerciseDTO
 import com.mmfsin.noexcuses.data.models.DefaultDayDTO
@@ -14,6 +15,7 @@ import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
 import com.mmfsin.noexcuses.domain.interfaces.IMenuRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
+import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.utils.DAYS
 import com.mmfsin.noexcuses.utils.DEFAULT_ROUTINES
 import com.mmfsin.noexcuses.utils.EXERCISES
@@ -124,10 +126,13 @@ class MenuRepository @Inject constructor(
 
     private fun getSharedPreferences() = context.getSharedPreferences(MY_SHARED_PREFS, MODE_PRIVATE)
 
-    override fun getMyActualRoutine(): Any? {
+    override fun getMyActualRoutine(): Routine? {
+        val dfRoutines = realmDatabase.getObjectsFromRealm { where<DefaultRoutineDTO>().findAll() }
+        dfRoutines.forEach { routine -> if (routine.doingIt) return routine.toDefaultRoutine() }
 
         val myRoutines = realmDatabase.getObjectsFromRealm { where<MyRoutineDTO>().findAll() }
         myRoutines.forEach { routine -> if (routine.doingIt) return routine.toMyRoutine() }
+
         return null
     }
 }
