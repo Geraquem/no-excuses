@@ -10,27 +10,15 @@
     <string name="error_btn">Aceptar</string>
 
     <!-- MENU -->
-
     <string name="menu_default_routines_title">Rutinas</string>
     <string name="menu_default_routines_description">Ponte en forma con los planes de entrenamiento creados para ganar masa muscular, definir o simplemente mantener la línea.</string>
     <string name="menu_my_routines_title">Mis entrenamientos</string>
     <string name="menu_my_routines_description">Crea tus propias rutinas de entrenamiento seleccionando ejercicios y grupos musculares. Divide la rutina en días para ser más eficiente y llevar tu entrenamiento al siguiente nivel.</string>
-    <string name="menu_my_actual_routine">Actualmente estás haciendo</string>
-
-    <string name="menu_routines">Rutinas predefinidas</string>
-    <string name="menu_routines_desc">Rutinas predefinidas</string>
-    <string name="menu_my_routines">Mis rutinas</string>
-    <string name="menu_my_routines_desc">Crea tus rutinas de entrenamiento</string>
-    <string name="menu_exercises">Ejercicios</string>
-    <string name="menu_exercises_desc">Todos los ejercicios de la aplicación</string>
-    <string name="menu_weights">Mis pesos</string>
-    <string name="menu_notes">Notas</string>
-    <string name="menu_notes_desc">¡Que no se olviden las cosas!</string>
-    <string name="menu_chronometer">Cronómetro</string>
-    <string name="menu_chronometer_desc">Para llevar el tiempo de entrenamiento</string>
-
-    <!-- CHRONOMETER -->
-    <string name="chrono_base">00:00:00</string>
+    <string name="menu_my_actual_routine">Actualmente estás haciendo:</string>
+    <string name="menu_exercises_title">Ejercicios</string>
+    <string name="menu_exercises_description">Echa un vistazo a todos ejercicios. Están divididos por grupos musculares.</string>
+    <string name="menu_notes_title">Notas</string>
+    <string name="menu_notes_description">Está bien confiar en la memomria de uno mismo, pero mejor si lo apuntas.</string>
 
     <!-- MUSCULAR GROUPS -->
     <string name="mgroups_toolbar">Grupos musculares</string>

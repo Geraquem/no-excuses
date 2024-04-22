@@ -8,18 +8,25 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
+import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMuscularGroups
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMyRoutines
+import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToNotes
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToRoutines
+import com.mmfsin.noexcuses.presentation.menu.adapter.MenuMGroupsAdapter
+import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuMGroupListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
+class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuMGroupListener {
 
     override val viewModel: MenuViewModel by viewModels()
 
@@ -50,6 +57,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
         binding.apply {
             btnDefaultRoutines.setOnClickListener { navigateTo(actionMenuToRoutines()) }
             btnMyRoutines.setOnClickListener { navigateTo(actionMenuToMyRoutines()) }
+            btnExercises.setOnClickListener { navigateTo(actionMenuToMuscularGroups()) }
+            btnNotes.setOnClickListener { navigateTo(actionMenuToNotes()) }
         }
     }
 
@@ -57,7 +66,15 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
         viewModel.event.observe(this) { event ->
             when (event) {
                 is MenuEvent.Completed -> viewModel.getMenuItems()
-                is MenuEvent.ActualRoutine -> setUpActualRoutine(event.routine)
+                is MenuEvent.ActualRoutine -> {
+                    setUpActualRoutine(event.routine)
+                    viewModel.getMuscularGroups()
+                }
+
+                is MenuEvent.GetMuscularGroups -> {
+                    setUpMuscularGroups(event.mGroups)
+                }
+
                 is MenuEvent.SWW -> error()
             }
         }
@@ -76,15 +93,16 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
         }
     }
 
-//    override fun onItemClick(action: MenuAction) {
-//        when (action) {
-//            ROUTINES -> navigateTo(actionMenuToRoutines())
-//            MY_ROUTINES -> navigateTo(actionMenuToMyRoutines())
-//            EXERCISES -> navigateTo(actionMenuToMuscularGroups())
-//            NOTES -> navigateTo(actionMenuToNotes())
-//            WEIGHTS -> {}
-//        }
-//    }
+    private fun setUpMuscularGroups(mGroups: List<MuscularGroup>) {
+        binding.rvMuscularGroups.apply {
+            layoutManager = LinearLayoutManager(mContext, HORIZONTAL, false)
+            adapter = MenuMGroupsAdapter(mGroups, this@MenuFragment)
+        }
+    }
+
+    override fun onMenuMGroupClick(id: String) {
+
+    }
 
     private fun navigateTo(directions: NavDirections) = findNavController().navigate(directions)
 
