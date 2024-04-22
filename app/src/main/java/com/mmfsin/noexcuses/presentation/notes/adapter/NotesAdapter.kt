@@ -10,17 +10,24 @@ import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.presentation.notes.interfaces.INotesListener
 
 class NotesAdapter(
-    private val notes: List<Note>, private val listener: INotesListener
+    private val notes: List<Note>,
+    private val listener: INotesListener
 ) : RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemNoteBinding.bind(view)
         private val c = binding.root.context
-        fun bind(note: Note) {
+        fun bind(note: Note, listener: INotesListener) {
             binding.apply {
                 tvTitle.text = note.title
                 tvDescription.text = note.description
                 tvDate.text = c.getString(R.string.notes_date, note.date)
+
+                val pushPinIcon = if (note.pinned) R.drawable.ic_pushpin
+                else R.drawable.ic_pushpin_off
+                ivPushpin.setImageResource(pushPinIcon)
+
+                ivPushpin.setOnClickListener { listener.updatePinnedNote(note.id) }
             }
         }
     }
@@ -32,10 +39,11 @@ class NotesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(notes[position])
-        holder.itemView.setOnClickListener { listener.onNoteClick(notes[position].id) }
+        val note = notes[position]
+        holder.bind(note, listener)
+        holder.itemView.setOnClickListener { listener.onNoteClick(note.id) }
         holder.itemView.setOnLongClickListener {
-            listener.onNoteLongClick(notes[position].id)
+            listener.onNoteLongClick(note.id)
             true
         }
     }

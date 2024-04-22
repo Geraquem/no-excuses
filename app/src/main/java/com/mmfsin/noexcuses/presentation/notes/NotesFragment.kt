@@ -58,6 +58,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
         viewModel.event.observe(this) { event ->
             when (event) {
                 is NotesEvent.GetNotes -> setUpNotes(event.notes)
+                is NotesEvent.UpdatePushPin -> viewModel.getNotes()
                 is NotesEvent.SWW -> error()
             }
         }
@@ -80,9 +81,10 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
         activity?.showFragmentDialog(DeleteNoteDialog.newInstance(id, this@NotesFragment))
     }
 
-    private fun navigateToDetail(id: String) {
+    private fun navigateToDetail(id: String) =
         findNavController().navigate(actionNotesToNoteDetail(id))
-    }
+
+    override fun updatePinnedNote(id: String) = viewModel.updatePinnedNote(id)
 
     override fun deletedComplete() {
         viewModel.getNotes()

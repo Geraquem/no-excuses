@@ -7,5 +7,6 @@ interface INotesRepository {
     fun getNoteById(id: String): Note?
     fun addNote(title: String, description: String, date: Long)
     fun editNote(id: String, title: String, description: String, date: Long)
+    fun pinnedNote(id: String)
     fun deleteNote(id: String)
 }

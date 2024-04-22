@@ -92,7 +92,13 @@ fun DataDTO.toData() = Data(id, exerciseDayId, reps, weight)
 fun List<DataDTO>.toDataList() = this.map { it.toData() }
 
 /** Notes */
-fun NoteDTO.toNote() = Note(id, title, description, formatDate(date))
+fun NoteDTO.toNote() = Note(
+    id = id,
+    title = title,
+    description = description,
+    date = formatDate(date),
+    pinned = pinned
+)
 
 private fun formatDate(date: Long): String {
     val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())

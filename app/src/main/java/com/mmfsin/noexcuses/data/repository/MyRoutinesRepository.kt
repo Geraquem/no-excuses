@@ -45,7 +45,6 @@ class MyRoutinesRepository @Inject constructor(
             else routine.doingIt = false
             realmDatabase.addObject { routine }
         }
-
     }
 
     override fun addRoutine(title: String, description: String?) {

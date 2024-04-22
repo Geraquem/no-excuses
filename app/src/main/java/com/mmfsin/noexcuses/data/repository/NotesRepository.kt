@@ -28,7 +28,7 @@ class NotesRepository @Inject constructor(
 
     override fun addNote(title: String, description: String, date: Long) {
         val id = UUID.randomUUID().toString()
-        val note = NoteDTO(id, title, description, date)
+        val note = NoteDTO(id, title, description, date, pinned = false)
         realmDatabase.addObject { note }
     }
 
@@ -38,7 +38,17 @@ class NotesRepository @Inject constructor(
             it.title = title
             it.description = description
             it.date = date
+            it.pinned = it.pinned
             realmDatabase.addObject { it }
+        }
+    }
+
+    override fun pinnedNote(id: String) {
+        val notes = realmDatabase.getObjectsFromRealm { where<NoteDTO>().findAll() }
+        notes.forEach { note ->
+            if (note.id == id) note.pinned = !note.pinned
+            else note.pinned = false
+            realmDatabase.addObject { note }
         }
     }
 
