@@ -4,31 +4,37 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.mmfsin.noexcuses.data.models.DayDTO
+import com.mmfsin.noexcuses.data.mappers.toMyRoutine
+import com.mmfsin.noexcuses.data.models.ChExerciseDTO
 import com.mmfsin.noexcuses.data.models.DefaultDayDTO
 import com.mmfsin.noexcuses.data.models.DefaultExerciseDTO
 import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
 import com.mmfsin.noexcuses.data.models.ExerciseDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
+import com.mmfsin.noexcuses.data.models.MyRoutineDTO
 import com.mmfsin.noexcuses.domain.interfaces.IMenuRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.utils.DAYS
 import com.mmfsin.noexcuses.utils.DEFAULT_ROUTINES
 import com.mmfsin.noexcuses.utils.EXERCISES
 import com.mmfsin.noexcuses.utils.FIRST_TIME
+import com.mmfsin.noexcuses.utils.ID
 import com.mmfsin.noexcuses.utils.MY_SHARED_PREFS
 import com.mmfsin.noexcuses.utils.M_GROUPS
 import com.mmfsin.noexcuses.utils.ROUTINES
+import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import com.mmfsin.noexcuses.utils.SAVED_VERSION
 import com.mmfsin.noexcuses.utils.VERSION
 import dagger.hilt.android.qualifiers.ApplicationContext
+import io.realm.kotlin.where
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.concurrent.CountDownLatch
 import javax.inject.Inject
 
 class MenuRepository @Inject constructor(
-    @ApplicationContext val context: Context, private val realmDatabase: IRealmDatabase
+    @ApplicationContext val context: Context,
+    private val realmDatabase: IRealmDatabase
 ) : IMenuRepository {
 
     private val reference = Firebase.database.reference
@@ -118,6 +124,12 @@ class MenuRepository @Inject constructor(
         return firstTime
     }
 
-    private fun getSharedPreferences() =
-        context.getSharedPreferences(MY_SHARED_PREFS, MODE_PRIVATE)
+    private fun getSharedPreferences() = context.getSharedPreferences(MY_SHARED_PREFS, MODE_PRIVATE)
+
+    override fun getMyActualRoutine(): Any? {
+
+        val myRoutines = realmDatabase.getObjectsFromRealm { where<MyRoutineDTO>().findAll() }
+        myRoutines.forEach { routine -> if (routine.doingIt) return routine.toMyRoutine() }
+        return null
+    }
 }

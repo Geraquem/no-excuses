@@ -18,12 +18,10 @@ import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.domain.models.DefaultRoutine
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
-import com.mmfsin.noexcuses.domain.models.MyRoutine
+import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.utils.formatTime
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
@@ -38,7 +36,7 @@ fun ExerciseDTO.toExercise() = Exercise(id, category, imageURL, name, dataURL)
 fun List<ExerciseDTO>.toExerciseList() = this.map { it.toExercise() }
 
 /** My Routine */
-fun MyRoutineDTO.toMyRoutine() = MyRoutine(id, title, description, days, doingIt)
+fun MyRoutineDTO.toMyRoutine() = Routine(id, title, description, days, doingIt)
 
 fun List<MyRoutineDTO>.toMyRoutineList() = this.map { it.toMyRoutine() }
 

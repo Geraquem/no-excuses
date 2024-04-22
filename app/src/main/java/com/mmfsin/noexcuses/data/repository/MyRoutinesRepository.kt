@@ -9,7 +9,7 @@ import com.mmfsin.noexcuses.data.models.MyRoutineDTO
 import com.mmfsin.noexcuses.domain.interfaces.IMyRoutinesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Day
-import com.mmfsin.noexcuses.domain.models.MyRoutine
+import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.utils.ID
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import io.realm.kotlin.where
@@ -20,13 +20,13 @@ class MyRoutinesRepository @Inject constructor(
     private val realmDatabase: IRealmDatabase
 ) : IMyRoutinesRepository {
 
-    override fun getRoutines(): List<MyRoutine> {
+    override fun getRoutines(): List<Routine> {
         val groups = realmDatabase.getObjectsFromRealm { where<MyRoutineDTO>().findAll() }
         return if (groups.isNotEmpty()) groups.toMyRoutineList()
         else emptyList()
     }
 
-    override fun getRoutineById(id: String): MyRoutine? {
+    override fun getRoutineById(id: String): Routine? {
         val routine = getRoutineDTO(id)
         return routine?.toMyRoutine() ?: run { null }
     }

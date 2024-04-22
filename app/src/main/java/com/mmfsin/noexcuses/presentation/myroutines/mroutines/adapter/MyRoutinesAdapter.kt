@@ -6,33 +6,33 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemRoutineBinding
-import com.mmfsin.noexcuses.domain.models.MyRoutine
+import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces.IMyRoutineListener
 
 class MyRoutinesAdapter(
-    private val myRoutines: List<MyRoutine>,
+    private val routines: List<Routine>,
     private val listener: IMyRoutineListener
 ) : RecyclerView.Adapter<MyRoutinesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemRoutineBinding.bind(view)
         private val c = binding.root.context
-        fun bind(myRoutine: MyRoutine, listener: IMyRoutineListener) {
+        fun bind(routine: Routine, listener: IMyRoutineListener) {
             binding.apply {
-                image.tvNumOfDays.text = myRoutine.days.toString()
+                image.tvNumOfDays.text = routine.days.toString()
                 val days =
-                    if (myRoutine.days == 1) R.string.my_routines_day else R.string.my_routines_days
+                    if (routine.days == 1) R.string.my_routines_day else R.string.my_routines_days
                 image.tvDays.text = c.getString(days)
-                tvTitle.text = myRoutine.title
-                val description = myRoutine.description?.let { myRoutine.description }
+                tvTitle.text = routine.title
+                val description = routine.description?.let { routine.description }
                     ?: run { c.getString(R.string.my_routines_no_description) }
                 tvDescription.text = description
 
-                val pushPinIcon = if (myRoutine.doingIt) R.drawable.ic_pushpin
+                val pushPinIcon = if (routine.doingIt) R.drawable.ic_pushpin
                 else R.drawable.ic_pushpin_off
                 ivPushpin.setImageResource(pushPinIcon)
 
-                ivPushpin.setOnClickListener { listener.onRoutinePushPinClick(myRoutine.id) }
+                ivPushpin.setOnClickListener { listener.onRoutinePushPinClick(routine.id) }
             }
         }
     }
@@ -44,13 +44,13 @@ class MyRoutinesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(myRoutines[position], listener)
-        holder.itemView.setOnClickListener { listener.onRoutineClick(myRoutines[position].id) }
+        holder.bind(routines[position], listener)
+        holder.itemView.setOnClickListener { listener.onRoutineClick(routines[position].id) }
         holder.itemView.setOnLongClickListener {
-            listener.onRoutineLongClick(myRoutines[position].id)
+            listener.onRoutineLongClick(routines[position].id)
             true
         }
     }
 
-    override fun getItemCount(): Int = myRoutines.size
+    override fun getItemCount(): Int = routines.size
 }

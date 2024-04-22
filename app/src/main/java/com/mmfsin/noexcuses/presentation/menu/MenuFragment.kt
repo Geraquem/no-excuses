@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
@@ -19,12 +17,10 @@ import com.mmfsin.noexcuses.domain.models.MenuAction.MY_ROUTINES
 import com.mmfsin.noexcuses.domain.models.MenuAction.NOTES
 import com.mmfsin.noexcuses.domain.models.MenuAction.ROUTINES
 import com.mmfsin.noexcuses.domain.models.MenuAction.WEIGHTS
-import com.mmfsin.noexcuses.domain.models.MenuItem
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMuscularGroups
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMyRoutines
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToNotes
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToRoutines
-import com.mmfsin.noexcuses.presentation.menu.adapter.MenuAdapter
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,23 +52,26 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
         }
     }
 
-    override fun setListeners() {}
+    override fun setListeners() {
+        binding.apply {
+            btnDefaultRoutines.setOnClickListener { navigateTo(actionMenuToRoutines()) }
+        }
+    }
 
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
                 is MenuEvent.Completed -> viewModel.getMenuItems()
-                is MenuEvent.MenuItems -> setUpMenu(event.items)
+                is MenuEvent.ActualRoutine -> setUpActualRoutine(event.routine)
                 is MenuEvent.SWW -> error()
             }
         }
     }
 
-    private fun setUpMenu(items: List<MenuItem>) {
+    private fun setUpActualRoutine(routine: Any?) {
         binding.apply {
-            rvMenu.apply {
-                layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-                adapter = MenuAdapter(items, this@MenuFragment)
+            routine?.let { } ?: run {
+                llMyActualRoutine.visibility = View.GONE
             }
             loading.root.visibility = View.GONE
         }

@@ -2,14 +2,14 @@ package com.mmfsin.noexcuses.presentation.menu
 
 import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.CheckVersionUseCase
-import com.mmfsin.noexcuses.domain.usecases.GetMenuItemsUseCase
+import com.mmfsin.noexcuses.domain.usecases.GetMyActualRoutineUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MenuViewModel @Inject constructor(
     private val checkVersionUseCase: CheckVersionUseCase,
-    private val getMenuItemsUseCase: GetMenuItemsUseCase
+    private val getMyActualRoutine: GetMyActualRoutineUseCase
 ) : BaseViewModel<MenuEvent>() {
 
     fun checkVersion() {
@@ -22,8 +22,8 @@ class MenuViewModel @Inject constructor(
 
     fun getMenuItems() {
         executeUseCase(
-            { getMenuItemsUseCase.execute() },
-            { result -> _event.value = MenuEvent.MenuItems(result) },
+            { getMyActualRoutine.execute() },
+            { result -> _event.value = MenuEvent.ActualRoutine(result) },
             { _event.value = MenuEvent.SWW }
         )
     }

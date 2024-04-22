@@ -1,9 +1,7 @@
 package com.mmfsin.noexcuses.presentation.menu
 
-import com.mmfsin.noexcuses.domain.models.MenuItem
-
 sealed class MenuEvent {
     object Completed : MenuEvent()
-    class MenuItems(val items: List<MenuItem>) : MenuEvent()
+    class ActualRoutine(val routine: Any?) : MenuEvent()
     object SWW : MenuEvent()
 }

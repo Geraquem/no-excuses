@@ -9,7 +9,14 @@
     <string name="error_description">Inténtalo de nuevo más tarde</string>
     <string name="error_btn">Aceptar</string>
 
-    <!-- MAIN -->
+    <!-- MENU -->
+
+    <string name="menu_default_routines_title">Rutinas</string>
+    <string name="menu_default_routines_description">Ponte en forma con los planes de entrenamiento creados para ganar masa muscular, definir o simplemente mantener la línea.</string>
+    <string name="menu_my_routines_title">Mis entrenamientos</string>
+    <string name="menu_my_routines_description">Crea tus propias rutinas de entrenamiento seleccionando ejercicios y grupos musculares. Divide la rutina en días para ser más eficiente y llevar tu entrenamiento al siguiente nivel.</string>
+    <string name="menu_my_actual_routine">Actualmente estás haciendo</string>
+
     <string name="menu_routines">Rutinas predefinidas</string>
     <string name="menu_routines_desc">Rutinas predefinidas</string>
     <string name="menu_my_routines">Mis rutinas</string>

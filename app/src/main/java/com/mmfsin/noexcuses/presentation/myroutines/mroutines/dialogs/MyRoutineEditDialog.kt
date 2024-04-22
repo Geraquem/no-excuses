@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogItemEditBinding
-import com.mmfsin.noexcuses.domain.models.MyRoutine
+import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces.IMyRoutineListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.countDown300
@@ -21,7 +21,7 @@ class MyRoutineEditDialog(val routineId: String, private val listener: IMyRoutin
 
     private val viewModel: MyRoutineDialogViewModel by viewModels()
 
-    private var myRoutine: MyRoutine? = null
+    private var routine: Routine? = null
 
     override fun inflateView(inflater: LayoutInflater) =
         DialogItemEditBinding.inflate(inflater)
@@ -50,14 +50,14 @@ class MyRoutineEditDialog(val routineId: String, private val listener: IMyRoutin
     override fun setListeners() {
         binding.apply {
             btnDelete.setOnClickListener {
-                myRoutine?.let {
+                routine?.let {
                     listener.deleteRoutine(it.id)
                     dismiss()
                 }
             }
 
             btnEdit.setOnClickListener {
-                myRoutine?.let { r ->
+                routine?.let { r ->
                     val title = etTitle.text.toString()
                     val description = etDescription.text.toString()
                     if (title.isNotEmpty() && title.isNotBlank()) {
@@ -77,9 +77,9 @@ class MyRoutineEditDialog(val routineId: String, private val listener: IMyRoutin
                 }
 
                 is MyRoutineDialogEvent.GetMyRoutine -> {
-                    myRoutine = event.myRoutine
-                    binding.etTitle.setText(myRoutine?.title)
-                    binding.etDescription.setText(myRoutine?.description)
+                    routine = event.routine
+                    binding.etTitle.setText(routine?.title)
+                    binding.etDescription.setText(routine?.description)
                 }
 
                 is MyRoutineDialogEvent.SWW -> error()

@@ -4,5 +4,6 @@ open class DefaultRoutine(
     var id: String,
     var title: String,
     var description: String,
-    var days: Long
+    var days: Long,
+    var doingIt: Boolean
 )
