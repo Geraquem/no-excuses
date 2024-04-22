@@ -8,5 +8,6 @@ interface INotesRepository {
     fun addNote(title: String, description: String, date: Long)
     fun editNote(id: String, title: String, description: String, date: Long)
     fun pinnedNote(id: String)
+    fun getPinnedNote(): Note?
     fun deleteNote(id: String)
 }

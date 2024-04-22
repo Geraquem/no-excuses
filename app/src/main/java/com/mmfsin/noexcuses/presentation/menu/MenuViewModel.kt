@@ -4,6 +4,7 @@ import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.CheckVersionUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetMuscularGroupsUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetMyActualRoutineUseCase
+import com.mmfsin.noexcuses.domain.usecases.GetPinnedNoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -11,7 +12,8 @@ import javax.inject.Inject
 class MenuViewModel @Inject constructor(
     private val checkVersionUseCase: CheckVersionUseCase,
     private val getMyActualRoutine: GetMyActualRoutineUseCase,
-    private val getMuscularGroups: GetMuscularGroupsUseCase
+    private val getMuscularGroups: GetMuscularGroupsUseCase,
+    private val getPinnedNoteUseCase: GetPinnedNoteUseCase
 ) : BaseViewModel<MenuEvent>() {
 
     fun checkVersion() {
@@ -34,6 +36,14 @@ class MenuViewModel @Inject constructor(
         executeUseCase(
             { getMuscularGroups.execute() },
             { result -> _event.value = MenuEvent.GetMuscularGroups(result) },
+            { _event.value = MenuEvent.SWW }
+        )
+    }
+
+    fun getPinnedNote() {
+        executeUseCase(
+            { getPinnedNoteUseCase.execute() },
+            { result -> _event.value = MenuEvent.PinnedNote(result) },
             { _event.value = MenuEvent.SWW }
         )
     }

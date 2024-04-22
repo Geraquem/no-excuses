@@ -18,7 +18,7 @@
     <string name="menu_exercises_title">Ejercicios</string>
     <string name="menu_exercises_description">Echa un vistazo a todos ejercicios. Están divididos por grupos musculares.</string>
     <string name="menu_notes_title">Notas</string>
-    <string name="menu_notes_description">Está bien confiar en la memomria de uno mismo, pero mejor si lo apuntas.</string>
+    <string name="menu_notes_description">Está bien confiar en la memoria de uno mismo, pero mejor si lo apuntas.</string>
 
     <!-- MUSCULAR GROUPS -->
     <string name="mgroups_toolbar">Grupos musculares</string>

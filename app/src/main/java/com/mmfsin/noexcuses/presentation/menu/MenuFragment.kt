@@ -15,6 +15,7 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
+import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMuscularGroups
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMyRoutines
@@ -49,6 +50,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuMG
                 routineOpened = null
             }
             llMyActualRoutine.visibility = View.GONE
+            pinnedNote.root.visibility = View.GONE
             loading.root.visibility = View.VISIBLE
         }
     }
@@ -73,8 +75,10 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuMG
 
                 is MenuEvent.GetMuscularGroups -> {
                     setUpMuscularGroups(event.mGroups)
+                    viewModel.getPinnedNote()
                 }
 
+                is MenuEvent.PinnedNote -> setUpPinnedNote(event.note)
                 is MenuEvent.SWW -> error()
             }
         }
@@ -89,7 +93,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuMG
                 actualRoutine.ivPushpin.setImageResource(R.drawable.ic_pushpin)
                 llMyActualRoutine.visibility = View.VISIBLE
             }
-            loading.root.visibility = View.GONE
         }
     }
 
@@ -102,6 +105,21 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuMG
 
     override fun onMenuMGroupClick(id: String) {
 
+    }
+
+    private fun setUpPinnedNote(note: Note?) {
+        binding.apply {
+            note?.let {
+                pinnedNote.apply {
+                    tvTitle.text = note.title
+                    tvDescription.text = note.description
+                    tvDate.text = getString(R.string.notes_date, note.date)
+                    ivPushpin.setImageResource(R.drawable.ic_pushpin)
+                    root.visibility = View.VISIBLE
+                }
+            }
+            loading.root.visibility = View.GONE
+        }
     }
 
     private fun navigateTo(directions: NavDirections) = findNavController().navigate(directions)

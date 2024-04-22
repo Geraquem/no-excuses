@@ -52,6 +52,12 @@ class NotesRepository @Inject constructor(
         }
     }
 
+    override fun getPinnedNote(): Note? {
+        val notes = realmDatabase.getObjectsFromRealm { where<NoteDTO>().findAll() }
+        notes.forEach { note -> if (note.pinned) return note.toNote() }
+        return null
+    }
+
     override fun deleteNote(id: String) {
         realmDatabase.deleteObject(NoteDTO::class.java, ID, id)
     }

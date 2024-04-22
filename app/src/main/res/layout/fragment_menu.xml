@@ -47,7 +47,7 @@
                 android:clipToPadding="false"
                 android:orientation="vertical"
                 android:paddingTop="16dp"
-                android:paddingBottom="36dp"
+                android:paddingBottom="48dp"
                 app:layout_constraintLeft_toLeftOf="@id/gl_left"
                 app:layout_constraintRight_toRightOf="@id/gl_right"
                 app:layout_constraintTop_toTopOf="parent">
@@ -164,6 +164,7 @@
                     android:id="@+id/btn_notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/bg_white_box"
                     android:orientation="vertical"
                     android:padding="12dp">
@@ -183,6 +184,10 @@
                         android:text="@string/menu_notes_description" />
 
                 </LinearLayout>
+
+                <include
+                    android:id="@+id/pinned_note"
+                    layout="@layout/item_note" />
 
             </LinearLayout>
 
