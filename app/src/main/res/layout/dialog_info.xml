@@ -8,22 +8,41 @@
     android:clipChildren="false"
     android:clipToPadding="false">
 
-    <TextView
-        android:id="@+id/tv_header"
-        style="@style/BigTextView_Bold"
+    <RelativeLayout
+        android:id="@+id/rv_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:background="@drawable/bg_header_dialog"
         android:backgroundTint="@color/light_blue"
-        android:gravity="center"
+        android:paddingHorizontal="8dp"
         android:paddingVertical="8dp"
-        android:text="@string/first_dialog_explanation_info"
-        android:textAllCaps="true"
-        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_header"
+            style="@style/BigTextView_Bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/first_dialog_explanation_info"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/ic_cross" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,11 +50,13 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_header">
+        app:layout_constraintTop_toBottomOf="@id/rv_header">
 
         <TextView
             style="@style/MediumTextView"
@@ -59,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:background="@drawable/bg_white_box"
-            android:backgroundTint="@color/light_green"
+            android:backgroundTint="@color/light_grey"
             android:padding="12dp"
             android:text="@string/first_dialog_explanation_two"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -103,7 +124,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="24dp"
             android:background="@drawable/bg_white_box"
-            android:backgroundTint="@color/light_green"
+            android:backgroundTint="@color/light_grey"
             android:gravity="center"
             android:padding="12dp"
             android:text="@string/first_dialog_edit"

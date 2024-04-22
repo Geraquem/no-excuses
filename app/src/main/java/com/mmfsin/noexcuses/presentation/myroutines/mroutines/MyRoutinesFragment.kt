@@ -18,7 +18,7 @@ import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.mdays.DaysDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.MyRoutinesFragmentDirections.Companion.actionRoutinesToMexercises
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.adapter.MyRoutinesAdapter
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.InfoDialog
+import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineAddDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineDeleteDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineEditDialog
@@ -58,7 +58,7 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
                 setUpToolbar(title = getString(R.string.my_routines_toolbar))
                 rightIconToolbar(isVisible = true,
                     icon = R.drawable.ic_info,
-                    action = { supportFragmentManager.showFragmentDialog(InfoDialog.newInstance()) })
+                    action = { supportFragmentManager.showFragmentDialog(InfoDialog()) })
             }
         }
     }
@@ -91,7 +91,7 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
     }
 
     private fun firstTimeFlow(firstTime: Boolean) {
-        if (firstTime) activity?.showFragmentDialog(InfoDialog.newInstance())
+        if (firstTime) activity?.showFragmentDialog(InfoDialog())
     }
 
     private fun setUpRoutines(routines: List<Routine>) {

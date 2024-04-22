@@ -21,7 +21,7 @@ import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExercise
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs.DeleteChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.EditChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.MExercisesFragmentDirections.Companion.actionMGroupsToExercises
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.InfoDialog
+import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.utils.ID_GROUP
 import com.mmfsin.noexcuses.utils.getBundleParcelableArgs
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -70,7 +70,7 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
                         setUpToolbar(title = event.day.title)
                         rightIconToolbar(isVisible = true,
                             icon = R.drawable.ic_info,
-                            action = { supportFragmentManager.showFragmentDialog(InfoDialog.newInstance()) })
+                            action = { supportFragmentManager.showFragmentDialog(InfoDialog()) })
                     }
                     viewModel.getDayExercises(event.day.id)
                 }

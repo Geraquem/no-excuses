@@ -17,7 +17,7 @@ import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.adapter.ChExercisesAdapter
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.AddChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.interfaces.IChExercisesListener
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.InfoDialog
+import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.utils.ID_GROUP
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
@@ -50,7 +50,7 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
             setUpToolbar(title = group?.muscularGroup)
             rightIconToolbar(isVisible = true,
                 icon = R.drawable.ic_info,
-                action = { supportFragmentManager.showFragmentDialog(InfoDialog.newInstance()) })
+                action = { supportFragmentManager.showFragmentDialog(InfoDialog()) })
         }
     }
 

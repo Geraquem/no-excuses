@@ -1,25 +1,18 @@
-package com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs
+package com.mmfsin.noexcuses.presentation.myroutines.dialogs
 
 import android.app.Dialog
 import android.view.LayoutInflater
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogInfoBinding
-import com.mmfsin.noexcuses.utils.animateDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class InfoDialog : BaseDialog<DialogInfoBinding>() {
 
-    override fun inflateView(inflater: LayoutInflater) =
-        DialogInfoBinding.inflate(inflater)
+    override fun inflateView(inflater: LayoutInflater) = DialogInfoBinding.inflate(inflater)
 
-    override fun setCustomViewDialog(dialog: Dialog) = centerViewDialog(dialog)
-
-    override fun onResume() {
-        super.onResume()
-        requireDialog().animateDialog()
-    }
+    override fun setCustomViewDialog(dialog: Dialog) = bottomViewDialog(dialog)
 
     override fun setUI() {
         isCancelable = true
@@ -31,12 +24,9 @@ class InfoDialog : BaseDialog<DialogInfoBinding>() {
     }
 
     override fun setListeners() {
-        binding.btnAccept.setOnClickListener { dismiss() }
-    }
-
-    companion object {
-        fun newInstance(): InfoDialog {
-            return InfoDialog()
+        binding.apply {
+            ivClose.setOnClickListener { dismiss() }
+            btnAccept.setOnClickListener { dismiss() }
         }
     }
 }
