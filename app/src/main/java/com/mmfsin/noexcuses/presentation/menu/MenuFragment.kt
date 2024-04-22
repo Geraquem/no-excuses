@@ -17,8 +17,10 @@ import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToExercises
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMuscularGroups
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMyRoutines
+import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToNoteDetail
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToNotes
 import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToRoutines
 import com.mmfsin.noexcuses.presentation.menu.adapter.MenuMGroupsAdapter
@@ -103,9 +105,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuMG
         }
     }
 
-    override fun onMenuMGroupClick(id: String) {
-
-    }
+    override fun onMenuMGroupClick(id: String) = navigateTo(actionMenuToExercises(id))
 
     private fun setUpPinnedNote(note: Note?) {
         binding.apply {
@@ -116,6 +116,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuMG
                     tvDate.text = getString(R.string.notes_date, note.date)
                     ivPushpin.setImageResource(R.drawable.ic_pushpin)
                     root.visibility = View.VISIBLE
+                    root.setOnClickListener { navigateTo(actionMenuToNoteDetail(note.id)) }
                 }
             }
             loading.root.visibility = View.GONE

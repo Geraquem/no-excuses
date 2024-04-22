@@ -25,6 +25,22 @@
         <action
             android:id="@+id/action_menu_to_notes"
             app:destination="@id/notes_nav_graph" />
+
+        <action
+            android:id="@+id/action_menu_to_noteDetail"
+            app:destination="@id/noteDetailFragment">
+            <argument
+                android:name="idNote"
+                app:argType="string" />
+        </action>
+
+        <action
+            android:id="@+id/action_menu_to_exercises"
+            app:destination="@id/exercisesFragment">
+            <argument
+                android:name="mGroupId"
+                app:argType="string" />
+        </action>
     </fragment>
 
     <include app:graph="@navigation/nav_graph_default_routines" />
@@ -34,5 +50,17 @@
     <include app:graph="@navigation/nav_graph_exercises" />
 
     <include app:graph="@navigation/nav_graph_notes" />
+
+    <fragment
+        android:id="@+id/noteDetailFragment"
+        android:name="com.mmfsin.noexcuses.presentation.notes.detail.NoteDetailFragment"
+        android:label="noteDetailFragment"
+        tools:layout="@layout/fragment_note_detail" />
+
+    <fragment
+        android:id="@+id/exercisesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.exercises.exercises.ExercisesFragment"
+        android:label="exercisesFragment"
+        tools:layout="@layout/fragment_exercises" />
 
 </navigation>
