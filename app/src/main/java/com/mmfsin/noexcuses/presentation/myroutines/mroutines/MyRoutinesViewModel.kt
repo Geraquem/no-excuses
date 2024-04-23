@@ -33,7 +33,7 @@ class MyRoutinesViewModel @Inject constructor(
     fun updateMyRoutinePushPin(id: String) {
         executeUseCase(
             { updateMyRoutinePushPinUseCase.execute(UpdateMyRoutinePushPinUseCase.Params(id)) },
-            { _event.value = MyRoutinesEvent.PushPinUpdated(myRoutineId = id) },
+            { _event.value = MyRoutinesEvent.PushPinUpdated },
             { _event.value = MyRoutinesEvent.SWW }
         )
     }

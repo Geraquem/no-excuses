@@ -124,6 +124,9 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                         llNonePinned.visibility = View.INVISIBLE
                     }
                 })
+            } ?: run {
+                llMyActualRoutine.animateY(-500f, 1).setListener(null)
+                llNonePinned.visibility = View.VISIBLE
             }
         }
     }

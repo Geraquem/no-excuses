@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
         android:backgroundTint="@color/white"
-        android:paddingVertical="16dp"
+        android:paddingVertical="12dp"
         app:layout_scrollFlags="scroll|enterAlways">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,8 +21,8 @@
             android:layout_marginEnd="24dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/content_description"
                 android:src="@drawable/no_excuses_logo"

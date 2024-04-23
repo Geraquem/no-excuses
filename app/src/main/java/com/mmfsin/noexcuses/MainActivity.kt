@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
 
         changeStatusBar()
         setNavigationDrawer()
-        openDrawer()
     }
 
     private fun changeStatusBar() {
@@ -44,7 +43,6 @@ class MainActivity : AppCompatActivity() {
                 when (menuItem.itemId) {
                     R.id.nav_default_routines -> openBedRockActivity(R.navigation.nav_graph_default_routines)
                     R.id.nav_my_routines -> openBedRockActivity(R.navigation.nav_graph_my_routines)
-                    //////////////////////
                     R.id.nav_exercises -> openBedRockActivity(R.navigation.nav_graph_exercises)
                     R.id.nav_notes -> openBedRockActivity(R.navigation.nav_graph_notes)
                 }
