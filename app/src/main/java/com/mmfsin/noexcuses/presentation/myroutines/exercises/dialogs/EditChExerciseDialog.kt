@@ -55,7 +55,6 @@ class EditChExerciseDialog(
     override fun setUI() {
         isCancelable = true
         binding.apply {
-            lottie.visibility = View.GONE
             exercise?.let {
                 tvCategory.text = getString(R.string.exercise_dialog_category, it.category)
                 tvName.text = it.name
@@ -176,23 +175,7 @@ class EditChExerciseDialog(
 
     private fun endFlow() {
         listener.updateView()
-        binding.apply {
-            lottie.visibility = View.VISIBLE
-            lottie.addAnimatorListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator) {}
-                override fun onAnimationEnd(animation: Animator, isReverse: Boolean) {
-                    super.onAnimationEnd(animation, isReverse)
-                    dismiss()
-                }
-
-                override fun onAnimationEnd(animation: Animator) {}
-                override fun onAnimationCancel(animation: Animator) {}
-                override fun onAnimationRepeat(animation: Animator) {}
-            })
-
-            lottie.setAnimation(R.raw.flow_completed)
-            lottie.playAnimation()
-        }
+        dismiss()
     }
 
     private fun error() = activity?.showErrorDialog()

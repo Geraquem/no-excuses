@@ -60,7 +60,7 @@
                 android:id="@+id/ll_reps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="8dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -71,6 +71,7 @@
                     android:layout_gravity="center"
                     android:layout_marginEnd="4dp"
                     android:textAllCaps="true"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     tools:text="4" />
 
@@ -81,7 +82,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/mexercises_series"
-                    android:textAllCaps="true" />
+                    android:textAllCaps="true"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -100,7 +102,8 @@
                     android:layout_gravity="center"
                     android:layout_marginEnd="2dp"
                     android:text="@string/days_exercise_dialog_time_rest"
-                    android:textAllCaps="true" />
+                    android:textAllCaps="true"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_wait"
@@ -110,6 +113,7 @@
                     android:layout_gravity="center"
                     android:layout_marginEnd="2dp"
                     android:textAllCaps="true"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     tools:text="2" />
 
@@ -120,14 +124,15 @@
                     android:layout_gravity="center"
                     android:text="@string/days_exercise_dialog_time_minutes_symbol"
                     android:textAllCaps="true"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/iv_has_notes"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/content_description"
                 android:src="@drawable/ic_notes" />

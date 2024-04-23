@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_header_dialog"
         android:backgroundTint="@color/light_grey"
-        android:padding="16dp"
+        android:padding="12dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,8 +24,9 @@
             style="@style/MediumTextView_Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_centerInParent="true"
             android:textAllCaps="true"
+            android:textSize="14sp"
             tools:text="EJERCICIO DE PECHO" />
 
     </RelativeLayout>

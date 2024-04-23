@@ -106,7 +106,7 @@ class ExercisesRepository @Inject constructor(
         val data = realmDatabase.getObjectsFromRealm {
             where<DataDTO>().equalTo(DATA_ID, dataId).findAll()
         }
-        for (d in data) {
+        data.forEach { d ->
             d.id?.let { id -> realmDatabase.deleteObject(DataDTO::class.java, ID, id) }
         }
     }

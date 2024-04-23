@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_header_dialog"
         android:backgroundTint="@color/light_grey"
-        android:padding="16dp"
+        android:padding="12dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,8 +24,10 @@
             style="@style/MediumTextView_Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_marginEnd="16dp"
             android:textAllCaps="true"
+            android:textSize="14sp"
             tools:text="EJERCICIO DE PECHO" />
 
     </RelativeLayout>
@@ -54,11 +56,20 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="12dp"
             android:contentDescription="@string/content_description"
             tools:src="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            style="@style/SmallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Además de estos músculos principales, otros músculos secundarios también pueden estar involucrados en el curl de bíceps, como los músculos del antebrazo que estabilizan la muñeca y el codo durante el movimiento. Es importante mantener una técnica adecuada para maximizar la activación de los músculos objetivo y minimizar el riesgo de lesiones."
+            android:textSize="14sp" />
 
     </LinearLayout>
 

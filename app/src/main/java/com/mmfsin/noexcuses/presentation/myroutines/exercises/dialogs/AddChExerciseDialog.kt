@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -52,7 +53,6 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
     override fun setUI() {
         isCancelable = true
         binding.apply {
-            lottie.visibility = View.GONE
             exercise?.let {
                 tvCategory.text = getString(R.string.exercise_dialog_category, it.category)
                 tvName.text = it.name
@@ -163,21 +163,12 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
 
     private fun endFlow() {
         binding.apply {
-            lottie.visibility = View.VISIBLE
-            lottie.addAnimatorListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator) {}
-                override fun onAnimationEnd(animation: Animator, isReverse: Boolean) {
-                    super.onAnimationEnd(animation, isReverse)
-                    dismiss()
-                }
-
-                override fun onAnimationEnd(animation: Animator) {}
-                override fun onAnimationCancel(animation: Animator) {}
-                override fun onAnimationRepeat(animation: Animator) {}
-            })
-
-            lottie.setAnimation(R.raw.flow_completed)
-            lottie.playAnimation()
+            Toast.makeText(
+                activity?.applicationContext,
+                getString(R.string.mexercises_add_completed),
+                Toast.LENGTH_SHORT
+            ).show()
+            dismiss()
         }
     }
 

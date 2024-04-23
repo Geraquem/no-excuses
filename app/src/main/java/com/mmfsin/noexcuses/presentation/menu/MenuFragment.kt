@@ -133,7 +133,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     root.setOnClickListener { navigateTo(actionMenuToNoteDetail(note.id)) }
                 }
             }
-            countDown(750) { loading.root.visibility = View.GONE }
+            loading.root.visibility = View.GONE
         }
     }
 

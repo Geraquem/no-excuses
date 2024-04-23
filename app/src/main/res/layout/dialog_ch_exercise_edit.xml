@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_header_dialog"
         android:backgroundTint="@color/light_grey"
-        android:padding="16dp"
+        android:padding="12dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,8 +24,9 @@
             style="@style/MediumTextView_Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_centerInParent="true"
             android:textAllCaps="true"
+            android:textSize="14sp"
             tools:text="EJERCICIO DE PECHO" />
 
     </RelativeLayout>
@@ -192,63 +193,39 @@
                 android:textCursorDrawable="@drawable/et_cursor_color" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:orientation="horizontal"
-                android:weightSum="1">
+                android:layout_gravity="end"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-                <ImageView
+                <TextView
                     android:id="@+id/btn_delete"
                     style="@style/MediumTextView_Bold"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.285"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="18dp"
                     android:background="@drawable/click_effect"
-                    android:backgroundTint="@color/light_red"
-                    android:contentDescription="@string/content_description"
-                    android:elevation="6dp"
-                    android:padding="12dp"
-                    android:src="@drawable/ic_trash" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.05" />
+                    android:paddingHorizontal="4dp"
+                    android:text="@string/routines_delete"
+                    android:textAllCaps="true"
+                    android:textColor="@color/red" />
 
                 <TextView
                     android:id="@+id/btn_edit"
                     style="@style/MediumTextView_Bold"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.665"
                     android:background="@drawable/click_effect"
-                    android:backgroundTint="@color/light_blue"
-                    android:elevation="6dp"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:text="@string/days_exercise_dialog_edit"
-                    android:textAllCaps="true" />
+                    android:paddingHorizontal="4dp"
+                    android:text="@string/routines_edit_button"
+                    android:textAllCaps="true"
+                    android:textColor="@color/blue" />
 
             </LinearLayout>
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_gravity="center"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="false"
-        app:lottie_loop="false" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
