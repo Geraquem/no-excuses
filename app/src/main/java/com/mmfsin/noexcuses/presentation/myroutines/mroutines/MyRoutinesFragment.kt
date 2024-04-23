@@ -9,25 +9,24 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentMyRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.models.IdGroup
+import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mdays.DaysDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.MyRoutinesFragmentDirections.Companion.actionRoutinesToMexercises
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.adapter.MyRoutinesAdapter
-import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineAddDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineDeleteDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineEditDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces.IMyRoutineListener
-import com.mmfsin.noexcuses.presentation.notes.NotesFragmentDirections
 import com.mmfsin.noexcuses.utils.BEDROCK_ARGS
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
+import com.mmfsin.noexcuses.utils.updateMenuUI
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -98,7 +97,11 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
                     }
                 }
 
-                is MyRoutinesEvent.PushPinUpdated -> viewModel.getRoutines()
+                is MyRoutinesEvent.PushPinUpdated -> {
+                    viewModel.getRoutines()
+                    activity?.updateMenuUI(mContext)
+                }
+
                 is MyRoutinesEvent.SWW -> error()
             }
         }

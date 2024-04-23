@@ -19,6 +19,7 @@ import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.DefaultRoutinesFr
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.adapter.DefaultRoutinesAdapter
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.interfaces.IDefaultRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.updateMenuUI
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -57,7 +58,11 @@ class DefaultRoutinesFragment :
         viewModel.event.observe(this) { event ->
             when (event) {
                 is DefaultRoutinesEvent.GetDefaultRoutines -> setUpRoutines(event.defaultRoutines)
-                is DefaultRoutinesEvent.PushPinUpdated -> viewModel.getDefaultRoutines()
+                is DefaultRoutinesEvent.PushPinUpdated -> {
+                    viewModel.getDefaultRoutines()
+                    activity?.updateMenuUI(mContext)
+                }
+
                 is DefaultRoutinesEvent.SWW -> error()
             }
         }

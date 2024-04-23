@@ -2,12 +2,16 @@ package com.mmfsin.noexcuses.presentation.menu
 
 import android.animation.Animator
 import android.animation.Animator.AnimatorListener
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import com.mmfsin.noexcuses.MainActivity
@@ -20,6 +24,7 @@ import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.menu.adapter.MenuMGroupsAdapter
 import com.mmfsin.noexcuses.presentation.menu.dialogs.MenuDaysDialog
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
+import com.mmfsin.noexcuses.utils.LOCAL_BROADCAST_FILTER
 import com.mmfsin.noexcuses.utils.animateY
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +42,21 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        registerLocalBroadcast()
         viewModel.checkVersion()
+    }
+
+    private fun registerLocalBroadcast() {
+        val filter = IntentFilter(LOCAL_BROADCAST_FILTER)
+        activity?.let {
+            LocalBroadcastManager.getInstance(it).registerReceiver(myBroadcastReceiver, filter)
+        }
+    }
+
+    private val myBroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            viewModel.getMyActualRoutine()
+        }
     }
 
     override fun setUI() {
@@ -66,15 +85,15 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is MenuEvent.Completed -> viewModel.getMenuItems()
+                is MenuEvent.VersionCompleted -> viewModel.getMuscularGroups()
                 is MenuEvent.ActualRoutine -> {
                     setUpActualRoutine(event.routine)
-                    viewModel.getMuscularGroups()
+                    viewModel.getPinnedNote()
                 }
 
                 is MenuEvent.GetMuscularGroups -> {
                     setUpMuscularGroups(event.mGroups)
-                    viewModel.getPinnedNote()
+                    viewModel.getMyActualRoutine()
                 }
 
                 is MenuEvent.PinnedNote -> setUpPinnedNote(event.note)
@@ -146,5 +165,10 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        activity?.unregisterReceiver(myBroadcastReceiver)
     }
 }

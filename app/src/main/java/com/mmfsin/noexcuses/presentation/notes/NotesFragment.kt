@@ -23,6 +23,7 @@ import com.mmfsin.noexcuses.utils.BEDROCK_ARGS
 import com.mmfsin.noexcuses.utils.NO_ID_NOTE
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
+import com.mmfsin.noexcuses.utils.updateMenuUI
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -69,7 +70,11 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
         viewModel.event.observe(this) { event ->
             when (event) {
                 is NotesEvent.GetNotes -> setUpNotes(event.notes)
-                is NotesEvent.UpdatePushPin -> viewModel.getNotes()
+                is NotesEvent.UpdatePushPin -> {
+                    viewModel.getNotes()
+                    activity?.updateMenuUI(mContext)
+                }
+
                 is NotesEvent.SWW -> error()
             }
         }

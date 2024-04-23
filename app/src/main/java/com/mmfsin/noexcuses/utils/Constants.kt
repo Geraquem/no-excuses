@@ -3,6 +3,7 @@ package com.mmfsin.noexcuses.utils
 /** INTENT */
 const val ROOT_ACTIVITY_NAV_GRAPH = "root_nav_graph"
 const val BEDROCK_ARGS = "bedrock_args"
+const val LOCAL_BROADCAST_FILTER = "local_broadcast_filter"
 
 //FIREBASE
 const val VERSION = "version"

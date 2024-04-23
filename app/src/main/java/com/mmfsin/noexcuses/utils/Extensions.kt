@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -14,6 +15,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.mmfsin.noexcuses.base.dialog.ErrorDialog
 
 //fun FragmentActivity.shouldShowInterstitial(position: Int) =
@@ -22,6 +24,12 @@ import com.mmfsin.noexcuses.base.dialog.ErrorDialog
 fun FragmentActivity.showErrorDialog(goBack: Boolean = true) {
     val dialog = ErrorDialog(goBack)
     this.let { dialog.show(it.supportFragmentManager, "") }
+}
+
+fun FragmentActivity.updateMenuUI(context: Context) {
+    val intent = Intent(LOCAL_BROADCAST_FILTER)
+    this.sendBroadcast(intent)
+    LocalBroadcastManager.getInstance(context).sendBroadcast(intent)
 }
 
 fun isKeyboardVisible(view: View): Boolean {

@@ -19,12 +19,12 @@ class MenuViewModel @Inject constructor(
     fun checkVersion() {
         executeUseCase(
             { checkVersionUseCase.execute() },
-            { _event.value = MenuEvent.Completed },
+            { _event.value = MenuEvent.VersionCompleted },
             { _event.value = MenuEvent.SWW }
         )
     }
 
-    fun getMenuItems() {
+    fun getMyActualRoutine() {
         executeUseCase(
             { getMyActualRoutine.execute() },
             { result -> _event.value = MenuEvent.ActualRoutine(result) },
