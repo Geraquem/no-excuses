@@ -64,6 +64,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
         binding.apply {
             btnDefaultRoutines.setOnClickListener { navigateTo(actionMenuToRoutines()) }
             btnMyRoutines.setOnClickListener { navigateTo(actionMenuToMyRoutines()) }
+            btnNewRoutine.setOnClickListener {}
             btnExercises.setOnClickListener { navigateTo(actionMenuToMuscularGroups()) }
             btnNotes.setOnClickListener { navigateTo(actionMenuToNotes()) }
         }
