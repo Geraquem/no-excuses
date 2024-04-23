@@ -3,6 +3,7 @@ package com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
@@ -45,6 +46,7 @@ class DeleteChExerciseDialog(
         isCancelable = true
         binding.apply {
             tvTitle.text = getString(R.string.days_exercise_dialog_delete_top_text)
+            tvAlert.visibility = View.GONE
             if (exerciseName != null && dayName != null) {
                 tvText.text =
                     getString(R.string.days_exercise_dialog_delete_text, exerciseName, dayName)
@@ -54,8 +56,8 @@ class DeleteChExerciseDialog(
 
     override fun setListeners() {
         binding.apply {
-            btnNo.setOnClickListener { dismiss() }
-            btnYes.setOnClickListener { viewModel.deleteChExercise(chExerciseId) }
+            btnCancel.setOnClickListener { dismiss() }
+            btnDelete.setOnClickListener { viewModel.deleteChExercise(chExerciseId) }
         }
     }
 
@@ -66,15 +68,18 @@ class DeleteChExerciseDialog(
                     exerciseName = event.exercise.name
                     dayId?.let { id -> viewModel.getDay(id) }
                 }
+
                 is ChExerciseDialogEvent.GetDay -> {
                     dayName = event.day.title
                     setUI()
                 }
+
                 is ChExerciseDialogEvent.GetChExercise -> {
                     dayId = event.chExercise.dayId
                     val exerciseId = event.chExercise.exerciseId
                     exerciseId?.let { id -> viewModel.getExercise(id) }
                 }
+
                 is ChExerciseDialogEvent.FlowCompleted -> endFlow()
                 is ChExerciseDialogEvent.SWW -> error()
             }

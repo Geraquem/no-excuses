@@ -41,13 +41,14 @@ class MyRoutineDeleteDialog(val id: String, private val listener: IMyRoutineList
         isCancelable = true
         binding.apply {
             tvTitle.text = getString(R.string.routines_delete_top_text)
+            tvAlert.text = getString(R.string.routines_delete_alert)
         }
     }
 
     override fun setListeners() {
         binding.apply {
-            btnNo.setOnClickListener { dismiss() }
-            btnYes.setOnClickListener { routine?.let { viewModel.deleteRoutine(it.id) } }
+            btnCancel.setOnClickListener { dismiss() }
+            btnDelete.setOnClickListener { routine?.let { viewModel.deleteRoutine(it.id) } }
         }
     }
 
@@ -58,10 +59,12 @@ class MyRoutineDeleteDialog(val id: String, private val listener: IMyRoutineList
                     listener.flowCompleted()
                     dismiss()
                 }
+
                 is MyRoutineDialogEvent.GetMyRoutine -> {
                     routine = event.routine
                     binding.tvText.text = getString(R.string.routines_delete_text, routine?.title)
                 }
+
                 is MyRoutineDialogEvent.SWW -> error()
             }
         }

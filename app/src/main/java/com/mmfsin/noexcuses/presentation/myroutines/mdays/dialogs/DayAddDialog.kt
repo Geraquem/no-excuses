@@ -42,8 +42,7 @@ class DayAddDialog(
         isCancelable = true
         binding.apply {
             tvTitle.text = getString(R.string.days_add_top_text)
-            llDescription.visibility = View.GONE
-            tvError.visibility = View.GONE
+            tilDescription.visibility = View.GONE
         }
     }
 
@@ -54,8 +53,13 @@ class DayAddDialog(
                 if (title.isNotEmpty() && title.isNotBlank()) {
                     if (isKeyboardVisible(btnAccept)) closeKeyboard()
                     countDown300 { viewModel.addDay(routineId, title) }
-                } else tvError.visibility = View.VISIBLE
+                } else {
+                    tilTitle.error = getString(R.string.routines_add_title_error)
+                    tilTitle.isErrorEnabled = true
+                }
             }
+
+            btnCancel.setOnClickListener { dismiss() }
         }
     }
 

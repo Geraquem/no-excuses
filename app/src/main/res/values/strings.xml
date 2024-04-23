@@ -34,7 +34,7 @@
     <string name="first_dialog_explanation_three">Por lo general, para que el músculo progrese adecuadamente, evitar lesiones y que el cuerpo no se acostumbre al entrenamiento, las rutinas deberían durar entre <b>5 y 8 semanas</b>.</string>
     <string name="first_dialog_edit"><b>Mantén pulsado</b> para <b>editar</b> o <b>borrar</b> una rutina o un día</string>
     <string name="first_dialog_routine_days">4</string>
-    <string name="first_dialog_routine_title">Mes de mayo</string>
+    <string name="first_dialog_routine_title">Mayo y Junio</string>
     <string name="first_dialog_routine_description">Enfocada en pierna</string>
     <string name="first_dialog_routine_accept">Entendido</string>
     <string name="first_dialog_day_letter">L</string>
@@ -90,10 +90,10 @@
     <!-- ROUTINES ADD/EDIT/DELETE DIALOG -->
     <string name="routines_add_top_text">Nueva rutina</string>
     <string name="routines_add_button">Añadir</string>
+    <string name="routines_cancel_button">Cancelar</string>
     <string name="routines_add_title">Nombre</string>
     <string name="routines_add_title_hint">Mes de Mayo</string>
-    <string name="routines_add_description">Descripción</string>
-    <string name="routines_add_description_optional">(opcional)</string>
+    <string name="routines_add_description">Descripción (opcional)</string>
     <string name="routines_add_description_hint">Enfocada en pierna y hombro</string>
     <string name="routines_add_title_error">El nombre no puede estar vacío</string>
 
@@ -101,9 +101,11 @@
     <string name="routines_edit_button">Editar</string>
 
     <string name="routines_delete_top_text">Eliminar rutina</string>
-    <string name="routines_delete_text">¿Quieres eliminar %s?</string>
+    <string name="routines_delete">Eliminar</string>
+    <string name="routines_delete_text">¿Quieres eliminar definitivamente %s?</string>
+    <string name="routines_delete_alert">Eliminarás también los días y los ejercicios relacionados con esta rutina.</string>
     <string name="routines_delete_yes">Eliminar</string>
-    <string name="routines_delete_cancel">Volver</string>
+    <string name="routines_delete_cancel">Cancelar</string>
 
     <!-- DAYS ADD/EDIT/DELETE DIALOG -->
     <string name="days_add_top_text">Nuevo día</string>
@@ -117,6 +119,7 @@
 
     <string name="days_delete_top_text">Eliminar día</string>
     <string name="days_delete_text">¿Quieres eliminar %s?</string>
+    <string name="days_delete_alert">Eliminarás también los ejercicios relacionados con este día.</string>
     <string name="days_delete_yes">Eliminar</string>
     <string name="days_delete_cancel">Volver</string>
 

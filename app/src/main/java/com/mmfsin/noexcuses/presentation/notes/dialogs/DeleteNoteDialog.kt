@@ -3,6 +3,7 @@ package com.mmfsin.noexcuses.presentation.notes.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
@@ -35,12 +36,15 @@ class DeleteNoteDialog(private val noteId: String, private val listener: INotesL
 
     override fun setUI() {
         isCancelable = true
+        binding.apply {
+            tvAlert.visibility = View.GONE
+        }
     }
 
     override fun setListeners() {
         binding.apply {
-            btnNo.setOnClickListener { dismiss() }
-            btnYes.setOnClickListener { viewModel.deleteNote(noteId) }
+            btnCancel.setOnClickListener { dismiss() }
+            btnDelete.setOnClickListener { viewModel.deleteNote(noteId) }
         }
     }
 
@@ -50,10 +54,12 @@ class DeleteNoteDialog(private val noteId: String, private val listener: INotesL
                 is DeleteNoteEvent.GetNote -> {
                     binding.tvText.text = getString(R.string.notes_delete_text, event.note.title)
                 }
+
                 is DeleteNoteEvent.DeletedCompleted -> {
                     listener.deletedComplete()
                     dismiss()
                 }
+
                 is DeleteNoteEvent.SWW -> error()
             }
         }

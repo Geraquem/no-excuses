@@ -46,8 +46,7 @@ class DayEditDialog(
         isCancelable = true
         binding.apply {
             tvTitle.text = getString(R.string.days_edit_top_text)
-            llDescription.visibility = View.GONE
-            tvError.visibility = View.GONE
+            tilDescription.visibility = View.GONE
         }
     }
 
@@ -66,7 +65,10 @@ class DayEditDialog(
                     if (title.isNotEmpty() && title.isNotBlank()) {
                         if (isKeyboardVisible(btnEdit)) closeKeyboard()
                         countDown300 { viewModel.editDay(d.id, title) }
-                    } else binding.tvError.visibility = View.VISIBLE
+                    } else {
+                        tilTitle.error = getString(R.string.routines_add_title_error)
+                        tilTitle.isErrorEnabled = true
+                    }
                 }
             }
         }

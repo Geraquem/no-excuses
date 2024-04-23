@@ -41,13 +41,14 @@ class DayDeleteDialog(private val dayId: String, private val listener: IDaysList
         isCancelable = true
         binding.apply {
             tvTitle.text = getString(R.string.days_delete_top_text)
+            tvAlert.text = getString(R.string.days_delete_alert)
         }
     }
 
     override fun setListeners() {
         binding.apply {
-            btnNo.setOnClickListener { dismiss() }
-            btnYes.setOnClickListener { day?.let { viewModel.deleteDay(it.id) } }
+            btnCancel.setOnClickListener { dismiss() }
+            btnDelete.setOnClickListener { day?.let { viewModel.deleteDay(it.id) } }
         }
     }
 

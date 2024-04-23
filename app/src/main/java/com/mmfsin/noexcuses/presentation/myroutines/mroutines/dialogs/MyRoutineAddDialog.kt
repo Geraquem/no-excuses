@@ -38,7 +38,6 @@ class MyRoutineAddDialog(private val listener: IMyRoutineListener) :
         isCancelable = true
         binding.apply {
             tvTitle.text = getString(R.string.routines_add_top_text)
-            tvError.visibility = View.GONE
         }
     }
 
@@ -49,8 +48,13 @@ class MyRoutineAddDialog(private val listener: IMyRoutineListener) :
                 val description = etDescription.text.toString()
                 if (title.isNotEmpty() && title.isNotBlank()) {
                     countDown300 { viewModel.addRoutine(title, description) }
-                } else tvError.visibility = View.VISIBLE
+                } else {
+                    tilTitle.error = getString(R.string.routines_add_title_error)
+                    tilTitle.isErrorEnabled = true
+                }
             }
+
+            btnCancel.setOnClickListener { dismiss() }
         }
     }
 
