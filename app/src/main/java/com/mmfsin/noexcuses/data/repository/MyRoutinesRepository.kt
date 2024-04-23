@@ -4,6 +4,7 @@ import com.mmfsin.noexcuses.data.mappers.toDay
 import com.mmfsin.noexcuses.data.mappers.toDayListFromDayDTO
 import com.mmfsin.noexcuses.data.mappers.toMyRoutine
 import com.mmfsin.noexcuses.data.mappers.toMyRoutineList
+import com.mmfsin.noexcuses.data.models.ChExerciseDTO
 import com.mmfsin.noexcuses.data.models.DayDTO
 import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
@@ -11,6 +12,7 @@ import com.mmfsin.noexcuses.domain.interfaces.IMyRoutinesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.utils.DAY_ID
 import com.mmfsin.noexcuses.utils.ID
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import io.realm.kotlin.where
@@ -67,9 +69,7 @@ class MyRoutinesRepository @Inject constructor(
         val days = realmDatabase.getObjectsFromRealm {
             where<DayDTO>().equalTo(ROUTINE_ID, id).findAll()
         }
-        for (day in days) {
-            realmDatabase.deleteObject(DayDTO::class.java, ID, day.id)
-        }
+        days.forEach { day -> realmDatabase.deleteObject(DayDTO::class.java, ID, day.id) }
 
         /** DELTE ROUTINE */
         realmDatabase.deleteObject(MyRoutineDTO::class.java, ID, id)
@@ -113,6 +113,12 @@ class MyRoutinesRepository @Inject constructor(
     override fun deleteDay(id: String) {
         /** DELETE EXERCISES RELATED WITH ROUTINE */
         /** TODO */
+        val exercises = realmDatabase.getObjectsFromRealm {
+            where<ChExerciseDTO>().equalTo(DAY_ID, id).findAll()
+        }
+        exercises.forEach { exercise ->
+            realmDatabase.deleteObject(ChExerciseDTO::class.java, ID, exercise.id)
+        }
 
         /** DELETE DAY */
         val day = getDayDTO(id)
@@ -123,7 +129,7 @@ class MyRoutinesRepository @Inject constructor(
                 r.days--
                 realmDatabase.addObject { r }
             }
-            realmDatabase.deleteObject(MyRoutineDTO::class.java, ID, id)
+            realmDatabase.deleteObject(DayDTO::class.java, ID, id)
         }
     }
 
