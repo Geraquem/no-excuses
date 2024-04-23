@@ -1,10 +1,13 @@
 package com.mmfsin.noexcuses.presentation.menu
 
+import android.animation.Animator
+import android.animation.Animator.AnimatorListener
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
@@ -26,8 +29,7 @@ import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.a
 import com.mmfsin.noexcuses.presentation.menu.adapter.MenuMGroupsAdapter
 import com.mmfsin.noexcuses.presentation.menu.dialogs.MenuDaysDialog
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
-import com.mmfsin.noexcuses.utils.countDown
-import com.mmfsin.noexcuses.utils.countDown300
+import com.mmfsin.noexcuses.utils.animateY
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,7 +56,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                 rightIconToolbar(isVisible = false)
                 routineOpened = null
             }
-            llMyActualRoutine.visibility = View.GONE
+            llMyActualRoutine.animateY(-500f, 1)
             pinnedNote.root.visibility = View.GONE
             loading.root.visibility = View.VISIBLE
         }
@@ -103,7 +105,15 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                         activity?.let { dialog.show(it.supportFragmentManager, "") }
                     }
                 }
-                llMyActualRoutine.visibility = View.VISIBLE
+                llMyActualRoutine.animateY(0f, 350).setListener(object : AnimatorListener {
+                    override fun onAnimationStart(animation: Animator) {}
+                    override fun onAnimationCancel(animation: Animator) {}
+                    override fun onAnimationRepeat(animation: Animator) {}
+
+                    override fun onAnimationEnd(animation: Animator) {
+                        llNonePinned.visibility = View.INVISIBLE
+                    }
+                })
             }
         }
     }

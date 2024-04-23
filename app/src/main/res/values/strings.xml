@@ -10,6 +10,8 @@
     <string name="error_btn">Aceptar</string>
 
     <!-- MENU -->
+    <string name="menu_none_routine_pinned">¡Fija aqui la rutina que estés haciendo!</string>
+    <string name="menu_none_routine_pinned_description">Solo tienes que pulsar el icono</string>
     <string name="menu_default_routines_title">Rutinas</string>
     <string name="menu_default_routines_description">Ponte en forma con los planes de entrenamiento creados para ganar masa muscular, definir o simplemente mantener la línea.</string>
     <string name="menu_my_routines_title">Mis entrenamientos</string>
@@ -17,9 +19,9 @@
     <string name="menu_my_routines_new_routine">Crear nueva rutina</string>
     <string name="menu_my_actual_routine">Actualmente estás haciendo:</string>
     <string name="menu_exercises_title">Ejercicios</string>
-    <string name="menu_exercises_description">Echa un vistazo a todos ejercicios. Están divididos por grupos musculares.</string>
+    <string name="menu_exercises_description">Echa un vistazo más detallado a todos los ejercicios.</string>
     <string name="menu_notes_title">Notas</string>
-    <string name="menu_notes_description">Está bien confiar en la memoria de uno mismo, pero mucho mejor si lo apuntas.</string>
+    <string name="menu_notes_description">Está bien confiar en la memoria de uno mismo, pero siempre es mucho mejor si queda por escrito.</string>
 
     <!-- MUSCULAR GROUPS -->
     <string name="mgroups_toolbar">Grupos musculares</string>

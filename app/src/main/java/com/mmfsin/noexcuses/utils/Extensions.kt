@@ -84,6 +84,12 @@ fun countDown(millis: Long, action: () -> Unit) {
     }.start()
 }
 
+fun View.animateY(pos: Float, duration: Long) =
+    this.animate().translationY(pos).setDuration(duration)
+
+fun View.animateX(pos: Float, duration: Long) =
+    this.animate().translationX(pos).setDuration(duration)
+
 fun Double?.formatTime(): String? {
     return this?.let { d ->
         String.format("%.2f", d).replace(",", ":").replace(":00", "")
