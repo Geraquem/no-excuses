@@ -49,16 +49,16 @@
     <string name="my_routines_days">Días</string>
     <string name="my_routines_add_btn">Añadir rutina</string>
     <string name="my_routines_no_description">Sin descripción</string>
-    <string name="my_routines_empty">Todavía no tienes ninguna rutina.</string>
+    <string name="my_routines_empty">No has creado\nninguna rutina.</string>
 
     <!-- DAYS -->
-    <string name="days_empty">Todavía no tienes ningún día\npara esta rutina.</string>
+    <string name="days_empty">No tienes días\npara esta rutina.</string>
     <string name="days_add_btn">Añadir día</string>
     <string name="days_one_exercise">1 ejercicio</string>
     <string name="days_exercises">%s ejercicios</string>
 
     <!-- MY EXERCISES -->
-    <string name="mexercises_empty">Todavía no tienes ningún ejercicio\nasignado a este día.</string>
+    <string name="mexercises_empty">No tienes ningún ejercicio\nasignado a este día.</string>
     <string name="mexercises_serie">Serie</string>
     <string name="mexercises_series">Series</string>
     <string name="mexercises_empty_data">\?</string>

@@ -88,7 +88,7 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
                 adapter = MExercisesAdapter(exercises, this@MExercisesFragment)
             }
             rvExercises.isVisible = exercises.isNotEmpty()
-            llEmpty.isVisible = exercises.isEmpty()
+            clEmpty.isVisible = exercises.isEmpty()
         }
     }
 

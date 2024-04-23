@@ -105,8 +105,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
+        android:alpha="0.5"
+        android:drawablePadding="8dp"
         android:gravity="center"
         android:text="@string/days_empty"
+        android:textAllCaps="true"
+        app:drawableBottomCompat="@drawable/ic_sad_face"
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right"
         app:layout_constraintTop_toBottomOf="@id/ll_top" />
