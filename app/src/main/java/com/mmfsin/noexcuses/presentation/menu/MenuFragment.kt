@@ -26,6 +26,8 @@ import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.a
 import com.mmfsin.noexcuses.presentation.menu.adapter.MenuMGroupsAdapter
 import com.mmfsin.noexcuses.presentation.menu.dialogs.MenuDaysDialog
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
+import com.mmfsin.noexcuses.utils.countDown
+import com.mmfsin.noexcuses.utils.countDown300
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -130,7 +132,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     root.setOnClickListener { navigateTo(actionMenuToNoteDetail(note.id)) }
                 }
             }
-            loading.root.visibility = View.GONE
+            countDown(750) { loading.root.visibility = View.GONE }
         }
     }
 

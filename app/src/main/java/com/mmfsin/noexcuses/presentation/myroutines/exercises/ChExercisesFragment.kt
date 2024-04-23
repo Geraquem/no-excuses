@@ -19,6 +19,7 @@ import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.AddChExerc
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.interfaces.IChExercisesListener
 import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.utils.ID_GROUP
+import com.mmfsin.noexcuses.utils.getBundleParcelableArgs
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +38,7 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
         FragmentExercisesBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
-        arguments?.let { group = it.getParcelable(ID_GROUP) }
+        arguments?.let { group = it.getBundleParcelableArgs(ID_GROUP, IdGroup::class.java) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
