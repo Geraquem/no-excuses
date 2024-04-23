@@ -17,9 +17,13 @@ class InfoDialog : BaseDialog<DialogInfoBinding>() {
     override fun setUI() {
         isCancelable = true
         binding.apply {
-            item.image.tvNumOfDays.text = getString(R.string.first_dialog_routine_days)
-            item.tvTitle.text = getString(R.string.first_dialog_routine_title)
-            item.tvDescription.text = getString(R.string.first_dialog_routine_description)
+            routine.image.tvNumOfDays.text = getString(R.string.first_dialog_routine_days)
+            routine.tvTitle.text = getString(R.string.first_dialog_routine_title)
+            routine.tvDescription.text = getString(R.string.first_dialog_routine_description)
+
+            day.image.firstLetter.text = getString(R.string.first_dialog_day_letter)
+            day.tvTitle.text = getString(R.string.first_dialog_day_title)
+            day.tvExercises.text = getString(R.string.days_exercises, "6")
         }
     }
 
