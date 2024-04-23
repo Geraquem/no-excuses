@@ -24,6 +24,8 @@ import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineA
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineDeleteDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineEditDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces.IMyRoutineListener
+import com.mmfsin.noexcuses.presentation.notes.NotesFragmentDirections
+import com.mmfsin.noexcuses.utils.BEDROCK_ARGS
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +39,11 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
     private lateinit var mContext: Context
 
     private var routines = emptyList<Routine>()
+    private var openNewRoutineDialog: String? = null
+
+    override fun getBundleArgs() {
+        openNewRoutineDialog = activity?.intent?.getStringExtra(BEDROCK_ARGS)
+    }
 
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
@@ -66,11 +73,12 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
 
     override fun setListeners() {
         binding.apply {
-            btnAddRoutine.setOnClickListener {
-                activity?.showFragmentDialog(MyRoutineAddDialog.newInstance(this@MyRoutinesFragment))
-            }
+            btnAddRoutine.setOnClickListener { createNewRoutineDialog() }
         }
     }
+
+    private fun createNewRoutineDialog() =
+        activity?.showFragmentDialog(MyRoutineAddDialog.newInstance(this@MyRoutinesFragment))
 
     override fun observe() {
         viewModel.event.observe(this) { event ->
@@ -83,6 +91,11 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
                 is MyRoutinesEvent.GetMyRoutines -> {
                     routines = event.routines
                     setUpRoutines(routines)
+
+                    openNewRoutineDialog?.let {
+                        createNewRoutineDialog()
+                        openNewRoutineDialog = null
+                    }
                 }
 
                 is MyRoutinesEvent.PushPinUpdated -> viewModel.getRoutines()

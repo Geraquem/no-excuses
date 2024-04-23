@@ -52,7 +52,12 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
         binding.apply {
             btnDefaultRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_default_routines) }
             btnMyRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_my_routines) }
-            btnNewRoutine.setOnClickListener {}
+            btnNewRoutine.setOnClickListener {
+                navigateTo(
+                    R.navigation.nav_graph_my_routines,
+                    getString(R.string.my_routines_add_btn)
+                )
+            }
             btnExercises.setOnClickListener { navigateTo(R.navigation.nav_graph_exercises) }
             btnNotes.setOnClickListener { navigateTo(R.navigation.nav_graph_notes) }
         }
