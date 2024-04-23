@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
+import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentMuscularGroupsBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.presentation.models.IdGroup
@@ -47,7 +48,7 @@ class ChMGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, ChMGroupsV
     }
 
     override fun setUI() {
-        (activity as MainActivity).apply {
+        (activity as BedRockActivity).apply {
             setUpToolbar(title = getString(R.string.mgroups_toolbar))
             rightIconToolbar(isVisible = true,
                 icon = R.drawable.ic_info,

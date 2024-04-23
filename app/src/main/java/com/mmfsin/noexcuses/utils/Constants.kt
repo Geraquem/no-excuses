@@ -1,5 +1,9 @@
 package com.mmfsin.noexcuses.utils
 
+/** INTENT */
+const val ROOT_ACTIVITY_NAV_GRAPH = "root_nav_graph"
+const val BEDROCK_ARGS = "bedrock_args"
+
 //FIREBASE
 const val VERSION = "version"
 const val M_GROUPS = "muscular_groups"

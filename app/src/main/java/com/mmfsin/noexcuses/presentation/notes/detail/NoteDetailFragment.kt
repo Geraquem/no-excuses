@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
+import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentNoteDetailBinding
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.utils.ID_NOTE
@@ -50,7 +51,7 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
     }
 
     private fun setUpToolbar() {
-        (activity as MainActivity).apply {
+        (activity as BedRockActivity).apply {
             setUpToolbar(title = getString(R.string.notes_toolbar))
             rightIconToolbar(isVisible = true,
                 icon = R.drawable.ic_check,

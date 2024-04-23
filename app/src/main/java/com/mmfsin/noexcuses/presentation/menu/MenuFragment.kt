@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import com.mmfsin.noexcuses.MainActivity
@@ -20,12 +17,6 @@ import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.domain.models.Routine
-import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToExercises
-import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMuscularGroups
-import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToMyRoutines
-import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToNoteDetail
-import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToNotes
-import com.mmfsin.noexcuses.presentation.menu.MenuFragmentDirections.Companion.actionMenuToRoutines
 import com.mmfsin.noexcuses.presentation.menu.adapter.MenuMGroupsAdapter
 import com.mmfsin.noexcuses.presentation.menu.dialogs.MenuDaysDialog
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
@@ -51,11 +42,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun setUI() {
         binding.apply {
-            (activity as MainActivity).apply {
-                setUpToolbar(false)
-                rightIconToolbar(isVisible = false)
-                routineOpened = null
-            }
             llMyActualRoutine.animateY(-500f, 1)
             pinnedNote.root.visibility = View.GONE
             loading.root.visibility = View.VISIBLE
@@ -64,11 +50,11 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun setListeners() {
         binding.apply {
-            btnDefaultRoutines.setOnClickListener { navigateTo(actionMenuToRoutines()) }
-            btnMyRoutines.setOnClickListener { navigateTo(actionMenuToMyRoutines()) }
+            btnDefaultRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_default_routines) }
+            btnMyRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_my_routines) }
             btnNewRoutine.setOnClickListener {}
-            btnExercises.setOnClickListener { navigateTo(actionMenuToMuscularGroups()) }
-            btnNotes.setOnClickListener { navigateTo(actionMenuToNotes()) }
+            btnExercises.setOnClickListener { navigateTo(R.navigation.nav_graph_exercises) }
+            btnNotes.setOnClickListener { navigateTo(R.navigation.nav_graph_notes) }
         }
     }
 
@@ -129,7 +115,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
         }
     }
 
-    override fun onMenuMGroupClick(id: String) = navigateTo(actionMenuToExercises(id))
+    override fun onMenuMGroupClick(id: String) = navigateTo(R.navigation.nav_graph_exercises, id)
 
     private fun setUpPinnedNote(note: Note?) {
         binding.apply {
@@ -140,14 +126,15 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     tvDate.text = getString(R.string.notes_date, note.date)
                     ivPushpin.setImageResource(R.drawable.ic_pushpin)
                     root.visibility = View.VISIBLE
-                    root.setOnClickListener { navigateTo(actionMenuToNoteDetail(note.id)) }
+                    root.setOnClickListener { navigateTo(R.navigation.nav_graph_notes, note.id) }
                 }
             }
             loading.root.visibility = View.GONE
         }
     }
 
-    private fun navigateTo(directions: NavDirections) = findNavController().navigate(directions)
+    private fun navigateTo(navGraph: Int, args: String? = null) =
+        (activity as MainActivity).openBedRockActivity(navGraph, args)
 
     private fun error() = activity?.showErrorDialog()
 

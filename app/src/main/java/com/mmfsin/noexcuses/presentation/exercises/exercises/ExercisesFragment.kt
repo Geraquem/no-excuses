@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.base.BaseFragment
+import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.exercises.exercises.adapter.ExercisesAdapter
@@ -43,7 +44,7 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding, ExercisesViewMo
     }
 
     override fun setUI() {
-        (activity as MainActivity).setUpToolbar(title = mGroup)
+        (activity as BedRockActivity).setUpToolbar(title = mGroup)
     }
 
     override fun setListeners() {}

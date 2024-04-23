@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
+import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentDefaultRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.DefaultDaysDialog
@@ -40,13 +41,13 @@ class DefaultRoutinesFragment :
 
     override fun onResume() {
         super.onResume()
-        val routineOpened = (activity as MainActivity).routineOpened
+        val routineOpened = (activity as BedRockActivity).routineOpened
         routineOpened?.let { onRoutineClick(it) }
     }
 
     override fun setUI() {
         binding.apply {
-            (activity as MainActivity).setUpToolbar(title = getString(R.string.routines_toolbar))
+            (activity as BedRockActivity).setUpToolbar(title = getString(R.string.routines_toolbar))
         }
     }
 
@@ -72,7 +73,7 @@ class DefaultRoutinesFragment :
     }
 
     override fun onRoutineClick(id: String) {
-        (activity as MainActivity).routineOpened = id
+        (activity as BedRockActivity).routineOpened = id
         val dialog = DefaultDaysDialog(routineId = id, this@DefaultRoutinesFragment)
         activity?.let { dialog.show(it.supportFragmentManager, "") }
     }

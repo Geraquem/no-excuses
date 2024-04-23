@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.base.BaseFragment
+import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentDefaultExercisesBinding
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter.DefaultExercisesAdapter
@@ -46,7 +47,7 @@ class DefaultExercisesFragment :
         viewModel.event.observe(this) { event ->
             when (event) {
                 is DefaultExercisesEvent.GetDefaultDay -> {
-                    (activity as MainActivity).setUpToolbar(title = event.day.title)
+                    (activity as BedRockActivity).setUpToolbar(title = event.day.title)
                     viewModel.getDefaultDayExercises(event.day.id)
                 }
 

@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
+import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentNotesBinding
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.presentation.notes.NotesFragmentDirections.Companion.actionNotesToNoteDetail
 import com.mmfsin.noexcuses.presentation.notes.adapter.NotesAdapter
 import com.mmfsin.noexcuses.presentation.notes.dialogs.DeleteNoteDialog
 import com.mmfsin.noexcuses.presentation.notes.interfaces.INotesListener
+import com.mmfsin.noexcuses.utils.BEDROCK_ARGS
 import com.mmfsin.noexcuses.utils.NO_ID_NOTE
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
@@ -30,18 +32,27 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
 
     private lateinit var mContext: Context
 
+    private var noteId: String? = null
+
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
     ) = FragmentNotesBinding.inflate(inflater, container, false)
 
+    override fun getBundleArgs() {
+        noteId = activity?.intent?.getStringExtra(BEDROCK_ARGS)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getNotes()
+        noteId?.let { id ->
+            findNavController().navigate(actionNotesToNoteDetail(id))
+            noteId = null
+        } ?: run { viewModel.getNotes() }
     }
 
     override fun setUI() {
         binding.apply {
-            (activity as MainActivity).apply {
+            (activity as BedRockActivity).apply {
                 setUpToolbar(title = getString(R.string.notes_toolbar))
                 rightIconToolbar(isVisible = false)
             }

@@ -12,11 +12,14 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
+import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentMuscularGroupsBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.presentation.exercises.mgroups.MGroupsFragmentDirections.Companion.actionMuscularGroupsToExercises
 import com.mmfsin.noexcuses.presentation.exercises.mgroups.adapter.MGroupsAdapter
 import com.mmfsin.noexcuses.presentation.exercises.mgroups.interfaces.IMGroupListener
+import com.mmfsin.noexcuses.presentation.notes.NotesFragmentDirections
+import com.mmfsin.noexcuses.utils.BEDROCK_ARGS
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,16 +31,25 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MGroupsViewM
 
     private lateinit var mContext: Context
 
+    private var mGroupId: String? = null
+
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentMuscularGroupsBinding.inflate(inflater, container, false)
 
+    override fun getBundleArgs() {
+        mGroupId = activity?.intent?.getStringExtra(BEDROCK_ARGS)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getMuscularGroups()
+        mGroupId?.let { id ->
+            findNavController().navigate(actionMuscularGroupsToExercises(id))
+            mGroupId = null
+        } ?: run { viewModel.getMuscularGroups() }
     }
 
     override fun setUI() {
-        (activity as MainActivity).setUpToolbar(title = getString(R.string.mgroups_toolbar))
+        (activity as BedRockActivity).setUpToolbar(title = getString(R.string.mgroups_toolbar))
     }
 
     override fun setListeners() {}

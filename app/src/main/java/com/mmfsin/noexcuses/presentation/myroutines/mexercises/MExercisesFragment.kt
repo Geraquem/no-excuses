@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
+import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentMexercisesBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.presentation.models.IdGroup
@@ -66,7 +67,7 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
         viewModel.event.observe(this) { event ->
             when (event) {
                 is MExercisesEvent.GetDay -> {
-                    (activity as MainActivity).apply {
+                    (activity as BedRockActivity).apply {
                         setUpToolbar(title = event.day.title)
                         rightIconToolbar(isVisible = true,
                             icon = R.drawable.ic_info,
