@@ -9,6 +9,12 @@
     <string name="error_description">Inténtalo de nuevo más tarde</string>
     <string name="error_btn">Aceptar</string>
 
+    <!-- DRAWER -->
+    <string name="drawer_item_default_routines">Rutinas</string>
+    <string name="drawer_item_my_routines">Mis entrenamientos</string>
+    <string name="drawer_item_exercises">Ejercicios</string>
+    <string name="drawer_item_notes">Notas</string>
+
     <!-- MENU -->
     <string name="menu_none_routine_pinned">¡Fija aqui la rutina que estés haciendo!</string>
     <string name="menu_none_routine_pinned_description">Solo tienes que pulsar el icono</string>

@@ -1,6 +1,7 @@
 package com.mmfsin.noexcuses
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         changeStatusBar()
+        setNavigationDrawer()
+        openDrawer()
     }
 
     private fun changeStatusBar() {
@@ -34,6 +37,24 @@ class MainActivity : AppCompatActivity() {
         val controller = WindowInsetsControllerCompat(window, window.decorView)
         controller.isAppearanceLightStatusBars = true
     }
+
+    private fun setNavigationDrawer() {
+        binding.apply {
+            navigationView.setNavigationItemSelectedListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.nav_default_routines -> openBedRockActivity(R.navigation.nav_graph_default_routines)
+                    R.id.nav_my_routines -> openBedRockActivity(R.navigation.nav_graph_my_routines)
+                    //////////////////////
+                    R.id.nav_exercises -> openBedRockActivity(R.navigation.nav_graph_exercises)
+                    R.id.nav_notes -> openBedRockActivity(R.navigation.nav_graph_notes)
+                }
+                drawerLayout.closeDrawers()
+                true
+            }
+        }
+    }
+
+    fun openDrawer() = binding.drawerLayout.openDrawer(binding.navigationView)
 
     fun openBedRockActivity(navGraph: Int, args: String? = null) {
         val intent = Intent(this, BedRockActivity::class.java)
