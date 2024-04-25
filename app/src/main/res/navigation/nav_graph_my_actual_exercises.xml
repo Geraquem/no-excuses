@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/myActualExercisesFragment"
-        android:name="com.mmfsin.noexcuses.presentation.myroutines.mexercises.actual.ActualExercisesFromMenuFragment"
+        android:name="com.mmfsin.noexcuses.presentation.menu.actual.ActualExercisesFromMenuFragment"
         android:label="exercisesFragment"
         tools:layout="@layout/fragment_exercises" />
 

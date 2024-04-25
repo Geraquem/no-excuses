@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.mexercises.actual
+package com.mmfsin.noexcuses.presentation.menu.actual
 
 import android.content.Context
 import android.os.Bundle
@@ -50,8 +50,9 @@ class ActualExercisesFromMenuFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (createdByUser == null) error()
-        dayId?.let { viewModel.getDay(it) } ?: run { error() }
+        checkNotNulls(dayId, createdByUser) { id, byUser ->
+            viewModel.getActualDay(id, byUser)
+        } ?: run { error() }
     }
 
     override fun setUI() {
