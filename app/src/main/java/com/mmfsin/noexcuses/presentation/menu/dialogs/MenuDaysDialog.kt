@@ -27,8 +27,6 @@ class MenuDaysDialog(
 
     private val viewModel: MenuDaysDialogViewModel by viewModels()
 
-    private var mDays = emptyList<Day>()
-
     override fun inflateView(inflater: LayoutInflater) = DialogDaysBinding.inflate(inflater)
 
     override fun setCustomViewDialog(dialog: Dialog) = bottomCustomViewDialog(dialog, 0.95)
@@ -75,11 +73,10 @@ class MenuDaysDialog(
     }
 
     private fun setUpDays(days: List<Day>) {
-        mDays = days
         binding.apply {
             rvDays.apply {
                 layoutManager = LinearLayoutManager(requireContext())
-                adapter = MenuDaysAdapter(mDays, this@MenuDaysDialog)
+                adapter = MenuDaysAdapter(days, createdByUser, this@MenuDaysDialog)
             }
             rvDays.isVisible = days.isNotEmpty()
             tvEmpty.isVisible = days.isEmpty()

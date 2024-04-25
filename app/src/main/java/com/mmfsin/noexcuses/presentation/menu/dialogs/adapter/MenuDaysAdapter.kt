@@ -11,16 +11,22 @@ import com.mmfsin.noexcuses.presentation.menu.dialogs.listener.IMenuDaysListener
 
 class MenuDaysAdapter(
     private val days: List<Day>,
+    private val createdByUser: Boolean,
     private val listener: IMenuDaysListener
 ) : RecyclerView.Adapter<MenuDaysAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemDayBinding.bind(view)
         private val c = binding.root.context
-        fun bind(day: Day) {
+        fun bind(day: Day, createdByUser: Boolean) {
             binding.apply {
                 val title = day.title
-                image.firstLetter.text = day.id.last().toString()
+                val initial = if (createdByUser) {
+                    if (title.isNotEmpty()) title.substring(0, 1) else "?"
+                } else {
+                    day.id.last().toString()
+                }
+                image.firstLetter.text = initial
                 tvTitle.text = title
                 val exercises = day.exercises
                 val numOfExercises = if (exercises == 1) c.getString(R.string.days_one_exercise)
@@ -36,9 +42,9 @@ class MenuDaysAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: MenuDaysAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val day = days[position]
-        holder.bind(day)
+        holder.bind(day, createdByUser)
         holder.itemView.setOnClickListener { listener.onDayClick(day.id) }
     }
 
