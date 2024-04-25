@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.mexercises.menu
+package com.mmfsin.noexcuses.presentation.myroutines.mexercises.actual
 
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.Day

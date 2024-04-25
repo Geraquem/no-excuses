@@ -12,8 +12,9 @@ import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.base.swipelistener.OnSwipeListener
 import com.mmfsin.noexcuses.databinding.DialogDaysBinding
 import com.mmfsin.noexcuses.domain.models.Day
-import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.adapter.DefaultDaysAdapter
 import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.interfaces.IDefaultDaysListener
+import com.mmfsin.noexcuses.presentation.menu.dialogs.adapter.MenuDaysAdapter
+import com.mmfsin.noexcuses.presentation.menu.dialogs.listener.IMenuDaysListener
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,8 +22,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MenuDaysDialog(
     val routineId: String,
+    val createdByUser: Boolean,
     val listener: IMenuListener
-) : BaseDialog<DialogDaysBinding>(), IDefaultDaysListener {
+) : BaseDialog<DialogDaysBinding>(), IMenuDaysListener {
 
     private val viewModel: MenuDaysDialogViewModel by viewModels()
 
@@ -78,16 +80,14 @@ class MenuDaysDialog(
         binding.apply {
             rvDays.apply {
                 layoutManager = LinearLayoutManager(requireContext())
-                adapter = DefaultDaysAdapter(mDays, this@MenuDaysDialog)
+                adapter = MenuDaysAdapter(mDays, this@MenuDaysDialog)
             }
             rvDays.isVisible = days.isNotEmpty()
             tvEmpty.isVisible = days.isEmpty()
         }
     }
 
-    override fun onDayClick(id: String) {
-        listener.onMenuDayClick(id)
-    }
+    override fun onDayClick(id: String) = listener.onMenuDayClick(id, createdByUser)
 
     private fun error() = activity?.showErrorDialog()
 }

@@ -10,7 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.ActivityMainBinding
-import com.mmfsin.noexcuses.utils.BEDROCK_ARGS
+import com.mmfsin.noexcuses.utils.BEDROCK_BOOLEAN_ARGS
+import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.ROOT_ACTIVITY_NAV_GRAPH
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -66,9 +67,10 @@ class MainActivity : AppCompatActivity() {
 
     fun openDrawer() = binding.drawerLayout.openDrawer(binding.navigationView)
 
-    fun openBedRockActivity(navGraph: Int, args: String? = null) {
+    fun openBedRockActivity(navGraph: Int, strArgs: String? = null, booleanArgs: Boolean? = null) {
         val intent = Intent(this, BedRockActivity::class.java)
-        args?.let { intent.putExtra(BEDROCK_ARGS, args) }
+        strArgs?.let { intent.putExtra(BEDROCK_STR_ARGS, strArgs) }
+        booleanArgs?.let { intent.putExtra(BEDROCK_BOOLEAN_ARGS, booleanArgs) }
         intent.putExtra(ROOT_ACTIVITY_NAV_GRAPH, navGraph)
         startActivity(intent)
     }

@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.dfroutines.dfdays.adapter
+package com.mmfsin.noexcuses.presentation.menu.dialogs.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemDayBinding
 import com.mmfsin.noexcuses.domain.models.Day
-import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.interfaces.IDefaultDaysListener
+import com.mmfsin.noexcuses.presentation.menu.dialogs.listener.IMenuDaysListener
 
-class DefaultDaysAdapter(
+class MenuDaysAdapter(
     private val days: List<Day>,
-    private val listener: IDefaultDaysListener
-) : RecyclerView.Adapter<DefaultDaysAdapter.ViewHolder>() {
+    private val listener: IMenuDaysListener
+) : RecyclerView.Adapter<MenuDaysAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemDayBinding.bind(view)
@@ -36,7 +36,7 @@ class DefaultDaysAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MenuDaysAdapter.ViewHolder, position: Int) {
         val day = days[position]
         holder.bind(day)
         holder.itemView.setOnClickListener { listener.onDayClick(day.id) }

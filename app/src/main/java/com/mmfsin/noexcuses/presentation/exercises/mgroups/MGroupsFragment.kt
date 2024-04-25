@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
-import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
@@ -18,8 +17,7 @@ import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.presentation.exercises.mgroups.MGroupsFragmentDirections.Companion.actionMuscularGroupsToExercises
 import com.mmfsin.noexcuses.presentation.exercises.mgroups.adapter.MGroupsAdapter
 import com.mmfsin.noexcuses.presentation.exercises.mgroups.interfaces.IMGroupListener
-import com.mmfsin.noexcuses.presentation.notes.NotesFragmentDirections
-import com.mmfsin.noexcuses.utils.BEDROCK_ARGS
+import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,7 +35,7 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MGroupsViewM
         FragmentMuscularGroupsBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
-        mGroupId = activity?.intent?.getStringExtra(BEDROCK_ARGS)
+        mGroupId = activity?.intent?.getStringExtra(BEDROCK_STR_ARGS)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

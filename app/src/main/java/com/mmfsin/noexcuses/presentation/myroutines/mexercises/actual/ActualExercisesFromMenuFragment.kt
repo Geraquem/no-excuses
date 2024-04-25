@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.mexercises.menu
+package com.mmfsin.noexcuses.presentation.myroutines.mexercises.actual
 
 import android.content.Context
 import android.os.Bundle
@@ -7,25 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentMexercisesBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
-import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.adapter.MExercisesAdapter
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExerciseListener
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs.DeleteChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.EditChExerciseDialog
-import com.mmfsin.noexcuses.presentation.myroutines.mexercises.MExercisesFragmentDirections.Companion.actionMGroupsToExercises
 import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
-import com.mmfsin.noexcuses.utils.BEDROCK_ARGS
-import com.mmfsin.noexcuses.utils.ID_GROUP
-import com.mmfsin.noexcuses.utils.getBundleParcelableArgs
+import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,7 +39,7 @@ class ActualExercisesFromMenuFragment :
         FragmentMexercisesBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
-        dayId = activity?.intent?.getStringExtra(BEDROCK_ARGS)
+        dayId = activity?.intent?.getStringExtra(BEDROCK_STR_ARGS)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

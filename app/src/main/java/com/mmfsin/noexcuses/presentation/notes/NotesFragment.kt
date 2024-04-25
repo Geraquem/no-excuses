@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
@@ -19,7 +18,7 @@ import com.mmfsin.noexcuses.presentation.notes.NotesFragmentDirections.Companion
 import com.mmfsin.noexcuses.presentation.notes.adapter.NotesAdapter
 import com.mmfsin.noexcuses.presentation.notes.dialogs.DeleteNoteDialog
 import com.mmfsin.noexcuses.presentation.notes.interfaces.INotesListener
-import com.mmfsin.noexcuses.utils.BEDROCK_ARGS
+import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.NO_ID_NOTE
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
@@ -40,7 +39,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
     ) = FragmentNotesBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
-        noteId = activity?.intent?.getStringExtra(BEDROCK_ARGS)
+        noteId = activity?.intent?.getStringExtra(BEDROCK_STR_ARGS)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

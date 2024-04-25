@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.mexercises.menu
+package com.mmfsin.noexcuses.presentation.myroutines.mexercises.actual
 
 import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.GetDayByIdUseCase

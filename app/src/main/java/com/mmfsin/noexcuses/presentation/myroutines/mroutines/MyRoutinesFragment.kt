@@ -23,7 +23,7 @@ import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineA
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineDeleteDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineEditDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces.IMyRoutineListener
-import com.mmfsin.noexcuses.utils.BEDROCK_ARGS
+import com.mmfsin.noexcuses.utils.BEDROCK_BOOLEAN_ARGS
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import com.mmfsin.noexcuses.utils.updateMenuUI
@@ -38,10 +38,10 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
     private lateinit var mContext: Context
 
     private var routines = emptyList<Routine>()
-    private var openNewRoutineDialog: String? = null
+    private var openNewRoutineDialog: Boolean? = null
 
     override fun getBundleArgs() {
-        openNewRoutineDialog = activity?.intent?.getStringExtra(BEDROCK_ARGS)
+        openNewRoutineDialog = activity?.intent?.getBooleanExtra(BEDROCK_BOOLEAN_ARGS, false)
     }
 
     override fun inflateView(
@@ -91,9 +91,11 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
                     routines = event.routines
                     setUpRoutines(routines)
 
-                    openNewRoutineDialog?.let {
-                        createNewRoutineDialog()
-                        openNewRoutineDialog = null
+                    openNewRoutineDialog?.let { newRoutine ->
+                        if (newRoutine) {
+                            createNewRoutineDialog()
+                            openNewRoutineDialog = null
+                        }
                     }
                 }
 

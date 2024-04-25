@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
-import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.domain.models.Note
@@ -75,8 +74,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             btnMyRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_my_routines) }
             btnNewRoutine.setOnClickListener {
                 navigateTo(
-                    R.navigation.nav_graph_my_routines,
-                    getString(R.string.my_routines_add_btn)
+                    navGraph = R.navigation.nav_graph_my_routines,
+                    booleanArgs = true
                 )
             }
             btnExercises.setOnClickListener { navigateTo(R.navigation.nav_graph_exercises) }
@@ -115,7 +114,11 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     tvDescription.text = description
                     ivPushpin.setImageResource(R.drawable.ic_pushpin)
                     root.setOnClickListener {
-                        val dialog = MenuDaysDialog(routineId = routine.id, this@MenuFragment)
+                        val dialog = MenuDaysDialog(
+                            routineId = routine.id,
+                            createdByUser = routine.createdByUser,
+                            this@MenuFragment
+                        )
                         activity?.let { dialog.show(it.supportFragmentManager, "") }
                     }
                 }
@@ -135,8 +138,12 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
         }
     }
 
-    override fun onMenuDayClick(id: String) =
-        navigateTo(R.navigation.nav_graph_my_actual_exercises, id)
+    override fun onMenuDayClick(id: String, createdByUser: Boolean) =
+        navigateTo(
+            navGraph = R.navigation.nav_graph_my_actual_exercises,
+            strArgs = id,
+            booleanArgs = createdByUser
+        )
 
 
     private fun setUpMuscularGroups(mGroups: List<MuscularGroup>) {
@@ -146,7 +153,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
         }
     }
 
-    override fun onMenuMGroupClick(id: String) = navigateTo(R.navigation.nav_graph_exercises, id)
+    override fun onMenuMGroupClick(id: String) =
+        navigateTo(R.navigation.nav_graph_exercises, strArgs = id)
 
     private fun setUpPinnedNote(note: Note?) {
         binding.apply {
@@ -157,15 +165,24 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     tvDate.text = getString(R.string.notes_date, note.date)
                     ivPushpin.setImageResource(R.drawable.ic_pushpin)
                     root.visibility = View.VISIBLE
-                    root.setOnClickListener { navigateTo(R.navigation.nav_graph_notes, note.id) }
+                    root.setOnClickListener {
+                        navigateTo(
+                            navGraph = R.navigation.nav_graph_notes,
+                            strArgs = note.id
+                        )
+                    }
                 }
             } ?: run { pinnedNote.root.visibility = View.GONE }
             loading.root.visibility = View.GONE
         }
     }
 
-    private fun navigateTo(navGraph: Int, args: String? = null) =
-        (activity as MainActivity).openBedRockActivity(navGraph, args)
+    private fun navigateTo(navGraph: Int, strArgs: String? = null, booleanArgs: Boolean? = null) =
+        (activity as MainActivity).openBedRockActivity(
+            navGraph = navGraph,
+            strArgs = strArgs,
+            booleanArgs = booleanArgs
+        )
 
     private fun error() = activity?.showErrorDialog()
 
