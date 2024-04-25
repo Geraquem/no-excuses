@@ -1,19 +1,19 @@
 package com.mmfsin.noexcuses
 
 import android.content.Intent
-import android.net.Uri
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.core.view.isVisible
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.ActivityMainBinding
 import com.mmfsin.noexcuses.utils.BEDROCK_ARGS
 import com.mmfsin.noexcuses.utils.ROOT_ACTIVITY_NAV_GRAPH
 import dagger.hilt.android.AndroidEntryPoint
-import io.realm.Realm
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setNavigationDrawer() {
+        getAppVersion()
         binding.apply {
             navigationView.setNavigationItemSelectedListener { menuItem ->
                 when (menuItem.itemId) {
@@ -49,6 +50,17 @@ class MainActivity : AppCompatActivity() {
                 drawerLayout.closeDrawers()
                 true
             }
+        }
+    }
+
+    private fun getAppVersion() {
+        try {
+            val pInfo: PackageInfo =
+                this.packageManager.getPackageInfo(this.packageName, 0)
+            val version = pInfo.versionName
+            binding.tvVersion.text = getString(R.string.drawer_version, version)
+        } catch (e: PackageManager.NameNotFoundException) {
+            Log.e("Error", e.printStackTrace().toString())
         }
     }
 
