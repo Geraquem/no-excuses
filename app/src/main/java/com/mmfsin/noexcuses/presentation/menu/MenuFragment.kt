@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
+import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.domain.models.Note
@@ -69,6 +70,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun setListeners() {
         binding.apply {
+            toolbar.ivOpenDrawer.setOnClickListener { (activity as MainActivity).openDrawer() }
             btnDefaultRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_default_routines) }
             btnMyRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_my_routines) }
             btnNewRoutine.setOnClickListener {
