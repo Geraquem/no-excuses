@@ -221,7 +221,7 @@
                     style="@style/scroll_no_effects"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
+                    android:layout_marginBottom="20dp"
                     android:clipChildren="false"
                     android:clipToPadding="false"
                     android:orientation="horizontal"
