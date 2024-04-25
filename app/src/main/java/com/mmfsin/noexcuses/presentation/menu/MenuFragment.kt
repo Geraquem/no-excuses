@@ -110,7 +110,9 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                 actualRoutine.apply {
                     image.tvNumOfDays.text = routine.days.toString()
                     tvTitle.text = routine.title
-                    tvDescription.text = routine.description
+                    val description = routine.description?.let { routine.description }
+                        ?: run { getString(R.string.my_routines_no_description) }
+                    tvDescription.text = description
                     ivPushpin.setImageResource(R.drawable.ic_pushpin)
                     root.setOnClickListener {
                         val dialog = MenuDaysDialog(routineId = routine.id, this@MenuFragment)
@@ -133,9 +135,9 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
         }
     }
 
-    override fun onMenuDayClick(id: String) {
+    override fun onMenuDayClick(id: String) =
+        navigateTo(R.navigation.nav_graph_my_actual_exercises, id)
 
-    }
 
     private fun setUpMuscularGroups(mGroups: List<MuscularGroup>) {
         binding.rvMuscularGroups.apply {

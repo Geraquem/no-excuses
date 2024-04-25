@@ -87,7 +87,6 @@ class MenuDaysDialog(
 
     override fun onDayClick(id: String) {
         listener.onMenuDayClick(id)
-        dismiss()
     }
 
     private fun error() = activity?.showErrorDialog()

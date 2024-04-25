@@ -147,6 +147,7 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
     }
 
     private fun updateUI() {
+        activity?.updateMenuUI(mContext)
         routines = emptyList()
         viewModel.getRoutines()
     }

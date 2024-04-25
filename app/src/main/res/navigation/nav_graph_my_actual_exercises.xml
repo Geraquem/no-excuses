@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_my_actual_routine_exercises.xml"
+    app:startDestination="@id/myActualExercisesFragment">
+
+    <fragment
+        android:id="@+id/myActualExercisesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.myroutines.mexercises.menu.ActualExercisesFromMenuFragment"
+        android:label="exercisesFragment"
+        tools:layout="@layout/fragment_exercises" />
+
+</navigation>
