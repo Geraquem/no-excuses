@@ -157,7 +157,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     root.visibility = View.VISIBLE
                     root.setOnClickListener { navigateTo(R.navigation.nav_graph_notes, note.id) }
                 }
-            }
+            } ?: run { pinnedNote.root.visibility = View.GONE }
             loading.root.visibility = View.GONE
         }
     }
