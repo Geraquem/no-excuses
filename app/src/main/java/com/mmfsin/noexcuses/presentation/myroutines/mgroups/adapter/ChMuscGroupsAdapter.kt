@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.exercises.mgroups.adapter
+package com.mmfsin.noexcuses.presentation.myroutines.mgroups.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +8,12 @@ import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemMuscularGroupBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
-import com.mmfsin.noexcuses.presentation.exercises.mgroups.interfaces.IMGroupListener
+import com.mmfsin.noexcuses.presentation.myroutines.mgroups.intefaces.IChMuscGroupListener
 
-class MGroupsAdapter(
+class ChMuscGroupsAdapter(
     private val groups: List<MuscularGroup>,
-    private val listener: IMGroupListener
-) : RecyclerView.Adapter<MGroupsAdapter.ViewHolder>() {
+    private val listener: IChMuscGroupListener
+) : RecyclerView.Adapter<ChMuscGroupsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemMuscularGroupBinding.bind(view)

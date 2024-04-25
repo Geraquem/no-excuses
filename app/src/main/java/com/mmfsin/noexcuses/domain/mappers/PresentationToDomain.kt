@@ -3,7 +3,7 @@ package com.mmfsin.noexcuses.domain.mappers
 import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
 import com.mmfsin.noexcuses.presentation.models.IdGroup
-import java.util.*
+import java.util.UUID
 
 fun createChExercise(idGroup: IdGroup, dataChExercise: DataChExercise): ChExercise {
     return ChExercise(

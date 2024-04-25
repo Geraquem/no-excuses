@@ -1,7 +1,12 @@
 package com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs
 
 import com.mmfsin.noexcuses.base.BaseViewModel
-import com.mmfsin.noexcuses.domain.usecases.*
+import com.mmfsin.noexcuses.domain.usecases.AddChExerciseUseCase
+import com.mmfsin.noexcuses.domain.usecases.DeleteChExerciseUseCase
+import com.mmfsin.noexcuses.domain.usecases.EditChExerciseUseCase
+import com.mmfsin.noexcuses.domain.usecases.GetChExerciseUseCase
+import com.mmfsin.noexcuses.domain.usecases.GetDayByIdUseCase
+import com.mmfsin.noexcuses.domain.usecases.GetExerciseUseCase
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import dagger.hilt.android.lifecycle.HiltViewModel

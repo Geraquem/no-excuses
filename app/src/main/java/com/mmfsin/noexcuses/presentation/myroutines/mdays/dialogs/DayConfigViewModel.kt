@@ -1,7 +1,10 @@
 package com.mmfsin.noexcuses.presentation.myroutines.mdays.dialogs
 
 import com.mmfsin.noexcuses.base.BaseViewModel
-import com.mmfsin.noexcuses.domain.usecases.*
+import com.mmfsin.noexcuses.domain.usecases.AddDayUseCase
+import com.mmfsin.noexcuses.domain.usecases.DeleteDayUseCase
+import com.mmfsin.noexcuses.domain.usecases.EditDayUseCase
+import com.mmfsin.noexcuses.domain.usecases.GetDayByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

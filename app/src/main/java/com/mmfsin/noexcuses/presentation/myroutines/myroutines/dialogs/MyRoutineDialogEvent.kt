@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs
+package com.mmfsin.noexcuses.presentation.myroutines.myroutines.dialogs
 
 import com.mmfsin.noexcuses.domain.models.Routine
 

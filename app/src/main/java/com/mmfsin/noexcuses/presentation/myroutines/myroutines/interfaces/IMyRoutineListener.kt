@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces
+package com.mmfsin.noexcuses.presentation.myroutines.myroutines.interfaces
 
 interface IMyRoutineListener {
     fun onRoutineClick(id: String)

@@ -1,5 +1,5 @@
 package com.mmfsin.noexcuses.presentation.myroutines.mgroups.intefaces
 
-interface IChMGroupListener {
+interface IChMuscGroupListener {
     fun onMGroupClick(mGroup: String)
 }

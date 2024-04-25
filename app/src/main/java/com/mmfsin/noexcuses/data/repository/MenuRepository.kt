@@ -20,7 +20,6 @@ import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.utils.DAYS
-import com.mmfsin.noexcuses.utils.DAY_ID
 import com.mmfsin.noexcuses.utils.DEFAULT_ROUTINES
 import com.mmfsin.noexcuses.utils.EXERCISES
 import com.mmfsin.noexcuses.utils.FIRST_TIME

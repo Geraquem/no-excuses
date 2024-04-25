@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/myRoutinesFragment"
-        android:name="com.mmfsin.noexcuses.presentation.myroutines.mroutines.MyRoutinesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.myroutines.myroutines.MyRoutinesFragment"
         android:label="routinesFragment"
         tools:layout="@layout/fragment_my_routines">
         <action
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/chMGroupsFragment"
-        android:name="com.mmfsin.noexcuses.presentation.myroutines.mgroups.ChMGroupsFragment"
+        android:name="com.mmfsin.noexcuses.presentation.myroutines.mgroups.ChMuscGroupsFragment"
         android:label="chMGroupsFragment"
         tools:layout="@layout/fragment_muscular_groups">
         <action

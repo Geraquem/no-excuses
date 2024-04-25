@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.mroutines
+package com.mmfsin.noexcuses.presentation.myroutines.myroutines
 
 import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.FirstTimeUseCase

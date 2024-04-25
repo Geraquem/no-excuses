@@ -12,7 +12,8 @@ import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExerciseListener
 
 class MExercisesAdapter(
-    private val exercises: List<CompactExercise>, private val listener: IMExerciseListener
+    private val exercises: List<CompactExercise>,
+    private val listener: IMExerciseListener
 ) : RecyclerView.Adapter<MExercisesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

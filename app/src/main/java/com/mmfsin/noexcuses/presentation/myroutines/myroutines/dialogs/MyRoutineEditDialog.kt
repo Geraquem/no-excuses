@@ -1,15 +1,14 @@
-package com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs
+package com.mmfsin.noexcuses.presentation.myroutines.myroutines.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogItemEditBinding
 import com.mmfsin.noexcuses.domain.models.Routine
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces.IMyRoutineListener
+import com.mmfsin.noexcuses.presentation.myroutines.myroutines.interfaces.IMyRoutineListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.countDown300
 import com.mmfsin.noexcuses.utils.showErrorDialog

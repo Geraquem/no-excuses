@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.mroutines.adapter
+package com.mmfsin.noexcuses.presentation.myroutines.myroutines.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemRoutineBinding
 import com.mmfsin.noexcuses.domain.models.Routine
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces.IMyRoutineListener
+import com.mmfsin.noexcuses.presentation.myroutines.myroutines.interfaces.IMyRoutineListener
 
 class MyRoutinesAdapter(
     private val routines: List<Routine>,

@@ -1,15 +1,15 @@
 package com.mmfsin.noexcuses.presentation.myroutines.mexercises.actual
 
 import com.mmfsin.noexcuses.base.BaseViewModel
+import com.mmfsin.noexcuses.domain.usecases.GetActualDayExercisesUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetDayByIdUseCase
-import com.mmfsin.noexcuses.domain.usecases.GetDayExercisesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class ActualExercisesFromMenuViewModel @Inject constructor(
     private val getDayByIdUseCase: GetDayByIdUseCase,
-    private val getDayExercisesUseCase: GetDayExercisesUseCase
+    private val getActualDayExercisesUseCase: GetActualDayExercisesUseCase
 ) : BaseViewModel<ActualExercisesFromMenuEvent>() {
 
     fun getDay(dayId: String) {
@@ -23,9 +23,13 @@ class ActualExercisesFromMenuViewModel @Inject constructor(
         )
     }
 
-    fun getDayExercises(dayId: String) {
+    fun getActualDayExercises(dayId: String, createdByUser: Boolean) {
         executeUseCase(
-            { getDayExercisesUseCase.execute(GetDayExercisesUseCase.Params(dayId)) },
+            {
+                getActualDayExercisesUseCase.execute(
+                    GetActualDayExercisesUseCase.Params(dayId, createdByUser)
+                )
+            },
             { result -> _event.value = ActualExercisesFromMenuEvent.GetDayExercises(result) },
             { _event.value = ActualExercisesFromMenuEvent.SWW }
         )

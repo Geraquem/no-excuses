@@ -2,8 +2,6 @@ package com.mmfsin.noexcuses.domain.usecases
 
 import com.mmfsin.noexcuses.base.BaseUseCase
 import com.mmfsin.noexcuses.domain.interfaces.IDefaultRoutinesRepository
-import com.mmfsin.noexcuses.domain.interfaces.IExercisesRepository
-import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import javax.inject.Inject
 

@@ -15,11 +15,7 @@ import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.adapter.DefaultDaysAdapter
 import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.interfaces.IDefaultDaysListener
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.interfaces.IDefaultRoutineListener
-import com.mmfsin.noexcuses.presentation.myroutines.mdays.adapter.DaysAdapter
-import com.mmfsin.noexcuses.presentation.myroutines.mdays.dialogs.DayAddDialog
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces.IMyRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
-import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

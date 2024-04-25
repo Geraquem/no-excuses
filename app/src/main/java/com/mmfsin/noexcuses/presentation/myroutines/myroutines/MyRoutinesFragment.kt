@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.mroutines
+package com.mmfsin.noexcuses.presentation.myroutines.myroutines
 
 import android.content.Context
 import android.os.Bundle
@@ -17,12 +17,12 @@ import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mdays.DaysDialog
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.MyRoutinesFragmentDirections.Companion.actionRoutinesToMexercises
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.adapter.MyRoutinesAdapter
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineAddDialog
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineDeleteDialog
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.dialogs.MyRoutineEditDialog
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces.IMyRoutineListener
+import com.mmfsin.noexcuses.presentation.myroutines.myroutines.MyRoutinesFragmentDirections.Companion.actionRoutinesToMexercises
+import com.mmfsin.noexcuses.presentation.myroutines.myroutines.adapter.MyRoutinesAdapter
+import com.mmfsin.noexcuses.presentation.myroutines.myroutines.dialogs.MyRoutineAddDialog
+import com.mmfsin.noexcuses.presentation.myroutines.myroutines.dialogs.MyRoutineDeleteDialog
+import com.mmfsin.noexcuses.presentation.myroutines.myroutines.dialogs.MyRoutineEditDialog
+import com.mmfsin.noexcuses.presentation.myroutines.myroutines.interfaces.IMyRoutineListener
 import com.mmfsin.noexcuses.utils.BEDROCK_BOOLEAN_ARGS
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog

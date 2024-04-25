@@ -1,7 +1,7 @@
 package com.mmfsin.noexcuses.di
 
-import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.data.database.RealmDatabase
+import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

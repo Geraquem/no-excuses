@@ -16,7 +16,7 @@ import com.mmfsin.noexcuses.presentation.myroutines.mdays.dialogs.DayAddDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mdays.dialogs.DayDeleteDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mdays.dialogs.DayEditDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mdays.interfaces.IDaysListener
-import com.mmfsin.noexcuses.presentation.myroutines.mroutines.interfaces.IMyRoutineListener
+import com.mmfsin.noexcuses.presentation.myroutines.myroutines.interfaces.IMyRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint

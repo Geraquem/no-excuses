@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.exercises.mgroups
+package com.mmfsin.noexcuses.presentation.exercises.musculargroups
 
 import android.content.Context
 import android.os.Bundle
@@ -14,18 +14,18 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentMuscularGroupsBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
-import com.mmfsin.noexcuses.presentation.exercises.mgroups.MGroupsFragmentDirections.Companion.actionMuscularGroupsToExercises
-import com.mmfsin.noexcuses.presentation.exercises.mgroups.adapter.MGroupsAdapter
-import com.mmfsin.noexcuses.presentation.exercises.mgroups.interfaces.IMGroupListener
+import com.mmfsin.noexcuses.presentation.exercises.musculargroups.MuscGroupsFragmentDirections.Companion.actionMuscularGroupsToExercises
+import com.mmfsin.noexcuses.presentation.exercises.musculargroups.adapter.MuscGroupsAdapter
+import com.mmfsin.noexcuses.presentation.exercises.musculargroups.interfaces.IMuscGroupListener
 import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MGroupsViewModel>(),
-    IMGroupListener {
+class MuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MuscGroupsViewModel>(),
+    IMuscGroupListener {
 
-    override val viewModel: MGroupsViewModel by viewModels()
+    override val viewModel: MuscGroupsViewModel by viewModels()
 
     private lateinit var mContext: Context
 
@@ -55,8 +55,8 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MGroupsViewM
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is MGroupsEvent.MGroups -> setUpMGroups(event.groups)
-                is MGroupsEvent.SWW -> error()
+                is MuscGroupsEvent.MuscGroups -> setUpMGroups(event.groups)
+                is MuscGroupsEvent.SWW -> error()
             }
         }
     }
@@ -64,7 +64,7 @@ class MGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MGroupsViewM
     private fun setUpMGroups(items: List<MuscularGroup>) {
         binding.rvMgroups.apply {
             layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-            adapter = MGroupsAdapter(items, this@MGroupsFragment)
+            adapter = MuscGroupsAdapter(items, this@MuscGroupsFragment)
         }
     }
 

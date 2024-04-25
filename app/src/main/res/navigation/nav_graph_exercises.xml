@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mGroupsFragment"
-        android:name="com.mmfsin.noexcuses.presentation.exercises.mgroups.MGroupsFragment"
+        android:name="com.mmfsin.noexcuses.presentation.exercises.musculargroups.MuscGroupsFragment"
         android:label="mGroupsFragment"
         tools:layout="@layout/fragment_muscular_groups">
         <action

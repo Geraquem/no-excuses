@@ -12,7 +12,6 @@ import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.base.swipelistener.OnSwipeListener
 import com.mmfsin.noexcuses.databinding.DialogDaysBinding
 import com.mmfsin.noexcuses.domain.models.Day
-import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.interfaces.IDefaultDaysListener
 import com.mmfsin.noexcuses.presentation.menu.dialogs.adapter.MenuDaysAdapter
 import com.mmfsin.noexcuses.presentation.menu.dialogs.listener.IMenuDaysListener
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
