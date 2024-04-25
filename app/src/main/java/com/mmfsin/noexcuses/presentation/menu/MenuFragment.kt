@@ -21,7 +21,7 @@ import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.domain.models.Routine
-import com.mmfsin.noexcuses.presentation.menu.adapter.MenuMGroupsAdapter
+import com.mmfsin.noexcuses.presentation.menu.adapter.MenuMuscGroupsAdapter
 import com.mmfsin.noexcuses.presentation.menu.dialogs.MenuDaysDialog
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 import com.mmfsin.noexcuses.utils.LOCAL_BROADCAST_FILTER
@@ -149,11 +149,11 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
     private fun setUpMuscularGroups(mGroups: List<MuscularGroup>) {
         binding.rvMuscularGroups.apply {
             layoutManager = LinearLayoutManager(mContext, HORIZONTAL, false)
-            adapter = MenuMGroupsAdapter(mGroups, this@MenuFragment)
+            adapter = MenuMuscGroupsAdapter(mGroups, this@MenuFragment)
         }
     }
 
-    override fun onMenuMGroupClick(id: String) =
+    override fun onMenuMuscGroupClick(id: String) =
         navigateTo(R.navigation.nav_graph_exercises, strArgs = id)
 
     private fun setUpPinnedNote(note: Note?) {

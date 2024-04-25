@@ -10,10 +10,10 @@ import com.mmfsin.noexcuses.databinding.ItemMenuMuscularGroupBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 
-class MenuMGroupsAdapter(
+class MenuMuscGroupsAdapter(
     private val groups: List<MuscularGroup>,
     private val listener: IMenuListener
-) : RecyclerView.Adapter<MenuMGroupsAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MenuMuscGroupsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemMenuMuscularGroupBinding.bind(view)
@@ -33,9 +33,9 @@ class MenuMGroupsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val mGroup = groups[position]
-        holder.bind(mGroup)
-        holder.itemView.setOnClickListener { listener.onMenuMGroupClick(mGroup.name) }
+        val muscularGroup = groups[position]
+        holder.bind(muscularGroup)
+        holder.itemView.setOnClickListener { listener.onMenuMuscGroupClick(muscularGroup.name) }
     }
 
     override fun getItemCount(): Int = groups.size
