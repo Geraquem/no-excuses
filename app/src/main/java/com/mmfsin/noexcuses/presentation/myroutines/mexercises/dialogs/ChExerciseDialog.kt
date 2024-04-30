@@ -63,7 +63,10 @@ class ChExerciseDialog(
     override fun setListeners() {
         binding.apply {
             tvSeeExercise.setOnClickListener {
-                exercise?.let { e -> listener.onSeeExerciseButtonClick(e.id) }
+                exercise?.let { e ->
+                    listener.onSeeExerciseButtonClick(e.id)
+                    dismiss()
+                }
             }
         }
     }

@@ -11,12 +11,16 @@ import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogDefaultExerciseBinding
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter.DfExerciseSeriesAdapter
+import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.interfaces.IDefaultExerciseListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DfExerciseDialog(private val dfExerciseId: String) :
+class DfExerciseDialog(
+    private val dfExerciseId: String,
+    private val listener: IDefaultExerciseListener
+) :
     BaseDialog<DialogDefaultExerciseBinding>() {
 
     private val viewModel: DfExerciseDialogViewModel by viewModels()
@@ -52,7 +56,16 @@ class DfExerciseDialog(private val dfExerciseId: String) :
         }
     }
 
-    override fun setListeners() {}
+    override fun setListeners() {
+        binding.apply {
+            tvSeeExercise.setOnClickListener {
+                exercise?.let { e ->
+                    listener.seeExerciseButtonClick(e.exercise.id)
+                    dismiss()
+                }
+            }
+        }
+    }
 
     private fun observe() {
         viewModel.event.observe(this) { event ->
@@ -79,8 +92,11 @@ class DfExerciseDialog(private val dfExerciseId: String) :
     private fun error() = activity?.showErrorDialog()
 
     companion object {
-        fun newInstance(chExerciseId: String): DfExerciseDialog {
-            return DfExerciseDialog(chExerciseId)
+        fun newInstance(
+            chExerciseId: String,
+            listener: IDefaultExerciseListener
+        ): DfExerciseDialog {
+            return DfExerciseDialog(chExerciseId, listener)
         }
     }
 }

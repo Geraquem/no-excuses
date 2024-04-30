@@ -14,6 +14,7 @@ import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter.DefaultExercisesAdapter
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.dialogs.DfExerciseDialog
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.interfaces.IDefaultExerciseListener
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.utils.DAY_ID
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
@@ -66,7 +67,16 @@ class DefaultExercisesFragment :
     }
 
     override fun onDefaultExerciseClick(id: String) {
-        activity?.showFragmentDialog(DfExerciseDialog.newInstance(id))
+        activity?.showFragmentDialog(
+            DfExerciseDialog.newInstance(
+                id,
+                this@DefaultExercisesFragment
+            )
+        )
+    }
+
+    override fun seeExerciseButtonClick(id: String) {
+        activity?.showFragmentDialog(ExerciseDialog(id))
     }
 
     private fun error() = activity?.showErrorDialog()

@@ -123,7 +123,12 @@ class ActualExercisesFromMenuFragment :
     }
 
     override fun onDefaultExerciseClick(id: String) {
-        activity?.showFragmentDialog(DfExerciseDialog.newInstance(id))
+        activity?.showFragmentDialog(
+            DfExerciseDialog.newInstance(
+                id,
+                this@ActualExercisesFromMenuFragment
+            )
+        )
     }
 
     override fun onExerciseClick(chExerciseId: String) {
@@ -144,6 +149,8 @@ class ActualExercisesFromMenuFragment :
     override fun onSeeExerciseButtonClick(id: String) {
         activity?.showFragmentDialog(ExerciseDialog(id))
     }
+
+    override fun seeExerciseButtonClick(id: String) = onSeeExerciseButtonClick(id)
 
     override fun deleteExerciseFromDay(chExerciseId: String) {
         activity?.showFragmentDialog(
