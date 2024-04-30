@@ -22,12 +22,7 @@ class ExerciseDialog(private val exerciseId: String) : BaseDialog<DialogExercise
 
     override fun inflateView(inflater: LayoutInflater) = DialogExerciseBinding.inflate(inflater)
 
-    override fun setCustomViewDialog(dialog: Dialog) = centerViewDialog(dialog)
-
-    override fun onResume() {
-        super.onResume()
-        requireDialog().animateDialog()
-    }
+    override fun setCustomViewDialog(dialog: Dialog) = bottomViewDialog(dialog)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,11 +37,16 @@ class ExerciseDialog(private val exerciseId: String) : BaseDialog<DialogExercise
                 tvCategory.text = getString(R.string.exercise_dialog_category, it.category)
                 tvName.text = it.name
                 Glide.with(requireContext()).load(it.imageURL).into(image)
+                tvDescription.text = it.description
             }
         }
     }
 
-    override fun setListeners() {}
+    override fun setListeners() {
+        binding.apply {
+            ivClose.setOnClickListener { dismiss() }
+        }
+    }
 
     private fun observe() {
         viewModel.event.observe(this) { event ->
@@ -55,17 +55,11 @@ class ExerciseDialog(private val exerciseId: String) : BaseDialog<DialogExercise
                     this.exercise = event.exercise
                     setUI()
                 }
+
                 is ExerciseDialogEvent.SWW -> error()
             }
         }
     }
 
     private fun error() = activity?.showErrorDialog()
-
-
-    companion object {
-        fun newInstance(exerciseId: String): ExerciseDialog {
-            return ExerciseDialog(exerciseId)
-        }
-    }
 }

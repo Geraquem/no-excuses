@@ -193,6 +193,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun onDestroy() {
         super.onDestroy()
-        activity?.unregisterReceiver(myBroadcastReceiver)
+        LocalBroadcastManager.getInstance(mContext).unregisterReceiver(myBroadcastReceiver)
     }
 }

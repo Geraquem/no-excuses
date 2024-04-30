@@ -5,5 +5,6 @@ open class Exercise(
     var category: String,
     var imageURL: String,
     var name: String,
-    var dataURL: String,
+    var description: String,
+    var involvedMuscles: String
 )

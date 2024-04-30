@@ -65,7 +65,7 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding, ExercisesViewMo
     }
 
     override fun onExerciseClick(id: String) {
-        activity?.showFragmentDialog(ExerciseDialog.newInstance(id))
+        activity?.showFragmentDialog(ExerciseDialog(id))
     }
 
     private fun error() = activity?.showErrorDialog()

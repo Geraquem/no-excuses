@@ -10,5 +10,6 @@ open class ExerciseDTO(
     var imageURL: String = "",
     var name: String = "",
     var order: Long = 0,
-    var dataURL: String = "",
+    var description: String = "",
+    var muscles: String = "",
 ) : RealmObject()
