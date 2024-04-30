@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs
+package com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
@@ -14,14 +14,20 @@ import com.mmfsin.noexcuses.databinding.DialogChExerciseBinding
 import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialogEvent
+import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialogViewModel
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.adapter.ChExerciseAdapter
+import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExerciseListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.formatTime
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ChExerciseDialog(private val chExerciseId: String) : BaseDialog<DialogChExerciseBinding>() {
+class ChExerciseDialog(
+    private val chExerciseId: String,
+    private val listener: IMExerciseListener
+) : BaseDialog<DialogChExerciseBinding>() {
 
     private val viewModel: ChExerciseDialogViewModel by viewModels()
 
@@ -54,7 +60,13 @@ class ChExerciseDialog(private val chExerciseId: String) : BaseDialog<DialogChEx
         }
     }
 
-    override fun setListeners() {}
+    override fun setListeners() {
+        binding.apply {
+            tvSeeExercise.setOnClickListener {
+                exercise?.let { e -> listener.onSeeExerciseButtonClick(e.id) }
+            }
+        }
+    }
 
     private fun observe() {
         viewModel.event.observe(this) { event ->
@@ -98,8 +110,8 @@ class ChExerciseDialog(private val chExerciseId: String) : BaseDialog<DialogChEx
     private fun error() = activity?.showErrorDialog()
 
     companion object {
-        fun newInstance(chExerciseId: String): ChExerciseDialog {
-            return ChExerciseDialog(chExerciseId)
+        fun newInstance(chExerciseId: String, listener: IMExerciseListener): ChExerciseDialog {
+            return ChExerciseDialog(chExerciseId, listener)
         }
     }
 }

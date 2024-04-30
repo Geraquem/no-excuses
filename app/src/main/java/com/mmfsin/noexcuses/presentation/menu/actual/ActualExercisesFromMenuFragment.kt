@@ -16,10 +16,11 @@ import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter.DefaultExercisesAdapter
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.dialogs.DfExerciseDialog
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.interfaces.IDefaultExerciseListener
-import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialog
-import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.EditChExerciseDialog
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.adapter.MExercisesAdapter
+import com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs.ChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs.DeleteChExerciseDialog
+import com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs.EditChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExerciseListener
 import com.mmfsin.noexcuses.utils.BEDROCK_BOOLEAN_ARGS
 import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
@@ -126,13 +127,22 @@ class ActualExercisesFromMenuFragment :
     }
 
     override fun onExerciseClick(chExerciseId: String) {
-        activity?.showFragmentDialog(ChExerciseDialog.newInstance(chExerciseId))
+        activity?.showFragmentDialog(
+            ChExerciseDialog.newInstance(
+                chExerciseId,
+                this@ActualExercisesFromMenuFragment
+            )
+        )
     }
 
     override fun onExerciseLongClick(chExerciseId: String) {
         activity?.showFragmentDialog(
             EditChExerciseDialog.newInstance(chExerciseId, this@ActualExercisesFromMenuFragment)
         )
+    }
+
+    override fun onSeeExerciseButtonClick(id: String) {
+        activity?.showFragmentDialog(ExerciseDialog(id))
     }
 
     override fun deleteExerciseFromDay(chExerciseId: String) {

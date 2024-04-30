@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_header_dialog"
         android:backgroundTint="@color/light_grey"
+        android:elevation="1dp"
         android:padding="12dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -44,45 +45,83 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="0dp"
+    <ScrollView
+        style="@style/scroll_no_effects"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rl_top"
-        tools:ignore="UseCompoundDrawables">
+        app:layout_constraintTop_toBottomOf="@id/rl_top">
 
-        <TextView
-            android:id="@+id/tv_name"
-            style="@style/MediumTextView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:textAllCaps="true"
-            tools:text="PRESS DE BANCA PLANO" />
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="16dp"
+            tools:ignore="UseCompoundDrawables">
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="12dp"
-            android:contentDescription="@string/content_description"
-            tools:src="@color/black" />
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/MediumTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:textAllCaps="true"
+                tools:text="PRESS DE BANCA PLANO" />
 
-        <TextView
-            android:id="@+id/tv_description"
-            style="@style/SmallTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            tools:text="bla bla bla" />
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="12dp"
+                android:contentDescription="@string/content_description"
+                tools:src="@color/black" />
 
-    </LinearLayout>
+            <TextView
+                style="@style/MediumTextView_Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@string/exercise_dialog_description"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                style="@style/SmallTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:alpha="0.75"
+                android:textSize="14sp"
+                tools:text="bla bla bla" />
+
+            <TextView
+                style="@style/MediumTextView_Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@string/exercise_dialog_involved_muscles"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_muscles"
+                style="@style/SmallTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:alpha="0.75"
+                android:textSize="14sp"
+                tools:text="bla bla bla" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,6 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogExerciseBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
-import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,6 +37,7 @@ class ExerciseDialog(private val exerciseId: String) : BaseDialog<DialogExercise
                 tvName.text = it.name
                 Glide.with(requireContext()).load(it.imageURL).into(image)
                 tvDescription.text = it.description
+                tvMuscles.text = it.involvedMuscles
             }
         }
     }

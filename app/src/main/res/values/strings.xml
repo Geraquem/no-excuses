@@ -35,6 +35,8 @@
 
     <!-- EXERCISE DIALOG -->
     <string name="exercise_dialog_category">Ejercicio de %s</string>
+    <string name="exercise_dialog_description">Descripción</string>
+    <string name="exercise_dialog_involved_muscles">Músculos involucrados</string>
 
     <!-- FIRST DIALOG -->
     <string name="first_dialog_explanation_info">Información</string>
@@ -67,6 +69,7 @@
     <string name="days_exercises">%s ejercicios</string>
 
     <!-- MY EXERCISES -->
+    <string name="mexercises_see_exercise">Ver ejercicio</string>
     <string name="mexercises_empty">No tienes ningún ejercicio\nasignado a este día.</string>
     <string name="mexercises_serie">Serie</string>
     <string name="mexercises_series">Series</string>

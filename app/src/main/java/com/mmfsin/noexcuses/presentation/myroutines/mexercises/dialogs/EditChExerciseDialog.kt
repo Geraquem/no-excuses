@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs
+package com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
@@ -13,6 +13,8 @@ import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
+import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialogEvent
+import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialogViewModel
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.adapter.EditChExerciseAdapter
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.interfaces.IAddChExerciseListener
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExerciseListener

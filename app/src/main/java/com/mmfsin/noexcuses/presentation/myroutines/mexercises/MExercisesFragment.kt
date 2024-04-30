@@ -14,13 +14,14 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentMexercisesBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
-import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialog
-import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.EditChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.MExercisesFragmentDirections.Companion.actionMGroupsToExercises
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.adapter.MExercisesAdapter
+import com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs.ChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs.DeleteChExerciseDialog
+import com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs.EditChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExerciseListener
 import com.mmfsin.noexcuses.utils.ID_GROUP
 import com.mmfsin.noexcuses.utils.getBundleParcelableArgs
@@ -93,13 +94,22 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
     }
 
     override fun onExerciseClick(chExerciseId: String) {
-        activity?.showFragmentDialog(ChExerciseDialog.newInstance(chExerciseId))
+        activity?.showFragmentDialog(
+            ChExerciseDialog.newInstance(
+                chExerciseId,
+                this@MExercisesFragment
+            )
+        )
     }
 
     override fun onExerciseLongClick(chExerciseId: String) {
         activity?.showFragmentDialog(
             EditChExerciseDialog.newInstance(chExerciseId, this@MExercisesFragment)
         )
+    }
+
+    override fun onSeeExerciseButtonClick(id: String) {
+        activity?.showFragmentDialog(ExerciseDialog(id))
     }
 
     override fun deleteExerciseFromDay(chExerciseId: String) {
