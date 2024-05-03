@@ -37,6 +37,7 @@ class DeleteNoteDialog(private val noteId: String, private val listener: INotesL
     override fun setUI() {
         isCancelable = true
         binding.apply {
+            tvTitle.text = getString(R.string.notes_delete_top_text)
             tvAlert.visibility = View.GONE
         }
     }

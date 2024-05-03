@@ -24,7 +24,7 @@
             android:layout_marginBottom="8dp"
             android:contentDescription="@string/content_description"
             android:gravity="center"
-            tools:src="@drawable/iv_exercises" />
+            tools:src="@drawable/ic_error" />
 
         <FrameLayout
             android:layout_width="match_parent"
