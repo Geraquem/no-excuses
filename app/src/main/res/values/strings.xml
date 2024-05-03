@@ -75,7 +75,7 @@
     <string name="mexercises_series">Series</string>
     <string name="mexercises_empty_data">\?</string>
     <string name="mexercises_add_btn">Añadir ejercicio</string>
-    <string name="mexercises_add_completed">Añadido correctamente</string>
+    <string name="mexercises_add_completed">Ejercicio añadido</string>
 
     <!-- DAY EXERCISE ADD/EDIT/DELETE DIALOG -->
     <string name="days_exercise_dialog_serie">Serie %s</string>

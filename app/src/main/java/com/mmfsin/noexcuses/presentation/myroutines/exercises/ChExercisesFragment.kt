@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
+import com.google.android.material.snackbar.Snackbar
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
@@ -19,6 +20,7 @@ import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.adapter.ChExercisesAdapter
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.AddChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.interfaces.IChExercisesListener
+import com.mmfsin.noexcuses.presentation.myroutines.snackbar.CustomSnackbar
 import com.mmfsin.noexcuses.utils.ID_GROUP
 import com.mmfsin.noexcuses.utils.getBundleParcelableArgs
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -77,12 +79,21 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
     override fun onExerciseClick(id: String) {
         group?.let { ids ->
             ids.exerciseId = id
-            activity?.showFragmentDialog(AddChExerciseDialog.newInstance(ids, this@ChExercisesFragment))
+            activity?.showFragmentDialog(
+                AddChExerciseDialog.newInstance(
+                    ids,
+                    this@ChExercisesFragment
+                )
+            )
         }
     }
 
     override fun seeExercise(id: String) {
         activity?.showFragmentDialog(ExerciseDialog(id))
+    }
+
+    override fun showSnackBar() {
+        CustomSnackbar.make(binding.clMain, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun error() = activity?.showErrorDialog()

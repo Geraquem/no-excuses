@@ -170,11 +170,7 @@ class AddChExerciseDialog(
 
     private fun endFlow() {
         binding.apply {
-            Toast.makeText(
-                activity?.applicationContext,
-                getString(R.string.mexercises_add_completed),
-                Toast.LENGTH_SHORT
-            ).show()
+            listener.showSnackBar()
             dismiss()
         }
     }
