@@ -129,7 +129,7 @@
         style="@style/MediumTextView_Bold"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:paddingVertical="12dp"
         android:text="@string/days_add_btn"
         app:backgroundTint="@color/light_orange"

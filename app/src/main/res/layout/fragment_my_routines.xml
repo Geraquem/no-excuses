@@ -59,12 +59,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_bottom_dialog"
+        android:background="@color/white"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:elevation="6dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="24dp"
+        android:paddingVertical="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
