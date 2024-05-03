@@ -1,14 +1,17 @@
 package com.mmfsin.noexcuses.presentation.myroutines.mexercises.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemChExerciseBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
+import com.mmfsin.noexcuses.domain.models.getCategoryColor
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExerciseListener
 
 class MExercisesAdapter(
@@ -21,6 +24,7 @@ class MExercisesAdapter(
         private val c = binding.root.context
         fun bind(exercise: CompactExercise) {
             binding.apply {
+                setCategoryColor(exercise.category)
                 Glide.with(binding.root.context).load(exercise.imageURL).into(image)
                 tvCategory.text = exercise.category
                 tvName.text = exercise.name
@@ -30,19 +34,25 @@ class MExercisesAdapter(
                     llReps.visibility = if (it == 0) View.GONE else View.VISIBLE
                     if (it == 1) tvSeriesText.text = c.getString(R.string.mexercises_serie)
                     tvSeries.text = it.toString()
-                } ?: run { llReps.visibility = View.GONE }
+                } ?: run { llReps.visibility = View.INVISIBLE }
 
                 val time = exercise.time
                 tvWait.text = time.toString()
                 time?.let {
                     tvWait.text = it
                     llTime.visibility = View.VISIBLE
-                } ?: run { llTime.visibility = View.GONE }
+                } ?: run { llTime.visibility = View.INVISIBLE }
 
                 ivHasNotes.isVisible = exercise.hasNotes
 
-                llData.visibility = if (series == null && time == null) View.GONE else View.VISIBLE
+                llData.visibility = if (series == null && time == null) View.INVISIBLE
+                else View.VISIBLE
             }
+        }
+
+        private fun setCategoryColor(category: String) {
+            val categoryColor = ContextCompat.getColor(c, getCategoryColor(category))
+            binding.tvCategory.background.setTint(categoryColor)
         }
     }
 

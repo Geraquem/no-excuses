@@ -33,9 +33,13 @@
 
         <TextView
             android:id="@+id/tv_category"
-            style="@style/MediumTextView"
+            style="@style/SmallTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="2dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/bg_category_color"
             android:textAllCaps="true"
             android:textStyle="bold"
             tools:text="Pecho" />
