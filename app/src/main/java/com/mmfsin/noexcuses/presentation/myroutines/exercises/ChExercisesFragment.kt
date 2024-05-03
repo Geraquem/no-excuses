@@ -13,6 +13,7 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.adapter.ChExercisesAdapter
@@ -76,8 +77,12 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
     override fun onExerciseClick(id: String) {
         group?.let { ids ->
             ids.exerciseId = id
-            activity?.showFragmentDialog(AddChExerciseDialog.newInstance(ids))
+            activity?.showFragmentDialog(AddChExerciseDialog.newInstance(ids, this@ChExercisesFragment))
         }
+    }
+
+    override fun seeExercise(id: String) {
+        activity?.showFragmentDialog(ExerciseDialog(id))
     }
 
     private fun error() = activity?.showErrorDialog()

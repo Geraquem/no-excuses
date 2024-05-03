@@ -12,17 +12,22 @@ import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogChExerciseAddBinding
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.adapter.AddChExerciseAdapter
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.interfaces.IAddChExerciseListener
+import com.mmfsin.noexcuses.presentation.myroutines.exercises.interfaces.IChExercisesListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExerciseAddBinding>(),
-    IAddChExerciseListener {
+class AddChExerciseDialog(
+    private val idGroup: IdGroup,
+    val listener: IChExercisesListener
+) : BaseDialog<DialogChExerciseAddBinding>(), IAddChExerciseListener {
 
     private val viewModel: ChExerciseDialogViewModel by viewModels()
 
@@ -87,6 +92,10 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
 
                 val data = DataChExercise(dataList = mSeries, time = restTime, notes = notesStr)
                 viewModel.addChExercise(idGroup, data)
+            }
+
+            tvSeeExercise.setOnClickListener {
+                exercise?.let { e -> listener.seeExercise(e.id) }
             }
         }
     }
@@ -173,8 +182,8 @@ class AddChExerciseDialog(private val idGroup: IdGroup) : BaseDialog<DialogChExe
     private fun error() = activity?.showErrorDialog()
 
     companion object {
-        fun newInstance(idGroup: IdGroup): AddChExerciseDialog {
-            return AddChExerciseDialog(idGroup)
+        fun newInstance(idGroup: IdGroup, listener: IChExercisesListener): AddChExerciseDialog {
+            return AddChExerciseDialog(idGroup, listener)
         }
     }
 }

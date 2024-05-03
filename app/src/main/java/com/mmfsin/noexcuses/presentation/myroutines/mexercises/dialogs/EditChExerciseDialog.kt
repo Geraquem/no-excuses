@@ -12,6 +12,7 @@ import com.mmfsin.noexcuses.databinding.DialogChExerciseEditBinding
 import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialogEvent
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialogViewModel
@@ -21,6 +22,7 @@ import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExer
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.deletePointZero
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -93,6 +95,13 @@ class EditChExerciseDialog(
 
                 val data = DataChExercise(dataList = mSeries, time = restTime, notes = notesStr)
                 viewModel.editChExercise(chExerciseId, data)
+            }
+
+            tvSeeExercise.setOnClickListener {
+                exercise?.let { e ->
+                    listener.onSeeExerciseButtonClick(e.id)
+                    dismiss()
+                }
             }
         }
     }
