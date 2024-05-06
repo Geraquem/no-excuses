@@ -1,6 +1,5 @@
 package com.mmfsin.noexcuses.presentation.myroutines.mexercises.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,7 @@ class MExercisesAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemChExerciseBinding.bind(view)
         private val c = binding.root.context
-        fun bind(exercise: CompactExercise) {
+        fun bind(exercise: CompactExercise, listener: IMExerciseListener) {
             binding.apply {
                 setCategoryColor(exercise.category)
                 Glide.with(binding.root.context).load(exercise.imageURL).into(image)
@@ -34,19 +33,24 @@ class MExercisesAdapter(
                     llReps.visibility = if (it == 0) View.GONE else View.VISIBLE
                     if (it == 1) tvSeriesText.text = c.getString(R.string.mexercises_serie)
                     tvSeries.text = it.toString()
-                } ?: run { llReps.visibility = View.INVISIBLE }
+                } ?: run { llReps.visibility = View.GONE }
 
                 val time = exercise.time
                 tvWait.text = time.toString()
                 time?.let {
                     tvWait.text = it
                     llTime.visibility = View.VISIBLE
-                } ?: run { llTime.visibility = View.INVISIBLE }
+                } ?: run { llTime.visibility = View.GONE }
 
                 ivHasNotes.isVisible = exercise.hasNotes
 
-                llData.visibility = if (series == null && time == null) View.INVISIBLE
-                else View.VISIBLE
+                val addDataVisible = series == 0 && time == null && !exercise.hasNotes
+                llData.isVisible = !addDataVisible
+                llAddData.isVisible = addDataVisible
+
+                exercise.chExerciseId?.let { id ->
+                    llAddData.setOnClickListener { listener.onExerciseLongClick(id) }
+                }
             }
         }
 
@@ -63,7 +67,7 @@ class MExercisesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(exercises[position])
+        holder.bind(exercises[position], listener)
         holder.itemView.setOnClickListener {
             exercises[position].chExerciseId?.let { id -> listener.onExerciseClick(id) }
         }
