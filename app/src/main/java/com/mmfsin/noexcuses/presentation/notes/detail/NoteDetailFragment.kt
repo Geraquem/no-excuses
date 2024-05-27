@@ -14,6 +14,7 @@ import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.utils.ID_NOTE
 import com.mmfsin.noexcuses.utils.NO_ID_NOTE
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.updateMenuUI
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -66,7 +67,11 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
                     setUI()
                 }
 
-                is NoteDetailEvent.NoteCreated -> activity?.onBackPressedDispatcher?.onBackPressed()
+                is NoteDetailEvent.NoteCreated -> {
+                    activity?.updateMenuUI(mContext)
+                    activity?.onBackPressedDispatcher?.onBackPressed()
+                }
+
                 is NoteDetailEvent.SWW -> error()
             }
         }
@@ -85,6 +90,7 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
 
     override fun onStop() {
         addNote()
+        activity?.updateMenuUI(mContext)
         super.onStop()
     }
 

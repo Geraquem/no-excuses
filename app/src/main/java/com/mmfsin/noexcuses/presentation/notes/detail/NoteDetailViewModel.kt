@@ -3,13 +3,14 @@ package com.mmfsin.noexcuses.presentation.notes.detail
 import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.AddNoteUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetNoteByIdUseCase
+import com.mmfsin.noexcuses.domain.usecases.UpdateNotePushPinUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class NoteDetailViewModel @Inject constructor(
     private val getNoteByIdUseCase: GetNoteByIdUseCase,
-    private val addNoteUseCase: AddNoteUseCase
+    private val addNoteUseCase: AddNoteUseCase,
 ) : BaseViewModel<NoteDetailEvent>() {
 
     fun getNoteById(id: String) {
