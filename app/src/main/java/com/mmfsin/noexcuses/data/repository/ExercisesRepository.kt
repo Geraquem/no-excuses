@@ -85,6 +85,19 @@ class ExercisesRepository @Inject constructor(
     private fun getChExerciseDTO(chExerciseId: String): ChExerciseDTO? =
         realmDatabase.getObjectFromRealm(ChExerciseDTO::class.java, ID, chExerciseId)
 
+    override fun checkExerciseFav(exerciseId: String): Boolean {
+        val exercise = getExerciseById(exerciseId)
+        return exercise?.isFav ?: run { false }
+    }
+
+    override fun updateExerciseFav(exerciseId: String) {
+        val exercise = realmDatabase.getObjectFromRealm(ExerciseDTO::class.java, ID, exerciseId)
+        exercise?.let { e ->
+            e.isFav = !e.isFav
+            realmDatabase.addObject { e }
+        }
+    }
+
     override fun deleteChExercise(chExerciseId: String) {
         val chExercise = getChExerciseDTO(chExerciseId)
         chExercise?.let { e ->

@@ -39,7 +39,8 @@ fun ExerciseDTO.toExercise() = Exercise(
     imageURL = imageURL,
     name = name,
     description = description,
-    involvedMuscles = muscles
+    involvedMuscles = muscles,
+    isFav = isFav
 )
 
 fun List<ExerciseDTO>.toExerciseList() = this.map { it.toExercise() }

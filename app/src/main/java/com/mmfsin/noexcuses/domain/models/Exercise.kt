@@ -6,5 +6,6 @@ open class Exercise(
     var imageURL: String,
     var name: String,
     var description: String,
-    var involvedMuscles: String
+    var involvedMuscles: String,
+    var isFav: Boolean
 )

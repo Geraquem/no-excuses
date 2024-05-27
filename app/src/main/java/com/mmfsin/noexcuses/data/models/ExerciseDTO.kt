@@ -12,4 +12,5 @@ open class ExerciseDTO(
     var order: Long = 0,
     var description: String = "",
     var muscles: String = "",
+    var isFav: Boolean = false
 ) : RealmObject()

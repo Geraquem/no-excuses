@@ -38,6 +38,9 @@ class ExerciseDialog(private val exerciseId: String) : BaseDialog<DialogExercise
                 Glide.with(requireContext()).load(it.imageURL).into(image)
                 tvDescription.text = it.description
                 tvMuscles.text = it.involvedMuscles
+
+                val favIcon = if (it.isFav) R.drawable.ic_fav_on else R.drawable.ic_fav_off
+                ivFav.setImageResource(favIcon)
             }
         }
     }
@@ -45,6 +48,7 @@ class ExerciseDialog(private val exerciseId: String) : BaseDialog<DialogExercise
     override fun setListeners() {
         binding.apply {
             ivClose.setOnClickListener { dismiss() }
+            ivFav.setOnClickListener { exercise?.let { e -> viewModel.updateFav(e.id) } }
         }
     }
 
@@ -56,9 +60,15 @@ class ExerciseDialog(private val exerciseId: String) : BaseDialog<DialogExercise
                     setUI()
                 }
 
+                is ExerciseDialogEvent.CheckFav -> updateFavIcon(event.isFav)
                 is ExerciseDialogEvent.SWW -> error()
             }
         }
+    }
+
+    private fun updateFavIcon(isFav: Boolean) {
+        val icon = if (isFav) R.drawable.ic_fav_on else R.drawable.ic_fav_off
+        binding.ivFav.setImageResource(icon)
     }
 
     private fun error() = activity?.showErrorDialog()
