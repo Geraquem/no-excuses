@@ -37,7 +37,7 @@ class FavExercisesFragment : BaseFragment<FragmentExercisesBinding, FavExercises
     }
 
     override fun setUI() {
-        (activity as BedRockActivity).setUpToolbar(title = getString(R.string.drawer_item_fav_exercises))
+        (activity as BedRockActivity).setUpToolbar(title = getString(R.string.favs_title))
     }
 
     override fun setListeners() {}

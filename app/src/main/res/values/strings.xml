@@ -139,6 +139,11 @@
     <string name="days_delete_yes">Eliminar</string>
     <string name="days_delete_cancel">Volver</string>
 
+    <!-- FAVS -->
+    <string name="favs_title">Favoritos</string>
+    <string name="favs_save">Favorito</string>
+    <string name="favs_delete">Eliminar</string>
+
     <!-- NOTES -->
     <string name="notes_toolbar">Notas</string>
     <string name="notes_empty">Todavía no has escrito nada</string>
