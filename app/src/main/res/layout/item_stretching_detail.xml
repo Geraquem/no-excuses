@@ -25,12 +25,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:textAllCaps="true"
+            android:textStyle="bold"
             tools:text="Ejercicio 1" />
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_gravity="center"
             android:layout_marginBottom="12dp"
             android:contentDescription="@string/content_description"
@@ -41,6 +42,7 @@
             style="@style/MediumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:alpha="0.75"
             tools:text="Para realizar este estiramiento blablablablabal" />
 
     </LinearLayout>

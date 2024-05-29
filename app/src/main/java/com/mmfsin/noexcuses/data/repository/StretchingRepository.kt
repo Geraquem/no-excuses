@@ -19,6 +19,6 @@ class StretchingRepository @Inject constructor(
     override fun getStretching(category: String): List<Stretching> {
         return realmDatabase.getObjectsFromRealm {
             where<StretchingDTO>().equalTo(CATEGORY, category).findAll()
-        }.toStretching()
+        }.toStretching().sortedBy { it.order }
     }
 }
