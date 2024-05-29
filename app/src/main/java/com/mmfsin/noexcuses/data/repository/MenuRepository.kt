@@ -15,6 +15,7 @@ import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
 import com.mmfsin.noexcuses.data.models.ExerciseDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
+import com.mmfsin.noexcuses.data.models.StretchingDTO
 import com.mmfsin.noexcuses.domain.interfaces.IMenuRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Day
@@ -29,6 +30,7 @@ import com.mmfsin.noexcuses.utils.ROUTINES
 import com.mmfsin.noexcuses.utils.ROUTINE_DOING_IT
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import com.mmfsin.noexcuses.utils.SAVED_VERSION
+import com.mmfsin.noexcuses.utils.STRETCHING
 import com.mmfsin.noexcuses.utils.VERSION
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.realm.kotlin.where
@@ -66,8 +68,7 @@ class MenuRepository @Inject constructor(
                 val fbExercises = it.child(EXERCISES)
                 for (child in fbExercises.children) {
                     for (exercise in child.children) {
-                        exercise.getValue(ExerciseDTO::class.java)
-                            ?.let { e -> saveExercise(e) }
+                        exercise.getValue(ExerciseDTO::class.java)?.let { e -> saveExercise(e) }
                     }
                 }
 
@@ -88,6 +89,13 @@ class MenuRepository @Inject constructor(
                 for (exercise in exercises.children) {
                     exercise.getValue(DefaultExerciseDTO::class.java)
                         ?.let { e -> saveDefaultExercise(e) }
+                }
+
+                val stretching = it.child(STRETCHING)
+                for (child in stretching.children) {
+                    for (stretc in child.children) {
+                        stretc.getValue(StretchingDTO::class.java)?.let { s -> saveStretching(s) }
+                    }
                 }
 
                 latch.countDown()
@@ -111,11 +119,13 @@ class MenuRepository @Inject constructor(
 
     private fun saveMGroups(mGroup: MuscularGroupDTO) = realmDatabase.addObject { mGroup }
     private fun saveExercise(exercise: ExerciseDTO) = realmDatabase.addObject { exercise }
-
     private fun saveDefaultRoutine(routine: DefaultRoutineDTO) = realmDatabase.addObject { routine }
+
     private fun saveDefaultDay(day: DefaultDayDTO) = realmDatabase.addObject { day }
     private fun saveDefaultExercise(exercise: DefaultExerciseDTO) =
         realmDatabase.addObject { exercise }
+
+    private fun saveStretching(stretching: StretchingDTO) = realmDatabase.addObject { stretching }
 
     override fun isFirstTime(): Boolean {
         val firstTime = getSharedPreferences().getBoolean(FIRST_TIME, true)

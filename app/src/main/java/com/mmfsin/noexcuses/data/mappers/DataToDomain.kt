@@ -10,6 +10,7 @@ import com.mmfsin.noexcuses.data.models.ExerciseDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
 import com.mmfsin.noexcuses.data.models.NoteDTO
+import com.mmfsin.noexcuses.data.models.StretchingDTO
 import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.Data
@@ -19,6 +20,7 @@ import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.domain.models.Stretching
 import com.mmfsin.noexcuses.utils.formatTime
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -143,3 +145,12 @@ private fun formatDate(date: Long): String {
 }
 
 fun List<NoteDTO>.toNoteList() = this.map { it.toNote() }
+
+/** Stretching */
+
+fun StretchingDTO.toStretching() = Stretching(
+    imageURL = imageURL,
+    description = description
+)
+
+fun List<StretchingDTO>.toStretching() = this.map { it.toStretching() }

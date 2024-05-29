@@ -15,6 +15,8 @@ const val DEFAULT_ROUTINES = "default_routines"
 const val ROUTINES = "routines"
 const val DAYS = "days"
 
+const val STRETCHING = "stretching"
+
 //REALM
 const val CATEGORY = "category"
 const val ID = "id"

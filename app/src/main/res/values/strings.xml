@@ -15,6 +15,7 @@
     <string name="drawer_item_my_routines">Mis entrenamientos</string>
     <string name="drawer_item_exercises">Ejercicios</string>
     <string name="drawer_item_fav_exercises">Favoritos</string>
+    <string name="drawer_item_stretching">Estiramientos</string>
     <string name="drawer_item_notes">Notas</string>
     <string name="drawer_version">Versión %s</string>
 
@@ -144,6 +145,7 @@
     <string name="favs_title">Favoritos</string>
     <string name="favs_save">Favorito</string>
     <string name="favs_delete">Eliminar</string>
+    <string name="favs_empty">No hay ningún ejercicio marcado como favorito</string>
 
     <!-- NOTES -->
     <string name="notes_toolbar">Notas</string>
@@ -154,5 +156,9 @@
     <string name="notes_delete_text">¿Quieres eliminar %s?</string>
     <string name="notes_delete_yes">Eliminar</string>
     <string name="notes_delete_cancel">Volver</string>
+
+    <!-- STRETCHING -->
+    <string name="stretching_title">Estiramientos</string>
+    <string name="stretching_position">Estiramiento %s</string>
 
 </resources>

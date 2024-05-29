@@ -15,7 +15,6 @@ import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.ROOT_ACTIVITY_NAV_GRAPH
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -47,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.nav_my_routines -> openBedRockActivity(R.navigation.nav_graph_my_routines)
                     R.id.nav_exercises -> openBedRockActivity(R.navigation.nav_graph_exercises)
                     R.id.nav_fav_exercises -> openBedRockActivity(R.navigation.nav_graph_fav_exercises)
+                    R.id.nav_stretching -> openBedRockActivity(R.navigation.nav_graph_stretchings)
                     R.id.nav_notes -> openBedRockActivity(R.navigation.nav_graph_notes)
                 }
                 drawerLayout.closeDrawers()
