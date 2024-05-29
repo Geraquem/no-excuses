@@ -35,6 +35,7 @@
 
     <!-- MUSCULAR GROUPS -->
     <string name="mgroups_toolbar">Grupos musculares</string>
+    <string name="mgroups_cardio">cardio</string>
 
     <!-- EXERCISE DIALOG -->
     <string name="exercise_dialog_category">Ejercicio de %s</string>
@@ -159,6 +160,8 @@
 
     <!-- STRETCHING -->
     <string name="stretching_title">Estiramientos</string>
+    <string name="stretching_mgroup">Estiramientos de</string>
     <string name="stretching_position">Estiramiento %s</string>
+    <string name="stretching_description">La práctica regular de estiramientos antes y después del ejercicio es fundamental para maximizar el rendimiento, prevenir lesiones, y mejorar la flexibilidad y la recuperación muscular.\n\nIncorporar estos estiramientos en tu rutina de ejercicio puede llevar a una mejor salud física y bienestar general.</string>
 
 </resources>

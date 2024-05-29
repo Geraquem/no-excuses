@@ -41,6 +41,9 @@ class StretchingDetailFragment : BaseFragment<FragmentStretchingBinding, Stretch
 
     override fun setUI() {
         (activity as BedRockActivity).setUpToolbar(title = mGroup)
+        binding.apply {
+            tvTopText.visibility = View.GONE
+        }
     }
 
     override fun setListeners() {}

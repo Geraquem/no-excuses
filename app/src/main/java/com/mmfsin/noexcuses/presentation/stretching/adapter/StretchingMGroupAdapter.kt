@@ -3,12 +3,13 @@ package com.mmfsin.noexcuses.presentation.stretching.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemStretchingMgroupBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.presentation.stretching.interfaces.IStretchingListener
+import com.mmfsin.noexcuses.utils.CATEGORY
 
 class StretchingMGroupAdapter(
     private val mgroups: List<MuscularGroup>,
@@ -17,10 +18,11 @@ class StretchingMGroupAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemStretchingMgroupBinding.bind(view)
+        private val c = binding.root.context
         fun bind(mgroup: MuscularGroup) {
             binding.apply {
-                Glide.with(binding.root.context).load(mgroup.imageURL).into(image)
-                tvName.text = "estiramientos de ${mgroup.name}"
+                tvName.text = mgroup.name
+                if (mgroup.name == c.getString(R.string.mgroups_cardio)) itemView.isVisible = false
             }
         }
     }
