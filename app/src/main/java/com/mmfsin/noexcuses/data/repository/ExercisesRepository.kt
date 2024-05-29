@@ -90,7 +90,7 @@ class ExercisesRepository @Inject constructor(
         val favs = realmDatabase.getObjectsFromRealm {
             where<ExerciseDTO>().equalTo(FAV_ID, true).findAll()
         }
-        return favs.toExerciseList()
+        return favs.toExerciseList().sortedBy { it.category }
     }
 
     override fun checkExerciseFav(exerciseId: String): Boolean {

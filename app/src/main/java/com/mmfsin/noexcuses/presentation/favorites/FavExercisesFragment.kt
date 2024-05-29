@@ -16,6 +16,7 @@ import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.exercises.exercises.adapter.ExercisesAdapter
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.exercises.exercises.interfaces.IExercisesListener
+import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +38,12 @@ class FavExercisesFragment : BaseFragment<FragmentExercisesBinding, FavExercises
     }
 
     override fun setUI() {
-        (activity as BedRockActivity).setUpToolbar(title = getString(R.string.favs_title))
+        (activity as BedRockActivity).apply {
+            setUpToolbar(title = getString(R.string.favs_title))
+            rightIconToolbar(isVisible = true,
+                icon = R.drawable.ic_reload,
+                action = { viewModel.getFavExercises() })
+        }
     }
 
     override fun setListeners() {}
