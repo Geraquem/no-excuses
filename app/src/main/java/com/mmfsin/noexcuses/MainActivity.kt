@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.nav_default_routines -> openBedRockActivity(R.navigation.nav_graph_default_routines)
                     R.id.nav_my_routines -> openBedRockActivity(R.navigation.nav_graph_my_routines)
                     R.id.nav_exercises -> openBedRockActivity(R.navigation.nav_graph_exercises)
+                    R.id.nav_fav_exercises -> openBedRockActivity(R.navigation.nav_graph_fav_exercises)
                     R.id.nav_notes -> openBedRockActivity(R.navigation.nav_graph_notes)
                 }
                 drawerLayout.closeDrawers()

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">No excuses</string>
+    <string name="app_name_caps">NO EXCUSES</string>
 
     <string name="content_description">image</string>
     <string name="sww">Vaya, algo ha salido mal</string>
@@ -13,6 +14,7 @@
     <string name="drawer_item_default_routines">Rutinas</string>
     <string name="drawer_item_my_routines">Mis entrenamientos</string>
     <string name="drawer_item_exercises">Ejercicios</string>
+    <string name="drawer_item_fav_exercises">Favoritos</string>
     <string name="drawer_item_notes">Notas</string>
     <string name="drawer_version">Versión %s</string>
 

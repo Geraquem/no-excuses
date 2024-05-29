@@ -19,6 +19,7 @@ const val DAYS = "days"
 const val CATEGORY = "category"
 const val ID = "id"
 const val DAY_ID = "dayId"
+const val FAV_ID = "isFav"
 const val DATA_ID = "exerciseDayId"
 const val ROUTINE_DOING_IT = "doingIt"
 

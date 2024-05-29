@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="@string/app_name">
+    <item android:title="@string/app_name_caps">
         <menu>
             <item
                 android:id="@+id/nav_default_routines"
@@ -14,6 +14,10 @@
                 android:id="@+id/nav_exercises"
                 android:icon="@drawable/ic_dumbbell"
                 android:title="@string/drawer_item_exercises" />
+            <item
+                android:id="@+id/nav_fav_exercises"
+                android:icon="@drawable/ic_fav_on"
+                android:title="@string/drawer_item_fav_exercises" />
             <item
                 android:id="@+id/nav_notes"
                 android:icon="@drawable/ic_notes"

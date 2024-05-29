@@ -20,6 +20,7 @@ import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.utils.CATEGORY
 import com.mmfsin.noexcuses.utils.DATA_ID
 import com.mmfsin.noexcuses.utils.DAY_ID
+import com.mmfsin.noexcuses.utils.FAV_ID
 import com.mmfsin.noexcuses.utils.ID
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import io.realm.kotlin.where
@@ -84,6 +85,13 @@ class ExercisesRepository @Inject constructor(
 
     private fun getChExerciseDTO(chExerciseId: String): ChExerciseDTO? =
         realmDatabase.getObjectFromRealm(ChExerciseDTO::class.java, ID, chExerciseId)
+
+    override fun getFavExercises(): List<Exercise> {
+        val favs = realmDatabase.getObjectsFromRealm {
+            where<ExerciseDTO>().equalTo(FAV_ID, true).findAll()
+        }
+        return favs.toExerciseList()
+    }
 
     override fun checkExerciseFav(exerciseId: String): Boolean {
         val exercise = getExerciseById(exerciseId)
