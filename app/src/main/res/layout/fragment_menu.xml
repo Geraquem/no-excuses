@@ -229,6 +229,31 @@
                     tools:listitem="@layout/item_menu_muscular_group" />
 
                 <LinearLayout
+                    android:id="@+id/btn_stretching"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/click_effect"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        style="@style/MediumTextView_Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/menu_stretching_title" />
+
+                    <TextView
+                        style="@style/MediumTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.6"
+                        android:text="@string/menu_stretching_description" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/btn_notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

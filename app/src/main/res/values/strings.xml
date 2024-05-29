@@ -30,6 +30,8 @@
     <string name="menu_my_actual_routine">Actualmente estás haciendo:</string>
     <string name="menu_exercises_title">Ejercicios</string>
     <string name="menu_exercises_description">Echa un vistazo más detallado a todos los ejercicios.</string>
+    <string name="menu_stretching_title">Estiramientos</string>
+    <string name="menu_stretching_description">Estirar antes y después de hacer ejercicio es crucial ya que ayuda a preparar el cuerpo para la actividad física y a recuperarse adecuadamente después de la misma.</string>
     <string name="menu_notes_title">Notas</string>
     <string name="menu_notes_description">Está bien confiar en la memoria de uno mismo, pero siempre es mucho mejor si queda por escrito.</string>
 

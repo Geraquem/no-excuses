@@ -79,6 +79,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                 )
             }
             btnExercises.setOnClickListener { navigateTo(R.navigation.nav_graph_exercises) }
+            btnStretching.setOnClickListener { navigateTo(R.navigation.nav_graph_stretchings) }
             btnNotes.setOnClickListener { navigateTo(R.navigation.nav_graph_notes) }
         }
     }
