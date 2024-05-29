@@ -47,6 +47,7 @@ class ExerciseDialog(private val exerciseId: String) : BaseDialog<DialogExercise
         binding.apply {
             ivClose.setOnClickListener { dismiss() }
             llFav.setOnClickListener { exercise?.let { e -> viewModel.updateFav(e.id) } }
+            llVideo.setOnClickListener { }
         }
     }
 

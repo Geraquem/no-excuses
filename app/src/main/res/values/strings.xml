@@ -37,6 +37,7 @@
 
     <!-- EXERCISE DIALOG -->
     <string name="exercise_dialog_category">Ejercicio de %s</string>
+    <string name="exercise_dialog_video">Vídeo</string>
     <string name="exercise_dialog_description">Descripción</string>
     <string name="exercise_dialog_involved_muscles">Músculos involucrados</string>
 
