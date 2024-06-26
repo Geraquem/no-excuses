@@ -3,12 +3,14 @@ package com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemChExerciseBinding
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
+import com.mmfsin.noexcuses.domain.models.getCategoryColor
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.interfaces.IDefaultExerciseListener
 
 class DefaultExercisesAdapter(
@@ -21,6 +23,7 @@ class DefaultExercisesAdapter(
         private val c = binding.root.context
         fun bind(exercise: DefaultExercise) {
             binding.apply {
+                setCategoryColor(exercise.exercise.category)
                 Glide.with(c).load(exercise.exercise.imageURL).into(image)
                 tvCategory.text = exercise.exercise.category
                 tvName.text = exercise.exercise.name
@@ -28,7 +31,13 @@ class DefaultExercisesAdapter(
                 tvSeries.text = exercise.series
                 tvWait.text = exercise.desc
                 ivHasNotes.isVisible = false
+                llAddData.visibility = View.GONE
             }
+        }
+
+        private fun setCategoryColor(category: String) {
+            val categoryColor = ContextCompat.getColor(c, getCategoryColor(category))
+            binding.tvCategory.background.setTint(categoryColor)
         }
     }
 

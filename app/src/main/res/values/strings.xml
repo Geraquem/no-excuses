@@ -62,7 +62,7 @@
     <string name="routines_toolbar">Rutinas</string>
 
     <!-- MY ROUTINES -->
-    <string name="my_routines_toolbar">Mis rutinas</string>
+    <string name="my_routines_toolbar">Mis entrenamientos</string>
     <string name="my_routines_day">Día</string>
     <string name="my_routines_days">Días</string>
     <string name="my_routines_add_btn">Añadir rutina</string>
