@@ -19,7 +19,11 @@ class StretchingDetailAdapter(
         fun bind(stretching: Stretching, position: Int) {
             binding.apply {
                 tvPosition.text = c.getString(R.string.stretching_position, position.toString())
-                Glide.with(binding.root.context).load(stretching.imageURL).into(image)
+                Glide.with(binding.root.context).load(stretching.image1URL).into(image1)
+                stretching.image2URL?.let { image ->
+                    Glide.with(binding.root.context).load(image).into(image2)
+                    image2.visibility = View.VISIBLE
+                }?:run{ image2.visibility = View.GONE }
                 tvDescription.text = stretching.description
             }
         }

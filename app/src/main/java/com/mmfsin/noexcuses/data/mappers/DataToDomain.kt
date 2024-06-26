@@ -149,7 +149,8 @@ fun List<NoteDTO>.toNoteList() = this.map { it.toNote() }
 /** Stretching */
 
 fun StretchingDTO.toStretching() = Stretching(
-    imageURL = imageURL,
+    image1URL = imageURL,
+    image2URL = image2URL,
     description = description,
     order = order
 )

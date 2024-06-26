@@ -9,5 +9,6 @@ open class StretchingDTO(
     var order: Long = 0,
     var category: String = "",
     var imageURL: String = "",
+    var image2URL: String? = null,
     var description: String = "",
 ) : RealmObject()
