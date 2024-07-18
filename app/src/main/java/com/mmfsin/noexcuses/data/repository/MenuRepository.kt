@@ -58,6 +58,7 @@ class MenuRepository @Inject constructor(
                 latch.countDown()
             } else {
                 saveVersion(newVersion = version)
+                deleteSystemData()
 
                 val fbMGroups = it.child(M_GROUPS)
                 for (child in fbMGroups.children) {
@@ -116,6 +117,14 @@ class MenuRepository @Inject constructor(
     }
 
     private fun getSavedVersion(): Long = getSharedPreferences().getLong(SAVED_VERSION, -1)
+
+    private fun deleteSystemData() {
+        realmDatabase.deleteAllObjects(DefaultExerciseDTO::class.java)
+        realmDatabase.deleteAllObjects(DefaultDayDTO::class.java)
+        realmDatabase.deleteAllObjects(DefaultRoutineDTO::class.java)
+        realmDatabase.deleteAllObjects(ExerciseDTO::class.java)
+        realmDatabase.deleteAllObjects(StretchingDTO::class.java)
+    }
 
     private fun saveMGroups(mGroup: MuscularGroupDTO) = realmDatabase.addObject { mGroup }
     private fun saveExercise(exercise: ExerciseDTO) = realmDatabase.addObject { exercise }

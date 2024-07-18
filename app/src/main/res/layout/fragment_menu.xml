@@ -139,8 +139,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
+                        android:drawablePadding="8dp"
                         android:gravity="center"
-                        android:text="@string/menu_default_routines_title" />
+                        android:text="@string/menu_default_routines_title"
+                        app:drawableStartCompat="@drawable/ic_menu_routine" />
 
                     <TextView
                         style="@style/MediumTextView"
