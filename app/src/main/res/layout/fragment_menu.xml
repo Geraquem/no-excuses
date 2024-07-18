@@ -142,7 +142,7 @@
                         android:drawablePadding="8dp"
                         android:gravity="center"
                         android:text="@string/menu_default_routines_title"
-                        app:drawableStartCompat="@drawable/ic_menu_routine" />
+                        app:drawableStartCompat="@drawable/ic_calendar" />
 
                     <TextView
                         style="@style/MediumTextView"
@@ -167,7 +167,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
-                        android:text="@string/menu_my_routines_title" />
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:text="@string/menu_my_routines_title"
+                        app:drawableStartCompat="@drawable/ic_my_routines" />
 
                     <TextView
                         style="@style/MediumTextView"
@@ -178,20 +181,36 @@
 
                 </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:id="@+id/btn_new_routine"
-                    style="@style/MediumTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/click_effect"
                     android:elevation="2dp"
                     android:gravity="center"
-                    android:paddingVertical="8dp"
-                    android:text="@string/menu_my_routines_new_routine"
-                    android:textAllCaps="true"
-                    android:textSize="14sp" />
+                    android:orientation="horizontal"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        style="@style/MediumTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/menu_my_routines_new_routine"
+                        android:textAllCaps="true"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/content_description"
+                        android:src="@drawable/ic_add" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/btn_exercises"
@@ -207,7 +226,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="6dp"
-                        android:text="@string/menu_exercises_title" />
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:text="@string/menu_exercises_title"
+                        app:drawableStartCompat="@drawable/ic_dumbbell" />
 
                     <TextView
                         style="@style/MediumTextView"
@@ -244,7 +266,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
-                        android:text="@string/menu_stretching_title" />
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:text="@string/menu_stretching_title"
+                        app:drawableStartCompat="@drawable/ic_stretching" />
 
                     <TextView
                         style="@style/MediumTextView"
@@ -269,7 +294,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
-                        android:text="@string/menu_notes_title" />
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:text="@string/menu_notes_title"
+                        app:drawableStartCompat="@drawable/ic_notes" />
 
                     <TextView
                         style="@style/MediumTextView"
