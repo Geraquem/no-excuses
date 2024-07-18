@@ -18,8 +18,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.DialogExerciseBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
-import com.mmfsin.noexcuses.utils.pauseVideo
-import com.mmfsin.noexcuses.utils.playVideo
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +30,6 @@ class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment
     private val viewModel: ExerciseDialogViewModel by viewModels()
 
     private var exercise: Exercise? = null
-    private var videoPlaying: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,6 +81,7 @@ class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment
                 tvCategory.text = getString(R.string.exercise_dialog_category, it.category)
                 tvName.text = it.name
                 Glide.with(requireContext()).load(it.imageURL).into(image)
+                llMuscleWiki.isVisible = it.muscleWikiURL != null
                 tvDescription.text = it.description
                 tvMuscles.text = it.involvedMuscles
                 updateFavIcon(it.isFav)
@@ -95,34 +93,16 @@ class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment
         binding.apply {
             ivClose.setOnClickListener { dismiss() }
             llFav.setOnClickListener { exercise?.let { e -> viewModel.updateFav(e.id) } }
-            llVideo.setOnClickListener { handleVideo() }
-            ivMuscleWiki.setOnClickListener {
-                val url = "https://musclewiki.com/es-es/barbell/male/chest/barbell-bench-press/"
-                val i = Intent(Intent.ACTION_VIEW)
-                i.data = Uri.parse(url)
-                startActivity(i)
-            }
-        }
-    }
 
-    private fun handleVideo() {
-        binding.apply {
-            if (videoPlaying) {
-                youtubePlayerView.pauseVideo()
-                videoPlaying = false
-                tvVideo.text = getString(R.string.exercise_dialog_video)
-            } else {
+            llMuscleWiki.setOnClickListener {
                 exercise?.let { e ->
-//                    e.videoURL?.let { video ->
-                    youtubePlayerView.visibility = View.VISIBLE
-//                        youtubePlayerView.playVideo(video)
-                    youtubePlayerView.playVideo("qetW6R9Jxs4")
-                    videoPlaying = true
-                    tvVideo.text = getString(R.string.exercise_dialog_hide_video)
-//                    }
+                    e.muscleWikiURL?.let { url ->
+                        val intent = Intent(Intent.ACTION_VIEW)
+                        intent.data = Uri.parse(url)
+                        startActivity(intent)
+                    }
                 }
             }
-            youtubePlayerView.isVisible = videoPlaying
         }
     }
 

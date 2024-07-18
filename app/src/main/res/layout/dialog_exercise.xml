@@ -125,7 +125,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ll_video"
+                    android:id="@+id/ll_muscle_wiki"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
@@ -143,36 +143,18 @@
                         android:layout_height="18dp"
                         android:layout_marginEnd="6dp"
                         android:contentDescription="@string/content_description"
-                        android:src="@drawable/ic_youtube" />
+                        android:src="@drawable/ic_musclewiki" />
 
                     <TextView
                         android:id="@+id/tv_video"
                         style="@style/MediumTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/exercise_dialog_video" />
+                        android:text="@string/exercise_dialog_hide_muscle_wiki" />
 
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/iv_muscle_wiki"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="6dp"
-                    android:background="@drawable/click_effect"
-                    android:contentDescription="@string/content_description"
-                    android:elevation="6dp"
-                    android:paddingHorizontal="8dp"
-                    android:src="@drawable/ic_musclewiki" />
-
             </LinearLayout>
-
-            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                android:id="@+id/youtubePlayerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:visibility="gone" />
 
             <TextView
                 style="@style/MediumTextView_Bold"
