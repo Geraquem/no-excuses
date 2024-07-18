@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
     android:background="@drawable/bg_white_box"
     android:clipChildren="false"
     android:clipToPadding="false"
@@ -127,6 +128,7 @@
                     android:id="@+id/ll_video"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
                     android:background="@drawable/click_effect"
                     android:backgroundTint="@color/white"
                     android:elevation="6dp"
@@ -152,7 +154,25 @@
 
                 </LinearLayout>
 
+                <ImageView
+                    android:id="@+id/iv_muscle_wiki"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/click_effect"
+                    android:contentDescription="@string/content_description"
+                    android:elevation="6dp"
+                    android:paddingHorizontal="8dp"
+                    android:src="@drawable/ic_musclewiki" />
+
             </LinearLayout>
+
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/youtubePlayerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone" />
 
             <TextView
                 style="@style/MediumTextView_Bold"

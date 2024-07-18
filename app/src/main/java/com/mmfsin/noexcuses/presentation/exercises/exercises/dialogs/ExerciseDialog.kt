@@ -1,11 +1,14 @@
 package com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs
 
 import android.app.Dialog
+import android.content.Intent
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -15,8 +18,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.DialogExerciseBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.utils.pauseVideo
+import com.mmfsin.noexcuses.utils.playVideo
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment() {
@@ -26,6 +32,7 @@ class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment
     private val viewModel: ExerciseDialogViewModel by viewModels()
 
     private var exercise: Exercise? = null
+    private var videoPlaying: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -88,7 +95,34 @@ class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment
         binding.apply {
             ivClose.setOnClickListener { dismiss() }
             llFav.setOnClickListener { exercise?.let { e -> viewModel.updateFav(e.id) } }
-            llVideo.setOnClickListener { }
+            llVideo.setOnClickListener { handleVideo() }
+            ivMuscleWiki.setOnClickListener {
+                val url = "https://musclewiki.com/es-es/barbell/male/chest/barbell-bench-press/"
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(url)
+                startActivity(i)
+            }
+        }
+    }
+
+    private fun handleVideo() {
+        binding.apply {
+            if (videoPlaying) {
+                youtubePlayerView.pauseVideo()
+                videoPlaying = false
+                tvVideo.text = getString(R.string.exercise_dialog_video)
+            } else {
+                exercise?.let { e ->
+//                    e.videoURL?.let { video ->
+                    youtubePlayerView.visibility = View.VISIBLE
+//                        youtubePlayerView.playVideo(video)
+                    youtubePlayerView.playVideo("qetW6R9Jxs4")
+                    videoPlaying = true
+                    tvVideo.text = getString(R.string.exercise_dialog_hide_video)
+//                    }
+                }
+            }
+            youtubePlayerView.isVisible = videoPlaying
         }
     }
 

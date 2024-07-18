@@ -7,5 +7,6 @@ open class Exercise(
     var name: String,
     var description: String,
     var involvedMuscles: String,
-    var isFav: Boolean
+    var isFav: Boolean,
+    var videoURL: String?
 )
