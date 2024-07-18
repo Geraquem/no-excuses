@@ -43,7 +43,7 @@
     <string name="exercise_dialog_category">Ejercicio de %s</string>
     <string name="exercise_dialog_video">Vídeo</string>
     <string name="exercise_dialog_hide_video">Ocultar</string>
-    <string name="exercise_dialog_hide_muscle_wiki">Ver ejercicio en Muscle Wiki</string>
+    <string name="exercise_dialog_hide_muscle_wiki">Ver en Muscle Wiki</string>
     <string name="exercise_dialog_description">Descripción</string>
     <string name="exercise_dialog_involved_muscles">Músculos involucrados</string>
 

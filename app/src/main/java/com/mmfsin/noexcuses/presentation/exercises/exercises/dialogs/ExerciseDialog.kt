@@ -92,7 +92,7 @@ class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment
     fun setListeners() {
         binding.apply {
             ivClose.setOnClickListener { dismiss() }
-            llFav.setOnClickListener { exercise?.let { e -> viewModel.updateFav(e.id) } }
+            ivFav.setOnClickListener { exercise?.let { e -> viewModel.updateFav(e.id) } }
 
             llMuscleWiki.setOnClickListener {
                 exercise?.let { e ->
@@ -122,11 +122,8 @@ class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment
 
     private fun updateFavIcon(isFav: Boolean) {
         val icon = if (isFav) R.drawable.ic_fav_on else R.drawable.ic_fav_off
-        val favText = if (isFav) R.string.favs_delete else R.string.favs_save
-        binding.apply {
-            ivFav.setImageResource(icon)
-            tvFav.text = getString(favText)
-        }
+//        val favText = if (isFav) R.string.favs_delete else R.string.favs_save
+        binding.ivFav.setImageResource(icon)
     }
 
     private fun error() = activity?.showErrorDialog()
