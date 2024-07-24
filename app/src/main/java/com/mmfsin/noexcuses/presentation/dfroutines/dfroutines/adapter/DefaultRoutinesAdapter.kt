@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
-import com.mmfsin.noexcuses.databinding.ItemRoutineBinding
+import com.mmfsin.noexcuses.databinding.ItemDefaultRoutineBinding
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.interfaces.IDefaultRoutineListener
 
@@ -15,7 +15,7 @@ class DefaultRoutinesAdapter(
 ) : RecyclerView.Adapter<DefaultRoutinesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemRoutineBinding.bind(view)
+        private val binding = ItemDefaultRoutineBinding.bind(view)
         private val c = binding.root.context
         fun bind(defaultRoutine: Routine, listener: IDefaultRoutineListener) {
             binding.apply {
@@ -34,7 +34,8 @@ class DefaultRoutinesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_routine, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_default_routine, parent, false)
         )
     }
 
