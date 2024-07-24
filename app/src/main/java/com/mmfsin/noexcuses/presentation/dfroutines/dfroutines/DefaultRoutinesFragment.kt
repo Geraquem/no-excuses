@@ -13,7 +13,7 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentDefaultRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.Routine
-import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.DefaultDaysDialog
+import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.DefaultDaysSheet
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.DefaultRoutinesFragmentDirections.Companion.actionDefaultRoutinesToDefaultExercises
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.adapter.DefaultRoutinesAdapter
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.interfaces.IDefaultRoutineListener
@@ -78,7 +78,7 @@ class DefaultRoutinesFragment :
 
     override fun onRoutineClick(id: String) {
         (activity as BedRockActivity).routineOpened = id
-        val dialog = DefaultDaysDialog(routineId = id, this@DefaultRoutinesFragment)
+        val dialog = DefaultDaysSheet(routineId = id, this@DefaultRoutinesFragment)
         activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
 

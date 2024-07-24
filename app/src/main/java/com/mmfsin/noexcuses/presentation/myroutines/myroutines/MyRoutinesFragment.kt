@@ -16,7 +16,7 @@ import com.mmfsin.noexcuses.databinding.FragmentMyRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
-import com.mmfsin.noexcuses.presentation.myroutines.mdays.DaysDialog
+import com.mmfsin.noexcuses.presentation.myroutines.mdays.DaysSheet
 import com.mmfsin.noexcuses.presentation.myroutines.myroutines.MyRoutinesFragmentDirections.Companion.actionRoutinesToMexercises
 import com.mmfsin.noexcuses.presentation.myroutines.myroutines.adapter.MyRoutinesAdapter
 import com.mmfsin.noexcuses.presentation.myroutines.myroutines.dialogs.MyRoutineAddDialog
@@ -126,7 +126,7 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
 
     override fun onRoutineClick(id: String) {
         (activity as BedRockActivity).routineOpened = id
-        val dialog = DaysDialog(routineId = id, this@MyRoutinesFragment)
+        val dialog = DaysSheet(routineId = id, this@MyRoutinesFragment)
         activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
 

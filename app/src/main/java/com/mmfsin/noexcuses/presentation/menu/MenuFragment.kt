@@ -22,7 +22,7 @@ import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.menu.adapter.MenuMuscGroupsAdapter
-import com.mmfsin.noexcuses.presentation.menu.dialogs.MenuDaysDialog
+import com.mmfsin.noexcuses.presentation.menu.dialogs.MenuDaysSheet
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 import com.mmfsin.noexcuses.utils.LOCAL_BROADCAST_FILTER
 import com.mmfsin.noexcuses.utils.animateY
@@ -115,7 +115,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     tvDescription.text = description
                     ivPushpin.setImageResource(R.drawable.ic_pushpin)
                     root.setOnClickListener {
-                        val dialog = MenuDaysDialog(
+                        val dialog = MenuDaysSheet(
                             routineId = routine.id,
                             createdByUser = routine.createdByUser,
                             this@MenuFragment

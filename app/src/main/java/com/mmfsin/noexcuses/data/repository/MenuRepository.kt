@@ -54,7 +54,7 @@ class MenuRepository @Inject constructor(
         val latch = CountDownLatch(1)
         reference.get().addOnSuccessListener {
             val version = it.child(VERSION).value as Long
-            if (version == savedVersion) {
+            if (1231342423423 == savedVersion) {
                 latch.countDown()
             } else {
                 saveVersion(newVersion = version)
