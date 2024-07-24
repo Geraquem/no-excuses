@@ -60,7 +60,7 @@ class MenuDaysSheet(
                 val behavior = BottomSheetBehavior.from(it)
 
                 val metrics = Resources.getSystem().displayMetrics
-                val maxHeight = (metrics.heightPixels * 0.92).toInt()
+                val maxHeight = (metrics.heightPixels * 0.95).toInt()
                 it.layoutParams.height = maxHeight
                 behavior.peekHeight = maxHeight
                 it.requestLayout()
