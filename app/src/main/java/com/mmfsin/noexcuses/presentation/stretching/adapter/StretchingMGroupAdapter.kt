@@ -3,11 +3,13 @@ package com.mmfsin.noexcuses.presentation.stretching.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemStretchingMgroupBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.presentation.stretching.interfaces.IStretchingListener
+import com.mmfsin.noexcuses.utils.CATEGORY
 
 class StretchingMGroupAdapter(
     private val mgroups: List<MuscularGroup>,
@@ -20,14 +22,7 @@ class StretchingMGroupAdapter(
         fun bind(mgroup: MuscularGroup) {
             binding.apply {
                 tvName.text = mgroup.name
-
-                val visibility = when (mgroup.id) {
-                    c.getString(R.string.mgroups_forearm),
-                    c.getString(R.string.mgroups_cardio) -> View.GONE
-
-                    else -> View.VISIBLE
-                }
-                itemView.visibility = visibility
+                if (mgroup.name == c.getString(R.string.mgroups_cardio)) itemView.isVisible = false
             }
         }
     }
