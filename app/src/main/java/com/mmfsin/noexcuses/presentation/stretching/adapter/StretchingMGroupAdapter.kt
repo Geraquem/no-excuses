@@ -9,7 +9,6 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemStretchingMgroupBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.presentation.stretching.interfaces.IStretchingListener
-import com.mmfsin.noexcuses.utils.CATEGORY
 
 class StretchingMGroupAdapter(
     private val mgroups: List<MuscularGroup>,
