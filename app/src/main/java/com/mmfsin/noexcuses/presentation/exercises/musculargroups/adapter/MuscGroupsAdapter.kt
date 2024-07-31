@@ -33,7 +33,7 @@ class MuscGroupsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(groups[position])
-        holder.itemView.setOnClickListener { listener.onMGroupClick(groups[position].name) }
+        holder.itemView.setOnClickListener { listener.onMGroupClick(groups[position].id) }
     }
 
     override fun getItemCount(): Int = groups.size

@@ -28,6 +28,7 @@ import java.util.Locale
 
 /** MuscularGroup */
 fun MuscularGroupDTO.toMuscularGroup() = MuscularGroup(
+    id = id,
     name = name,
     imageURL = imageURL
 )

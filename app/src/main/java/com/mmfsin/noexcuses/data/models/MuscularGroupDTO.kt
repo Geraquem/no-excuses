@@ -5,6 +5,7 @@ import io.realm.annotations.PrimaryKey
 
 open class MuscularGroupDTO(
     @PrimaryKey
+    var id: String = "",
     var name: String = "",
     var imageURL: String = "",
     var order: Long = 0,

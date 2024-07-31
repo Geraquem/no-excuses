@@ -38,6 +38,7 @@
     <!-- MUSCULAR GROUPS -->
     <string name="mgroups_toolbar">Grupos musculares</string>
     <string name="mgroups_cardio">cardio</string>
+    <string name="mgroups_forearm">antebrazo</string>
 
     <!-- EXERCISE DIALOG -->
     <string name="exercise_dialog_category">Ejercicio de %s</string>
