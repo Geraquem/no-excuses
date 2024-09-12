@@ -46,7 +46,7 @@ class MenuMuscGroupsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val muscularGroup = groups[position]
         holder.bind(muscularGroup, position == itemCount - 1)
-        holder.itemView.setOnClickListener { listener.onMenuMuscGroupClick(muscularGroup.name) }
+        holder.itemView.setOnClickListener { listener.onMenuMuscGroupClick(muscularGroup.id) }
     }
 
     override fun getItemCount(): Int = groups.size

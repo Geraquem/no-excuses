@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
     android:paddingHorizontal="8dp"
-    android:paddingVertical="6dp">
+    android:paddingVertical="2dp">
 
     <TextView
         android:id="@+id/tv_serie"

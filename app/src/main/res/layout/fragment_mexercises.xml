@@ -31,7 +31,7 @@
         android:clipToPadding="false"
         android:paddingHorizontal="12dp"
         android:paddingTop="8dp"
-        android:paddingBottom="64dp"
+        android:paddingBottom="42dp"
         app:layout_constraintBottom_toTopOf="@id/cl_add"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -51,7 +51,8 @@
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UseCompoundDrawables">
+        tools:ignore="UseCompoundDrawables"
+        tools:visibility="gone">
 
         <TextView
             style="@style/MediumTextView"

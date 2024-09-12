@@ -18,8 +18,10 @@ fun getCategoryColor(category: String): Int {
         "pecho" -> R.color.chest_color
         "biceps" -> R.color.biceps_color
         "triceps" -> R.color.triceps_color
+        "antebrazo" -> R.color.forearm_color
         "espalda" -> R.color.back_color
         "pierna" -> R.color.legs_color
+        "gluteos" -> R.color.glutes_color
         "core" -> R.color.core_color
         "cardio" -> R.color.cardio_color
         else -> R.color.white

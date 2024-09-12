@@ -36,8 +36,10 @@
     <color name="chest_color">#CDE1FF</color>
     <color name="biceps_color">#E3C5FF</color>
     <color name="triceps_color">#FFE0AB</color>
-    <color name="back_color">#ECC2AA</color>
+    <color name="forearm_color">#ADDCA6</color>
+    <color name="back_color">#DCB29A</color>
     <color name="legs_color">#AEF8E3</color>
+    <color name="glutes_color">#FFCCA5</color>
     <color name="core_color">#BCBCBC</color>
     <color name="cardio_color">#EF9B9B</color>
 </resources>
