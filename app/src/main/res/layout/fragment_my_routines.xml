@@ -8,20 +8,6 @@
     android:clipChildren="false"
     android:clipToPadding="false">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_routines"
         style="@style/scroll_no_effects"
@@ -29,11 +15,12 @@
         android:layout_height="0dp"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:paddingTop="16dp"
+        android:paddingTop="8dp"
+        android:paddingHorizontal="12dp"
         android:paddingBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/gl_left"
-        app:layout_constraintRight_toRightOf="@id/gl_right"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="2"
         tools:listitem="@layout/item_routine" />
@@ -52,8 +39,8 @@
         android:textAllCaps="true"
         android:textSize="18sp"
         app:drawableBottomCompat="@drawable/ic_sad_face"
-        app:layout_constraintLeft_toLeftOf="@id/gl_left"
-        app:layout_constraintRight_toRightOf="@id/gl_right"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
