@@ -7,7 +7,7 @@ import com.mmfsin.noexcuses.domain.models.MuscularGroup
 
 interface IExercisesRepository {
     fun getMuscularGroups(): List<MuscularGroup>
-    fun getExercisesByMuscularGroup(mGroup: String): List<Exercise>
+    suspend fun getExercisesByMuscularGroup(mGroup: String): List<Exercise>
     fun getExerciseById(id: String): Exercise?
 
     fun getDayExercises(dayId: String): List<CompactExercise>

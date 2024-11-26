@@ -12,10 +12,8 @@ import com.mmfsin.noexcuses.data.models.DayDTO
 import com.mmfsin.noexcuses.data.models.DefaultDayDTO
 import com.mmfsin.noexcuses.data.models.DefaultExerciseDTO
 import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
-import com.mmfsin.noexcuses.data.models.ExerciseDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
-import com.mmfsin.noexcuses.data.models.StretchingDTO
 import com.mmfsin.noexcuses.domain.interfaces.IMenuRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Day
@@ -30,7 +28,9 @@ import com.mmfsin.noexcuses.utils.ROUTINES
 import com.mmfsin.noexcuses.utils.ROUTINE_DOING_IT
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import com.mmfsin.noexcuses.utils.SAVED_VERSION
-import com.mmfsin.noexcuses.utils.STRETCHING
+import com.mmfsin.noexcuses.utils.SERVER_DEFAULT_ROUTINES
+import com.mmfsin.noexcuses.utils.SERVER_EXERCISES
+import com.mmfsin.noexcuses.utils.SERVER_STRETCHING
 import com.mmfsin.noexcuses.utils.VERSION
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.realm.kotlin.where
@@ -54,8 +54,7 @@ class MenuRepository @Inject constructor(
         val latch = CountDownLatch(1)
         reference.get().addOnSuccessListener {
             val version = it.child(VERSION).value as Long
-//            if (version == savedVersion) {
-            if (false) {
+            if (version == savedVersion) {
                 latch.countDown()
             } else {
                 saveVersion(newVersion = version)
@@ -67,38 +66,24 @@ class MenuRepository @Inject constructor(
                         ?.let { mGroup -> saveMGroups(mGroup) }
                 }
 
-                val fbExercises = it.child(EXERCISES)
-                for (child in fbExercises.children) {
-                    for (exercise in child.children) {
-                        exercise.getValue(ExerciseDTO::class.java)?.let { e -> saveExercise(e) }
-                    }
-                }
+//                val defaultRoutines = it.child(DEFAULT_ROUTINES)
+//
+//                val routines = defaultRoutines.child(ROUTINES)
+//                for (routine in routines.children) {
+//                    routine.getValue(DefaultRoutineDTO::class.java)
+//                        ?.let { r -> saveDefaultRoutine(r) }
+//                }
+//
+//                val days = defaultRoutines.child(DAYS)
+//                for (day in days.children) {
+//                    day.getValue(DefaultDayDTO::class.java)?.let { d -> saveDefaultDay(d) }
+//                }
 
-                val defaultRoutines = it.child(DEFAULT_ROUTINES)
-
-                val routines = defaultRoutines.child(ROUTINES)
-                for (routine in routines.children) {
-                    routine.getValue(DefaultRoutineDTO::class.java)
-                        ?.let { r -> saveDefaultRoutine(r) }
-                }
-
-                val days = defaultRoutines.child(DAYS)
-                for (day in days.children) {
-                    day.getValue(DefaultDayDTO::class.java)?.let { d -> saveDefaultDay(d) }
-                }
-
-                val exercises = defaultRoutines.child(EXERCISES)
-                for (exercise in exercises.children) {
-                    exercise.getValue(DefaultExerciseDTO::class.java)
-                        ?.let { e -> saveDefaultExercise(e) }
-                }
-
-                val stretching = it.child(STRETCHING)
-                for (child in stretching.children) {
-                    for (stretc in child.children) {
-                        stretc.getValue(StretchingDTO::class.java)?.let { s -> saveStretching(s) }
-                    }
-                }
+//                val exercises = defaultRoutines.child(EXERCISES)
+//                for (exercise in exercises.children) {
+//                    exercise.getValue(DefaultExerciseDTO::class.java)
+//                        ?.let { e -> saveDefaultExercise(e) }
+//                }
 
                 latch.countDown()
             }
@@ -120,22 +105,22 @@ class MenuRepository @Inject constructor(
     private fun getSavedVersion(): Long = getSharedPreferences().getLong(SAVED_VERSION, -1)
 
     private fun deleteSystemData() {
-        realmDatabase.deleteAllObjects(DefaultExerciseDTO::class.java)
-        realmDatabase.deleteAllObjects(DefaultDayDTO::class.java)
-        realmDatabase.deleteAllObjects(DefaultRoutineDTO::class.java)
-        realmDatabase.deleteAllObjects(ExerciseDTO::class.java)
-        realmDatabase.deleteAllObjects(StretchingDTO::class.java)
+        val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, MODE_PRIVATE)
+        sharedPrefs.edit().apply {
+            putBoolean(SERVER_EXERCISES, true)
+            putBoolean(SERVER_DEFAULT_ROUTINES, true)
+            putBoolean(SERVER_STRETCHING, true)
+            apply()
+        }
     }
 
     private fun saveMGroups(mGroup: MuscularGroupDTO) = realmDatabase.addObject { mGroup }
-    private fun saveExercise(exercise: ExerciseDTO) = realmDatabase.addObject { exercise }
     private fun saveDefaultRoutine(routine: DefaultRoutineDTO) = realmDatabase.addObject { routine }
 
     private fun saveDefaultDay(day: DefaultDayDTO) = realmDatabase.addObject { day }
     private fun saveDefaultExercise(exercise: DefaultExerciseDTO) =
         realmDatabase.addObject { exercise }
 
-    private fun saveStretching(stretching: StretchingDTO) = realmDatabase.addObject { stretching }
 
     override fun isFirstTime(): Boolean {
         val firstTime = getSharedPreferences().getBoolean(FIRST_TIME, true)

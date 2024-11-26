@@ -1,5 +1,8 @@
 package com.mmfsin.noexcuses.data.repository
 
+import android.content.Context
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.mmfsin.noexcuses.data.mappers.toChExercise
 import com.mmfsin.noexcuses.data.mappers.toChExerciseDTO
 import com.mmfsin.noexcuses.data.mappers.toCompactExercise
@@ -20,13 +23,21 @@ import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.utils.CATEGORY
 import com.mmfsin.noexcuses.utils.DATA_ID
 import com.mmfsin.noexcuses.utils.DAY_ID
+import com.mmfsin.noexcuses.utils.EXERCISES
 import com.mmfsin.noexcuses.utils.FAV_ID
 import com.mmfsin.noexcuses.utils.ID
+import com.mmfsin.noexcuses.utils.MY_SHARED_PREFS
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
+import com.mmfsin.noexcuses.utils.SERVER_EXERCISES
+import dagger.hilt.android.qualifiers.ApplicationContext
 import io.realm.kotlin.where
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.util.concurrent.CountDownLatch
 import javax.inject.Inject
 
 class ExercisesRepository @Inject constructor(
+    @ApplicationContext val context: Context,
     private val realmDatabase: IRealmDatabase
 ) : IExercisesRepository {
 
@@ -36,13 +47,46 @@ class ExercisesRepository @Inject constructor(
         else emptyList()
     }
 
-    override fun getExercisesByMuscularGroup(mGroup: String): List<Exercise> {
-        val exercises = realmDatabase.getObjectsFromRealm {
-            where<ExerciseDTO>().equalTo(CATEGORY, mGroup).findAll()
+    override suspend fun getExercisesByMuscularGroup(mGroup: String): List<Exercise> {
+        val latch = CountDownLatch(1)
+        val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
+
+        if (sharedPrefs.getBoolean(SERVER_EXERCISES, true)) {
+            realmDatabase.deleteAllObjects(ExerciseDTO::class.java)
+            val exercises = mutableListOf<ExerciseDTO>()
+            Firebase.database.reference.child(EXERCISES).get().addOnSuccessListener {
+                for (mgroup in it.children) {
+                    for (child in mgroup.children) {
+                        child.getValue(ExerciseDTO::class.java)?.let { exerciseDTO ->
+                            saveExerciseInRealm(exerciseDTO)
+                            exercises.add(exerciseDTO)
+                        }
+                    }
+                }
+                sharedPrefs.edit().apply {
+                    putBoolean(SERVER_EXERCISES, false)
+                    apply()
+                }
+                latch.countDown()
+
+            }.addOnFailureListener {
+                latch.countDown()
+            }
+
+            withContext(Dispatchers.IO) { latch.await() }
+            val selection = exercises.filter { it.category == mGroup }.sortedBy { it.order }
+            return selection.toExerciseList()
+
+        } else {
+            val exercises = realmDatabase.getObjectsFromRealm {
+                where<ExerciseDTO>().equalTo(CATEGORY, mGroup).findAll()
+            }
+            return if (exercises.isNotEmpty()) exercises.sortedBy { it.order }.toExerciseList()
+            else emptyList()
         }
-        return if (exercises.isNotEmpty()) exercises.sortedBy { it.order }.toExerciseList()
-        else emptyList()
     }
+
+    private fun saveExerciseInRealm(exercise: ExerciseDTO) = realmDatabase.addObject { exercise }
 
     override fun getExerciseById(id: String): Exercise? {
         val exercises = realmDatabase.getObjectFromRealm(ExerciseDTO::class.java, ID, id)
