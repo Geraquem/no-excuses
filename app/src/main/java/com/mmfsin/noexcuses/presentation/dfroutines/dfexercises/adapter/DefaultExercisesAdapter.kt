@@ -50,7 +50,7 @@ class DefaultExercisesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val exercise = exercises[position]
         holder.bind(exercise)
-        holder.itemView.setOnClickListener { listener.onDefaultExerciseClick(exercise.id) }
+        holder.itemView.setOnClickListener { listener.seeExerciseButtonClick(exercise.exercise.id) }
     }
 
     override fun getItemCount(): Int = exercises.size

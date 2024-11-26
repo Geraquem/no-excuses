@@ -14,7 +14,6 @@ import com.mmfsin.noexcuses.databinding.FragmentMexercisesBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter.DefaultExercisesAdapter
-import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.dialogs.DfExerciseDialog
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.interfaces.IDefaultExerciseListener
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.adapter.MExercisesAdapter
@@ -120,15 +119,6 @@ class ActualExercisesFromMenuFragment :
                 else -> return null
             }
         } else return null
-    }
-
-    override fun onDefaultExerciseClick(id: String) {
-        activity?.showFragmentDialog(
-            DfExerciseDialog.newInstance(
-                id,
-                this@ActualExercisesFromMenuFragment
-            )
-        )
     }
 
     override fun onExerciseClick(chExerciseId: String) {

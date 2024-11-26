@@ -64,6 +64,11 @@
     <!-- ROUTINES -->
     <string name="routines_toolbar">Rutinas</string>
 
+    <!-- DEFAULT ROUTINES -->
+    <string name="df_routines_series">Series/Reps:</string>
+    <string name="df_routines_rest">Descanso</string>
+    <string name="df_routines_rest_min">min/Serie </string>
+
     <!-- MY ROUTINES -->
     <string name="my_routines_toolbar">Mis entrenamientos</string>
     <string name="my_routines_day">Día</string>

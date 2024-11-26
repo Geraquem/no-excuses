@@ -12,7 +12,6 @@ import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentDefaultExercisesBinding
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter.DefaultExercisesAdapter
-import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.dialogs.DfExerciseDialog
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.interfaces.IDefaultExerciseListener
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.utils.DAY_ID
@@ -64,15 +63,6 @@ class DefaultExercisesFragment :
                 adapter = DefaultExercisesAdapter(exercises, this@DefaultExercisesFragment)
             }
         }
-    }
-
-    override fun onDefaultExerciseClick(id: String) {
-        activity?.showFragmentDialog(
-            DfExerciseDialog.newInstance(
-                id,
-                this@DefaultExercisesFragment
-            )
-        )
     }
 
     override fun seeExerciseButtonClick(id: String) {
