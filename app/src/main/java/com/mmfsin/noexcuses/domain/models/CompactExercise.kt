@@ -11,7 +11,7 @@ open class CompactExercise(
     var series: Int?,
     var time: String?,
     var hasNotes: Boolean,
-    val position: Int
+    var position: Int
 )
 
 fun getCategoryColor(category: String): Int {

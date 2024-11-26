@@ -105,15 +105,15 @@ class ExercisesRepository @Inject constructor(
                 ex?.let { e -> resultList.add(exercise.toCompactExercise(e)) }
             }
         }
-        return resultList
+        return resultList.sortedBy { it.position }
     }
 
     override fun addChExercise(chExercise: ChExercise) {
         val day = getDayDTO(chExercise.dayId)
         var exercisePos = 0
         day?.let {
-            exercisePos = it.exercises + 1
             it.exercises++
+            exercisePos = it.exercises
             realmDatabase.addObject { it }
         }
         realmDatabase.addObject { chExercise.toChExerciseDTO(exercisePos) }
@@ -121,6 +121,16 @@ class ExercisesRepository @Inject constructor(
 
     override fun editChExercise(chExercise: ChExercise) {
         realmDatabase.addObject { chExercise.toChExerciseDTO(null) }
+    }
+
+    override fun moveChExercise(exercises: List<String>) {
+        exercises.forEachIndexed { i, id ->
+            val exercise = realmDatabase.getObjectFromRealm(ChExerciseDTO::class.java, ID, id)
+            exercise?.let { e ->
+                e.position = i
+                realmDatabase.addObject { e }
+            }
+        }
     }
 
     private fun getDayDTO(id: String): DayDTO? =

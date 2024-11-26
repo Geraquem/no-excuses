@@ -12,9 +12,10 @@ import com.mmfsin.noexcuses.databinding.ItemChExerciseBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.getCategoryColor
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExerciseListener
+import java.util.Collections
 
 class MExercisesAdapter(
-    private val exercises: List<CompactExercise>,
+    private val exercises: MutableList<CompactExercise>,
     private val listener: IMExerciseListener
 ) : RecyclerView.Adapter<MExercisesAdapter.ViewHolder>() {
 
@@ -26,8 +27,7 @@ class MExercisesAdapter(
                 setCategoryColor(exercise.category)
                 Glide.with(binding.root.context).load(exercise.imageURL).into(image)
                 tvCategory.text = exercise.category
-//                tvName.text = exercise.name
-                tvName.text = exercise.position.toString()
+                tvName.text = exercise.name
 
                 val series = exercise.series
                 series?.let {
@@ -74,11 +74,16 @@ class MExercisesAdapter(
         holder.itemView.setOnClickListener {
             exercises[position].chExerciseId?.let { id -> listener.onExerciseClick(id) }
         }
-        holder.itemView.setOnLongClickListener {
-            exercises[position].chExerciseId?.let { id -> listener.editExercise(id) }
-            true
-        }
     }
 
     override fun getItemCount(): Int = exercises.size
+
+    fun swapItems(from: Int, to: Int) = Collections.swap(exercises, from, to)
+    fun getItemIdAt(position: Int): String? = exercises[position].chExerciseId
+
+    fun getNewSortedList(): MutableList<String> {
+        val result = mutableListOf<String>()
+        exercises.forEach { it.chExerciseId?.let { id -> result.add(it.chExerciseId) } }
+        return result
+    }
 }

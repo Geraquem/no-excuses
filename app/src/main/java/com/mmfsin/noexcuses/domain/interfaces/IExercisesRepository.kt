@@ -14,6 +14,7 @@ interface IExercisesRepository {
     fun getChExerciseById(chExerciseId: String): ChExercise?
     fun addChExercise(chExercise: ChExercise)
     fun editChExercise(chExercise: ChExercise)
+    fun moveChExercise(exercises: List<String>)
     fun deleteChExercise(chExerciseId: String)
 
     fun getFavExercises(): List<Exercise>

@@ -112,7 +112,7 @@ class ActualExercisesFromMenuFragment :
                 is CompactExercise -> {
                     val dfExercises = exercises.mapNotNull { it as? CompactExercise }
                     return MExercisesAdapter(
-                        dfExercises,
+                        dfExercises.toMutableList(),
                         this@ActualExercisesFromMenuFragment
                     )
                 }

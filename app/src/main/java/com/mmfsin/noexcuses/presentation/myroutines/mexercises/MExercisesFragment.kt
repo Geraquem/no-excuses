@@ -5,10 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.DOWN
+import androidx.recyclerview.widget.ItemTouchHelper.END
+import androidx.recyclerview.widget.ItemTouchHelper.START
+import androidx.recyclerview.widget.ItemTouchHelper.SimpleCallback
+import androidx.recyclerview.widget.ItemTouchHelper.UP
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
@@ -86,7 +94,11 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
         binding.apply {
             rvExercises.apply {
                 layoutManager = LinearLayoutManager(mContext)
-                adapter = MExercisesAdapter(exercises, this@MExercisesFragment)
+                adapter = MExercisesAdapter(
+                    exercises.toMutableList(),
+                    this@MExercisesFragment
+                )
+                itemTouchHelper.attachToRecyclerView(this)
             }
             rvExercises.isVisible = exercises.isNotEmpty()
             clEmpty.isVisible = exercises.isEmpty()
@@ -127,5 +139,41 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+    }
+
+    private val itemTouchHelper by lazy {
+        val simpleItemTouchHelper = object : SimpleCallback(UP or DOWN or START or END, 0) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                val adapter = recyclerView.adapter as MExercisesAdapter
+                val from = viewHolder.adapterPosition
+                val to = target.adapterPosition
+
+                adapter.swapItems(from, to)
+                adapter.notifyItemMoved(from, to)
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {}
+
+            override fun clearView(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ) {
+                super.clearView(recyclerView, viewHolder)
+//                val finalPos = viewHolder.adapterPosition
+                val adapter = recyclerView.adapter as MExercisesAdapter
+//                val exerciseId = adapter.getItemIdAt(finalPos)
+//                exerciseId?.let { id -> viewModel.moveChExercise(id, finalPos) }
+
+                val list = adapter.getNewSortedList()
+                viewModel.moveChExercise(list)
+            }
+        }
+
+        ItemTouchHelper(simpleItemTouchHelper)
     }
 }
