@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -164,16 +163,11 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
                 viewHolder: RecyclerView.ViewHolder
             ) {
                 super.clearView(recyclerView, viewHolder)
-//                val finalPos = viewHolder.adapterPosition
                 val adapter = recyclerView.adapter as MExercisesAdapter
-//                val exerciseId = adapter.getItemIdAt(finalPos)
-//                exerciseId?.let { id -> viewModel.moveChExercise(id, finalPos) }
-
-                val list = adapter.getNewSortedList()
-                viewModel.moveChExercise(list)
+                val newSortedlist = adapter.getNewSortedList()
+                viewModel.moveChExercise(newSortedlist)
             }
         }
-
         ItemTouchHelper(simpleItemTouchHelper)
     }
 }
