@@ -5,7 +5,7 @@ import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.domain.models.Routine
 
 interface IDefaultRoutinesRepository {
-    fun getDefaultRoutines(): List<Routine>
+    suspend fun getDefaultRoutines(): List<Routine>
     fun getDefaultRoutineById(id: String): Routine?
     fun updateRoutinePushPin(id: String)
 

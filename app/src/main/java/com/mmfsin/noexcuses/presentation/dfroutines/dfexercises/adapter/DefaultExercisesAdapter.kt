@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemChExerciseBinding
+import com.mmfsin.noexcuses.databinding.ItemDfExerciseBinding
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.domain.models.getCategoryColor
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.interfaces.IDefaultExerciseListener
@@ -19,7 +20,7 @@ class DefaultExercisesAdapter(
 ) : RecyclerView.Adapter<DefaultExercisesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemChExerciseBinding.bind(view)
+        private val binding = ItemDfExerciseBinding.bind(view)
         private val c = binding.root.context
         fun bind(exercise: DefaultExercise) {
             binding.apply {
@@ -28,10 +29,8 @@ class DefaultExercisesAdapter(
                 tvCategory.text = exercise.exercise.category
                 tvName.text = exercise.exercise.name
 
-                tvSeries.text = exercise.series
+                tvSeries.text = exercise.reps
                 tvWait.text = exercise.desc
-                ivHasNotes.isVisible = false
-                llAddData.visibility = View.GONE
             }
         }
 
@@ -43,7 +42,7 @@ class DefaultExercisesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_ch_exercise, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_df_exercise, parent, false)
         )
     }
 

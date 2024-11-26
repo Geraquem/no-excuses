@@ -66,25 +66,6 @@ class MenuRepository @Inject constructor(
                         ?.let { mGroup -> saveMGroups(mGroup) }
                 }
 
-//                val defaultRoutines = it.child(DEFAULT_ROUTINES)
-//
-//                val routines = defaultRoutines.child(ROUTINES)
-//                for (routine in routines.children) {
-//                    routine.getValue(DefaultRoutineDTO::class.java)
-//                        ?.let { r -> saveDefaultRoutine(r) }
-//                }
-//
-//                val days = defaultRoutines.child(DAYS)
-//                for (day in days.children) {
-//                    day.getValue(DefaultDayDTO::class.java)?.let { d -> saveDefaultDay(d) }
-//                }
-
-//                val exercises = defaultRoutines.child(EXERCISES)
-//                for (exercise in exercises.children) {
-//                    exercise.getValue(DefaultExerciseDTO::class.java)
-//                        ?.let { e -> saveDefaultExercise(e) }
-//                }
-
                 latch.countDown()
             }
         }.addOnFailureListener {
@@ -115,12 +96,6 @@ class MenuRepository @Inject constructor(
     }
 
     private fun saveMGroups(mGroup: MuscularGroupDTO) = realmDatabase.addObject { mGroup }
-    private fun saveDefaultRoutine(routine: DefaultRoutineDTO) = realmDatabase.addObject { routine }
-
-    private fun saveDefaultDay(day: DefaultDayDTO) = realmDatabase.addObject { day }
-    private fun saveDefaultExercise(exercise: DefaultExerciseDTO) =
-        realmDatabase.addObject { exercise }
-
 
     override fun isFirstTime(): Boolean {
         val firstTime = getSharedPreferences().getBoolean(FIRST_TIME, true)

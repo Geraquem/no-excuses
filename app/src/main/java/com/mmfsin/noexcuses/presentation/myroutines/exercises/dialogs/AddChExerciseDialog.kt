@@ -3,7 +3,6 @@ package com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -12,7 +11,6 @@ import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogChExerciseAddBinding
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.Exercise
-import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.adapter.AddChExerciseAdapter
@@ -20,7 +18,6 @@ import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.interfaces
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.interfaces.IChExercisesListener
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
-import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
