@@ -6,7 +6,7 @@ import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.Data
 import io.realm.RealmList
 
-fun ChExercise.toChExerciseDTO() =
+fun ChExercise.toChExerciseDTO(actualPos: Int?) =
     ChExerciseDTO(
         id,
         routineId,
@@ -14,7 +14,8 @@ fun ChExercise.toChExerciseDTO() =
         exerciseId,
         data = setExerciseData(this.data),
         time,
-        notes
+        notes,
+        position = actualPos ?: this.position
     )
 
 fun setExerciseData(data: List<Data>?): RealmList<DataDTO>? {

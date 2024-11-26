@@ -26,7 +26,8 @@ class MExercisesAdapter(
                 setCategoryColor(exercise.category)
                 Glide.with(binding.root.context).load(exercise.imageURL).into(image)
                 tvCategory.text = exercise.category
-                tvName.text = exercise.name
+//                tvName.text = exercise.name
+                tvName.text = exercise.position.toString()
 
                 val series = exercise.series
                 series?.let {
@@ -46,10 +47,12 @@ class MExercisesAdapter(
 
                 val addDataVisible = series == 0 && time == null && !exercise.hasNotes
                 llData.isVisible = !addDataVisible
+                ivEdit.isVisible = !addDataVisible
                 llAddData.isVisible = addDataVisible
 
                 exercise.chExerciseId?.let { id ->
-                    llAddData.setOnClickListener { listener.onExerciseLongClick(id) }
+                    llAddData.setOnClickListener { listener.editExercise(id) }
+                    ivEdit.setOnClickListener { listener.editExercise(id) }
                 }
             }
         }
@@ -72,7 +75,7 @@ class MExercisesAdapter(
             exercises[position].chExerciseId?.let { id -> listener.onExerciseClick(id) }
         }
         holder.itemView.setOnLongClickListener {
-            exercises[position].chExerciseId?.let { id -> listener.onExerciseLongClick(id) }
+            exercises[position].chExerciseId?.let { id -> listener.editExercise(id) }
             true
         }
     }

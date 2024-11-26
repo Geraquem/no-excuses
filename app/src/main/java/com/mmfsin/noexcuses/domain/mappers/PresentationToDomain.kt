@@ -13,7 +13,8 @@ fun createChExercise(idGroup: IdGroup, dataChExercise: DataChExercise): ChExerci
         exerciseId = idGroup.exerciseId,
         data = dataChExercise.dataList,
         time = dataChExercise.time,
-        notes = dataChExercise.notes
+        notes = dataChExercise.notes,
+        position = 0
     )
 }
 
@@ -25,6 +26,7 @@ fun editChExercise(chExercise: ChExercise, dataChExercise: DataChExercise): ChEx
         exerciseId = chExercise.exerciseId,
         data = dataChExercise.dataList,
         time = dataChExercise.time,
-        notes = dataChExercise.notes
+        notes = dataChExercise.notes,
+        position = chExercise.position
     )
 }

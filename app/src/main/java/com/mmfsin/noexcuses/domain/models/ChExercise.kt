@@ -8,5 +8,6 @@ open class ChExercise(
     val exerciseId: String?,
     val data: List<Data>?,
     val time: Double?,
-    var notes: String?
+    var notes: String?,
+    val position: Int
 )

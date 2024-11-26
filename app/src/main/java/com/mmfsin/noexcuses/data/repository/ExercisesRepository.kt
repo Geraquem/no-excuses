@@ -110,15 +110,17 @@ class ExercisesRepository @Inject constructor(
 
     override fun addChExercise(chExercise: ChExercise) {
         val day = getDayDTO(chExercise.dayId)
+        var exercisePos = 0
         day?.let {
+            exercisePos = it.exercises + 1
             it.exercises++
             realmDatabase.addObject { it }
         }
-        realmDatabase.addObject { chExercise.toChExerciseDTO() }
+        realmDatabase.addObject { chExercise.toChExerciseDTO(exercisePos) }
     }
 
     override fun editChExercise(chExercise: ChExercise) {
-        realmDatabase.addObject { chExercise.toChExerciseDTO() }
+        realmDatabase.addObject { chExercise.toChExerciseDTO(null) }
     }
 
     private fun getDayDTO(id: String): DayDTO? =

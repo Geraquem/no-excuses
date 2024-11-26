@@ -109,7 +109,8 @@ fun ChExerciseDTO.toChExercise() = ChExercise(
     exerciseId = exerciseId,
     data = data?.toDataList(),
     time = time,
-    notes = notes
+    notes = notes,
+    position = position
 )
 
 fun ChExerciseDTO.toCompactExercise(e: Exercise) = CompactExercise(
@@ -119,7 +120,8 @@ fun ChExerciseDTO.toCompactExercise(e: Exercise) = CompactExercise(
     imageURL = e.imageURL,
     series = data?.size,
     time = time.formatTime(),
-    hasNotes = !notes.isNullOrEmpty()
+    hasNotes = !notes.isNullOrEmpty(),
+    position = position
 )
 
 /** Data */

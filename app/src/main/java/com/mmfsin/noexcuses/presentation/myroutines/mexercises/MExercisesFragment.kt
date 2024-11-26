@@ -102,7 +102,7 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
         )
     }
 
-    override fun onExerciseLongClick(chExerciseId: String) {
+    override fun editExercise(chExerciseId: String) {
         activity?.showFragmentDialog(
             EditChExerciseDialog.newInstance(chExerciseId, this@MExercisesFragment)
         )

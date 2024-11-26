@@ -140,7 +140,7 @@ class ActualExercisesFromMenuFragment :
         )
     }
 
-    override fun onExerciseLongClick(chExerciseId: String) {
+    override fun editExercise(chExerciseId: String) {
         activity?.showFragmentDialog(
             EditChExerciseDialog.newInstance(chExerciseId, this@ActualExercisesFromMenuFragment)
         )
