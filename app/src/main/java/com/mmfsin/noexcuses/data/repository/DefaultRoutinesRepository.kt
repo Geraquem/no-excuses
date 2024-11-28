@@ -70,7 +70,7 @@ class DefaultRoutinesRepository @Inject constructor(
                 }
 
                 sharedPrefs.edit().apply {
-//                    putBoolean(SERVER_DEFAULT_ROUTINES, false)
+                    putBoolean(SERVER_DEFAULT_ROUTINES, false)
                     apply()
                 }
                 latch.countDown()
