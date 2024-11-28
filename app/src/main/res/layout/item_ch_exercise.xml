@@ -160,6 +160,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:alpha="0.4"
+            android:paddingVertical="4dp"
+            android:paddingHorizontal="8dp"
             android:background="@drawable/click_effect"
             android:orientation="vertical"
             tools:visibility="gone">

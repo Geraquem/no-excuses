@@ -15,7 +15,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mmfsin.noexcuses.R
+import com.mmfsin.noexcuses.base.BaseBottomSheet
 import com.mmfsin.noexcuses.databinding.DialogDaysBinding
+import com.mmfsin.noexcuses.databinding.DialogInfoBinding
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.adapter.DefaultDaysAdapter
 import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.interfaces.IDefaultDaysListener
@@ -27,27 +29,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class DefaultDaysSheet(
     val routineId: String,
     val listener: IDefaultRoutineListener
-) : BottomSheetDialogFragment(), IDefaultDaysListener {
+) : BaseBottomSheet<DialogDaysBinding>(), IDefaultDaysListener {
 
     private val viewModel: DefaultDaysDialogViewModel by viewModels()
 
-    private lateinit var binding: DialogDaysBinding
-
     private var mDays = emptyList<Day>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DialogDaysBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.BottomSheetDialogThemeNoFloating)
-    }
+    override fun inflateView(inflater: LayoutInflater) = DialogDaysBinding.inflate(inflater)
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
@@ -81,7 +69,7 @@ class DefaultDaysSheet(
         viewModel.getDefaultRoutine(routineId)
     }
 
-    private fun setUI() {
+    override fun setUI() {
         isCancelable = true
         binding.apply {
             flBtnSeparator.visibility = View.GONE
