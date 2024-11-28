@@ -125,6 +125,10 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <include
+                    android:id="@+id/pinned_note"
+                    layout="@layout/item_note" />
+
                 <LinearLayout
                     android:id="@+id/btn_default_routines"
                     android:layout_width="match_parent"
@@ -195,9 +199,9 @@
                     <TextView
                         style="@style/MediumTextView"
                         android:layout_width="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginEnd="8dp"
                         android:gravity="center"
                         android:text="@string/menu_my_routines_new_routine"
                         android:textAllCaps="true"
@@ -307,10 +311,6 @@
                         android:text="@string/menu_notes_description" />
 
                 </LinearLayout>
-
-                <include
-                    android:id="@+id/pinned_note"
-                    layout="@layout/item_note" />
 
             </LinearLayout>
 
