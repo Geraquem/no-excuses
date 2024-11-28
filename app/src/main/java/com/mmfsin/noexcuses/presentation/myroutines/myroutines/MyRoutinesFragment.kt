@@ -50,7 +50,7 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getFirstTime()
+        viewModel.getRoutines()
     }
 
     override fun onResume() {
@@ -82,11 +82,6 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is MyRoutinesEvent.IsFistTime -> {
-                    firstTimeFlow(event.firstTime)
-                    viewModel.getRoutines()
-                }
-
                 is MyRoutinesEvent.GetMyRoutines -> {
                     routines = event.routines
                     setUpRoutines(routines)
@@ -107,10 +102,6 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
                 is MyRoutinesEvent.SWW -> error()
             }
         }
-    }
-
-    private fun firstTimeFlow(firstTime: Boolean) {
-        if (firstTime) activity?.showFragmentDialog(InfoDialog())
     }
 
     private fun setUpRoutines(routines: List<Routine>) {

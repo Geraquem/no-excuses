@@ -97,16 +97,6 @@ class MenuRepository @Inject constructor(
 
     private fun saveMGroups(mGroup: MuscularGroupDTO) = realmDatabase.addObject { mGroup }
 
-    override fun isFirstTime(): Boolean {
-        val firstTime = getSharedPreferences().getBoolean(FIRST_TIME, true)
-        if (firstTime) {
-            val editor = getSharedPreferences().edit()
-            editor.putBoolean(FIRST_TIME, false)
-            editor.apply()
-        }
-        return firstTime
-    }
-
     private fun getSharedPreferences() = context.getSharedPreferences(MY_SHARED_PREFS, MODE_PRIVATE)
 
     override fun getMyActualRoutine(): Routine? {
