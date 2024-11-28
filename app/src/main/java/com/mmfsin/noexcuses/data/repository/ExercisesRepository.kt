@@ -20,7 +20,6 @@ import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
-import com.mmfsin.noexcuses.utils.CATEGORY
 import com.mmfsin.noexcuses.utils.DATA_ID
 import com.mmfsin.noexcuses.utils.DAY_ID
 import com.mmfsin.noexcuses.utils.EXERCISES
@@ -47,7 +46,7 @@ class ExercisesRepository @Inject constructor(
         else emptyList()
     }
 
-    override suspend fun getExercisesByMuscularGroup(mGroup: String): List<Exercise> {
+    suspend fun getExercises(): List<Exercise> {
         val latch = CountDownLatch(1)
         val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
 
@@ -74,16 +73,23 @@ class ExercisesRepository @Inject constructor(
             }
 
             withContext(Dispatchers.IO) { latch.await() }
-            val selection = exercises.filter { it.category == mGroup }.sortedBy { it.order }
-            return selection.toExerciseList()
+            return exercises.sortedBy { it.order }.toExerciseList()
 
         } else {
-            val exercises = realmDatabase.getObjectsFromRealm {
-                where<ExerciseDTO>().equalTo(CATEGORY, mGroup).findAll()
-            }
-            return if (exercises.isNotEmpty()) exercises.sortedBy { it.order }.toExerciseList()
-            else emptyList()
+            val exercises = realmDatabase.getObjectsFromRealm { where<ExerciseDTO>().findAll() }
+            return exercises.sortedBy { it.order }.toExerciseList()
         }
+    }
+
+    override suspend fun getExercisesByMuscularGroup(mGroup: String): List<Exercise> {
+        val exercises = getExercises()
+        return exercises.filter { it.category == mGroup }
+
+//        val exercises = realmDatabase.getObjectsFromRealm {
+//            where<ExerciseDTO>().equalTo(CATEGORY, mGroup).findAll()
+//        }
+//        return if (exercises.isNotEmpty()) exercises.sortedBy { it.order }.toExerciseList()
+//        else emptyList()
     }
 
     private fun saveExerciseInRealm(exercise: ExerciseDTO) = realmDatabase.addObject { exercise }
