@@ -312,6 +312,17 @@
 
                 </LinearLayout>
 
+<!--                <com.google.android.gms.ads.nativead.NativeAdView-->
+<!--                    android:id="@+id/native_ad"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
+
+<!--                    <include-->
+<!--                        android:id="@+id/native_content"-->
+<!--                        layout="@layout/item_day" />-->
+
+<!--                </com.google.android.gms.ads.nativead.NativeAdView>-->
+
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

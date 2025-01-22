@@ -14,7 +14,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         Realm.init(this)
-//        MobileAds.initialize(this) {}
+        //MobileAds.initialize(this) {}
 
 //        getFCMToken()
         disableNightMode()
