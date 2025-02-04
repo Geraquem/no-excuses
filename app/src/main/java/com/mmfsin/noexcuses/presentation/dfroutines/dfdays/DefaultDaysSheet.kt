@@ -5,19 +5,15 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseBottomSheet
 import com.mmfsin.noexcuses.databinding.DialogDaysBinding
-import com.mmfsin.noexcuses.databinding.DialogInfoBinding
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.adapter.DefaultDaysAdapter
 import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.interfaces.IDefaultDaysListener
@@ -72,8 +68,10 @@ class DefaultDaysSheet(
     override fun setUI() {
         isCancelable = true
         binding.apply {
-            flBtnSeparator.visibility = View.GONE
-            btnAddDay.visibility = View.GONE
+            loading.isVisible = true
+            flBtnSeparator.isVisible = false
+            btnAddDay.isVisible = false
+            tvEmpty.isVisible = false
         }
     }
 
@@ -98,6 +96,7 @@ class DefaultDaysSheet(
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = DefaultDaysAdapter(mDays, this@DefaultDaysSheet)
             }
+            loading.isVisible = false
             rvDays.isVisible = days.isNotEmpty()
             tvEmpty.isVisible = days.isEmpty()
         }

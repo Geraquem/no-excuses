@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,6 +48,7 @@ class DefaultRoutinesFragment :
 
     override fun setUI() {
         binding.apply {
+            loading.isVisible = true
             (activity as BedRockActivity).setUpToolbar(title = getString(R.string.routines_toolbar))
         }
     }
@@ -73,6 +75,7 @@ class DefaultRoutinesFragment :
                 layoutManager = LinearLayoutManager(mContext)
                 adapter = DefaultRoutinesAdapter(defaultRoutines, this@DefaultRoutinesFragment)
             }
+            loading.isVisible = false
         }
     }
 

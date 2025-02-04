@@ -10,7 +10,6 @@ import com.mmfsin.noexcuses.data.mappers.toDefaultRoutine
 import com.mmfsin.noexcuses.data.mappers.toMyRoutine
 import com.mmfsin.noexcuses.data.models.DayDTO
 import com.mmfsin.noexcuses.data.models.DefaultDayDTO
-import com.mmfsin.noexcuses.data.models.DefaultExerciseDTO
 import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
@@ -18,13 +17,8 @@ import com.mmfsin.noexcuses.domain.interfaces.IMenuRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.Routine
-import com.mmfsin.noexcuses.utils.DAYS
-import com.mmfsin.noexcuses.utils.DEFAULT_ROUTINES
-import com.mmfsin.noexcuses.utils.EXERCISES
-import com.mmfsin.noexcuses.utils.FIRST_TIME
 import com.mmfsin.noexcuses.utils.MY_SHARED_PREFS
 import com.mmfsin.noexcuses.utils.M_GROUPS
-import com.mmfsin.noexcuses.utils.ROUTINES
 import com.mmfsin.noexcuses.utils.ROUTINE_DOING_IT
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import com.mmfsin.noexcuses.utils.SAVED_VERSION

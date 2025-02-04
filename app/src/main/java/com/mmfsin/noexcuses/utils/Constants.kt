@@ -12,8 +12,9 @@ const val M_GROUPS = "muscular_groups"
 const val EXERCISES = "exercises"
 
 const val DEFAULT_ROUTINES = "default_routines"
-const val ROUTINES = "routines"
+const val DEFAULT_DAYS = "default_days"
 const val DAYS = "days"
+const val DEFAULT_EXERCISES = "default_exercises"
 
 const val STRETCHING = "stretching"
 

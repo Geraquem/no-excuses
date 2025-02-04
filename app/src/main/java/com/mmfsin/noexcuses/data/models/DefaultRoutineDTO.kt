@@ -13,7 +13,7 @@ open class DefaultRoutineDTO(
     var createdByUser: Boolean = false
 ) : RealmObject()
 
-open class DefaultDayDTO(
+open class  DefaultDayDTO(
     @PrimaryKey
     var id: String = "",
     var name: String = "",
