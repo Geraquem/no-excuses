@@ -16,8 +16,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="8dp"
-        android:padding="8dp"
         android:contentDescription="@string/content_description"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginEnd="2dp"
                     android:text="@string/df_routines_series"
                     android:textSize="14sp" />
 
@@ -93,10 +93,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
                     android:textAllCaps="true"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    tools:text="12 - 10 - 8 - 6" />
+                    tools:text="4" />
+
+                <TextView
+                    android:id="@+id/tv_reps_text"
+                    style="@style/MediumTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="2dp"
+                    android:text="@string/df_routines_reps"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_reps"
+                    style="@style/MediumTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAllCaps="true"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="12,10,10,8" />
 
             </LinearLayout>
 

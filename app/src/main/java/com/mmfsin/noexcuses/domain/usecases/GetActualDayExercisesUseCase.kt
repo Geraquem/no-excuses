@@ -12,10 +12,11 @@ class GetActualDayExercisesUseCase @Inject constructor(
 
     override suspend fun execute(params: Params): List<Any> {
         return if (params.createdByUser) exercisesRepository.getDayExercises(params.dayId)
-        else defaultRepository.getDefaultExercises(params.dayId)
+        else defaultRepository.getDefaultExercises(params.routineId, params.dayId)
     }
 
     data class Params(
+        val routineId: String,
         val dayId: String,
         val createdByUser: Boolean
     )

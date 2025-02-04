@@ -1,7 +1,7 @@
 package com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.interfaces
 
 interface IDefaultRoutineListener {
-    fun onRoutineClick(id: String)
-    fun onDayClick(id: String)
-    fun onRoutinePushPinClick(id: String)
+    fun onRoutineClick(routineId: String)
+    fun onDayClick(routineId: String, dayId: String)
+    fun onRoutinePushPinClick(routineId: String)
 }

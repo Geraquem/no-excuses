@@ -3,12 +3,10 @@ package com.mmfsin.noexcuses.presentation.menu.dialogs
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.core.content.ContextCompat.getDrawable
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseBottomSheet
 import com.mmfsin.noexcuses.databinding.DialogDaysBinding
 import com.mmfsin.noexcuses.domain.models.Day
@@ -62,7 +60,7 @@ class MenuDaysSheet(
         viewModel.event.observe(this) { event ->
             when (event) {
                 is MenuDaysDialogEvent.GetRoutine -> {
-                    binding.tvRoutineName.text = event.routine.title
+                    binding.tvRoutineName.text = event.routine.name
                     viewModel.getPinnedRoutineDays(routineId)
                 }
 
@@ -83,7 +81,8 @@ class MenuDaysSheet(
         }
     }
 
-    override fun onDayClick(id: String) = listener.onMenuDayClick(id, createdByUser)
+    override fun onDayClick(dayId: String) =
+        listener.onMenuDayClick(routineId, dayId, createdByUser)
 
     private fun error() = activity?.showErrorDialog()
 }

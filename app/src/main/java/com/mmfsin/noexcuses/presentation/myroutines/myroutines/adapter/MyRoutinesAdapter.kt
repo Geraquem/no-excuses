@@ -23,7 +23,7 @@ class MyRoutinesAdapter(
                 val days =
                     if (routine.days == 1) R.string.my_routines_day else R.string.my_routines_days
                 image.tvDays.text = c.getString(days)
-                tvTitle.text = routine.title
+                tvTitle.text = routine.name
                 val description = routine.description?.let { routine.description }
                     ?: run { c.getString(R.string.my_routines_no_description) }
                 tvDescription.text = description

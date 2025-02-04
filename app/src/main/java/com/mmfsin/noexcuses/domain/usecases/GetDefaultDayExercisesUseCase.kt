@@ -10,9 +10,10 @@ class GetDefaultDayExercisesUseCase @Inject constructor(
 ) : BaseUseCase<GetDefaultDayExercisesUseCase.Params, List<DefaultExercise>>() {
 
     override suspend fun execute(params: Params): List<DefaultExercise> =
-        repository.getDefaultExercises(params.dayId)
+        repository.getDefaultExercises(params.routineId, params.dayId)
 
     data class Params(
+        val routineId: String,
         val dayId: String
     )
 }

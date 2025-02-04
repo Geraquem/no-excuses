@@ -79,7 +79,7 @@ class MyRoutineEditDialog(val routineId: String, private val listener: IMyRoutin
 
                 is MyRoutineDialogEvent.GetMyRoutine -> {
                     routine = event.routine
-                    binding.etTitle.setText(routine?.title)
+                    binding.etTitle.setText(routine?.name)
                     binding.etDescription.setText(routine?.description)
                 }
 

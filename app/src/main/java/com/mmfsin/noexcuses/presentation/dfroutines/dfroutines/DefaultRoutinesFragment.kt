@@ -79,16 +79,17 @@ class DefaultRoutinesFragment :
         }
     }
 
-    override fun onRoutineClick(id: String) {
-        (activity as BedRockActivity).routineOpened = id
-        val dialog = DefaultDaysSheet(routineId = id, this@DefaultRoutinesFragment)
+    override fun onRoutineClick(routineId: String) {
+        (activity as BedRockActivity).routineOpened = routineId
+        val dialog = DefaultDaysSheet(routineId = routineId, this@DefaultRoutinesFragment)
         activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
 
-    override fun onRoutinePushPinClick(id: String) = viewModel.updateDefaultRoutinePushPin(id)
+    override fun onRoutinePushPinClick(routineId: String) =
+        viewModel.updateDefaultRoutinePushPin(routineId)
 
-    override fun onDayClick(id: String) =
-        findNavController().navigate(actionDefaultRoutinesToDefaultExercises(id))
+    override fun onDayClick(routineId: String, dayId: String) =
+        findNavController().navigate(actionDefaultRoutinesToDefaultExercises(routineId, dayId))
 
     private fun error() = activity?.showErrorDialog()
 

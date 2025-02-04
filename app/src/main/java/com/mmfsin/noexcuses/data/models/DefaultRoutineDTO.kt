@@ -13,7 +13,7 @@ open class DefaultRoutineDTO(
     var createdByUser: Boolean = false
 ) : RealmObject()
 
-open class  DefaultDayDTO(
+open class DefaultDayDTO(
     @PrimaryKey
     var id: String = "",
     var name: String = "",
@@ -28,6 +28,7 @@ open class DefaultExerciseDTO(
     var dayId: String = "",
     var exerciseId: String = "",
     var desc: String = "",
-    var reps: String = ""
+    var reps: String = "",
+    var superSerie: Boolean = false
 ) : RealmObject()
 

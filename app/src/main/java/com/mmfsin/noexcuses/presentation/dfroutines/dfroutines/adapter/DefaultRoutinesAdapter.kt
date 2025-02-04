@@ -3,7 +3,6 @@ package com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemDefaultRoutineBinding
@@ -21,7 +20,7 @@ class DefaultRoutinesAdapter(
         fun bind(defaultRoutine: Routine, listener: IDefaultRoutineListener) {
             binding.apply {
                 image.tvNumOfDays.text = defaultRoutine.days.toString()
-                tvTitle.text = defaultRoutine.title
+                tvTitle.text = defaultRoutine.name
                 tvDescription.text = defaultRoutine.description
 
                 val pushPinIcon = if (defaultRoutine.doingIt) R.drawable.ic_pushpin

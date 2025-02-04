@@ -109,7 +109,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             routine?.let {
                 actualRoutine.apply {
                     image.tvNumOfDays.text = routine.days.toString()
-                    tvTitle.text = routine.title
+                    tvTitle.text = routine.name
                     val description = routine.description?.let { routine.description }
                         ?: run { getString(R.string.my_routines_no_description) }
                     tvDescription.text = description
@@ -139,10 +139,10 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
         }
     }
 
-    override fun onMenuDayClick(id: String, createdByUser: Boolean) =
+    override fun onMenuDayClick(routineId: String, dayId: String, createdByUser: Boolean) =
         navigateTo(
             navGraph = R.navigation.nav_graph_my_actual_exercises,
-            strArgs = id,
+            strArgs = "$routineId-$dayId",
             booleanArgs = createdByUser
         )
 
@@ -154,8 +154,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
         }
     }
 
-    override fun onMenuMuscGroupClick(id: String) =
-        navigateTo(R.navigation.nav_graph_exercises, strArgs = id)
+    override fun onMenuMuscGroupClick(muscularGroupId: String) =
+        navigateTo(R.navigation.nav_graph_exercises, strArgs = muscularGroupId)
 
     private fun setUpPinnedNote(note: Note?) {
         binding.apply {

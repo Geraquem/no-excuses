@@ -70,7 +70,7 @@ class DaysSheet(
         viewModel.event.observe(this) { event ->
             when (event) {
                 is DaysDialogEvent.GetRoutine -> {
-                    binding.tvRoutineName.text = event.routine.title
+                    binding.tvRoutineName.text = event.routine.name
                     viewModel.getDays(routineId)
                 }
 

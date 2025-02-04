@@ -37,6 +37,8 @@ class ActualExercisesFromMenuFragment :
 
     private lateinit var mContext: Context
 
+    private var idList: List<String>? = null
+    private var routineId: String? = null
     private var dayId: String? = null
     private var createdByUser: Boolean? = null
 
@@ -44,7 +46,13 @@ class ActualExercisesFromMenuFragment :
         FragmentMexercisesBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
-        dayId = activity?.intent?.getStringExtra(BEDROCK_STR_ARGS)
+        idList = activity?.intent?.getStringExtra(BEDROCK_STR_ARGS)?.split("-")
+        idList?.let { list ->
+            if (list.size > 1) {
+                routineId = list[0]
+                dayId = list[1]
+            } else error()
+        } ?: run { error() }
         createdByUser = activity?.intent?.getBooleanExtra(BEDROCK_BOOLEAN_ARGS, false)
     }
 
@@ -64,8 +72,8 @@ class ActualExercisesFromMenuFragment :
             when (event) {
                 is ActualExercisesFromMenuEvent.GetDay -> {
                     (activity as BedRockActivity).setUpToolbar(title = event.day.title)
-                    createdByUser?.let { byUser ->
-                        viewModel.getActualDayExercises(event.day.id, byUser)
+                    checkNotNulls(routineId, createdByUser) { r, cbu ->
+                        viewModel.getActualDayExercises(r, event.day.id, cbu)
                     }
                 }
 
@@ -149,8 +157,8 @@ class ActualExercisesFromMenuFragment :
     }
 
     override fun updateView() {
-        checkNotNulls(dayId, createdByUser) { id, byUser ->
-            viewModel.getActualDayExercises(id, byUser)
+        checkNotNulls(routineId, dayId) { r, d ->
+            if (createdByUser != null) viewModel.getActualDayExercises(r, d, createdByUser!!)
         }
     }
 

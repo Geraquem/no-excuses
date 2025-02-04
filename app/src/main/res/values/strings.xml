@@ -69,7 +69,8 @@
     <string name="routines_toolbar">Rutinas</string>
 
     <!-- DEFAULT ROUTINES -->
-    <string name="df_routines_series">Series/Reps:</string>
+    <string name="df_routines_series">Series:</string>
+    <string name="df_routines_reps">Reps:</string>
     <string name="df_routines_rest">Descanso</string>
     <string name="df_routines_rest_min">min/serie </string>
 

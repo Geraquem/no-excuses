@@ -23,9 +23,13 @@ class DefaultExercisesViewModel @Inject constructor(
         )
     }
 
-    fun getDefaultDayExercises(dayId: String) {
+    fun getDefaultDayExercises(routineId: String, dayId: String) {
         executeUseCase(
-            { getDefaultDayExercisesUseCase.execute(GetDefaultDayExercisesUseCase.Params(dayId)) },
+            {
+                getDefaultDayExercisesUseCase.execute(
+                    GetDefaultDayExercisesUseCase.Params(routineId, dayId)
+                )
+            },
             { result -> _event.value = DefaultExercisesEvent.GetDefaultDayExercises(result) },
             { _event.value = DefaultExercisesEvent.SWW }
         )

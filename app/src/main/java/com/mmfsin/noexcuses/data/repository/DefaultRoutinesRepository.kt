@@ -24,8 +24,8 @@ import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.utils.DAYS
 import com.mmfsin.noexcuses.utils.DAY_ID
-import com.mmfsin.noexcuses.utils.DEFAULT_DAYS
 import com.mmfsin.noexcuses.utils.DEFAULT_ROUTINES
+import com.mmfsin.noexcuses.utils.EXERCISES
 import com.mmfsin.noexcuses.utils.ID
 import com.mmfsin.noexcuses.utils.MY_SHARED_PREFS
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
@@ -106,10 +106,12 @@ class DefaultRoutinesRepository @Inject constructor(
         val days = realmDatabase.getObjectsFromRealm {
             where<DefaultDayDTO>().equalTo(ROUTINE_ID, routineId).findAll()
         }
-        if (days.isEmpty()) {
+//        if (days.isEmpty()) {
+        if (true) {
             val latch = CountDownLatch(1)
             val dDays = mutableListOf<DefaultDayDTO>()
-            Firebase.firestore.collection(DEFAULT_DAYS).document(routineId).collection(DAYS).get()
+            Firebase.firestore.collection(DEFAULT_ROUTINES).document(routineId).collection(DAYS)
+                .get()
                 .addOnSuccessListener { documents ->
                     for (doc in documents) {
                         try {
@@ -141,11 +143,44 @@ class DefaultRoutinesRepository @Inject constructor(
         return routine?.toDay()
     }
 
-    override fun getDefaultExercises(dayId: String): List<DefaultExercise> {
-        val result = mutableListOf<DefaultExercise>()
-        val dfExercises = realmDatabase.getObjectsFromRealm {
+    override suspend fun getDefaultExercises(
+        routineId: String,
+        dayId: String
+    ): List<DefaultExercise> {
+        var dfExercises = mutableListOf<DefaultExerciseDTO>()
+        val dfExercisesFromRealm = realmDatabase.getObjectsFromRealm {
             where<DefaultExerciseDTO>().equalTo(DAY_ID, dayId).findAll()
         }
+
+//        if (dfExercisesFromRealm.isEmpty()) {
+        if (true) {
+            val latch = CountDownLatch(1)
+            Firebase.firestore.collection(DEFAULT_ROUTINES).document(routineId).collection(DAYS)
+                .document(dayId).collection(EXERCISES).get().addOnSuccessListener { documents ->
+                    for (doc in documents) {
+                        try {
+                            doc.toObject(DefaultExerciseDTO::class.java).let {
+                                dfExercises.add(it)
+                                realmDatabase.addObject { it }
+                            }
+                        } catch (e: Exception) {
+                            Log.e("error", "error parsing day")
+                        }
+                    }
+                    latch.countDown()
+
+                }.addOnFailureListener {
+                    latch.countDown()
+                }
+
+            withContext(Dispatchers.IO) { latch.await() }
+            Toast.makeText(context, "from firebase", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "from realm", Toast.LENGTH_SHORT).show()
+            dfExercises = dfExercisesFromRealm.toMutableList()
+        }
+
+        val result = mutableListOf<DefaultExercise>()
         dfExercises.forEach { dfExercise ->
             val exercise = getExerciseFromDefaultExercise(dfExercise.exerciseId)
             exercise?.let { e -> result.add(dfExercise.toDefaultExercise(e)) }

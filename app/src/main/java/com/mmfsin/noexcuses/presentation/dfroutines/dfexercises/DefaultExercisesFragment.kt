@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.base.BaseFragment
@@ -15,6 +16,8 @@ import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter.DefaultE
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.interfaces.IDefaultExerciseListener
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.utils.DAY_ID
+import com.mmfsin.noexcuses.utils.ROUTINE_ID
+import com.mmfsin.noexcuses.utils.checkNotNulls
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,13 +31,17 @@ class DefaultExercisesFragment :
 
     private lateinit var mContext: Context
 
+    private var routineId: String? = null
     private var dayId: String? = null
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentDefaultExercisesBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
-        arguments?.let { dayId = it.getString(DAY_ID) }
+        arguments?.let {
+            routineId = it.getString(ROUTINE_ID)
+            dayId = it.getString(DAY_ID)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +54,9 @@ class DefaultExercisesFragment :
             when (event) {
                 is DefaultExercisesEvent.GetDefaultDay -> {
                     (activity as BedRockActivity).setUpToolbar(title = event.day.title)
-                    viewModel.getDefaultDayExercises(event.day.id)
+                    checkNotNulls(routineId, dayId) { r, d ->
+                        viewModel.getDefaultDayExercises(r, d)
+                    }
                 }
 
                 is DefaultExercisesEvent.GetDefaultDayExercises -> setUpExercises(event.exercises)
@@ -57,11 +66,16 @@ class DefaultExercisesFragment :
     }
 
     private fun setUpExercises(exercises: List<DefaultExercise>) {
+        println("------------------------------------------------------------------------------------------------------------------------------------------------------")
+        println(exercises)
+        println("------------------------------------------------------------------------------------------------------------------------------------------------------")
+
         binding.apply {
             rvExercises.apply {
                 layoutManager = LinearLayoutManager(mContext)
                 adapter = DefaultExercisesAdapter(exercises, this@DefaultExercisesFragment)
             }
+            loading.isVisible = false
         }
     }
 

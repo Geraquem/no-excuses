@@ -12,6 +12,6 @@ interface IDefaultRoutinesRepository {
     suspend fun getDefaultDays(routineId: String): List<Day>
     fun getDefaultDayById(id: String): Day?
 
-    fun getDefaultExercises(dayId: String): List<DefaultExercise>
+    suspend fun getDefaultExercises(routineId: String, dayId: String): List<DefaultExercise>
     fun getDefaultExerciseById(id: String): DefaultExercise?
 }

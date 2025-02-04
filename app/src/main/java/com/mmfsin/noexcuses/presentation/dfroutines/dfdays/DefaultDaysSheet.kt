@@ -79,7 +79,7 @@ class DefaultDaysSheet(
         viewModel.event.observe(this) { event ->
             when (event) {
                 is DefaultDaysDialogEvent.GetDefaultRoutine -> {
-                    binding.tvRoutineName.text = event.routine.title
+                    binding.tvRoutineName.text = event.routine.name
                     viewModel.getDefaultDays(routineId)
                 }
 
@@ -102,8 +102,8 @@ class DefaultDaysSheet(
         }
     }
 
-    override fun onDayClick(id: String) {
-        listener.onDayClick(id)
+    override fun onDayClick(dayId: String) {
+        listener.onDayClick(routineId, dayId)
         dismiss()
     }
 

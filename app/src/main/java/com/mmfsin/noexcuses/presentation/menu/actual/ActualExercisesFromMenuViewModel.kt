@@ -23,11 +23,11 @@ class ActualExercisesFromMenuViewModel @Inject constructor(
         )
     }
 
-    fun getActualDayExercises(dayId: String, createdByUser: Boolean) {
+    fun getActualDayExercises(routineId: String, dayId: String, createdByUser: Boolean) {
         executeUseCase(
             {
                 getActualDayExercisesUseCase.execute(
-                    GetActualDayExercisesUseCase.Params(dayId, createdByUser)
+                    GetActualDayExercisesUseCase.Params(routineId, dayId, createdByUser)
                 )
             },
             { result -> _event.value = ActualExercisesFromMenuEvent.GetDayExercises(result) },

@@ -1,10 +1,11 @@
 package com.mmfsin.noexcuses.domain.models
 
 open class DefaultExercise(
-    var id: String,
-    var exercise: Exercise,
-    var dayId: String,
-    var desc: String,
-    var reps: String,
-    var series: String
+    val id: String,
+    val exercise: Exercise,
+    val dayId: String,
+    val desc: String,
+    val reps: String,
+    val series: String,
+    val superSerie: Boolean
 )
