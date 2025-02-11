@@ -66,10 +66,6 @@ class DefaultExercisesFragment :
     }
 
     private fun setUpExercises(exercises: List<DefaultExercise>) {
-        println("------------------------------------------------------------------------------------------------------------------------------------------------------")
-        println(exercises)
-        println("------------------------------------------------------------------------------------------------------------------------------------------------------")
-
         binding.apply {
             rvExercises.apply {
                 layoutManager = LinearLayoutManager(mContext)

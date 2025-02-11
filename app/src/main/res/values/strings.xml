@@ -72,6 +72,7 @@
     <string name="df_routines_series">Series:</string>
     <string name="df_routines_reps">Reps:</string>
     <string name="df_routines_rest">Descanso</string>
+    <string name="df_routines_super_serie">Super serie con el de abajo</string>
     <string name="df_routines_rest_min">min/serie </string>
 
     <!-- MY ROUTINES -->
@@ -85,6 +86,7 @@
     <!-- DAYS -->
     <string name="days_empty">No tienes días\npara esta rutina.</string>
     <string name="days_add_btn">Añadir día</string>
+    <string name="days_day">Día %s</string>
     <string name="days_one_exercise">1 ejercicio</string>
     <string name="days_exercises">%s ejercicios</string>
 
