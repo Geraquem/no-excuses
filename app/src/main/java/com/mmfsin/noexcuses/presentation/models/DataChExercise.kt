@@ -8,5 +8,6 @@ import kotlinx.parcelize.Parcelize
 data class DataChExercise(
     var dataList: List<Data>? = null,
     var time: Double? = null,
+    var superSerie: Boolean = false,
     var notes: String? = null
 ) : Parcelable

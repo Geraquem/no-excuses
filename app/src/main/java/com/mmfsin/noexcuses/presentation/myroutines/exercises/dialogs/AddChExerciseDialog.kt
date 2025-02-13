@@ -87,7 +87,12 @@ class AddChExerciseDialog(
                 val notes = etNotes.text.toString()
                 val notesStr = notes.ifEmpty { null }
 
-                val data = DataChExercise(dataList = mSeries, time = restTime, notes = notesStr)
+                val data = DataChExercise(
+                    dataList = mSeries,
+                    time = restTime,
+                    superSerie = swSuperSerie.isChecked,
+                    notes = notesStr
+                )
                 viewModel.addChExercise(idGroup, data)
             }
 

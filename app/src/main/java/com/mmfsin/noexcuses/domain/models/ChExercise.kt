@@ -9,5 +9,6 @@ open class ChExercise(
     val data: List<Data>?,
     val time: Double?,
     var notes: String?,
-    val position: Int
+    val position: Int,
+    val superSerie: Boolean
 )

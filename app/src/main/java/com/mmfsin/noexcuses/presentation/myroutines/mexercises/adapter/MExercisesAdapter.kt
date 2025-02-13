@@ -22,7 +22,7 @@ class MExercisesAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemChExerciseBinding.bind(view)
         private val c = binding.root.context
-        fun bind(exercise: CompactExercise, listener: IMExerciseListener) {
+        fun bind(exercise: CompactExercise, prevSuperSerie: Boolean, listener: IMExerciseListener) {
             binding.apply {
                 setCategoryColor(exercise.category)
                 Glide.with(binding.root.context).load(exercise.imageURL).into(image)
@@ -45,10 +45,19 @@ class MExercisesAdapter(
 
                 ivHasNotes.isVisible = exercise.hasNotes
 
-                val addDataVisible = series == 0 && time == null && !exercise.hasNotes
+                val addDataVisible =
+                    series == 0 && time == null && !exercise.hasNotes && !exercise.superSerie
                 llData.isVisible = !addDataVisible
                 ivEdit.isVisible = !addDataVisible
                 llAddData.isVisible = addDataVisible
+
+                ivDot.visibility = View.VISIBLE
+                if (exercise.superSerie) {
+                    lineBottom.visibility = View.VISIBLE
+                }
+                if (prevSuperSerie) {
+                    lineTop.visibility = View.VISIBLE
+                }
 
                 exercise.chExerciseId?.let { id ->
                     llAddData.setOnClickListener { listener.editExercise(id) }
@@ -70,7 +79,8 @@ class MExercisesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(exercises[position], listener)
+        val prevSuperSerie = if (position == 0) false else (exercises[position - 1].superSerie)
+        holder.bind(exercises[position], prevSuperSerie, listener)
         holder.itemView.setOnClickListener {
             exercises[position].chExerciseId?.let { id -> listener.onExerciseClick(id) }
         }

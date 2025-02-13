@@ -37,7 +37,7 @@ class MExercisesViewModel @Inject constructor(
     fun moveChExercise(exercises: List<String>) {
         executeUseCase(
             { moveChExerciseUseCase.execute(MoveChExerciseUseCase.Params(exercises)) },
-            { Log.i(javaClass::class.java.name, "Exercise moved") },
+            { _event.value = MExercisesEvent.AAA },
             { _event.value = MExercisesEvent.SWW }
         )
     }

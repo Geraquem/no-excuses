@@ -14,7 +14,8 @@ fun createChExercise(idGroup: IdGroup, dataChExercise: DataChExercise): ChExerci
         data = dataChExercise.dataList,
         time = dataChExercise.time,
         notes = dataChExercise.notes,
-        position = 0
+        position = 0,
+        superSerie = dataChExercise.superSerie
     )
 }
 
@@ -27,6 +28,7 @@ fun editChExercise(chExercise: ChExercise, dataChExercise: DataChExercise): ChEx
         data = dataChExercise.dataList,
         time = dataChExercise.time,
         notes = dataChExercise.notes,
-        position = chExercise.position
+        position = chExercise.position,
+        superSerie = dataChExercise.superSerie
     )
 }

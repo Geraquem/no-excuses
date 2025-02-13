@@ -1,7 +1,6 @@
 package com.mmfsin.noexcuses.domain.models
 
 import com.mmfsin.noexcuses.R
-import java.text.FieldPosition
 
 open class CompactExercise(
     val chExerciseId: String?,
@@ -11,7 +10,8 @@ open class CompactExercise(
     var series: Int?,
     var time: String?,
     var hasNotes: Boolean,
-    var position: Int
+    var position: Int,
+    var superSerie: Boolean
 )
 
 fun getCategoryColor(category: String): Int {

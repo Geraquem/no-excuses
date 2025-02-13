@@ -19,6 +19,11 @@ class EditChExerciseUseCase @Inject constructor(private val repository: IExercis
             }
 
             val editedChExercise = editChExercise(chE, params.dataChExercise)
+            println("----------------------------------------------------------------------------------------------------------")
+            println("0.5->" + params.dataChExercise.superSerie)
+            println("1->" + editedChExercise.superSerie)
+            println("----------------------------------------------------------------------------------------------------------")
+
             repository.editChExercise(editedChExercise)
         }
     }

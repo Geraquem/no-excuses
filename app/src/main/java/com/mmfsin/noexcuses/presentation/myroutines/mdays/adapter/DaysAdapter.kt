@@ -17,11 +17,12 @@ class DaysAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemDayBinding.bind(view)
         private val c = binding.root.context
-        fun bind(day: Day) {
+        fun bind(day: Day, position: Int) {
             binding.apply {
                 val title = day.title
                 val initial = if (title.isNotEmpty()) title.substring(0, 1) else "?"
                 image.firstLetter.text = initial
+                tvDay.text = c.getString(R.string.days_day, position.toString())
                 tvTitle.text = title
                 val exercises = day.exercises
                 val numOfExercises = if (exercises == 1) c.getString(R.string.days_one_exercise)
@@ -38,7 +39,7 @@ class DaysAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(days[position])
+        holder.bind(days[position], position + 1)
         holder.itemView.setOnClickListener { listener.onDayClick(days[position].id) }
         holder.itemView.setOnLongClickListener {
             listener.onDayLongClick(days[position].id)

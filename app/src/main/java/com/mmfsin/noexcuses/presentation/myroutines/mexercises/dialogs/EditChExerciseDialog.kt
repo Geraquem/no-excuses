@@ -12,7 +12,6 @@ import com.mmfsin.noexcuses.databinding.DialogChExerciseEditBinding
 import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.Exercise
-import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialogEvent
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.ChExerciseDialogViewModel
@@ -22,7 +21,6 @@ import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExer
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.deletePointZero
 import com.mmfsin.noexcuses.utils.showErrorDialog
-import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -93,7 +91,18 @@ class EditChExerciseDialog(
                 val notes = etNotes.text.toString()
                 val notesStr = notes.ifEmpty { null }
 
-                val data = DataChExercise(dataList = mSeries, time = restTime, notes = notesStr)
+                val a = swSuperSerie.isChecked
+                println("----------------------------------------------------------------------------------------------------------")
+                println("0->" + a)
+                println("----------------------------------------------------------------------------------------------------------")
+
+
+                val data = DataChExercise(
+                    dataList = mSeries,
+                    time = restTime,
+                    superSerie = a,
+                    notes = notesStr
+                )
                 viewModel.editChExercise(chExerciseId, data)
             }
 
@@ -135,6 +144,7 @@ class EditChExerciseDialog(
                 seriesCont = series.size
                 setUpSeriesRV()
             }
+            swSuperSerie.isChecked = chExercise.superSerie
             chExercise.time?.let { time -> etTime.setText(time.deletePointZero()) }
             chExercise.notes?.let { notes -> etNotes.setText(notes) }
             chExercise.exerciseId?.let { id -> viewModel.getExercise(id) } ?: run { error() }

@@ -84,6 +84,7 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
                 }
 
                 is MExercisesEvent.GetDayExercises -> setUpExercises(event.exercises)
+                is MExercisesEvent.AAA -> updateView()
                 is MExercisesEvent.SWW -> error()
             }
         }

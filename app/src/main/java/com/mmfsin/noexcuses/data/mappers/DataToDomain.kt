@@ -111,7 +111,8 @@ fun ChExerciseDTO.toChExercise() = ChExercise(
     data = data?.toDataList(),
     time = time,
     notes = notes,
-    position = position
+    position = position,
+    superSerie = superSerie
 )
 
 fun ChExerciseDTO.toCompactExercise(e: Exercise) = CompactExercise(
@@ -122,7 +123,8 @@ fun ChExerciseDTO.toCompactExercise(e: Exercise) = CompactExercise(
     series = data?.size,
     time = time.formatTime(),
     hasNotes = !notes.isNullOrEmpty(),
-    position = position
+    position = position,
+    superSerie = superSerie
 )
 
 /** Data */

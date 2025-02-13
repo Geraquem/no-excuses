@@ -13,5 +13,6 @@ open class ChExerciseDTO(
     var data: RealmList<DataDTO>? = null,
     var time: Double? = null,
     var notes: String? = null,
-    var position: Int = 0
+    var position: Int = 0,
+    var superSerie: Boolean = false
 ) : RealmObject()

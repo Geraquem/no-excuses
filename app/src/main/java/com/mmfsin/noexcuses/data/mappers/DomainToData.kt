@@ -15,7 +15,8 @@ fun ChExercise.toChExerciseDTO(actualPos: Int?) =
         data = setExerciseData(this.data),
         time,
         notes,
-        position = actualPos ?: this.position
+        position = actualPos ?: this.position,
+        superSerie = this.superSerie
     )
 
 fun setExerciseData(data: List<Data>?): RealmList<DataDTO>? {

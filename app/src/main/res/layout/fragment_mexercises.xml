@@ -30,7 +30,6 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         android:paddingHorizontal="12dp"
-        android:paddingTop="8dp"
         android:paddingBottom="42dp"
         app:layout_constraintBottom_toTopOf="@id/cl_add"
         app:layout_constraintHorizontal_bias="0.0"
