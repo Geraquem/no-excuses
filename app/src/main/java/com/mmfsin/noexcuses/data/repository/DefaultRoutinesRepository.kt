@@ -47,7 +47,8 @@ class DefaultRoutinesRepository @Inject constructor(
         val defaultRoutines = mutableListOf<DefaultRoutineDTO>()
         val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
 
-        if (sharedPrefs.getBoolean(SERVER_DEFAULT_ROUTINES, true)) {
+//        if (sharedPrefs.getBoolean(SERVER_DEFAULT_ROUTINES, true)) {
+        if (true) {
             Firebase.firestore.collection(DEFAULT_ROUTINES).get()
                 .addOnSuccessListener { documents ->
                     for (doc in documents) {

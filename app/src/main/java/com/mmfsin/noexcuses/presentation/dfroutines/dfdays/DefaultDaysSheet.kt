@@ -5,7 +5,7 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getDrawable
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,13 +45,12 @@ class DefaultDaysSheet(
                 val behavior = BottomSheetBehavior.from(it)
 
                 val metrics = Resources.getSystem().displayMetrics
-                val maxHeight = (metrics.heightPixels * 0.95).toInt()
+                val maxHeight = (metrics.heightPixels * 0.8).toInt()
                 it.layoutParams.height = maxHeight
                 behavior.peekHeight = maxHeight
                 it.requestLayout()
 
-                it.background =
-                    ContextCompat.getDrawable(requireContext(), R.drawable.bg_header_dialog)
+                it.background = getDrawable(requireContext(), R.drawable.bg_header_dialog)
             }
         }
         return dialog
