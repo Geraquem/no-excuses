@@ -103,9 +103,8 @@ class MyRoutinesRepository @Inject constructor(
         realmDatabase.addObject { day }
     }
 
-    override fun addDayToNewDfRoutineMine(day: Day, newRoutineId: String) {
-        val id = UUID.randomUUID().toString()
-        val dayDTO = DayDTO(id, newRoutineId, day.title, day.exercises)
+    override fun addDayToNewDfRoutineMine(day: Day, newDayId: String, newRoutineId: String) {
+        val dayDTO = DayDTO(newDayId, newRoutineId, day.title, day.exercises)
         realmDatabase.addObject { dayDTO }
     }
 

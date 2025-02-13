@@ -1,5 +1,6 @@
 package com.mmfsin.noexcuses.domain.interfaces
 
+import com.mmfsin.noexcuses.data.models.ChExerciseDTO
 import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.Exercise
@@ -23,4 +24,6 @@ interface IExercisesRepository {
 
     fun deleteExercisesFromDeletedDay(dayId: String)
     fun deleteExercisesFromDeletedRoutine(routineId: String)
+
+    fun addDefaultExerciseAsMine(chExercise: ChExerciseDTO)
 }

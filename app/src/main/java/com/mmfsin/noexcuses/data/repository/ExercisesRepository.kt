@@ -125,11 +125,11 @@ class ExercisesRepository @Inject constructor(
         realmDatabase.addObject { chExercise.toChExerciseDTO(exercisePos) }
     }
 
-    override fun editChExercise(chExercise: ChExercise) {
-        println("----------------------------------------------------------------------------------------------------------")
-        println("2->" + chExercise.superSerie)
-        println("----------------------------------------------------------------------------------------------------------")
+    override fun addDefaultExerciseAsMine(chExercise: ChExerciseDTO) {
+        realmDatabase.addObject { chExercise }
+    }
 
+    override fun editChExercise(chExercise: ChExercise) {
         realmDatabase.addObject { chExercise.toChExerciseDTO(null) }
     }
 

@@ -19,5 +19,5 @@ interface IMyRoutinesRepository {
     fun deleteDay(id: String)
 
     fun addDfRoutineToMine(routine: MyRoutineDTO)
-    fun addDayToNewDfRoutineMine(day: Day, newRoutineId: String)
+    fun addDayToNewDfRoutineMine(day: Day, newDayId: String, newRoutineId: String)
 }

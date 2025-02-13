@@ -91,16 +91,10 @@ class EditChExerciseDialog(
                 val notes = etNotes.text.toString()
                 val notesStr = notes.ifEmpty { null }
 
-                val a = swSuperSerie.isChecked
-                println("----------------------------------------------------------------------------------------------------------")
-                println("0->" + a)
-                println("----------------------------------------------------------------------------------------------------------")
-
-
                 val data = DataChExercise(
                     dataList = mSeries,
                     time = restTime,
-                    superSerie = a,
+                    superSerie = swSuperSerie.isChecked,
                     notes = notesStr
                 )
                 viewModel.editChExercise(chExerciseId, data)

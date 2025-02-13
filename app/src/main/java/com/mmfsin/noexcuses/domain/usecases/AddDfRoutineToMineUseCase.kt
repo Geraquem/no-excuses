@@ -2,14 +2,17 @@ package com.mmfsin.noexcuses.domain.usecases
 
 import com.mmfsin.noexcuses.base.BaseUseCase
 import com.mmfsin.noexcuses.data.mappers.createNewRoutineFromDefault
+import com.mmfsin.noexcuses.data.mappers.toChExerciseDTO
 import com.mmfsin.noexcuses.domain.interfaces.IDefaultRoutinesRepository
+import com.mmfsin.noexcuses.domain.interfaces.IExercisesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IMyRoutinesRepository
 import java.util.UUID
 import javax.inject.Inject
 
 class AddDfRoutineToMineUseCase @Inject constructor(
     private val dfRepository: IDefaultRoutinesRepository,
-    private val mRepository: IMyRoutinesRepository
+    private val mRepository: IMyRoutinesRepository,
+    private val eRepository: IExercisesRepository
 ) : BaseUseCase<AddDfRoutineToMineUseCase.Params, Unit>() {
 
     override suspend fun execute(params: Params) {
@@ -18,8 +21,21 @@ class AddDfRoutineToMineUseCase @Inject constructor(
             val newRoutineId = UUID.randomUUID().toString()
 
             val days = dfRepository.getDefaultDays(params.dfRoutineId)
-            days.forEach { day -> mRepository.addDayToNewDfRoutineMine(day, newRoutineId) }
+            days.forEach { day ->
+                val newDayId = UUID.randomUUID().toString()
 
+                /** Sacamos días de la rutina */
+                val dayExercises = dfRepository.getDefaultExercises(params.dfRoutineId, day.id)
+                dayExercises.forEachIndexed { pos, e ->
+                    /** Para cada días, sacamos ejercicios y los guardamos */
+                    val chExerciseDTO = e.toChExerciseDTO(newRoutineId, newDayId, pos)
+                    eRepository.addDefaultExerciseAsMine(chExerciseDTO)
+                }
+                /** Guardamos día */
+                mRepository.addDayToNewDfRoutineMine(day, newDayId, newRoutineId)
+            }
+
+            /** Guardamos rutina */
             val newRoutine = r.createNewRoutineFromDefault(newRoutineId, days.size)
             mRepository.addDfRoutineToMine(newRoutine)
 
