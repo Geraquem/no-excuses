@@ -2,8 +2,10 @@ package com.mmfsin.noexcuses.data.mappers
 
 import com.mmfsin.noexcuses.data.models.ChExerciseDTO
 import com.mmfsin.noexcuses.data.models.DataDTO
+import com.mmfsin.noexcuses.data.models.MyRoutineDTO
 import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.Data
+import com.mmfsin.noexcuses.domain.models.Routine
 import io.realm.RealmList
 
 fun ChExercise.toChExerciseDTO(actualPos: Int?) =
@@ -30,3 +32,10 @@ fun setExerciseData(data: List<Data>?): RealmList<DataDTO>? {
 }
 
 fun Data.toDataDTO() = DataDTO(id, exerciseDayId, reps, weight)
+
+fun Routine.createNewRoutineFromDefault(newId: String, days: Int) = MyRoutineDTO(
+    id = newId,
+    title = this.name,
+    description = this.description,
+    days = days
+)

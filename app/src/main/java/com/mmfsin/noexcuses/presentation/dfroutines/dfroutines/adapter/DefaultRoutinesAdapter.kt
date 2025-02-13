@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
-import com.mmfsin.noexcuses.databinding.ItemDefaultRoutineBinding
+import com.mmfsin.noexcuses.databinding.ItemDfRoutineBinding
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.interfaces.IDefaultRoutineListener
 
@@ -15,7 +15,7 @@ class DefaultRoutinesAdapter(
 ) : RecyclerView.Adapter<DefaultRoutinesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemDefaultRoutineBinding.bind(view)
+        private val binding = ItemDfRoutineBinding.bind(view)
         private val c = binding.root.context
         fun bind(defaultRoutine: Routine, listener: IDefaultRoutineListener) {
             binding.apply {
@@ -28,6 +28,9 @@ class DefaultRoutinesAdapter(
                 ivPushpin.setImageResource(pushPinIcon)
 
                 ivPushpin.setOnClickListener { listener.onRoutinePushPinClick(defaultRoutine.id) }
+                tvAdd.setOnClickListener {
+                    listener.addToMyRoutines(defaultRoutine.id, defaultRoutine.name)
+                }
             }
         }
     }
@@ -35,7 +38,7 @@ class DefaultRoutinesAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_default_routine, parent, false)
+                .inflate(R.layout.item_df_routine, parent, false)
         )
     }
 

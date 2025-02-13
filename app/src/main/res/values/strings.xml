@@ -73,7 +73,14 @@
     <string name="df_routines_reps">Reps:</string>
     <string name="df_routines_rest">Descanso</string>
     <string name="df_routines_super_serie">Super serie con el siguiente ejercicio</string>
-    <string name="df_routines_rest_min">min/serie </string>
+    <string name="df_routines_rest_min">min/serie</string>
+    <string name="df_routines_add_to_mine">Añadir a mis entrenamientos</string>
+
+    <string name="df_routines_add">Añadir rutina</string>
+    <string name="df_routines_add_description">¿Quieres añadir %s a <i>\"Mis entrenamientos\"?</i></string>
+    <string name="df_routines_add_description_two">Podrás renombrarla, añadir, eliminar y editar días y ejercicios a tu gusto.</string>
+    <string name="df_routines_add_btn">Añadir</string>
+    <string name="df_routines_add_cancel">Cancelar</string>
 
     <!-- MY ROUTINES -->
     <string name="my_routines_toolbar">Mis entrenamientos</string>
@@ -108,7 +115,8 @@
     <string name="days_exercise_dialog_weight_hint">00.00</string>
     <string name="days_exercise_dialog_time_text">Descanso</string>
     <string name="days_exercise_dialog_time_minutes">min / serie</string>
-    <string name="days_exercise_dialog_time_rest">Desc.</string>
+    <string name="days_exercise_dialog_time_rest">Descanso</string>
+    <string name="days_exercise_dialog_notes">Notas apuntadas</string>
     <string name="days_exercise_dialog_time_minutes_symbol">\'\'</string>
     <string name="days_exercise_dialog_time_hint">0:00</string>
     <string name="days_exercise_dialog_add_serie">Añadir serie</string>

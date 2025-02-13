@@ -1,5 +1,6 @@
 package com.mmfsin.noexcuses.domain.interfaces
 
+import com.mmfsin.noexcuses.data.models.MyRoutineDTO
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.Routine
 
@@ -16,4 +17,7 @@ interface IMyRoutinesRepository {
     fun addDay(routineId: String, title: String)
     fun editDay(id: String, title: String)
     fun deleteDay(id: String)
+
+    fun addDfRoutineToMine(routine: MyRoutineDTO)
+    fun addDayToNewDfRoutineMine(day: Day, newRoutineId: String)
 }

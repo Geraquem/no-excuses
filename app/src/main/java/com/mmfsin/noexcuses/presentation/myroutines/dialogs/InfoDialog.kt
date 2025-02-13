@@ -2,7 +2,6 @@ package com.mmfsin.noexcuses.presentation.myroutines.dialogs
 
 import android.view.LayoutInflater
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
@@ -55,8 +54,7 @@ class InfoDialog : BaseBottomSheet<DialogInfoBinding>() {
                 tvName.text = getString(R.string.first_dialog_exercise_name)
                 tvSeries.text = getString(R.string.first_dialog_exercise_series)
                 tvWait.text = getString(R.string.first_dialog_exercise_rest)
-                ivHasNotes.isVisible = false
-                llAddData.isVisible = false
+                llNotes.isVisible = true
                 ivEdit.isVisible = false
             }
         }

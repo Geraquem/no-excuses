@@ -43,24 +43,22 @@ class MExercisesAdapter(
                     llTime.visibility = View.VISIBLE
                 } ?: run { llTime.visibility = View.GONE }
 
-                ivHasNotes.isVisible = exercise.hasNotes
+                llNotes.isVisible = exercise.hasNotes
 
                 val addDataVisible =
                     series == 0 && time == null && !exercise.hasNotes && !exercise.superSerie
                 llData.isVisible = !addDataVisible
-                ivEdit.isVisible = !addDataVisible
-                llAddData.isVisible = addDataVisible
 
-                ivDot.visibility = View.VISIBLE
                 if (exercise.superSerie) {
+                    ivDot.visibility = View.VISIBLE
                     lineBottom.visibility = View.VISIBLE
                 }
                 if (prevSuperSerie) {
                     lineTop.visibility = View.VISIBLE
+                    ivDot.visibility = View.VISIBLE
                 }
 
                 exercise.chExerciseId?.let { id ->
-                    llAddData.setOnClickListener { listener.editExercise(id) }
                     ivEdit.setOnClickListener { listener.editExercise(id) }
                 }
             }

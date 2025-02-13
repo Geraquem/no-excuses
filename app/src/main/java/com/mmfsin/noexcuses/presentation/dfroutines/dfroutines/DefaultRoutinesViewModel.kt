@@ -1,6 +1,7 @@
 package com.mmfsin.noexcuses.presentation.dfroutines.dfroutines
 
 import com.mmfsin.noexcuses.base.BaseViewModel
+import com.mmfsin.noexcuses.domain.usecases.AddDfRoutineToMineUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetDefaultRoutinesUseCase
 import com.mmfsin.noexcuses.domain.usecases.UpdateDefaultRoutinePushPinUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,7 +10,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DefaultRoutinesViewModel @Inject constructor(
     private val getDefaultRoutinesUseCase: GetDefaultRoutinesUseCase,
-    private val updateDefaultRoutinePushPinUseCase: UpdateDefaultRoutinePushPinUseCase
+    private val updateDefaultRoutinePushPinUseCase: UpdateDefaultRoutinePushPinUseCase,
+    private val addDfRoutineToMineUseCase: AddDfRoutineToMineUseCase
 ) : BaseViewModel<DefaultRoutinesEvent>() {
 
     fun getDefaultRoutines() {
@@ -20,14 +22,22 @@ class DefaultRoutinesViewModel @Inject constructor(
         )
     }
 
-    fun updateDefaultRoutinePushPin(id: String) {
+    fun updateDefaultRoutinePushPin(routineId: String) {
         executeUseCase(
             {
                 updateDefaultRoutinePushPinUseCase.execute(
-                    UpdateDefaultRoutinePushPinUseCase.Params(id)
+                    UpdateDefaultRoutinePushPinUseCase.Params(routineId)
                 )
             },
-            { _event.value = DefaultRoutinesEvent.PushPinUpdated(myRoutineId = id) },
+            { _event.value = DefaultRoutinesEvent.PushPinUpdated },
+            { _event.value = DefaultRoutinesEvent.SWW }
+        )
+    }
+
+    fun addRoutineToMine(routineId: String) {
+        executeUseCase(
+            { addDfRoutineToMineUseCase.execute(AddDfRoutineToMineUseCase.Params(routineId)) },
+            { _event.value = DefaultRoutinesEvent.RoutineAddedToMine },
             { _event.value = DefaultRoutinesEvent.SWW }
         )
     }

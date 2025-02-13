@@ -4,4 +4,5 @@ interface IDefaultRoutineListener {
     fun onRoutineClick(routineId: String)
     fun onDayClick(routineId: String, dayId: String)
     fun onRoutinePushPinClick(routineId: String)
+    fun addToMyRoutines(routineId: String, routineName: String)
 }

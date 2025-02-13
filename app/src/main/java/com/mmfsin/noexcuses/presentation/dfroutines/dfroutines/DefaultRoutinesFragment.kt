@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,8 +18,10 @@ import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.DefaultDaysSheet
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.DefaultRoutinesFragmentDirections.Companion.actionDefaultRoutinesToDefaultExercises
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.adapter.DefaultRoutinesAdapter
+import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.dialogs.AddRoutineToMineDialog
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.interfaces.IDefaultRoutineListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.showFragmentDialog
 import com.mmfsin.noexcuses.utils.updateMenuUI
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -64,6 +67,10 @@ class DefaultRoutinesFragment :
                     activity?.updateMenuUI(mContext)
                 }
 
+                is DefaultRoutinesEvent.RoutineAddedToMine -> {
+                    Toast.makeText(mContext, "guay", Toast.LENGTH_SHORT).show()
+                }
+
                 is DefaultRoutinesEvent.SWW -> error()
             }
         }
@@ -90,6 +97,14 @@ class DefaultRoutinesFragment :
 
     override fun onDayClick(routineId: String, dayId: String) =
         findNavController().navigate(actionDefaultRoutinesToDefaultExercises(routineId, dayId))
+
+    override fun addToMyRoutines(routineId: String, routineName: String) {
+        activity?.showFragmentDialog(
+            AddRoutineToMineDialog.newInstance(routineName) {
+                viewModel.addRoutineToMine(routineId)
+            }
+        )
+    }
 
     private fun error() = activity?.showErrorDialog()
 
