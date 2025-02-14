@@ -164,6 +164,14 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_super_serie"
+                style="@style/MediumTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/df_routines_super_serie" />
+
+            <TextView
                 android:id="@+id/tv_notes"
                 style="@style/MediumTextView"
                 android:layout_width="match_parent"

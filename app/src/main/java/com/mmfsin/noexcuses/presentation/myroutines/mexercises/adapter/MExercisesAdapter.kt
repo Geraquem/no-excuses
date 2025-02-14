@@ -3,6 +3,7 @@ package com.mmfsin.noexcuses.presentation.myroutines.mexercises.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -22,8 +23,15 @@ class MExercisesAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemChExerciseBinding.bind(view)
         private val c = binding.root.context
-        fun bind(exercise: CompactExercise, prevSuperSerie: Boolean, listener: IMExerciseListener) {
+        fun bind(
+            exercise: CompactExercise,
+            prevSuperSerie: Boolean,
+            position: Int,
+            totalSize: Int,
+            listener: IMExerciseListener
+        ) {
             binding.apply {
+                tvPosition.text = position.toString()
                 setCategoryColor(exercise.category)
                 Glide.with(binding.root.context).load(exercise.imageURL).into(image)
                 tvCategory.text = exercise.category
@@ -45,18 +53,13 @@ class MExercisesAdapter(
 
                 llNotes.isVisible = exercise.hasNotes
 
-                val addDataVisible =
-                    series == 0 && time == null && !exercise.hasNotes && !exercise.superSerie
+                val addDataVisible = series == 0 && time == null && !exercise.hasNotes
                 llData.isVisible = !addDataVisible
 
-                if (exercise.superSerie) {
-                    ivDot.visibility = View.VISIBLE
-                    lineBottom.visibility = View.VISIBLE
-                }
-                if (prevSuperSerie) {
-                    lineTop.visibility = View.VISIBLE
-                    ivDot.visibility = View.VISIBLE
-                }
+                if (exercise.superSerie) lineBottom.visibility = View.VISIBLE
+                if (prevSuperSerie) lineTop.visibility = View.VISIBLE
+
+                setBackground(position, totalSize, clMain)
 
                 exercise.chExerciseId?.let { id ->
                     ivEdit.setOnClickListener { listener.editExercise(id) }
@@ -68,6 +71,15 @@ class MExercisesAdapter(
             val categoryColor = ContextCompat.getColor(c, getCategoryColor(category))
             binding.tvCategory.background.setTint(categoryColor)
         }
+
+        private fun setBackground(position: Int, totalSize: Int, container: ConstraintLayout) {
+            val background = when (position) {
+                1 -> R.drawable.bg_white_box_top
+                totalSize -> R.drawable.bg_white_box_bottom
+                else -> R.drawable.bg_white_box_medium
+            }
+            container.setBackgroundResource(background)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -78,7 +90,13 @@ class MExercisesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val prevSuperSerie = if (position == 0) false else (exercises[position - 1].superSerie)
-        holder.bind(exercises[position], prevSuperSerie, listener)
+        holder.bind(
+            exercise = exercises[position],
+            prevSuperSerie = prevSuperSerie,
+            position = position + 1,
+            totalSize = exercises.size,
+            listener = listener
+        )
         holder.itemView.setOnClickListener {
             exercises[position].chExerciseId?.let { id -> listener.onExerciseClick(id) }
         }

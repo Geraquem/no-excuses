@@ -1,5 +1,6 @@
 package com.mmfsin.noexcuses.data.mappers
 
+import android.util.Log
 import com.mmfsin.noexcuses.data.models.ChExerciseDTO
 import com.mmfsin.noexcuses.data.models.DataDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
@@ -43,17 +44,39 @@ fun Routine.createNewRoutineFromDefault(newId: String, days: Int) = MyRoutineDTO
 )
 
 fun DefaultExercise.toChExerciseDTO(
+    newExerciseId: String,
     newRoutineId: String,
     newDayId: String,
     position: Int
 ) = ChExerciseDTO(
-    id = UUID.randomUUID().toString(),
+    id = newExerciseId,
     routineId = newRoutineId,
     dayId = newDayId,
     exerciseId = this.exercise.id,
-    data = null,
+    data = null,//parseDataSeries(newDayId, this.reps),
     time = this.desc.toDouble(),
     notes = null,
     position = position,
     superSerie = this.superSerie
 )
+
+fun parseDataSeries(
+    newDayId: String,
+    reps: String
+): RealmList<DataDTO> {
+    val result = RealmList<DataDTO>()
+    try {
+        reps.split(",").forEach { s ->
+            val data = DataDTO(
+                id = UUID.randomUUID().toString(),
+                exerciseDayId = newDayId,
+                reps = s.toInt()
+            )
+            result.add(data)
+        }
+
+    } catch (e: Exception) {
+        Log.e("*/*/*/*/*/*", "Error parsing exercise series")
+    }
+    return result
+}

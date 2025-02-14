@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/light_grey"
     android:clipChildren="false"
     android:clipToPadding="false">
 
@@ -37,9 +37,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
+        tools:ignore="RtlSymmetry"
         tools:itemCount="2"
-        tools:listitem="@layout/item_df_exercise"
-        tools:ignore="RtlSymmetry" />
+        tools:listitem="@layout/item_df_exercise" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/loading"

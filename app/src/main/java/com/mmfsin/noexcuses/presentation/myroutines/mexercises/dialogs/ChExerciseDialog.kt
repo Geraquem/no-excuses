@@ -92,6 +92,7 @@ class ChExerciseDialog(
             chExercise.data?.let { data -> setUpSeriesRV(data) }
             chExercise.time?.let { time -> tvTime.text = time.formatTime() }
                 ?: run { llTime.visibility = View.GONE }
+            tvSuperSerie.isVisible = chExercise.superSerie
             chExercise.notes?.let { notes -> tvNotes.text = notes } ?: run {
                 tvNotes.visibility = View.GONE
             }

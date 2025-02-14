@@ -35,7 +35,7 @@ class AddChExerciseAdapter(
                 etRep.addTextChangedListener(repsTextWatcher)
                 etWeight.addTextChangedListener(weightTextWatcher)
 
-                ivDelete.setOnClickListener { listener?.deleteSerie(pos.toString()) }
+                ivDelete.setOnClickListener { listener?.deleteSerie(data.id ?: "nada") }
             }
         }
 

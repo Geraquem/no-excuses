@@ -19,6 +19,7 @@ import com.mmfsin.noexcuses.presentation.myroutines.exercises.interfaces.IChExer
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.UUID
 
 @AndroidEntryPoint
 class AddChExerciseDialog(
@@ -104,7 +105,12 @@ class AddChExerciseDialog(
 
     private fun addSerie() {
         seriesCont++
-        series.add(Data(id = seriesCont.toString()))
+        series.add(
+            Data(
+                id = UUID.randomUUID().toString(),
+                pos = seriesCont.toString()
+            )
+        )
         mAdapter?.notifyItemInserted(series.size - 1)
     }
 
@@ -146,15 +152,15 @@ class AddChExerciseDialog(
         }
     }
 
-    override fun addRepToSerie(id: String, reps: Int) {
+    override fun addRepToSerie(pos: String, reps: Int) {
         for (s in series) {
-            if (s.id == id) s.reps = reps
+            if (s.pos == pos) s.reps = reps
         }
     }
 
-    override fun addWeightToSerie(id: String, weight: Double) {
+    override fun addWeightToSerie(pos: String, weight: Double) {
         for (s in series) {
-            if (s.id == id) s.weight = weight
+            if (s.pos == pos) s.weight = weight
         }
     }
 

@@ -27,8 +27,17 @@ class AddDfRoutineToMineUseCase @Inject constructor(
                 /** Sacamos días de la rutina */
                 val dayExercises = dfRepository.getDefaultExercises(params.dfRoutineId, day.id)
                 dayExercises.forEachIndexed { pos, e ->
-                    /** Para cada días, sacamos ejercicios y los guardamos */
-                    val chExerciseDTO = e.toChExerciseDTO(newRoutineId, newDayId, pos)
+                    val newExerciseId = UUID.randomUUID().toString()
+
+                    /** Para cada día, sacamos sus ejercicios */
+                    val chExerciseDTO = e.toChExerciseDTO(
+                        newExerciseId,
+                        newRoutineId,
+                        newDayId,
+                        pos
+                    )
+
+                    /** Guardamos el ejercicio con sus series */
                     eRepository.addDefaultExerciseAsMine(chExerciseDTO)
                 }
                 /** Guardamos día */
