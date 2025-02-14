@@ -53,12 +53,20 @@ fun DefaultExercise.toChExerciseDTO(
     routineId = newRoutineId,
     dayId = newDayId,
     exerciseId = this.exercise.id,
-    data = null,//parseDataSeries(newDayId, this.reps),
-    time = this.desc.toDouble(),
+    data = parseDataSeries(newDayId, this.reps),
+    time = this.desc.parseTime(),
     notes = null,
     position = position,
     superSerie = this.superSerie
 )
+
+fun String.parseTime(): Double? {
+    return try {
+        this.toDouble()
+    } catch (e: Exception) {
+        null
+    }
+}
 
 fun parseDataSeries(
     newDayId: String,

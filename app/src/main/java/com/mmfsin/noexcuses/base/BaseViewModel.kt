@@ -21,6 +21,11 @@ abstract class BaseViewModel<T> : ViewModel() {
                 useCase().also { result -> success(result) }
             } catch (t: Throwable) {
                 error(t)
+                println("*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/")
+                println("ERROR -> ${t.message} ")
+                println("LOCALIZED -> ${t.localizedMessage} ")
+                println("CAUSE -> ${t.cause} ")
+                println("*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/")
             }
         }
     }
