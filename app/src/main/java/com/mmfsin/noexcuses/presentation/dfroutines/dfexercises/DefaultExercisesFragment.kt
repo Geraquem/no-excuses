@@ -5,13 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
-import com.mmfsin.noexcuses.databinding.FragmentDefaultExercisesBinding
+import com.mmfsin.noexcuses.databinding.FragmentDfExercisesBinding
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
+import com.mmfsin.noexcuses.presentation.calendar.DatePickerDialog
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter.DefaultExercisesAdapter
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.interfaces.IDefaultExerciseListener
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
@@ -24,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DefaultExercisesFragment :
-    BaseFragment<FragmentDefaultExercisesBinding, DefaultExercisesViewModel>(),
+    BaseFragment<FragmentDfExercisesBinding, DefaultExercisesViewModel>(),
     IDefaultExerciseListener {
 
     override val viewModel: DefaultExercisesViewModel by viewModels()
@@ -35,7 +38,7 @@ class DefaultExercisesFragment :
     private var dayId: String? = null
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup?) =
-        FragmentDefaultExercisesBinding.inflate(inflater, container, false)
+        FragmentDfExercisesBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
         arguments?.let {
@@ -49,6 +52,26 @@ class DefaultExercisesFragment :
         dayId?.let { id -> viewModel.getDefaultDay(id) } ?: run { error() }
     }
 
+    override fun setUI() {
+        binding.apply {
+            loading.isVisible = true
+            nvExercises.isVisible = false
+        }
+    }
+
+    override fun setListeners() {
+        binding.apply {
+            llRegisterDf.setOnClickListener {
+                activity?.let {
+                    val calendar = DatePickerDialog { info ->
+                        viewModel.registerDayInCalendar(info)
+                    }
+                    calendar.show(it.supportFragmentManager, "")
+                }
+            }
+        }
+    }
+
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
@@ -60,6 +83,11 @@ class DefaultExercisesFragment :
                 }
 
                 is DefaultExercisesEvent.GetDefaultDayExercises -> setUpExercises(event.exercises)
+                is DefaultExercisesEvent.ExercisesRegisteredInCalendar -> {
+                    Toast.makeText(mContext, R.string.calendar_added, Toast.LENGTH_SHORT).show()
+                    activity?.onBackPressedDispatcher?.onBackPressed()
+                }
+
                 is DefaultExercisesEvent.SWW -> error()
             }
         }
@@ -71,6 +99,7 @@ class DefaultExercisesFragment :
                 layoutManager = LinearLayoutManager(mContext)
                 adapter = DefaultExercisesAdapter(exercises, this@DefaultExercisesFragment)
             }
+            nvExercises.isVisible = true
             loading.isVisible = false
         }
     }

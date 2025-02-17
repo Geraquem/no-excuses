@@ -1,9 +1,11 @@
 package com.mmfsin.noexcuses.data.mappers
 
 import android.util.Log
+import com.mmfsin.noexcuses.data.models.CalendarInfoDTO
 import com.mmfsin.noexcuses.data.models.ChExerciseDTO
 import com.mmfsin.noexcuses.data.models.DataDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
+import com.mmfsin.noexcuses.domain.models.CalendarInfo
 import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
@@ -88,3 +90,10 @@ fun parseDataSeries(
     }
     return result
 }
+
+fun CalendarInfo.toCalendarInfoDTO() = CalendarInfoDTO(
+    id = UUID.randomUUID().toString(),
+    day = day,
+    month = month,
+    year = year,
+)

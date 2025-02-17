@@ -72,7 +72,9 @@ class MExercisesFragment : BaseFragment<FragmentChExercisesBinding, MExercisesVi
 
             llRegister.setOnClickListener {
                 activity?.let {
-                    val calendar = DatePickerDialog { d, m, y -> onDateSelected(d, m, y) }
+                    val calendar = DatePickerDialog { info ->
+                        viewModel.registerDayInCalendar(info)
+                    }
                     calendar.show(it.supportFragmentManager, "")
                 }
             }
@@ -94,6 +96,11 @@ class MExercisesFragment : BaseFragment<FragmentChExercisesBinding, MExercisesVi
 
                 is MExercisesEvent.GetDayExercises -> setUpExercises(event.exercises)
                 is MExercisesEvent.ExerciseMoved -> updateView()
+                is MExercisesEvent.ExercisesRegisteredInCalendar -> {
+                    Toast.makeText(mContext, R.string.calendar_added, Toast.LENGTH_SHORT).show()
+                    activity?.onBackPressedDispatcher?.onBackPressed()
+                }
+
                 is MExercisesEvent.SWW -> error()
             }
         }
@@ -141,10 +148,6 @@ class MExercisesFragment : BaseFragment<FragmentChExercisesBinding, MExercisesVi
 
     override fun updateView() {
         idGroup?.let { viewModel.getDayExercises(it.dayId) } ?: run { error() }
-    }
-
-    private fun onDateSelected(day: Int, month: Int, year: Int) {
-        Toast.makeText(mContext, "$day/$month/$year", Toast.LENGTH_SHORT).show()
     }
 
     private fun error() = activity?.showErrorDialog()

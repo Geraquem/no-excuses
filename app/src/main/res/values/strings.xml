@@ -177,6 +177,9 @@
     <string name="favs_delete">Eliminar</string>
     <string name="favs_empty">No hay ningún ejercicio marcado como favorito</string>
 
+    <!-- CALENDAR -->
+    <string name="calendar_added">Añadido correctamente al calendario</string>
+
     <!-- NOTES -->
     <string name="notes_toolbar">Notas</string>
     <string name="notes_empty">Todavía no has escrito nada</string>

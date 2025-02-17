@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
-import com.mmfsin.noexcuses.databinding.FragmentDefaultRoutinesBinding
+import com.mmfsin.noexcuses.databinding.FragmentDfRoutinesBinding
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.dfroutines.dfdays.DefaultDaysSheet
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.DefaultRoutinesFragmentDirections.Companion.actionDefaultRoutinesToDefaultExercises
@@ -27,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DefaultRoutinesFragment :
-    BaseFragment<FragmentDefaultRoutinesBinding, DefaultRoutinesViewModel>(),
+    BaseFragment<FragmentDfRoutinesBinding, DefaultRoutinesViewModel>(),
     IDefaultRoutineListener {
 
     override val viewModel: DefaultRoutinesViewModel by viewModels()
@@ -36,7 +36,7 @@ class DefaultRoutinesFragment :
 
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
-    ) = FragmentDefaultRoutinesBinding.inflate(inflater, container, false)
+    ) = FragmentDfRoutinesBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

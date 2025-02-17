@@ -9,7 +9,7 @@
         android:id="@+id/defaultRoutinesFragment"
         android:name="com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.DefaultRoutinesFragment"
         android:label="defaultRoutinesFragment"
-        tools:layout="@layout/fragment_default_routines">
+        tools:layout="@layout/fragment_df_routines">
         <action
             android:id="@+id/action_default_routines_to_default_exercises"
             app:destination="@id/defaultExercisesFragment">
@@ -26,6 +26,6 @@
         android:id="@+id/defaultExercisesFragment"
         android:name="com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.DefaultExercisesFragment"
         android:label="defaultExercisesFragment"
-        tools:layout="@layout/fragment_default_exercises" />
+        tools:layout="@layout/fragment_df_exercises" />
 
 </navigation>
