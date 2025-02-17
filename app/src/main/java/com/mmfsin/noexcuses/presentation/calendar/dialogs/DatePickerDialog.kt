@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.calendar
+package com.mmfsin.noexcuses.presentation.calendar.dialogs
 
 import android.app.DatePickerDialog
 import android.app.Dialog

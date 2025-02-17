@@ -78,6 +78,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     booleanArgs = true
                 )
             }
+            btnMyCalendar.setOnClickListener { navigateTo(R.navigation.nav_graph_calendar) }
             btnExercises.setOnClickListener { navigateTo(R.navigation.nav_graph_exercises) }
             btnStretching.setOnClickListener { navigateTo(R.navigation.nav_graph_stretchings) }
             btnNotes.setOnClickListener { navigateTo(R.navigation.nav_graph_notes) }

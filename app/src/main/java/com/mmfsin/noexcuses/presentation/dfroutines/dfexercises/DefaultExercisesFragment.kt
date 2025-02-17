@@ -14,7 +14,7 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentDfExercisesBinding
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
-import com.mmfsin.noexcuses.presentation.calendar.DatePickerDialog
+import com.mmfsin.noexcuses.presentation.calendar.dialogs.DatePickerDialog
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter.DefaultExercisesAdapter
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.interfaces.IDefaultExerciseListener
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog

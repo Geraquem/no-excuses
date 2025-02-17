@@ -22,7 +22,7 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentChExercisesBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
-import com.mmfsin.noexcuses.presentation.calendar.DatePickerDialog
+import com.mmfsin.noexcuses.presentation.calendar.dialogs.DatePickerDialog
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
