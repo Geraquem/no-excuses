@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
-import com.mmfsin.noexcuses.databinding.FragmentMexercisesBinding
+import com.mmfsin.noexcuses.databinding.FragmentChExercisesBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter.DefaultExercisesAdapter
@@ -30,7 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ActualExercisesFromMenuFragment :
-    BaseFragment<FragmentMexercisesBinding, ActualExercisesFromMenuViewModel>(),
+    BaseFragment<FragmentChExercisesBinding, ActualExercisesFromMenuViewModel>(),
     IDefaultExerciseListener, IMExerciseListener {
 
     override val viewModel: ActualExercisesFromMenuViewModel by viewModels()
@@ -43,7 +43,7 @@ class ActualExercisesFromMenuFragment :
     private var createdByUser: Boolean? = null
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup?) =
-        FragmentMexercisesBinding.inflate(inflater, container, false)
+        FragmentChExercisesBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
         idList = activity?.intent?.getStringExtra(BEDROCK_STR_ARGS)?.split("-")
@@ -65,6 +65,12 @@ class ActualExercisesFromMenuFragment :
 
     override fun setUI() {
         binding.apply { clAdd.visibility = View.GONE }
+    }
+
+    override fun setListeners() {
+        binding.apply {
+            llRegister.setOnClickListener { }
+        }
     }
 
     override fun observe() {
@@ -101,6 +107,7 @@ class ActualExercisesFromMenuFragment :
             }
 
             rvExercises.isVisible = exercises.isNotEmpty()
+            llRegister.isVisible = exercises.isNotEmpty()
             clEmpty.isVisible = exercises.isEmpty()
         }
     }

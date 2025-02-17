@@ -23,7 +23,7 @@
         android:id="@+id/mExercisesFragment"
         android:name="com.mmfsin.noexcuses.presentation.myroutines.mexercises.MExercisesFragment"
         android:label="mExercisesFragment"
-        tools:layout="@layout/fragment_mexercises">
+        tools:layout="@layout/fragment_ch_exercises">
         <action
             android:id="@+id/action_mGroups_to_exercises"
             app:destination="@id/chMGroupsFragment">

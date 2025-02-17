@@ -1,6 +1,5 @@
 package com.mmfsin.noexcuses.presentation.myroutines.mexercises
 
-import android.util.Log
 import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.GetDayByIdUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetDayExercisesUseCase
@@ -37,7 +36,7 @@ class MExercisesViewModel @Inject constructor(
     fun moveChExercise(exercises: List<String>) {
         executeUseCase(
             { moveChExerciseUseCase.execute(MoveChExerciseUseCase.Params(exercises)) },
-            { _event.value = MExercisesEvent.AAA },
+            { _event.value = MExercisesEvent.ExerciseMoved },
             { _event.value = MExercisesEvent.SWW }
         )
     }

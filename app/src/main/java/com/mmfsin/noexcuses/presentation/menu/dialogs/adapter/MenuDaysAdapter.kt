@@ -8,6 +8,7 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemDayBinding
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.presentation.menu.dialogs.listener.IMenuDaysListener
+import com.mmfsin.noexcuses.utils.getInitial
 
 class MenuDaysAdapter(
     private val days: List<Day>,
@@ -21,11 +22,8 @@ class MenuDaysAdapter(
         fun bind(day: Day, createdByUser: Boolean) {
             binding.apply {
                 val title = day.title
-                val initial = if (createdByUser) {
-                    if (title.isNotEmpty()) title.substring(0, 1) else "?"
-                } else {
-                    day.id.last().toString()
-                }
+                val initial = if (createdByUser) title.getInitial()
+                else day.id.last().toString()
                 image.firstLetter.text = initial
                 tvTitle.text = title
                 val exercises = day.exercises

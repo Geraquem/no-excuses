@@ -8,6 +8,7 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemDayBinding
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.presentation.myroutines.mdays.interfaces.IDaysListener
+import com.mmfsin.noexcuses.utils.getInitial
 
 class DaysAdapter(
     private val days: List<Day>,
@@ -20,7 +21,7 @@ class DaysAdapter(
         fun bind(day: Day, position: Int) {
             binding.apply {
                 val title = day.title
-                val initial = if (title.isNotEmpty()) title.substring(0, 1) else "?"
+                val initial = title.getInitial()
                 image.firstLetter.text = initial
                 tvDay.text = c.getString(R.string.days_day, position.toString())
                 tvTitle.text = title

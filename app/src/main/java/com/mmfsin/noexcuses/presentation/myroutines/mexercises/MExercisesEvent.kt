@@ -6,6 +6,6 @@ import com.mmfsin.noexcuses.domain.models.Day
 sealed class MExercisesEvent {
     class GetDay(val day: Day) : MExercisesEvent()
     class GetDayExercises(val exercises: List<CompactExercise>) : MExercisesEvent()
-    object AAA: MExercisesEvent()
+    object ExerciseMoved: MExercisesEvent()
     object SWW : MExercisesEvent()
 }

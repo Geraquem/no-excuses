@@ -10,6 +10,7 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseBottomSheet
 import com.mmfsin.noexcuses.databinding.DialogInfoBinding
 import com.mmfsin.noexcuses.domain.models.getCategoryColor
+import com.mmfsin.noexcuses.utils.getInitial
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,8 +41,10 @@ class InfoDialog : BaseBottomSheet<DialogInfoBinding>() {
             }
 
             day.apply {
-                image.firstLetter.text = getString(R.string.first_dialog_day_letter)
-                tvTitle.text = getString(R.string.first_dialog_day_title)
+                tvDay.text = getString(R.string.first_dialog_day)
+                val dayName = getString(R.string.first_dialog_day_title)
+                tvTitle.text = dayName
+                image.firstLetter.text = dayName.getInitial()
                 tvExercises.text = getString(R.string.days_exercises, "6")
             }
 
@@ -54,6 +57,7 @@ class InfoDialog : BaseBottomSheet<DialogInfoBinding>() {
                 tvName.text = getString(R.string.first_dialog_exercise_name)
                 tvSeries.text = getString(R.string.first_dialog_exercise_series)
                 tvWait.text = getString(R.string.first_dialog_exercise_rest)
+                tvPosition.text = getString(R.string.first_dialog_exercise_rest)
                 llNotes.isVisible = true
                 ivEdit.isVisible = false
             }

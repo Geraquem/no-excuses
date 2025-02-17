@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,8 +20,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
-import com.mmfsin.noexcuses.databinding.FragmentMexercisesBinding
+import com.mmfsin.noexcuses.databinding.FragmentChExercisesBinding
 import com.mmfsin.noexcuses.domain.models.CompactExercise
+import com.mmfsin.noexcuses.presentation.calendar.DatePickerDialog
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
@@ -37,7 +39,7 @@ import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesViewModel>(),
+class MExercisesFragment : BaseFragment<FragmentChExercisesBinding, MExercisesViewModel>(),
     IMExerciseListener {
 
     override val viewModel: MExercisesViewModel by viewModels()
@@ -47,7 +49,7 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
     private var idGroup: IdGroup? = null
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup?) =
-        FragmentMexercisesBinding.inflate(inflater, container, false)
+        FragmentChExercisesBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
         arguments?.let { idGroup = it.getBundleParcelableArgs(ID_GROUP, IdGroup::class.java) }
@@ -67,6 +69,13 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
                     findNavController().navigate(actionMGroupsToExercises(data))
                 }
             }
+
+            llRegister.setOnClickListener {
+                activity?.let {
+                    val calendar = DatePickerDialog { d, m, y -> onDateSelected(d, m, y) }
+                    calendar.show(it.supportFragmentManager, "")
+                }
+            }
         }
     }
 
@@ -84,7 +93,7 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
                 }
 
                 is MExercisesEvent.GetDayExercises -> setUpExercises(event.exercises)
-                is MExercisesEvent.AAA -> updateView()
+                is MExercisesEvent.ExerciseMoved -> updateView()
                 is MExercisesEvent.SWW -> error()
             }
         }
@@ -100,7 +109,7 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
                 )
                 itemTouchHelper.attachToRecyclerView(this)
             }
-            rvExercises.isVisible = exercises.isNotEmpty()
+            nvExercises.isVisible = exercises.isNotEmpty()
             clEmpty.isVisible = exercises.isEmpty()
         }
     }
@@ -132,6 +141,10 @@ class MExercisesFragment : BaseFragment<FragmentMexercisesBinding, MExercisesVie
 
     override fun updateView() {
         idGroup?.let { viewModel.getDayExercises(it.dayId) } ?: run { error() }
+    }
+
+    private fun onDateSelected(day: Int, month: Int, year: Int) {
+        Toast.makeText(mContext, "$day/$month/$year", Toast.LENGTH_SHORT).show()
     }
 
     private fun error() = activity?.showErrorDialog()

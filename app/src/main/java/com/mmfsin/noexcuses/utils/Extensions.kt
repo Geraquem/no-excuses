@@ -98,6 +98,10 @@ fun View.animateY(pos: Float, duration: Long) =
 fun View.animateX(pos: Float, duration: Long) =
     this.animate().translationX(pos).setDuration(duration)
 
+fun String.getInitial(): String {
+    return if (this.isNotEmpty()) this.substring(0, 1) else "?"
+}
+
 fun Double?.formatTime(): String? {
     return this?.let { d ->
         String.format("%.2f", d).replace(",", ":").replace(":00", "")

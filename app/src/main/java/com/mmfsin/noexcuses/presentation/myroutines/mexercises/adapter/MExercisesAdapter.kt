@@ -73,12 +73,15 @@ class MExercisesAdapter(
         }
 
         private fun setBackground(position: Int, totalSize: Int, container: ConstraintLayout) {
-            val background = when (position) {
-                1 -> R.drawable.bg_white_box_top
-                totalSize -> R.drawable.bg_white_box_bottom
-                else -> R.drawable.bg_white_box_medium
+            if (totalSize == 1) container.setBackgroundResource(R.drawable.bg_white_box)
+            else {
+                val background = when (position) {
+                    1 -> R.drawable.bg_white_box_top
+                    totalSize -> R.drawable.bg_white_box_bottom
+                    else -> R.drawable.bg_white_box_medium
+                }
+                container.setBackgroundResource(background)
             }
-            container.setBackgroundResource(background)
         }
     }
 

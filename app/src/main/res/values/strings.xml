@@ -27,6 +27,8 @@
     <string name="menu_my_routines_title">Mis entrenamientos</string>
     <string name="menu_my_routines_description">Crea tus propias rutinas de entrenamiento seleccionando ejercicios y grupos musculares. Divide la rutina en días para ser más eficiente y llevar tu entrenamiento al siguiente nivel.</string>
     <string name="menu_my_routines_new_routine">Crear nueva rutina</string>
+    <string name="menu_my_routines_calendar">Calendario</string>
+    <string name="menu_my_routines_calendar_description">Lleva un registro de todo lo que has trabajado.</string>
     <string name="menu_my_actual_routine">Actualmente estás haciendo:</string>
     <string name="menu_exercises_title">Ejercicios</string>
     <string name="menu_exercises_description">Echa un vistazo más detallado a todos los ejercicios.</string>
@@ -58,7 +60,7 @@
     <string name="first_dialog_routine_title">Mayo y Junio</string>
     <string name="first_dialog_routine_description">Enfocada en pierna</string>
     <string name="first_dialog_routine_accept">Entendido</string>
-    <string name="first_dialog_day_letter">L</string>
+    <string name="first_dialog_day">Día 1</string>
     <string name="first_dialog_day_title">Lunes</string>
     <string name="first_dialog_exercise_name">Press banca</string>
     <string name="first_dialog_exercise_category">pecho</string>
@@ -106,6 +108,7 @@
     <string name="mexercises_add_data">Añade información</string>
     <string name="mexercises_add_btn">Añadir ejercicio</string>
     <string name="mexercises_add_completed">Ejercicio añadido</string>
+    <string name="mexercises_register_in_calendar">Pulsa aqui si quieres registrar el día de entrenamiento en el calendario.</string>
 
     <!-- DAY EXERCISE ADD/EDIT/DELETE DIALOG -->
     <string name="days_exercise_dialog_serie">Serie %s</string>
