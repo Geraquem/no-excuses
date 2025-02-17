@@ -124,3 +124,11 @@ fun <T> Bundle.getBundleParcelableArgs(identifier: String, clazz: Class<T>): T? 
 fun <T1 : Any, T2 : Any, R : Any> checkNotNulls(p1: T1?, p2: T2?, block: (T1, T2) -> R): R? {
     return if (p1 != null && p2 != null) block(p1, p2) else null
 }
+
+fun Int.getMonthName(): String {
+    val months = listOf(
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    )
+    return if (this in 1..12) months[this - 1] else ""
+}

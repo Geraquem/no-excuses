@@ -178,7 +178,9 @@
     <string name="favs_empty">No hay ningún ejercicio marcado como favorito</string>
 
     <!-- CALENDAR -->
+    <string name="calendar_title">Calendario</string>
     <string name="calendar_added">Añadido correctamente al calendario</string>
+    <string name="calendar_selected_day">Día seleccionado:</string>
 
     <!-- NOTES -->
     <string name="notes_toolbar">Notas</string>

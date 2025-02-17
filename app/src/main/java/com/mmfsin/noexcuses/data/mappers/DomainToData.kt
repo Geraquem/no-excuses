@@ -93,7 +93,5 @@ fun parseDataSeries(
 
 fun CalendarInfo.toCalendarInfoDTO() = CalendarInfoDTO(
     id = UUID.randomUUID().toString(),
-    day = day,
-    month = month,
-    year = year,
+    date = "$day/${month + 1}/$year"
 )

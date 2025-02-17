@@ -1,9 +1,8 @@
 package com.mmfsin.noexcuses.presentation.calendar
 
-import com.mmfsin.noexcuses.domain.models.MuscularGroup
-import com.mmfsin.noexcuses.domain.models.Note
-import com.mmfsin.noexcuses.domain.models.Routine
+import com.prolificinteractive.materialcalendarview.CalendarDay
 
 sealed class CalendarEvent {
+    class CalendarData(val data: List<CalendarDay>) : CalendarEvent()
     object SWW : CalendarEvent()
 }

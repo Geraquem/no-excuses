@@ -22,6 +22,7 @@ import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.domain.models.Stretching
 import com.mmfsin.noexcuses.utils.formatTime
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -163,3 +164,20 @@ fun StretchingDTO.toStretching() = Stretching(
 )
 
 fun List<StretchingDTO>.toStretching() = this.map { it.toStretching() }
+
+fun List<String>.toCalendarDayList(): List<CalendarDay> {
+    val result = mutableListOf<CalendarDay>()
+    this.forEach { date ->
+        val splitDate = date.split("/")
+        if (splitDate.size == 3) {
+            result.add(
+                CalendarDay.from(
+                    splitDate[2].toInt(),
+                    splitDate[1].toInt(),
+                    splitDate[0].toInt()
+                )
+            )
+        }
+    }
+    return result
+}
