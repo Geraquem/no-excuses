@@ -10,6 +10,7 @@ import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.utils.getMonthName
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import io.realm.RealmList
 import java.util.UUID
@@ -98,5 +99,3 @@ fun CalendarInfo.toCalendarInfoDTO() = CalendarInfoDTO(
     dayId = dayId,
     routineId = routineId
 )
-
-fun CalendarDay.toDateString() = "${this.day}/${this.month}/${this.year}"

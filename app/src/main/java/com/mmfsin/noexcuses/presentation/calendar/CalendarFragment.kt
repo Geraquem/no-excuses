@@ -11,10 +11,10 @@ import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
-import com.mmfsin.noexcuses.data.mappers.toDateString
 import com.mmfsin.noexcuses.databinding.FragmentCalendarBinding
-import com.mmfsin.noexcuses.utils.getMonthName
+import com.mmfsin.noexcuses.domain.models.CalendarDayData
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.toCompleteDateString
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
@@ -57,7 +57,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
             when (event) {
                 is CalendarEvent.CalendarData -> {
                     binding.calendar.addDecorator(MultipleDecorator(event.data))
-                    setTodayDate()
+                    viewModel.getDayInfo(CalendarDay.today())
                 }
 
                 is CalendarEvent.GetDayInfo -> setDayInfo(event.date, event.info)
@@ -66,17 +66,10 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
         }
     }
 
-    private fun setTodayDate() {
-        val today = CalendarDay.today()
-        val text = "${today.day} de ${(today.month).getMonthName()} de ${today.year}"
-        binding.tvSelectedDay.text = text
-        viewModel.getDayInfo(date = today)
-    }
-
-    private fun setDayInfo(date: CalendarDay, info: String) {
+    private fun setDayInfo(date: CalendarDay, info: List<CalendarDayData>) {
         binding.apply {
-            tvSelectedDay.text = date.toDateString()
-            tvAux.text = info
+            tvSelectedDay.text = date.toCompleteDateString()
+            tvAux.text = if (info.isEmpty()) "no hay nada" else info[0].routineName
         }
     }
 
