@@ -67,14 +67,37 @@
                 tools:text="17 - 02 - 2024" />
 
             <TextView
-                android:id="@+id/tv_aux"
+                android:id="@+id/tv_empty"
                 style="@style/MediumTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="6dp"
-                tools:text="17 - 02 - 2024" />
+                android:text="@string/calendar_empty_data" />
+
+            <LinearLayout
+                android:id="@+id/ll_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/MediumTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/calendar_data_title" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_calendar_day_data"
+                    style="@style/scroll_no_effects"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_calendar_data" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

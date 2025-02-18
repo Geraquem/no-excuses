@@ -48,9 +48,10 @@ class CalendarRepository @Inject constructor(
         val day = realmDatabase.getObjectFromRealm(DayDTO::class.java, ID, dayId)
 
         return CalendarDayData(
-            dayName = day?.title ?: "",
+            dayName = day?.title,
             dayId = dayId,
-            routineName = mRoutine?.title ?: (dfRoutine?.name ?: ""),
+            routineName = mRoutine?.title ?: (dfRoutine?.name),
+            routineDescription = mRoutine?.description ?: dfRoutine?.description,
             routineId = routineId
         )
     }

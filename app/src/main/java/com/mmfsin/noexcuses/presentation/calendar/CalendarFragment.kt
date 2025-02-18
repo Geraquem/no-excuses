@@ -7,12 +7,15 @@ import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentCalendarBinding
 import com.mmfsin.noexcuses.domain.models.CalendarDayData
+import com.mmfsin.noexcuses.presentation.calendar.adapter.CalendarDayAdapter
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.toCompleteDateString
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -69,7 +72,16 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
     private fun setDayInfo(date: CalendarDay, info: List<CalendarDayData>) {
         binding.apply {
             tvSelectedDay.text = date.toCompleteDateString()
-            tvAux.text = if (info.isEmpty()) "no hay nada" else info[0].routineName
+            tvEmpty.isVisible = info.isEmpty()
+            llData.isVisible = info.isNotEmpty()
+            if (info.isNotEmpty()) setRvData(info)
+        }
+    }
+
+    private fun setRvData(info: List<CalendarDayData>) {
+        binding.rvCalendarDayData.apply {
+            layoutManager = LinearLayoutManager(mContext)
+            adapter = CalendarDayAdapter(info)
         }
     }
 

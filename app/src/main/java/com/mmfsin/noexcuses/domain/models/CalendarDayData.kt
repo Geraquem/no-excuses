@@ -5,8 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CalendarDayData(
-    var dayName: String,
+    var dayName: String?,
     var dayId: String,
-    var routineName: String,
+    var routineName: String?,
+    var routineDescription: String?,
     var routineId: String
 ) : Parcelable
