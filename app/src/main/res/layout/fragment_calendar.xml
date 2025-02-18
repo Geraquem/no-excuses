@@ -66,6 +66,16 @@
                 android:paddingVertical="6dp"
                 tools:text="17 - 02 - 2024" />
 
+            <TextView
+                android:id="@+id/tv_aux"
+                style="@style/MediumTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                tools:text="17 - 02 - 2024" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

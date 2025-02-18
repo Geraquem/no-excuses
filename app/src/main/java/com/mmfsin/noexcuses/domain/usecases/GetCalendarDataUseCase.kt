@@ -9,6 +9,7 @@ import javax.inject.Inject
 class GetCalendarDataUseCase @Inject constructor(
     private val repository: ICalendarRepository
 ) : BaseUseCaseNoParams<List<CalendarDay>>() {
+
     override suspend fun execute(): List<CalendarDay> {
         val days = repository.getCalendarData()
         return days.toCalendarDayList()

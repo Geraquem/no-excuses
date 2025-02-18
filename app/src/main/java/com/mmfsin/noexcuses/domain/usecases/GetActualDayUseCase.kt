@@ -9,8 +9,7 @@ import javax.inject.Inject
 class GetActualDayUseCase @Inject constructor(
     private val defaultRepository: IDefaultRoutinesRepository,
     private val myRoutinesRepository: IMyRoutinesRepository
-) :
-    BaseUseCase<GetActualDayUseCase.Params, Day?>() {
+) : BaseUseCase<GetActualDayUseCase.Params, Day?>() {
 
     override suspend fun execute(params: Params): Day? {
         return if (params.createdByUser) myRoutinesRepository.getDayById(params.dayId)

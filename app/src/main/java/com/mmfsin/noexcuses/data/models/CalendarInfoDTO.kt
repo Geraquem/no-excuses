@@ -6,5 +6,7 @@ import io.realm.annotations.PrimaryKey
 open class CalendarInfoDTO(
     @PrimaryKey
     var id: String = "",
-    var date: String = ""
+    var date: String = "",
+    var dayId: String = "",
+    var routineId: String = ""
 ) : RealmObject()

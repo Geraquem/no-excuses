@@ -25,6 +25,7 @@ const val DAY_ID = "dayId"
 const val FAV_ID = "isFav"
 const val DATA_ID = "exerciseDayId"
 const val ROUTINE_DOING_IT = "doingIt"
+const val DATE = "date"
 
 //NAVIGATION
 const val MGROUP_ID = "mGroupId"

@@ -21,6 +21,7 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentChExercisesBinding
+import com.mmfsin.noexcuses.domain.models.CalendarInfo
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.presentation.calendar.dialogs.DatePickerDialog
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
@@ -72,10 +73,20 @@ class MExercisesFragment : BaseFragment<FragmentChExercisesBinding, MExercisesVi
 
             llRegister.setOnClickListener {
                 activity?.let {
-                    val calendar = DatePickerDialog { info ->
-                        viewModel.registerDayInCalendar(info)
+                    idGroup?.let { ids ->
+                        val calendar = DatePickerDialog { d, m, y ->
+                            viewModel.registerDayInCalendar(
+                                CalendarInfo(
+                                    day = d,
+                                    month = m,
+                                    year = y,
+                                    dayId = ids.dayId,
+                                    routineId = ids.routineId
+                                )
+                            )
+                        }
+                        calendar.show(it.supportFragmentManager, "")
                     }
-                    calendar.show(it.supportFragmentManager, "")
                 }
             }
         }

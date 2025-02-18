@@ -13,6 +13,7 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentDfExercisesBinding
+import com.mmfsin.noexcuses.domain.models.CalendarInfo
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.presentation.calendar.dialogs.DatePickerDialog
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter.DefaultExercisesAdapter
@@ -63,10 +64,20 @@ class DefaultExercisesFragment :
         binding.apply {
             llRegisterDf.setOnClickListener {
                 activity?.let {
-                    val calendar = DatePickerDialog { info ->
-                        viewModel.registerDayInCalendar(info)
+                    checkNotNulls(dayId, routineId) { dId, rId ->
+                        val calendar = DatePickerDialog { d, m, y ->
+                            viewModel.registerDayInCalendar(
+                                CalendarInfo(
+                                    day = d,
+                                    month = m,
+                                    year = y,
+                                    dayId = dId,
+                                    routineId = rId
+                                )
+                            )
+                        }
+                        calendar.show(it.supportFragmentManager, "")
                     }
-                    calendar.show(it.supportFragmentManager, "")
                 }
             }
         }

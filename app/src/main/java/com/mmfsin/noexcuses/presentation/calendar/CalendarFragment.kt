@@ -7,7 +7,6 @@ import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
@@ -48,8 +47,9 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
 
     override fun setListeners() {
         binding.apply {
-            calendar.setOnDateChangedListener { _, date, selected ->
-                Toast.makeText(mContext, "${date.month} - $selected", Toast.LENGTH_SHORT).show()
+            calendar.setOnDateChangedListener { _, date, _ ->
+                val dayToSearch = "${date.day}/${date.month}/${date.year}"
+                viewModel.getDayInfo(dayToSearch)
             }
         }
     }
@@ -60,7 +60,10 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
                 is CalendarEvent.CalendarData -> {
                     binding.calendar.addDecorator(MultipleDecorator(event.data))
                     setTodayDate()
-//                    viewModel.getTodayInfo()
+                }
+
+                is CalendarEvent.GetDayInfo -> {
+                    binding.tvAux.text = event.info
                 }
 
                 is CalendarEvent.SWW -> error()
@@ -72,6 +75,9 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
         val today = CalendarDay.today()
         val text = "${today.day} de ${(today.month).getMonthName()} de ${today.year}"
         binding.tvSelectedDay.text = text
+
+        val search = "17/2/2025"
+        viewModel.getDayInfo(date = search)
     }
 
     private fun error() = activity?.showErrorDialog()
