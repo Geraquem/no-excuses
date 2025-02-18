@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
+import com.mmfsin.noexcuses.data.mappers.toDateString
 import com.mmfsin.noexcuses.databinding.FragmentCalendarBinding
 import com.mmfsin.noexcuses.utils.getMonthName
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -47,10 +48,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
 
     override fun setListeners() {
         binding.apply {
-            calendar.setOnDateChangedListener { _, date, _ ->
-                val dayToSearch = "${date.day}/${date.month}/${date.year}"
-                viewModel.getDayInfo(dayToSearch)
-            }
+            calendar.setOnDateChangedListener { _, date, _ -> viewModel.getDayInfo(date) }
         }
     }
 
@@ -62,10 +60,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
                     setTodayDate()
                 }
 
-                is CalendarEvent.GetDayInfo -> {
-                    binding.tvAux.text = event.info
-                }
-
+                is CalendarEvent.GetDayInfo -> setDayInfo(event.date, event.info)
                 is CalendarEvent.SWW -> error()
             }
         }
@@ -75,9 +70,14 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
         val today = CalendarDay.today()
         val text = "${today.day} de ${(today.month).getMonthName()} de ${today.year}"
         binding.tvSelectedDay.text = text
+        viewModel.getDayInfo(date = today)
+    }
 
-        val search = "17/2/2025"
-        viewModel.getDayInfo(date = search)
+    private fun setDayInfo(date: CalendarDay, info: String) {
+        binding.apply {
+            tvSelectedDay.text = date.toDateString()
+            tvAux.text = info
+        }
     }
 
     private fun error() = activity?.showErrorDialog()

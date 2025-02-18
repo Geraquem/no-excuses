@@ -3,6 +3,7 @@ package com.mmfsin.noexcuses.presentation.calendar
 import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.GetCalendarDataUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetCalendarDayInfoUseCase
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -20,10 +21,10 @@ class CalendarViewModel @Inject constructor(
         )
     }
 
-    fun getDayInfo(date: String) {
+    fun getDayInfo(date: CalendarDay) {
         executeUseCase(
             { getCalendarDayInfoUseCase.execute(GetCalendarDayInfoUseCase.Params(date)) },
-            { result -> _event.value = CalendarEvent.GetDayInfo(result) },
+            { result -> _event.value = CalendarEvent.GetDayInfo(date, result) },
             { _event.value = CalendarEvent.SWW }
         )
     }
