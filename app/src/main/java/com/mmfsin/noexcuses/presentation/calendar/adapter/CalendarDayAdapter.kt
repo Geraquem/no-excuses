@@ -8,17 +8,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemCalendarDataBinding
 import com.mmfsin.noexcuses.domain.models.CalendarDayData
+import com.mmfsin.noexcuses.presentation.calendar.interfaces.ICalendarDayListener
 
 class CalendarDayAdapter(
     private val data: List<CalendarDayData>,
+    private val listener: ICalendarDayListener,
 ) : RecyclerView.Adapter<CalendarDayAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemCalendarDataBinding.bind(view)
         private val c = binding.root.context
-        var clickable: Boolean = false
+        private var clickable: Boolean = false
 
-        fun bind(data: CalendarDayData) {
+        fun bind(data: CalendarDayData, listener: ICalendarDayListener) {
             binding.apply {
                 data.routineName?.let { name ->
                     clickable = true
@@ -34,6 +36,9 @@ class CalendarDayAdapter(
                     tvDayName.isVisible = false
                     separator.isVisible = false
                 }
+
+                root.setOnClickListener { }
+                ivDelete.setOnClickListener { listener.deleteDayData(data.databaseId) }
             }
         }
     }
@@ -45,10 +50,7 @@ class CalendarDayAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(data[position])
-        holder.itemView.setOnClickListener {
-
-        }
+        holder.bind(data[position], listener)
     }
 
     override fun getItemCount(): Int = data.size

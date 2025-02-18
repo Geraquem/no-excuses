@@ -16,7 +16,10 @@ import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentCalendarBinding
 import com.mmfsin.noexcuses.domain.models.CalendarDayData
 import com.mmfsin.noexcuses.presentation.calendar.adapter.CalendarDayAdapter
+import com.mmfsin.noexcuses.presentation.calendar.dialogs.DeleteDayDataDialog
+import com.mmfsin.noexcuses.presentation.calendar.interfaces.ICalendarDayListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.showFragmentDialog
 import com.mmfsin.noexcuses.utils.toCompleteDateString
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
@@ -25,11 +28,14 @@ import com.prolificinteractive.materialcalendarview.spans.DotSpan
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel>() {
+class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel>(),
+    ICalendarDayListener {
 
     override val viewModel: CalendarViewModel by viewModels()
 
     private lateinit var mContext: Context
+
+    private var selectedDate: CalendarDay? = null
 
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
@@ -51,7 +57,10 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
 
     override fun setListeners() {
         binding.apply {
-            calendar.setOnDateChangedListener { _, date, _ -> viewModel.getDayInfo(date) }
+            calendar.setOnDateChangedListener { _, date, _ ->
+                selectedDate = date
+                viewModel.getDayInfo(date)
+            }
         }
     }
 
@@ -60,10 +69,15 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
             when (event) {
                 is CalendarEvent.CalendarData -> {
                     binding.calendar.addDecorator(MultipleDecorator(event.data))
+                    selectedDate = CalendarDay.today()
                     viewModel.getDayInfo(CalendarDay.today())
                 }
 
                 is CalendarEvent.GetDayInfo -> setDayInfo(event.date, event.info)
+                is CalendarEvent.DayDataDeleted -> {
+                    selectedDate?.let { date -> viewModel.getDayInfo(date) }
+                }
+
                 is CalendarEvent.SWW -> error()
             }
         }
@@ -81,8 +95,14 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
     private fun setRvData(info: List<CalendarDayData>) {
         binding.rvCalendarDayData.apply {
             layoutManager = LinearLayoutManager(mContext)
-            adapter = CalendarDayAdapter(info)
+            adapter = CalendarDayAdapter(info, this@CalendarFragment)
         }
+    }
+
+    override fun deleteDayData(id: String) {
+        activity?.showFragmentDialog(
+            DeleteDayDataDialog.newInstance { viewModel.deleteCalendarDay(id) }
+        )
     }
 
     private fun error() = activity?.showErrorDialog()

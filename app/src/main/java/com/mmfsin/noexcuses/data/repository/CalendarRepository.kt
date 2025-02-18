@@ -35,24 +35,29 @@ class CalendarRepository @Inject constructor(
         }
         val result = mutableListOf<CalendarDayData>()
         info.forEach { i ->
-            val data = getCalendarDayData(i.routineId, i.dayId)
+            val data = getCalendarDayData(i.id, i.routineId, i.dayId)
             result.add(data)
         }
         return result
     }
 
-    private fun getCalendarDayData(routineId: String, dayId: String): CalendarDayData {
+    private fun getCalendarDayData(id: String, routineId: String, dayId: String): CalendarDayData {
         val mRoutine = realmDatabase.getObjectFromRealm(MyRoutineDTO::class.java, ID, routineId)
         val dfRoutine =
             realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class.java, ID, routineId)
         val day = realmDatabase.getObjectFromRealm(DayDTO::class.java, ID, dayId)
 
         return CalendarDayData(
+            databaseId = id,
             dayName = day?.title,
             dayId = dayId,
             routineName = mRoutine?.title ?: (dfRoutine?.name),
             routineDescription = mRoutine?.description ?: dfRoutine?.description,
             routineId = routineId
         )
+    }
+
+    override fun deleteCalendarDayInfo(id: String) {
+        realmDatabase.deleteObject(CalendarInfoDTO::class.java, ID, id)
     }
 }

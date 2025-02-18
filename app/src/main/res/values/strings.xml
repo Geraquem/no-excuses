@@ -185,6 +185,11 @@
     <string name="calendar_empty_data">No hay nada registrado para este día.</string>
     <string name="calendar_no_data">Se ha perdido la información sobre esta rutina.</string>
 
+    <string name="calendar_delete_day">Eliminar registro</string>
+    <string name="calendar_delete_day_text">¿Quieres eliminar este registro del calendario?</string>
+    <string name="calendar_delete_day_accept">Eliminar</string>
+    <string name="calendar_delete_day_cancel">Cancelar</string>
+
     <!-- NOTES -->
     <string name="notes_toolbar">Notas</string>
     <string name="notes_empty">Todavía no has escrito nada</string>
