@@ -54,7 +54,7 @@ class CalendarDayExercisesSheet(
         setUI()
         observe()
 
-        viewModel.getExercises(dayId, routineId)
+//        viewModel.getExercises(dayId, routineId)
     }
 
     override fun setUI() {

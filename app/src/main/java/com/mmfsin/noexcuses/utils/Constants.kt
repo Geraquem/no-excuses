@@ -4,6 +4,7 @@ package com.mmfsin.noexcuses.utils
 const val ROOT_ACTIVITY_NAV_GRAPH = "root_nav_graph"
 const val BEDROCK_STR_ARGS = "bedrock_str_args"
 const val BEDROCK_BOOLEAN_ARGS = "bedrock_boolean_args"
+const val BEDROCK_PARCELABLE_ARGS = "bedrock_parcelable_args"
 const val LOCAL_BROADCAST_FILTER = "local_broadcast_filter"
 
 //FIREBASE
@@ -41,3 +42,5 @@ const val FIRST_TIME = "first_time"
 const val SERVER_EXERCISES = "server_exercises"
 const val SERVER_DEFAULT_ROUTINES = "server_default_routines"
 const val SERVER_STRETCHING = "server_stretching"
+
+const val SEPARATOR = "//separator//"

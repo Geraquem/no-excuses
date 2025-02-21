@@ -18,6 +18,7 @@ import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMenuBinding
+import com.mmfsin.noexcuses.domain.models.ActualData
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.domain.models.Routine
@@ -140,13 +141,12 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
         }
     }
 
-    override fun onMenuDayClick(routineId: String, dayId: String, createdByUser: Boolean) =
-        navigateTo(
+    override fun onMenuDayClick(routineId: String, dayId: String, createdByUser: Boolean) {
+        (activity as MainActivity).openBedRockActivity(
             navGraph = R.navigation.nav_graph_my_actual_exercises,
-            strArgs = "$routineId-$dayId",
-            booleanArgs = createdByUser
+            parcelable = ActualData(routineId, dayId, createdByUser)
         )
-
+    }
 
     private fun setUpMuscularGroups(mGroups: List<MuscularGroup>) {
         binding.rvMuscularGroups.apply {

@@ -75,6 +75,7 @@
         android:id="@+id/rv_exercises"
         style="@style/scroll_no_effects"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
@@ -87,6 +88,7 @@
         android:id="@+id/tv_empty"
         style="@style/MediumTextView"
         android:layout_width="0dp"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:alpha="0.5"
@@ -98,6 +100,5 @@
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right"
         app:layout_constraintTop_toBottomOf="@id/ll_top" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

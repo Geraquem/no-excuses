@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -11,6 +12,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.ActivityMainBinding
 import com.mmfsin.noexcuses.utils.BEDROCK_BOOLEAN_ARGS
+import com.mmfsin.noexcuses.utils.BEDROCK_PARCELABLE_ARGS
 import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.ROOT_ACTIVITY_NAV_GRAPH
 import dagger.hilt.android.AndroidEntryPoint
@@ -68,10 +70,15 @@ class MainActivity : AppCompatActivity() {
 
     fun openDrawer() = binding.drawerLayout.openDrawer(binding.navigationView)
 
-    fun openBedRockActivity(navGraph: Int, strArgs: String? = null, booleanArgs: Boolean? = null) {
+    fun openBedRockActivity(
+        navGraph: Int, strArgs: String? = null,
+        booleanArgs: Boolean? = null,
+        parcelable: Any? = null
+    ) {
         val intent = Intent(this, BedRockActivity::class.java)
         strArgs?.let { intent.putExtra(BEDROCK_STR_ARGS, strArgs) }
         booleanArgs?.let { intent.putExtra(BEDROCK_BOOLEAN_ARGS, booleanArgs) }
+        parcelable?.let { intent.putExtra(BEDROCK_PARCELABLE_ARGS, parcelable as Parcelable) }
         intent.putExtra(ROOT_ACTIVITY_NAV_GRAPH, navGraph)
         startActivity(intent)
     }

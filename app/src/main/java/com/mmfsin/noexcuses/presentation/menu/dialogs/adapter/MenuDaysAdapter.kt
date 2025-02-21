@@ -19,8 +19,9 @@ class MenuDaysAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemDayBinding.bind(view)
         private val c = binding.root.context
-        fun bind(day: Day, createdByUser: Boolean) {
+        fun bind(day: Day, position: Int, createdByUser: Boolean) {
             binding.apply {
+                tvDay.text = c.getString(R.string.days_day, position.toString())
                 val title = day.title
                 val initial = if (createdByUser) title.getInitial()
                 else day.id.last().toString()
@@ -42,7 +43,7 @@ class MenuDaysAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val day = days[position]
-        holder.bind(day, createdByUser)
+        holder.bind(day, position + 1, createdByUser)
         holder.itemView.setOnClickListener { listener.onDayClick(day.id) }
     }
 

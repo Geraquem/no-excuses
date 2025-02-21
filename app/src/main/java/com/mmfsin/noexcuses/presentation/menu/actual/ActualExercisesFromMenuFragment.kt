@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentChExercisesBinding
+import com.mmfsin.noexcuses.domain.models.ActualData
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter.DefaultExercisesAdapter
@@ -21,9 +22,7 @@ import com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs.ChExercis
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs.DeleteChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.dialogs.EditChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.mexercises.interfaces.IMExerciseListener
-import com.mmfsin.noexcuses.utils.BEDROCK_BOOLEAN_ARGS
-import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
-import com.mmfsin.noexcuses.utils.checkNotNulls
+import com.mmfsin.noexcuses.utils.BEDROCK_PARCELABLE_ARGS
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,30 +36,21 @@ class ActualExercisesFromMenuFragment :
 
     private lateinit var mContext: Context
 
-    private var idList: List<String>? = null
-    private var routineId: String? = null
-    private var dayId: String? = null
-    private var createdByUser: Boolean? = null
+    private var data: ActualData? = null
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentChExercisesBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
-        idList = activity?.intent?.getStringExtra(BEDROCK_STR_ARGS)?.split("-")
-        idList?.let { list ->
-            if (list.size > 1) {
-                routineId = list[0]
-                dayId = list[1]
-            } else error()
-        } ?: run { error() }
-        createdByUser = activity?.intent?.getBooleanExtra(BEDROCK_BOOLEAN_ARGS, false)
+        data = activity?.intent?.getParcelableExtra(BEDROCK_PARCELABLE_ARGS)
+        println("------------------------------------------------------------------------------------------------------------------------------")
+        println(data)
+        println("------------------------------------------------------------------------------------------------------------------------------")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkNotNulls(dayId, createdByUser) { id, byUser ->
-            viewModel.getActualDay(id, byUser)
-        } ?: run { error() }
+        data?.let { d -> viewModel.getActualDay(d.dayId, d.createdByUser) } ?: run { error() }
     }
 
     override fun setUI() {
@@ -78,9 +68,9 @@ class ActualExercisesFromMenuFragment :
             when (event) {
                 is ActualExercisesFromMenuEvent.GetDay -> {
                     (activity as BedRockActivity).setUpToolbar(title = event.day.title)
-                    checkNotNulls(routineId, createdByUser) { r, cbu ->
-                        viewModel.getActualDayExercises(r, event.day.id, cbu)
-                    }
+                    data?.let { d ->
+                        viewModel.getActualDayExercises(d.routineId, d.dayId, d.createdByUser)
+                    } ?: run { error() }
                 }
 
                 is ActualExercisesFromMenuEvent.GetDayExercises -> setUpExercises(event.exercises)
@@ -164,9 +154,7 @@ class ActualExercisesFromMenuFragment :
     }
 
     override fun updateView() {
-        checkNotNulls(routineId, dayId) { r, d ->
-            if (createdByUser != null) viewModel.getActualDayExercises(r, d, createdByUser!!)
-        }
+        data?.let { d -> viewModel.getActualDayExercises(d.routineId, d.dayId, d.createdByUser) }
     }
 
     private fun error() = activity?.showErrorDialog()
