@@ -18,26 +18,23 @@ class CalendarDayAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemCalendarDataBinding.bind(view)
         private val c = binding.root.context
-        private var clickable: Boolean = false
-
         fun bind(data: CalendarDayData, listener: ICalendarDayListener) {
             binding.apply {
                 data.routineName?.let { name ->
-                    clickable = true
                     tvRoutineName.text = name
                     data.routineDescription?.let { desc ->
                         tvRoutineDescription.text = desc
                     } ?: run { tvRoutineDescription.isVisible = false }
                     tvDayName.text = data.dayName
                 } ?: run {
-                    clickable = false
                     tvRoutineName.isVisible = false
                     tvRoutineDescription.text = c.getString(R.string.calendar_no_data)
                     tvDayName.isVisible = false
                     separator.isVisible = false
+                    ivView.isVisible = false
                 }
 
-                root.setOnClickListener { }
+                ivView.setOnClickListener { listener.toExercises(data.dayId, data.routineId) }
                 ivDelete.setOnClickListener { listener.deleteDayData(data.databaseId) }
             }
         }

@@ -17,6 +17,7 @@ import com.mmfsin.noexcuses.databinding.FragmentCalendarBinding
 import com.mmfsin.noexcuses.domain.models.CalendarDayData
 import com.mmfsin.noexcuses.presentation.calendar.adapter.CalendarDayAdapter
 import com.mmfsin.noexcuses.presentation.calendar.dialogs.DeleteDayDataDialog
+import com.mmfsin.noexcuses.presentation.calendar.dialogs.exercises.CalendarDayExercisesSheet
 import com.mmfsin.noexcuses.presentation.calendar.interfaces.ICalendarDayListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
@@ -97,6 +98,11 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
             layoutManager = LinearLayoutManager(mContext)
             adapter = CalendarDayAdapter(info, this@CalendarFragment)
         }
+    }
+
+    override fun toExercises(dayId: String, routineId: String) {
+        val dialog = CalendarDayExercisesSheet(dayId, routineId)
+        activity?.let { dialog.show(it.supportFragmentManager, "") }
     }
 
     override fun deleteDayData(id: String) {
