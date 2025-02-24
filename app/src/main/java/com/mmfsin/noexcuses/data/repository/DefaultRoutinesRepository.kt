@@ -8,7 +8,7 @@ import com.google.firebase.ktx.Firebase
 import com.mmfsin.noexcuses.data.mappers.toDay
 import com.mmfsin.noexcuses.data.mappers.toDayListFromDefaultDayDTO
 import com.mmfsin.noexcuses.data.mappers.toDefaultExercise
-import com.mmfsin.noexcuses.data.mappers.toDefaultRoutine
+import com.mmfsin.noexcuses.data.mappers.toRoutine
 import com.mmfsin.noexcuses.data.mappers.toDefaultRoutineList
 import com.mmfsin.noexcuses.data.mappers.toExercise
 import com.mmfsin.noexcuses.data.models.DefaultDayDTO
@@ -85,7 +85,7 @@ class DefaultRoutinesRepository @Inject constructor(
 
     override fun getDefaultRoutineById(id: String): Routine? {
         val routine = realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class.java, ID, id)
-        return routine?.toDefaultRoutine()
+        return routine?.toRoutine()
     }
 
     override fun updateRoutinePushPin(id: String) {

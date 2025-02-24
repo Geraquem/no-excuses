@@ -9,4 +9,6 @@ interface ICalendarRepository {
     fun getCalendarData(): List<String>
     fun getCalendarDayInfo(date: String): List<CalendarDayData>
     fun deleteCalendarDayInfo(id: String)
+
+    fun checkIfIsMyRoutine(routineId: String): Boolean?
 }

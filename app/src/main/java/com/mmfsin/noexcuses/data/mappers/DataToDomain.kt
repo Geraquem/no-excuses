@@ -51,7 +51,7 @@ fun ExerciseDTO.toExercise() = Exercise(
 fun List<ExerciseDTO>.toExerciseList() = this.map { it.toExercise() }
 
 /** My Routine */
-fun MyRoutineDTO.toMyRoutine() = Routine(
+fun MyRoutineDTO.toRoutine() = Routine(
     id = id,
     name = title,
     description = description,
@@ -60,10 +60,10 @@ fun MyRoutineDTO.toMyRoutine() = Routine(
     createdByUser = true
 )
 
-fun List<MyRoutineDTO>.toMyRoutineList() = this.map { it.toMyRoutine() }
+fun List<MyRoutineDTO>.toMyRoutineList() = this.map { it.toRoutine() }
 
 /** Default Routine */
-fun DefaultRoutineDTO.toDefaultRoutine() = Routine(
+fun DefaultRoutineDTO.toRoutine() = Routine(
     id = id,
     name = name,
     description = description,
@@ -72,7 +72,7 @@ fun DefaultRoutineDTO.toDefaultRoutine() = Routine(
     createdByUser = false
 )
 
-fun List<DefaultRoutineDTO>.toDefaultRoutineList() = this.map { it.toDefaultRoutine() }
+fun List<DefaultRoutineDTO>.toDefaultRoutineList() = this.map { it.toRoutine() }
 
 /** Day */
 fun DefaultDayDTO.toDay() = Day(

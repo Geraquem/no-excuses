@@ -60,4 +60,12 @@ class CalendarRepository @Inject constructor(
     override fun deleteCalendarDayInfo(id: String) {
         realmDatabase.deleteObject(CalendarInfoDTO::class.java, ID, id)
     }
+
+    override fun checkIfIsMyRoutine(routineId: String): Boolean? {
+        val dfR = realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class.java, ID, routineId)
+        dfR?.let { return it.createdByUser } ?: run {
+            val myR = realmDatabase.getObjectFromRealm(MyRoutineDTO::class.java, ID, routineId)
+            return myR?.createdByUser ?: run { null }
+        }
+    }
 }

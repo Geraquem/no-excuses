@@ -30,10 +30,7 @@ class DeleteDayDataDialog(val delete: () -> Unit) : BaseDialog<DialogCalendarDay
                 delete()
                 dismiss()
             }
-            btnDelete.setOnClickListener {
-                delete()
-                dismiss()
-            }
+            btnCancel.setOnClickListener { dismiss() }
         }
     }
 

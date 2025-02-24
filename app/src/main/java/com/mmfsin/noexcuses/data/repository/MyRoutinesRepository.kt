@@ -2,7 +2,7 @@ package com.mmfsin.noexcuses.data.repository
 
 import com.mmfsin.noexcuses.data.mappers.toDay
 import com.mmfsin.noexcuses.data.mappers.toDayListFromDayDTO
-import com.mmfsin.noexcuses.data.mappers.toMyRoutine
+import com.mmfsin.noexcuses.data.mappers.toRoutine
 import com.mmfsin.noexcuses.data.mappers.toMyRoutineList
 import com.mmfsin.noexcuses.data.models.ChExerciseDTO
 import com.mmfsin.noexcuses.data.models.DataDTO
@@ -33,7 +33,7 @@ class MyRoutinesRepository @Inject constructor(
 
     override fun getRoutineById(id: String): Routine? {
         val routine = getRoutineDTO(id)
-        return routine?.toMyRoutine() ?: run { null }
+        return routine?.toRoutine() ?: run { null }
     }
 
     override fun updateRoutinePushPin(id: String) {

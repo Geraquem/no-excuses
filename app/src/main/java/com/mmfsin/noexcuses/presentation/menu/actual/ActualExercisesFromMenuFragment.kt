@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,10 +43,8 @@ class ActualExercisesFromMenuFragment :
         FragmentChExercisesBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
+        /** CORREGIR */
         data = activity?.intent?.getParcelableExtra(BEDROCK_PARCELABLE_ARGS)
-        println("------------------------------------------------------------------------------------------------------------------------------")
-        println(data)
-        println("------------------------------------------------------------------------------------------------------------------------------")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,12 +53,15 @@ class ActualExercisesFromMenuFragment :
     }
 
     override fun setUI() {
+        /** CORREGIR */
         binding.apply { clAdd.visibility = View.GONE }
     }
 
     override fun setListeners() {
         binding.apply {
-            llRegister.setOnClickListener { }
+            llRegister.setOnClickListener {
+                Toast.makeText(mContext, "TO DO", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

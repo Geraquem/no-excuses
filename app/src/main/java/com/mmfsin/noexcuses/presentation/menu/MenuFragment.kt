@@ -186,7 +186,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             booleanArgs = booleanArgs
         )
 
-    private fun error() = activity?.showErrorDialog()
+    private fun error() = activity?.showErrorDialog(goBack = false)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

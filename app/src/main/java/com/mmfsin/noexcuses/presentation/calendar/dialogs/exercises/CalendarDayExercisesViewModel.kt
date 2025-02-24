@@ -20,7 +20,7 @@ class CalendarDayExercisesViewModel @Inject constructor(
                     )
                 )
             },
-            { _event.value = CalendarDayExercisesEvent.GetExercises("") },
+            { result-> _event.value = CalendarDayExercisesEvent.GetExercises(result) },
             { _event.value = CalendarDayExercisesEvent.SWW }
         )
     }

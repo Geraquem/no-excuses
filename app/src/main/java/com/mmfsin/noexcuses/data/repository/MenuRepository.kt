@@ -6,8 +6,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.mmfsin.noexcuses.data.mappers.toDayListFromDayDTO
 import com.mmfsin.noexcuses.data.mappers.toDayListFromDefaultDayDTO
-import com.mmfsin.noexcuses.data.mappers.toDefaultRoutine
-import com.mmfsin.noexcuses.data.mappers.toMyRoutine
+import com.mmfsin.noexcuses.data.mappers.toRoutine
 import com.mmfsin.noexcuses.data.models.DayDTO
 import com.mmfsin.noexcuses.data.models.DefaultDayDTO
 import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
@@ -97,12 +96,12 @@ class MenuRepository @Inject constructor(
         val myRoutines = realmDatabase.getObjectsFromRealm {
             where<MyRoutineDTO>().equalTo(ROUTINE_DOING_IT, true).findAll()
         }
-        if (myRoutines.isNotEmpty()) return myRoutines.first().toMyRoutine()
+        if (myRoutines.isNotEmpty()) return myRoutines.first().toRoutine()
 
         val dfRoutines = realmDatabase.getObjectsFromRealm {
             where<DefaultRoutineDTO>().equalTo(ROUTINE_DOING_IT, true).findAll()
         }
-        if (dfRoutines.isNotEmpty()) return dfRoutines.first().toDefaultRoutine()
+        if (dfRoutines.isNotEmpty()) return dfRoutines.first().toRoutine()
         return null
     }
 
