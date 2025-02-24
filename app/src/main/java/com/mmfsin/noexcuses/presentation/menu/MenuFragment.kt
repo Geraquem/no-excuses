@@ -66,9 +66,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             pinnedNote.root.visibility = View.GONE
             loading.root.visibility = View.VISIBLE
         }
-
-
-        navigateTo(R.navigation.nav_graph_my_routines)
     }
 
     override fun setListeners() {

@@ -28,7 +28,7 @@
     <string name="menu_my_routines_description">Crea tus propias rutinas de entrenamiento seleccionando ejercicios y grupos musculares. Divide la rutina en días para ser más eficiente y llevar tu entrenamiento al siguiente nivel.</string>
     <string name="menu_my_routines_new_routine">Crear nueva rutina</string>
     <string name="menu_my_routines_calendar">Calendario</string>
-    <string name="menu_my_routines_calendar_description">Lleva un registro de todo lo que has trabajado.</string>
+    <string name="menu_my_routines_calendar_description">Cuando registres una rutina aparecerá en el calendario el día que hayas entrenado y las rutinas realizadas. Organízate y lleva un registro de todo tu trabajo y de tus planes de entrenamientos.</string>
     <string name="menu_my_actual_routine">Actualmente estás haciendo:</string>
     <string name="menu_exercises_title">Ejercicios</string>
     <string name="menu_exercises_description">Echa un vistazo más detallado a todos los ejercicios.</string>

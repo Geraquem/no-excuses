@@ -146,7 +146,7 @@
                         android:drawablePadding="8dp"
                         android:gravity="center"
                         android:text="@string/menu_default_routines_title"
-                        app:drawableStartCompat="@drawable/ic_calendar" />
+                        app:drawableStartCompat="@drawable/ic_df_routines" />
 
                     <TextView
                         style="@style/MediumTextView"
@@ -233,7 +233,7 @@
                         android:drawablePadding="8dp"
                         android:gravity="center"
                         android:text="@string/menu_my_routines_calendar"
-                        app:drawableStartCompat="@drawable/ic_add_calendar" />
+                        app:drawableStartCompat="@drawable/ic_calendar" />
 
                     <TextView
                         style="@style/MediumTextView"

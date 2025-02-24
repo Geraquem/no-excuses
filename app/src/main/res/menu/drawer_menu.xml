@@ -3,7 +3,7 @@
     <group android:id="@+id/group_one">
         <item
             android:id="@+id/nav_default_routines"
-            android:icon="@drawable/ic_calendar"
+            android:icon="@drawable/ic_df_routines"
             android:title="@string/drawer_item_default_routines" />
         <item
             android:id="@+id/nav_my_routines"
