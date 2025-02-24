@@ -139,21 +139,11 @@ class CalendarDayExercisesSheet(
         } else activity?.showFragmentDialog(ExerciseDialog(exerciseId))
     }
 
-    override fun onExerciseClick(chExerciseId: String) {
-
-    }
-
-    override fun editExercise(chExerciseId: String) {
-    }
-
-    override fun onSeeExerciseButtonClick(id: String) {
-    }
-
-    override fun deleteExerciseFromDay(chExerciseId: String) {
-    }
-
-    override fun updateView() {
-    }
+    override fun onExerciseClick(chExerciseId: String) {}
+    override fun editExercise(chExerciseId: String) {}
+    override fun onSeeExerciseButtonClick(id: String) {}
+    override fun deleteExerciseFromDay(chExerciseId: String) {}
+    override fun updateView() {}
 
     private fun error() = activity?.showErrorDialog()
 }
