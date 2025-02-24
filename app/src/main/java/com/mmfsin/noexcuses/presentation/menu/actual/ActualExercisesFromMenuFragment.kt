@@ -1,6 +1,7 @@
 package com.mmfsin.noexcuses.presentation.menu.actual
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +10,15 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentChExercisesBinding
 import com.mmfsin.noexcuses.domain.models.ActualData
+import com.mmfsin.noexcuses.domain.models.CalendarInfo
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
+import com.mmfsin.noexcuses.presentation.calendar.dialogs.DatePickerDialog
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.adapter.DefaultExercisesAdapter
 import com.mmfsin.noexcuses.presentation.dfroutines.dfexercises.interfaces.IDefaultExerciseListener
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
@@ -43,8 +47,12 @@ class ActualExercisesFromMenuFragment :
         FragmentChExercisesBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
-        /** CORREGIR */
-        data = activity?.intent?.getParcelableExtra(BEDROCK_PARCELABLE_ARGS)
+        data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            activity?.intent?.getParcelableExtra(BEDROCK_PARCELABLE_ARGS, ActualData::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            activity?.intent?.getParcelableExtra(BEDROCK_PARCELABLE_ARGS)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,14 +61,28 @@ class ActualExercisesFromMenuFragment :
     }
 
     override fun setUI() {
-        /** CORREGIR */
         binding.apply { clAdd.visibility = View.GONE }
     }
 
     override fun setListeners() {
         binding.apply {
             llRegister.setOnClickListener {
-                Toast.makeText(mContext, "TO DO", Toast.LENGTH_SHORT).show()
+                activity?.let {
+                    data?.let { ids ->
+                        val calendar = DatePickerDialog { d, m, y ->
+                            viewModel.registerDayInCalendar(
+                                CalendarInfo(
+                                    day = d,
+                                    month = m,
+                                    year = y,
+                                    dayId = ids.dayId,
+                                    routineId = ids.routineId
+                                )
+                            )
+                        }
+                        calendar.show(it.supportFragmentManager, "")
+                    }
+                }
             }
         }
     }
@@ -76,6 +98,11 @@ class ActualExercisesFromMenuFragment :
                 }
 
                 is ActualExercisesFromMenuEvent.GetDayExercises -> setUpExercises(event.exercises)
+                is ActualExercisesFromMenuEvent.ExercisesRegisteredInCalendar -> {
+                    Toast.makeText(mContext, R.string.calendar_added, Toast.LENGTH_SHORT).show()
+                    activity?.onBackPressedDispatcher?.onBackPressed()
+                }
+
                 is ActualExercisesFromMenuEvent.SWW -> error()
             }
         }

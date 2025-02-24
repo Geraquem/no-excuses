@@ -1,15 +1,18 @@
 package com.mmfsin.noexcuses.presentation.menu.actual
 
 import com.mmfsin.noexcuses.base.BaseViewModel
+import com.mmfsin.noexcuses.domain.models.CalendarInfo
 import com.mmfsin.noexcuses.domain.usecases.GetActualDayExercisesUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetActualDayUseCase
+import com.mmfsin.noexcuses.domain.usecases.RegisterDayInCalendarUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class ActualExercisesFromMenuViewModel @Inject constructor(
     private val getActualDayUseCase: GetActualDayUseCase,
-    private val getActualDayExercisesUseCase: GetActualDayExercisesUseCase
+    private val getActualDayExercisesUseCase: GetActualDayExercisesUseCase,
+    private val registerDayInCalendarUseCase: RegisterDayInCalendarUseCase
 ) : BaseViewModel<ActualExercisesFromMenuEvent>() {
 
     fun getActualDay(dayId: String, createdByUser: Boolean) {
@@ -31,6 +34,14 @@ class ActualExercisesFromMenuViewModel @Inject constructor(
                 )
             },
             { result -> _event.value = ActualExercisesFromMenuEvent.GetDayExercises(result) },
+            { _event.value = ActualExercisesFromMenuEvent.SWW }
+        )
+    }
+
+    fun registerDayInCalendar(info: CalendarInfo) {
+        executeUseCase(
+            { registerDayInCalendarUseCase.execute(RegisterDayInCalendarUseCase.Params(info)) },
+            { _event.value = ActualExercisesFromMenuEvent.ExercisesRegisteredInCalendar },
             { _event.value = ActualExercisesFromMenuEvent.SWW }
         )
     }

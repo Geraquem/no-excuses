@@ -61,8 +61,6 @@ class MExercisesFragment : BaseFragment<FragmentChExercisesBinding, MExercisesVi
         idGroup?.let { viewModel.getDay(it.dayId) } ?: run { error() }
     }
 
-    override fun setUI() {}
-
     override fun setListeners() {
         binding.apply {
             btnAddExercise.setOnClickListener {
