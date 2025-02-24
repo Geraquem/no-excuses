@@ -21,11 +21,11 @@ class AddChExerciseAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemDataAddBinding.bind(view)
         private val c = binding.root.context
-        private var pos = 0
+        private var dataId: String? = null
         private var listener: IAddChExerciseListener? = null
         fun bind(data: Data, position: Int, addListener: IAddChExerciseListener) {
             binding.apply {
-                pos = position
+                dataId = data.id
                 listener = addListener
 
                 tvSerie.text = c.getString(R.string.days_exercise_dialog_serie, position.toString())
@@ -35,7 +35,7 @@ class AddChExerciseAdapter(
                 etRep.addTextChangedListener(repsTextWatcher)
                 etWeight.addTextChangedListener(weightTextWatcher)
 
-                ivDelete.setOnClickListener { listener?.deleteSerie(data.id ?: "nada") }
+                ivDelete.setOnClickListener { data.id?.let { id -> listener?.deleteSerie(id) } }
             }
         }
 
@@ -45,7 +45,7 @@ class AddChExerciseAdapter(
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 try {
                     val reps = s.toString().toInt()
-                    listener?.addRepToSerie(pos.toString(), reps)
+                    dataId?.let { id -> listener?.addRepToSerie(id, reps) }
                 } catch (e: java.lang.Exception) {
                     Log.e("ERROR ->", "Algo ha salido mal")
                 }
@@ -58,7 +58,7 @@ class AddChExerciseAdapter(
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 try {
                     val weight = s.toString().toDouble()
-                    listener?.addWeightToSerie(pos.toString(), weight)
+                    dataId?.let { id -> listener?.addWeightToSerie(id, weight) }
                 } catch (e: java.lang.Exception) {
                     Log.e("ERROR ->", "Algo ha salido mal")
                 }

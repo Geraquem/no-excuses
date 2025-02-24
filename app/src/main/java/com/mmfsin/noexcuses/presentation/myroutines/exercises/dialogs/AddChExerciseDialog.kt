@@ -33,7 +33,6 @@ class AddChExerciseDialog(
 
     private var exercise: Exercise? = null
     private var series = mutableListOf<Data>()
-    private var seriesCont = 0
 
     override fun inflateView(inflater: LayoutInflater) =
         DialogChExerciseAddBinding.inflate(inflater)
@@ -104,13 +103,7 @@ class AddChExerciseDialog(
     }
 
     private fun addSerie() {
-        seriesCont++
-        series.add(
-            Data(
-                id = UUID.randomUUID().toString(),
-                pos = seriesCont.toString()
-            )
-        )
+        series.add(Data(id = UUID.randomUUID().toString()))
         mAdapter?.notifyItemInserted(series.size - 1)
     }
 
@@ -136,7 +129,6 @@ class AddChExerciseDialog(
     }
 
     private fun setUpSeriesRV() {
-        setUpSeriesData()
         binding.rvSeries.apply {
             layoutManager = LinearLayoutManager(requireContext())
             mAdapter = AddChExerciseAdapter(series, this@AddChExerciseDialog)
@@ -144,24 +136,12 @@ class AddChExerciseDialog(
         }
     }
 
-    private fun setUpSeriesData() {
-        if (series.isNotEmpty()) {
-            for (i in 0 until series.size) {
-                series[i].id = (i + 1).toString()
-            }
-        }
+    override fun addRepToSerie(id: String, reps: Int) {
+        series.forEach { serie -> if (serie.id == id) serie.reps = reps }
     }
 
-    override fun addRepToSerie(pos: String, reps: Int) {
-        for (s in series) {
-            if (s.pos == pos) s.reps = reps
-        }
-    }
-
-    override fun addWeightToSerie(pos: String, weight: Double) {
-        for (s in series) {
-            if (s.pos == pos) s.weight = weight
-        }
+    override fun addWeightToSerie(id: String, weight: Double) {
+        series.forEach { serie -> if (serie.id == id) serie.weight = weight }
     }
 
     override fun deleteSerie(id: String) {
@@ -169,7 +149,6 @@ class AddChExerciseDialog(
         while (iterator.hasNext()) {
             val item = iterator.next()
             if (item.id == id) {
-                seriesCont--
                 iterator.remove()
             }
         }
