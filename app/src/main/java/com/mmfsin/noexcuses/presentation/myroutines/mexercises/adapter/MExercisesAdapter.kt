@@ -62,7 +62,7 @@ class MExercisesAdapter(
                 setBackground(position, totalSize, clMain)
 
                 exercise.chExerciseId?.let { id ->
-                    ivEdit.setOnClickListener { listener.editExercise(id) }
+                    rlEdit.setOnClickListener { listener.editExercise(id) }
                 }
             }
         }
@@ -108,7 +108,6 @@ class MExercisesAdapter(
     override fun getItemCount(): Int = exercises.size
 
     fun swapItems(from: Int, to: Int) = Collections.swap(exercises, from, to)
-    fun getItemIdAt(position: Int): String? = exercises[position].chExerciseId
 
     fun getNewSortedList(): MutableList<String> {
         val result = mutableListOf<String>()

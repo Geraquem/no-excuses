@@ -27,7 +27,7 @@ class CalendarMExercisesAdapter(
             position: Int,
         ) {
             binding.apply {
-                ivEdit.isVisible = false
+                rlEdit.isVisible = false
                 tvPosition.text = position.toString()
                 setCategoryColor(exercise.category)
                 Glide.with(binding.root.context).load(exercise.imageURL).into(image)
