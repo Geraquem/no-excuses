@@ -130,13 +130,12 @@ class CalendarDayExercisesSheet(
 
     override fun showExercise(exerciseId: String, createdByUser: Boolean) {
         if (createdByUser) {
-            /** AQUI ALGO FALLA */
-            activity?.showFragmentDialog(
-                ChExerciseDialog.newInstance(
-                    exerciseId,
-                    this@CalendarDayExercisesSheet
-                )
+            val dialogFragment = ChExerciseDialog(
+                exerciseId,
+                this@CalendarDayExercisesSheet
             )
+            dialogFragment.show(childFragmentManager, "")
+
         } else activity?.showFragmentDialog(ExerciseDialog(exerciseId))
     }
 
