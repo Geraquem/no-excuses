@@ -78,6 +78,7 @@ class MenuDaysSheet(
             }
             rvDays.isVisible = days.isNotEmpty()
             tvEmpty.isVisible = days.isEmpty()
+            loading.isVisible = false
         }
     }
 
