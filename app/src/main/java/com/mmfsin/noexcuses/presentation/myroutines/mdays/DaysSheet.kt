@@ -3,12 +3,10 @@ package com.mmfsin.noexcuses.presentation.myroutines.mdays
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseBottomSheet
 import com.mmfsin.noexcuses.databinding.DialogDaysBinding
 import com.mmfsin.noexcuses.domain.models.Day
@@ -89,6 +87,7 @@ class DaysSheet(
             }
             rvDays.isVisible = days.isNotEmpty()
             tvEmpty.isVisible = days.isEmpty()
+            loading.isVisible = false
         }
     }
 

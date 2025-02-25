@@ -42,6 +42,7 @@ class DefaultExercisesAdapter(
                 setBackground(position, totalSize, clMain)
 
                 llTime.isVisible = !exercise.superSerie
+                llSuperSerie.isVisible = exercise.superSerie
 
                 if (exercise.superSerie) lineBottom.visibility = View.VISIBLE
                 if (prevSuperSerie) lineTop.visibility = View.VISIBLE

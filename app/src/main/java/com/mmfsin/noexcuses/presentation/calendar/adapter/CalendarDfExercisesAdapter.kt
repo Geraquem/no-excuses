@@ -25,7 +25,6 @@ class CalendarDfExercisesAdapter(
             exercise: DefaultExercise,
             prevSuperSerie: Boolean,
             position: Int,
-            totalSize: Int
         ) {
             binding.apply {
                 tvPosition.text = position.toString()
@@ -64,7 +63,6 @@ class CalendarDfExercisesAdapter(
             exercise = exercises[position],
             prevSuperSerie = prevSuperSerie,
             position = position + 1,
-            totalSize = exercises.size,
         )
         holder.itemView.setOnClickListener { listener.showExercise(exercise.exercise.id, false) }
     }

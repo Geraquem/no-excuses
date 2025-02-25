@@ -13,6 +13,13 @@
 
     <group android:id="@+id/group_two">
         <item
+            android:id="@+id/nav_calendar"
+            android:icon="@drawable/ic_calendar"
+            android:title="@string/drawer_item_calendar" />
+    </group>
+
+    <group android:id="@+id/group_three">
+        <item
             android:id="@+id/nav_exercises"
             android:icon="@drawable/ic_dumbbell"
             android:title="@string/drawer_item_exercises" />
@@ -22,7 +29,7 @@
             android:title="@string/drawer_item_fav_exercises" />
     </group>
 
-    <group android:id="@+id/group_three">
+    <group android:id="@+id/group_four">
         <item
             android:id="@+id/nav_stretching"
             android:icon="@drawable/ic_stretching"
