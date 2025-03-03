@@ -16,6 +16,7 @@ import com.mmfsin.noexcuses.domain.interfaces.IMenuRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.utils.BODY_IMAGE_WOMAN_SELECTED
 import com.mmfsin.noexcuses.utils.MY_SHARED_PREFS
 import com.mmfsin.noexcuses.utils.M_GROUPS
 import com.mmfsin.noexcuses.utils.ROUTINE_DOING_IT
@@ -121,5 +122,18 @@ class MenuRepository @Inject constructor(
             }
         }
         return emptyList()
+    }
+
+    override fun checkBodyImage(): Boolean {
+        val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
+        return sharedPrefs.getBoolean(BODY_IMAGE_WOMAN_SELECTED, false)
+    }
+
+    override fun editBodyImage(womanImageSelected: Boolean) {
+        val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, MODE_PRIVATE)
+        sharedPrefs.edit().apply {
+            putBoolean(BODY_IMAGE_WOMAN_SELECTED, womanImageSelected)
+            apply()
+        }
     }
 }

@@ -12,14 +12,15 @@ import com.mmfsin.noexcuses.presentation.myroutines.mgroups.intefaces.IChMuscGro
 
 class ChMuscGroupsAdapter(
     private val groups: List<MuscularGroup>,
+    private val isWomanImageSelected: Boolean,
     private val listener: IChMuscGroupListener
 ) : RecyclerView.Adapter<ChMuscGroupsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemMuscularGroupBinding.bind(view)
-        fun bind(group: MuscularGroup) {
+        fun bind(group: MuscularGroup, isWomanImageSelected: Boolean) {
             binding.apply {
-                val mgImage = if(group.isManSelected) group.manImageURL else group.womanImageURL
+                val mgImage = if (isWomanImageSelected) group.womanImageURL else group.manImageURL
                 Glide.with(binding.root.context).load(mgImage).into(image)
                 tvName.text = group.name
             }
@@ -33,7 +34,7 @@ class ChMuscGroupsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(groups[position])
+        holder.bind(groups[position], isWomanImageSelected)
         holder.itemView.setOnClickListener { listener.onMGroupClick(groups[position].id) }
     }
 

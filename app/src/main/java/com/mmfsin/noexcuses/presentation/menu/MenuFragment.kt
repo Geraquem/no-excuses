@@ -34,8 +34,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuListener {
 
     override val viewModel: MenuViewModel by viewModels()
-
     private lateinit var mContext: Context
+
+    private var bodyImage: Boolean = false
 
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
@@ -89,7 +90,12 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is MenuEvent.VersionCompleted -> viewModel.getMuscularGroups()
+                is MenuEvent.VersionCompleted -> viewModel.getBodyImage()
+                is MenuEvent.BodyImage -> {
+                    bodyImage = event.isWomanImage
+                    viewModel.getMuscularGroups()
+                }
+
                 is MenuEvent.ActualRoutine -> {
                     setUpActualRoutine(event.routine)
                     viewModel.getPinnedNote()
@@ -151,7 +157,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
     private fun setUpMuscularGroups(mGroups: List<MuscularGroup>) {
         binding.rvMuscularGroups.apply {
             layoutManager = LinearLayoutManager(mContext, HORIZONTAL, false)
-            adapter = MenuMuscGroupsAdapter(mGroups, this@MenuFragment)
+            adapter = MenuMuscGroupsAdapter(mGroups, bodyImage, this@MenuFragment)
         }
     }
 

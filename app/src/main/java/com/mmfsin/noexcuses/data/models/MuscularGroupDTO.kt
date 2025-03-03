@@ -9,6 +9,5 @@ open class MuscularGroupDTO(
     var name: String = "",
     var manImageURL: String = "",
     var womanImageURL: String = "",
-    var isManSelected: Boolean = true,
     var order: Long = 0,
 ) : RealmObject()

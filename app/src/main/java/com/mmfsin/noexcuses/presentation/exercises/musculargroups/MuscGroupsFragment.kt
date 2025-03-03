@@ -30,6 +30,7 @@ class MuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MuscGroup
     private lateinit var mContext: Context
 
     private var mGroupId: String? = null
+    private var bodyImage: Boolean = false
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentMuscularGroupsBinding.inflate(inflater, container, false)
@@ -43,19 +44,35 @@ class MuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MuscGroup
         mGroupId?.let { id ->
             findNavController().navigate(actionMuscularGroupsToExercises(id))
             mGroupId = null
-        } ?: run { viewModel.getMuscularGroups() }
+        } ?: run { viewModel.getBodyImage() }
     }
 
     override fun setUI() {
         (activity as BedRockActivity).setUpToolbar(title = getString(R.string.mgroups_toolbar))
     }
 
-    override fun setListeners() {}
+    override fun setListeners() {
+        binding.apply {
+            swGender.setOnClickListener { viewModel.editBodyImage(swGender.isChecked) }
+        }
+    }
 
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
+                is MuscGroupsEvent.BodyImage -> {
+                    val sw = binding.swGender
+                    bodyImage = event.isWomanImage
+                    sw.isChecked = event.isWomanImage
+                    viewModel.getMuscularGroups()
+                }
+
                 is MuscGroupsEvent.MuscGroups -> setUpMGroups(event.groups)
+                is MuscGroupsEvent.BodyImageChanged -> {
+                    bodyImage = !bodyImage
+                    viewModel.getMuscularGroups()
+                }
+
                 is MuscGroupsEvent.SWW -> error()
             }
         }
@@ -64,7 +81,7 @@ class MuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MuscGroup
     private fun setUpMGroups(items: List<MuscularGroup>) {
         binding.rvMgroups.apply {
             layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-            adapter = MuscGroupsAdapter(items, this@MuscGroupsFragment)
+            adapter = MuscGroupsAdapter(items, bodyImage, this@MuscGroupsFragment)
         }
     }
 

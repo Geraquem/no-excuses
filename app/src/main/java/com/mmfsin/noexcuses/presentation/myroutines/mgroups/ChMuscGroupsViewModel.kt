@@ -1,13 +1,17 @@
 package com.mmfsin.noexcuses.presentation.myroutines.mgroups
 
 import com.mmfsin.noexcuses.base.BaseViewModel
+import com.mmfsin.noexcuses.domain.usecases.CheckBodyImageUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetMuscularGroupsUseCase
+import com.mmfsin.noexcuses.domain.usecases.SwitchBodyImageUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class ChMuscGroupsViewModel @Inject constructor(
-    private val getMuscularGroupsUseCase: GetMuscularGroupsUseCase
+    private val getMuscularGroupsUseCase: GetMuscularGroupsUseCase,
+    private val getBodyImageUseCase: CheckBodyImageUseCase,
+    private val switchBodyImageUseCase: SwitchBodyImageUseCase
 ) : BaseViewModel<ChMuscGroupsEvent>() {
 
     fun getMuscularGroups() {
@@ -17,6 +21,22 @@ class ChMuscGroupsViewModel @Inject constructor(
                 _event.value = if (result.isNotEmpty()) ChMuscGroupsEvent.MuscGroups(result)
                 else ChMuscGroupsEvent.SWW
             },
+            { _event.value = ChMuscGroupsEvent.SWW }
+        )
+    }
+
+    fun getBodyImage() {
+        executeUseCase(
+            { getBodyImageUseCase.execute() },
+            { result -> _event.value = ChMuscGroupsEvent.BodyImage(result) },
+            { _event.value = ChMuscGroupsEvent.SWW }
+        )
+    }
+
+    fun editBodyImage(selectedWomanImage: Boolean) {
+        executeUseCase(
+            { switchBodyImageUseCase.execute(SwitchBodyImageUseCase.Params(selectedWomanImage)) },
+            { _event.value = ChMuscGroupsEvent.BodyImageChanged },
             { _event.value = ChMuscGroupsEvent.SWW }
         )
     }

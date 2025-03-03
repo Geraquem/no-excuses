@@ -42,5 +42,6 @@ const val FIRST_TIME = "first_time"
 const val SERVER_EXERCISES = "server_exercises"
 const val SERVER_DEFAULT_ROUTINES = "server_default_routines"
 const val SERVER_STRETCHING = "server_stretching"
+const val BODY_IMAGE_WOMAN_SELECTED = "body_image_woman_selected"
 
 const val SEPARATOR = "//separator//"

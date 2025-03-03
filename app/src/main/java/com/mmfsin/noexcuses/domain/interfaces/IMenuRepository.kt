@@ -8,4 +8,7 @@ interface IMenuRepository {
 
     fun getMyActualRoutine(): Routine?
     fun getMyActualRoutineDays(routineId: String): List<Day>
+
+    fun checkBodyImage(): Boolean
+    fun editBodyImage(womanImageSelected: Boolean)
 }

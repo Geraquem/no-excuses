@@ -5,5 +5,4 @@ open class MuscularGroup(
     var name: String,
     var manImageURL: String,
     var womanImageURL: String,
-    var isManSelected: Boolean,
 )

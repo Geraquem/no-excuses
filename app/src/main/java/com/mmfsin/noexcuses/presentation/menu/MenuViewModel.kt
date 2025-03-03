@@ -1,6 +1,7 @@
 package com.mmfsin.noexcuses.presentation.menu
 
 import com.mmfsin.noexcuses.base.BaseViewModel
+import com.mmfsin.noexcuses.domain.usecases.CheckBodyImageUseCase
 import com.mmfsin.noexcuses.domain.usecases.CheckVersionUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetMuscularGroupsUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetMyActualRoutineUseCase
@@ -13,7 +14,8 @@ class MenuViewModel @Inject constructor(
     private val checkVersionUseCase: CheckVersionUseCase,
     private val getMyActualRoutine: GetMyActualRoutineUseCase,
     private val getMuscularGroups: GetMuscularGroupsUseCase,
-    private val getPinnedNoteUseCase: GetPinnedNoteUseCase
+    private val getPinnedNoteUseCase: GetPinnedNoteUseCase,
+    private val getBodyImageUseCase: CheckBodyImageUseCase
 ) : BaseViewModel<MenuEvent>() {
 
     fun checkVersion() {
@@ -28,6 +30,14 @@ class MenuViewModel @Inject constructor(
         executeUseCase(
             { getMyActualRoutine.execute() },
             { result -> _event.value = MenuEvent.ActualRoutine(result) },
+            { _event.value = MenuEvent.SWW }
+        )
+    }
+
+    fun getBodyImage() {
+        executeUseCase(
+            { getBodyImageUseCase.execute() },
+            { result -> _event.value = MenuEvent.BodyImage(result) },
             { _event.value = MenuEvent.SWW }
         )
     }

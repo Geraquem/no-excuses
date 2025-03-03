@@ -34,6 +34,7 @@ class ChMuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, ChMuscG
     private lateinit var mContext: Context
 
     private var idGroup: IdGroup? = null
+    private var bodyImage: Boolean = false
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentMuscularGroupsBinding.inflate(inflater, container, false)
@@ -44,7 +45,7 @@ class ChMuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, ChMuscG
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getMuscularGroups()
+        viewModel.getBodyImage()
     }
 
     override fun setUI() {
@@ -56,11 +57,27 @@ class ChMuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, ChMuscG
         }
     }
 
-    override fun setListeners() {}
+    override fun setListeners() {
+        binding.apply {
+            swGender.setOnClickListener { viewModel.editBodyImage(swGender.isChecked) }
+        }
+    }
 
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
+                is ChMuscGroupsEvent.BodyImage -> {
+                    val sw = binding.swGender
+                    bodyImage = event.isWomanImage
+                    sw.isChecked = event.isWomanImage
+                    viewModel.getMuscularGroups()
+                }
+
+                is ChMuscGroupsEvent.BodyImageChanged -> {
+                    bodyImage = !bodyImage
+                    viewModel.getMuscularGroups()
+                }
+
                 is ChMuscGroupsEvent.MuscGroups -> setUpMGroups(event.groups)
                 is ChMuscGroupsEvent.SWW -> error()
             }
@@ -70,7 +87,7 @@ class ChMuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, ChMuscG
     private fun setUpMGroups(items: List<MuscularGroup>) {
         binding.rvMgroups.apply {
             layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-            adapter = ChMuscGroupsAdapter(items, this@ChMuscGroupsFragment)
+            adapter = ChMuscGroupsAdapter(items, bodyImage, this@ChMuscGroupsFragment)
         }
     }
 
