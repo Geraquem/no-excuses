@@ -42,6 +42,14 @@ class MenuViewModel @Inject constructor(
         )
     }
 
+    fun checkBodyImageFromOnResume() {
+        executeUseCase(
+            { getBodyImageUseCase.execute() },
+            { result -> _event.value = MenuEvent.BodyImageOnResume(result) },
+            { _event.value = MenuEvent.SWW }
+        )
+    }
+
     fun getMuscularGroups() {
         executeUseCase(
             { getMuscularGroups.execute() },

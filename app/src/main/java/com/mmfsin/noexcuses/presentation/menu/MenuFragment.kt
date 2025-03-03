@@ -106,6 +106,13 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     viewModel.getMyActualRoutine()
                 }
 
+                is MenuEvent.BodyImageOnResume -> {
+                    if (bodyImage != event.image) {
+                        bodyImage = event.image
+                        viewModel.getMuscularGroups()
+                    }
+                }
+
                 is MenuEvent.PinnedNote -> setUpPinnedNote(event.note)
                 is MenuEvent.SWW -> error()
             }
@@ -191,6 +198,11 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             strArgs = strArgs,
             booleanArgs = booleanArgs
         )
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.checkBodyImageFromOnResume()
+    }
 
     private fun error() = activity?.showErrorDialog(goBack = false)
 

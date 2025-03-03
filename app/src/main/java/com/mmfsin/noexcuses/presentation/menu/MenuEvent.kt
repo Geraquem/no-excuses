@@ -9,6 +9,7 @@ sealed class MenuEvent {
     object VersionCompleted : MenuEvent()
     class ActualRoutine(val routine: Routine?) : MenuEvent()
     class BodyImage(val isWomanImage: Boolean) : MenuEvent()
+    class BodyImageOnResume(val image: Boolean) : MenuEvent()
     class GetMuscularGroups(val mGroups: List<MuscularGroup>) : MenuEvent()
     class PinnedNote(val note: Note?) : MenuEvent()
     object SWW : MenuEvent()
