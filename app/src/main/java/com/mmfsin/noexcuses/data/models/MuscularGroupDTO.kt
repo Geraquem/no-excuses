@@ -7,6 +7,8 @@ open class MuscularGroupDTO(
     @PrimaryKey
     var id: String = "",
     var name: String = "",
-    var imageURL: String = "",
+    var manImageURL: String = "",
+    var womanImageURL: String = "",
+    var isManSelected: Boolean = true,
     var order: Long = 0,
 ) : RealmObject()

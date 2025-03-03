@@ -19,7 +19,8 @@ class MuscGroupsAdapter(
         private val binding = ItemMuscularGroupBinding.bind(view)
         fun bind(group: MuscularGroup) {
             binding.apply {
-                Glide.with(binding.root.context).load(group.imageURL).into(image)
+                val mgImage = if(group.isManSelected) group.manImageURL else group.womanImageURL
+                Glide.with(binding.root.context).load(mgImage).into(image)
                 tvName.text = group.name
             }
         }
