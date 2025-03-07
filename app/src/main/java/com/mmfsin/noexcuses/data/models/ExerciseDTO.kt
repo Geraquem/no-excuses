@@ -8,7 +8,7 @@ open class ExerciseDTO(
     var id: String = "",
     var category: String = "",
     var imageURL: String = "",
-    var gifURL: String = "",
+    var gifURL: String? = null,
     var name: String = "",
     var order: Long = 0,
     var description: String = "",
