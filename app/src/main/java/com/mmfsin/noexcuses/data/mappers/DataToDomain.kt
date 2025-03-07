@@ -42,6 +42,7 @@ fun ExerciseDTO.toExercise() = Exercise(
     id = id,
     category = category,
     imageURL = imageURL,
+    gifURL = gifURL,
     name = name,
     description = description,
     involvedMuscles = muscles,
