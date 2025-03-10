@@ -127,7 +127,17 @@ class MenuRepository @Inject constructor(
     }
 
     override fun unpinRoutineFromMenu(routineId: String) {
-
+        val dfRoutine =
+            realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class.java, ID, routineId)
+        dfRoutine?.let { routine ->
+            routine.doingIt = false
+            realmDatabase.addObject { routine }
+        }
+        val mRoutine = realmDatabase.getObjectFromRealm(MyRoutineDTO::class.java, ID, routineId)
+        mRoutine?.let { routine ->
+            routine.doingIt = false
+            realmDatabase.addObject { routine }
+        }
     }
 
     override fun unpinNoteFromMenu(noteId: String) {
@@ -139,7 +149,7 @@ class MenuRepository @Inject constructor(
     }
 
     override fun checkBodyImage(): Boolean {
-        val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
+        val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, MODE_PRIVATE)
         return sharedPrefs.getBoolean(BODY_IMAGE_WOMAN_SELECTED, false)
     }
 
