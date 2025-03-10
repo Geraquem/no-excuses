@@ -68,4 +68,9 @@ class CalendarRepository @Inject constructor(
             return myR?.createdByUser ?: run { null }
         }
     }
+
+    override fun getTotalSavedInCalendar(): Int {
+        val saved = realmDatabase.getObjectsFromRealm { where<CalendarInfoDTO>().findAll() }
+        return saved.size
+    }
 }

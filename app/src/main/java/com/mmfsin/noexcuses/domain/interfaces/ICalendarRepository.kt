@@ -11,4 +11,6 @@ interface ICalendarRepository {
     fun deleteCalendarDayInfo(id: String)
 
     fun checkIfIsMyRoutine(routineId: String): Boolean?
+
+    fun getTotalSavedInCalendar(): Int
 }

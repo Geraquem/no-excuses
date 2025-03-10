@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getColorStateList
 import androidx.fragment.app.viewModels
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -72,6 +73,10 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
     override fun setListeners() {
         binding.apply {
             toolbar.ivOpenDrawer.setOnClickListener { (activity as MainActivity).openDrawer() }
+
+            actualRoutine.ivPushpin.setOnClickListener { }
+            pinnedNote.ivPushpin.setOnClickListener { }
+
             btnDefaultRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_default_routines) }
             btnMyRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_my_routines) }
             btnNewRoutine.setOnClickListener {
@@ -90,7 +95,12 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is MenuEvent.VersionCompleted -> viewModel.getBodyImage()
+                is MenuEvent.VersionCompleted -> viewModel.getTotalCalendarSaved()
+                is MenuEvent.CalendarSaved -> {
+                    setTotalCalendarDays(event.totalSaved)
+                    viewModel.getBodyImage()
+                }
+
                 is MenuEvent.BodyImage -> {
                     bodyImage = event.isWomanImage
                     viewModel.getMuscularGroups()
@@ -106,16 +116,19 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     viewModel.getMyActualRoutine()
                 }
 
-                is MenuEvent.BodyImageOnResume -> {
-                    if (bodyImage != event.image) {
-                        bodyImage = event.image
-                        viewModel.getMuscularGroups()
-                    }
-                }
-
                 is MenuEvent.PinnedNote -> setUpPinnedNote(event.note)
                 is MenuEvent.SWW -> error()
             }
+        }
+    }
+
+    private fun setTotalCalendarDays(total: Int) {
+        binding.apply {
+            val text = when (total) {
+                1 -> getString(R.string.menu_my_routines_calendar_one_saved)
+                else -> getString(R.string.menu_my_routines_calendar_saved, total.toString())
+            }
+            tvCalendarSaved.text = text
         }
     }
 
@@ -123,7 +136,10 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
         binding.apply {
             routine?.let {
                 actualRoutine.apply {
+                    val color = if (routine.createdByUser) R.color.blue else R.color.dark_green
+                    image.llMain.backgroundTintList = getColorStateList(mContext, color)
                     image.tvNumOfDays.text = routine.days.toString()
+
                     tvTitle.text = routine.name
                     val description = routine.description?.let { routine.description }
                         ?: run { getString(R.string.my_routines_no_description) }
@@ -201,7 +217,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun onResume() {
         super.onResume()
-        viewModel.checkBodyImageFromOnResume()
+        viewModel.getTotalCalendarSaved()
     }
 
     private fun error() = activity?.showErrorDialog(goBack = false)

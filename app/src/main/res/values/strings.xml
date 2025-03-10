@@ -30,6 +30,8 @@
     <string name="menu_my_routines_new_routine">Crear nueva rutina</string>
     <string name="menu_my_routines_calendar">Calendario</string>
     <string name="menu_my_routines_calendar_description">Cuando registres una rutina aparecerá en el calendario el día que hayas entrenado y las rutinas realizadas. Organízate y lleva un registro de todo tu trabajo y de tus planes de entrenamientos.</string>
+    <string name="menu_my_routines_calendar_one_saved">Tienes registrada 1 sesión</string>
+    <string name="menu_my_routines_calendar_saved">Tienes registradas %s sesiones</string>
     <string name="menu_my_actual_routine">Actualmente estás haciendo:</string>
     <string name="menu_exercises_title">Ejercicios</string>
     <string name="menu_exercises_description">Echa un vistazo más detallado a todos los ejercicios.</string>

@@ -146,7 +146,9 @@
                         android:drawablePadding="8dp"
                         android:gravity="center"
                         android:text="@string/menu_default_routines_title"
-                        app:drawableStartCompat="@drawable/ic_df_routines" />
+                        android:textColor="@color/dark_green"
+                        app:drawableStartCompat="@drawable/ic_df_routines"
+                        app:drawableTint="@color/dark_green" />
 
                     <TextView
                         style="@style/MediumTextView"
@@ -174,7 +176,9 @@
                         android:drawablePadding="8dp"
                         android:gravity="center"
                         android:text="@string/menu_my_routines_title"
-                        app:drawableStartCompat="@drawable/ic_my_routines" />
+                        android:textColor="@color/dark_blue"
+                        app:drawableStartCompat="@drawable/ic_my_routines"
+                        app:drawableTint="@color/dark_blue" />
 
                     <TextView
                         style="@style/MediumTextView"
@@ -233,14 +237,42 @@
                         android:drawablePadding="8dp"
                         android:gravity="center"
                         android:text="@string/menu_my_routines_calendar"
-                        app:drawableStartCompat="@drawable/ic_calendar" />
+                        android:textColor="@color/red"
+                        app:drawableStartCompat="@drawable/ic_calendar"
+                        app:drawableTint="@color/red" />
 
                     <TextView
                         style="@style/MediumTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
                         android:alpha="0.6"
                         android:text="@string/menu_my_routines_calendar_description" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="6dp"
+                            android:layout_height="6dp"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="6dp"
+                            android:background="@color/black"
+                            app:shapeAppearanceOverlay="@style/circular_image" />
+
+                        <TextView
+                            android:id="@+id/tv_calendar_saved"
+                            style="@style/MediumTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textStyle="bold"
+                            tools:text="@string/menu_my_routines_calendar_saved" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -301,7 +333,9 @@
                         android:drawablePadding="8dp"
                         android:gravity="center"
                         android:text="@string/menu_stretching_title"
-                        app:drawableStartCompat="@drawable/ic_stretching" />
+                        android:textColor="@color/dark_purple"
+                        app:drawableStartCompat="@drawable/ic_stretching"
+                        app:drawableTint="@color/dark_purple" />
 
                     <TextView
                         style="@style/MediumTextView"
@@ -329,7 +363,9 @@
                         android:drawablePadding="8dp"
                         android:gravity="center"
                         android:text="@string/menu_notes_title"
-                        app:drawableStartCompat="@drawable/ic_notes" />
+                        android:textColor="@color/dark_orange"
+                        app:drawableStartCompat="@drawable/ic_notes"
+                        app:drawableTint="@color/dark_orange" />
 
                     <TextView
                         style="@style/MediumTextView"
@@ -340,16 +376,16 @@
 
                 </LinearLayout>
 
-<!--                <com.google.android.gms.ads.nativead.NativeAdView-->
-<!--                    android:id="@+id/native_ad"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content">-->
+                <!--                <com.google.android.gms.ads.nativead.NativeAdView-->
+                <!--                    android:id="@+id/native_ad"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content">-->
 
-<!--                    <include-->
-<!--                        android:id="@+id/native_content"-->
-<!--                        layout="@layout/item_day" />-->
+                <!--                    <include-->
+                <!--                        android:id="@+id/native_content"-->
+                <!--                        layout="@layout/item_day" />-->
 
-<!--                </com.google.android.gms.ads.nativead.NativeAdView>-->
+                <!--                </com.google.android.gms.ads.nativead.NativeAdView>-->
 
             </LinearLayout>
 

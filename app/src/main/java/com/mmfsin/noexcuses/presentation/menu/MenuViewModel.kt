@@ -6,6 +6,7 @@ import com.mmfsin.noexcuses.domain.usecases.CheckVersionUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetMuscularGroupsUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetMyActualRoutineUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetPinnedNoteUseCase
+import com.mmfsin.noexcuses.domain.usecases.GetTotalSavedCalendarUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -15,7 +16,8 @@ class MenuViewModel @Inject constructor(
     private val getMyActualRoutine: GetMyActualRoutineUseCase,
     private val getMuscularGroups: GetMuscularGroupsUseCase,
     private val getPinnedNoteUseCase: GetPinnedNoteUseCase,
-    private val getBodyImageUseCase: CheckBodyImageUseCase
+    private val getBodyImageUseCase: CheckBodyImageUseCase,
+    private val getTotalSavedCalendarUseCase: GetTotalSavedCalendarUseCase
 ) : BaseViewModel<MenuEvent>() {
 
     fun checkVersion() {
@@ -34,18 +36,18 @@ class MenuViewModel @Inject constructor(
         )
     }
 
-    fun getBodyImage() {
+    fun getTotalCalendarSaved() {
         executeUseCase(
-            { getBodyImageUseCase.execute() },
-            { result -> _event.value = MenuEvent.BodyImage(result) },
+            { getTotalSavedCalendarUseCase.execute() },
+            { result -> _event.value = MenuEvent.CalendarSaved(result) },
             { _event.value = MenuEvent.SWW }
         )
     }
 
-    fun checkBodyImageFromOnResume() {
+    fun getBodyImage() {
         executeUseCase(
             { getBodyImageUseCase.execute() },
-            { result -> _event.value = MenuEvent.BodyImageOnResume(result) },
+            { result -> _event.value = MenuEvent.BodyImage(result) },
             { _event.value = MenuEvent.SWW }
         )
     }

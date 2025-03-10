@@ -3,6 +3,7 @@ package com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getColorStateList
 import androidx.recyclerview.widget.RecyclerView
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemDfRoutineBinding
@@ -20,6 +21,8 @@ class DefaultRoutinesAdapter(
         fun bind(defaultRoutine: Routine, listener: IDefaultRoutineListener) {
             binding.apply {
                 image.tvNumOfDays.text = defaultRoutine.days.toString()
+                image.llMain.backgroundTintList = getColorStateList(c, R.color.dark_green)
+
                 tvTitle.text = defaultRoutine.name
                 tvDescription.text = defaultRoutine.description
 

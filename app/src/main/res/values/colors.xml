@@ -27,11 +27,16 @@
     <color name="light_yellow">#FBFBDB</color>
 
     <color name="orange">#FFCF84</color>
+    <color name="dark_orange">#CD9337</color>
     <color name="light_orange">#FFDEA8</color>
 
     <color name="green">#9EE8B6</color>
+    <color name="dark_green">#308C4E</color>
     <color name="light_green">#EEFFE7</color>
-    
+
+    <color name="purple">#B77AEC</color>
+    <color name="dark_purple">#6B2AA3</color>
+
     <color name="shoulder_color">#BCFFB4</color>
     <color name="chest_color">#CDE1FF</color>
     <color name="biceps_color">#E3C5FF</color>
