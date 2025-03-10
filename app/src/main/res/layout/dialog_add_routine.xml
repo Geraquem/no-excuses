@@ -25,6 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/ll_main"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:clipChildren="false"
@@ -84,5 +85,51 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:lottie_autoPlay="true"
+        app:lottie_colorFilter="@color/black"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
+
+    <LinearLayout
+        android:id="@+id/ll_added"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/ic_check"
+            app:tint="@color/dark_green" />
+
+        <TextView
+            style="@style/MediumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/df_routines_add_completed"
+            android:textAllCaps="true" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

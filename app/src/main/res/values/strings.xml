@@ -95,6 +95,7 @@
     <string name="df_routines_add">Añadir rutina</string>
     <string name="df_routines_add_description">¿Quieres añadir %s a <i>\"Mis entrenamientos\"?</i></string>
     <string name="df_routines_add_description_two">Podrás renombrarla, añadir, eliminar y editar días y ejercicios a tu gusto.</string>
+    <string name="df_routines_add_completed">Añadida correctamente</string>
     <string name="df_routines_add_btn">Añadir</string>
     <string name="df_routines_add_cancel">Cancelar</string>
 

@@ -11,7 +11,6 @@ import javax.inject.Inject
 class DefaultRoutinesViewModel @Inject constructor(
     private val getDefaultRoutinesUseCase: GetDefaultRoutinesUseCase,
     private val updateDefaultRoutinePushPinUseCase: UpdateDefaultRoutinePushPinUseCase,
-    private val addDfRoutineToMineUseCase: AddDfRoutineToMineUseCase
 ) : BaseViewModel<DefaultRoutinesEvent>() {
 
     fun getDefaultRoutines() {
@@ -30,14 +29,6 @@ class DefaultRoutinesViewModel @Inject constructor(
                 )
             },
             { _event.value = DefaultRoutinesEvent.PushPinUpdated },
-            { _event.value = DefaultRoutinesEvent.SWW }
-        )
-    }
-
-    fun addRoutineToMine(routineId: String) {
-        executeUseCase(
-            { addDfRoutineToMineUseCase.execute(AddDfRoutineToMineUseCase.Params(routineId)) },
-            { _event.value = DefaultRoutinesEvent.RoutineAddedToMine },
             { _event.value = DefaultRoutinesEvent.SWW }
         )
     }
