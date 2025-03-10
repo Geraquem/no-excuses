@@ -59,7 +59,8 @@ class ChMuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, ChMuscG
 
     override fun setListeners() {
         binding.apply {
-            swGender.setOnClickListener { viewModel.editBodyImage(swGender.isChecked) }
+            btnMan.setOnClickListener { viewModel.editBodyImage(selectedWomanImage = false) }
+            btnWoman.setOnClickListener { viewModel.editBodyImage(selectedWomanImage = true) }
         }
     }
 
@@ -67,9 +68,10 @@ class ChMuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, ChMuscG
         viewModel.event.observe(this) { event ->
             when (event) {
                 is ChMuscGroupsEvent.BodyImage -> {
-                    val sw = binding.swGender
                     bodyImage = event.isWomanImage
-                    sw.isChecked = event.isWomanImage
+                    if (event.isWomanImage) binding.btnWoman.isChecked = true
+                    else binding.btnMan.isChecked = true
+
                     viewModel.getMuscularGroups()
                 }
 
