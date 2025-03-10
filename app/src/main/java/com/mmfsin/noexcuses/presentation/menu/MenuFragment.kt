@@ -25,10 +25,16 @@ import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.presentation.menu.adapter.MenuMuscGroupsAdapter
 import com.mmfsin.noexcuses.presentation.menu.dialogs.MenuDaysSheet
+import com.mmfsin.noexcuses.presentation.menu.dialogs.unpin.UnpinDataDialog
+import com.mmfsin.noexcuses.presentation.menu.dialogs.unpin.UnpinDataDialog.Companion.UnpinType
+import com.mmfsin.noexcuses.presentation.menu.dialogs.unpin.UnpinDataDialog.Companion.UnpinType.UNPIN_NOTE
+import com.mmfsin.noexcuses.presentation.menu.dialogs.unpin.UnpinDataDialog.Companion.UnpinType.UNPIN_ROUTINE
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 import com.mmfsin.noexcuses.utils.LOCAL_BROADCAST_FILTER
 import com.mmfsin.noexcuses.utils.animateY
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.showFragmentDialog
+import com.mmfsin.noexcuses.utils.updateMenuUI
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,6 +43,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
     override val viewModel: MenuViewModel by viewModels()
     private lateinit var mContext: Context
 
+    private var pinnedRoutineId: String? = null
+    private var pinnedNoteId: String? = null
     private var bodyImage: Boolean = false
 
     override fun inflateView(
@@ -74,8 +82,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
         binding.apply {
             toolbar.ivOpenDrawer.setOnClickListener { (activity as MainActivity).openDrawer() }
 
-            actualRoutine.ivPushpin.setOnClickListener { }
-            pinnedNote.ivPushpin.setOnClickListener { }
+            actualRoutine.ivPushpin.setOnClickListener { showUnpinDialog(UNPIN_ROUTINE) }
+            pinnedNote.ivPushpin.setOnClickListener { showUnpinDialog(UNPIN_NOTE) }
 
             btnDefaultRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_default_routines) }
             btnMyRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_my_routines) }
@@ -95,7 +103,20 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is MenuEvent.VersionCompleted -> viewModel.getTotalCalendarSaved()
+                is MenuEvent.VersionCompleted -> viewModel.getMyActualRoutine()
+
+                is MenuEvent.ActualRoutine -> {
+                    pinnedRoutineId = event.routine?.id
+                    setUpActualRoutine(event.routine)
+                    viewModel.getPinnedNote()
+                }
+
+                is MenuEvent.PinnedNote -> {
+                    pinnedNoteId = event.note?.id
+                    setUpPinnedNote(event.note)
+                    viewModel.getTotalCalendarSaved()
+                }
+
                 is MenuEvent.CalendarSaved -> {
                     setTotalCalendarDays(event.totalSaved)
                     viewModel.getBodyImage()
@@ -106,25 +127,25 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     viewModel.getMuscularGroups()
                 }
 
-                is MenuEvent.ActualRoutine -> {
-                    setUpActualRoutine(event.routine)
-                    viewModel.getPinnedNote()
-                }
+                is MenuEvent.GetMuscularGroups -> setUpMuscularGroups(event.mGroups)
 
-                is MenuEvent.GetMuscularGroups -> {
-                    setUpMuscularGroups(event.mGroups)
-                    viewModel.getMyActualRoutine()
-                }
-
-                is MenuEvent.PinnedNote -> setUpPinnedNote(event.note)
                 is MenuEvent.SWW -> error()
             }
         }
     }
 
+    private fun showUnpinDialog(type: UnpinType) {
+        val id = when (type) {
+            UNPIN_ROUTINE -> pinnedRoutineId
+            UNPIN_NOTE -> pinnedNoteId
+        }
+        id?.let { activity?.showFragmentDialog(UnpinDataDialog.newInstance(id, type)) }
+    }
+
     private fun setTotalCalendarDays(total: Int) {
         binding.apply {
             val text = when (total) {
+                0 -> getString(R.string.menu_my_routines_calendar_nothing_saved)
                 1 -> getString(R.string.menu_my_routines_calendar_one_saved)
                 else -> getString(R.string.menu_my_routines_calendar_saved, total.toString())
             }
@@ -178,9 +199,12 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
     }
 
     private fun setUpMuscularGroups(mGroups: List<MuscularGroup>) {
-        binding.rvMuscularGroups.apply {
-            layoutManager = LinearLayoutManager(mContext, HORIZONTAL, false)
-            adapter = MenuMuscGroupsAdapter(mGroups, bodyImage, this@MenuFragment)
+        binding.apply {
+            rvMuscularGroups.apply {
+                layoutManager = LinearLayoutManager(mContext, HORIZONTAL, false)
+                adapter = MenuMuscGroupsAdapter(mGroups, bodyImage, this@MenuFragment)
+            }
+            loading.root.visibility = View.GONE
         }
     }
 
@@ -204,7 +228,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     }
                 }
             } ?: run { pinnedNote.root.visibility = View.GONE }
-            loading.root.visibility = View.GONE
         }
     }
 
@@ -217,7 +240,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun onResume() {
         super.onResume()
-        viewModel.getTotalCalendarSaved()
+        activity?.updateMenuUI(mContext)
     }
 
     private fun error() = activity?.showErrorDialog(goBack = false)

@@ -30,6 +30,7 @@
     <string name="menu_my_routines_new_routine">Crear nueva rutina</string>
     <string name="menu_my_routines_calendar">Calendario</string>
     <string name="menu_my_routines_calendar_description">Cuando registres una rutina aparecerá en el calendario el día que hayas entrenado y las rutinas realizadas. Organízate y lleva un registro de todo tu trabajo y de tus planes de entrenamientos.</string>
+    <string name="menu_my_routines_calendar_nothing_saved">No tienes nada registrado</string>
     <string name="menu_my_routines_calendar_one_saved">Tienes registrada 1 sesión</string>
     <string name="menu_my_routines_calendar_saved">Tienes registradas %s sesiones</string>
     <string name="menu_my_actual_routine">Actualmente estás haciendo:</string>
@@ -39,6 +40,14 @@
     <string name="menu_stretching_description">Estirar antes y después de hacer ejercicio es crucial ya que ayuda a preparar el cuerpo para la actividad física y a recuperarse adecuadamente después de la misma.</string>
     <string name="menu_notes_title">Notas</string>
     <string name="menu_notes_description">Está bien confiar en la memoria de uno mismo, pero siempre es mucho mejor si queda por escrito.</string>
+
+    <string name="menu_unpin_routine_title">Desfijar rutina</string>
+    <string name="menu_unpin_routine">¿Quieres desfijar esta rutina?</string>
+    <string name="menu_unpin_routine_description">Para volver a fijarla tendrás que buscarla y pulsar de nuevo en el icono de la chincheta.</string>
+    <string name="menu_unpin_note_title">Desfijar nota</string>
+    <string name="menu_unpin_note">¿Quieres desfijar esta nota?</string>
+    <string name="menu_unpin_note_description">Para volver a fijarla tendrás que acceder a la sección Notas y pulsar de nuevo en el icono de la chincheta.</string>
+    <string name="menu_unpin_note_btn">Desfijar</string>
 
     <!-- MUSCULAR GROUPS -->
     <string name="mgroups_toolbar">Grupos musculares</string>

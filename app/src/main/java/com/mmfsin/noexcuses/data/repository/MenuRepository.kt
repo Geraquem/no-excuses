@@ -12,11 +12,13 @@ import com.mmfsin.noexcuses.data.models.DefaultDayDTO
 import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
+import com.mmfsin.noexcuses.data.models.NoteDTO
 import com.mmfsin.noexcuses.domain.interfaces.IMenuRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.utils.BODY_IMAGE_WOMAN_SELECTED
+import com.mmfsin.noexcuses.utils.ID
 import com.mmfsin.noexcuses.utils.MY_SHARED_PREFS
 import com.mmfsin.noexcuses.utils.M_GROUPS
 import com.mmfsin.noexcuses.utils.ROUTINE_DOING_IT
@@ -122,6 +124,18 @@ class MenuRepository @Inject constructor(
             }
         }
         return emptyList()
+    }
+
+    override fun unpinRoutineFromMenu(routineId: String) {
+
+    }
+
+    override fun unpinNoteFromMenu(noteId: String) {
+        val note = realmDatabase.getObjectFromRealm(NoteDTO::class.java, ID, noteId)
+        note?.let { n ->
+            n.pinned = false
+            realmDatabase.addObject { note }
+        }
     }
 
     override fun checkBodyImage(): Boolean {

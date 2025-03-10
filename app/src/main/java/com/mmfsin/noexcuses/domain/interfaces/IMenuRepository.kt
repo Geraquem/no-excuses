@@ -9,6 +9,9 @@ interface IMenuRepository {
     fun getMyActualRoutine(): Routine?
     fun getMyActualRoutineDays(routineId: String): List<Day>
 
+    fun unpinRoutineFromMenu(routineId: String)
+    fun unpinNoteFromMenu(noteId: String)
+
     fun checkBodyImage(): Boolean
     fun editBodyImage(womanImageSelected: Boolean)
 }
