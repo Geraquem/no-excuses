@@ -4,6 +4,7 @@ import com.mmfsin.noexcuses.base.BaseViewModel
 import com.mmfsin.noexcuses.domain.usecases.DeleteCalendarDayUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetCalendarDataUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetCalendarDayInfoUseCase
+import com.mmfsin.noexcuses.presentation.menu.MenuEvent
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -38,4 +39,13 @@ class CalendarViewModel @Inject constructor(
             { _event.value = CalendarEvent.SWW }
         )
     }
+
+
+//    fun getTotalCalendarSaved() {
+//        executeUseCase(
+//            { getTotalSavedCalendarUseCase.execute() },
+//            { result -> _event.value = MenuEvent.CalendarSaved(result) },
+//            { _event.value = MenuEvent.SWW }
+//        )
+//    }
 }

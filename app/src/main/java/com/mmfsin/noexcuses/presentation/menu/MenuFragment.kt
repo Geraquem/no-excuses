@@ -32,9 +32,9 @@ import com.mmfsin.noexcuses.presentation.menu.dialogs.unpin.UnpinDataDialog.Comp
 import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 import com.mmfsin.noexcuses.utils.LOCAL_BROADCAST_FILTER
 import com.mmfsin.noexcuses.utils.animateY
+import com.mmfsin.noexcuses.utils.countDown
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
-import com.mmfsin.noexcuses.utils.updateMenuUI
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,8 +53,13 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        registerLocalBroadcast()
-        viewModel.checkVersion()
+        (activity as MainActivity).apply {
+            if (firstTimeAccess) {
+                registerLocalBroadcast()
+                viewModel.checkVersion()
+                firstTimeAccess = false
+            } else viewModel.secondCallPinnedRoutine()
+        }
     }
 
     private fun registerLocalBroadcast() {
@@ -66,13 +71,13 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     private val myBroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            viewModel.getMyActualRoutine()
+            viewModel.secondCallPinnedRoutine()
         }
     }
 
     override fun setUI() {
         binding.apply {
-            llMyActualRoutine.animateY(-500f, 1)
+            llMyActualRoutine.visibility = View.INVISIBLE
             pinnedNote.root.visibility = View.GONE
             loading.root.visibility = View.VISIBLE
         }
@@ -80,8 +85,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun setListeners() {
         binding.apply {
-            toolbar.ivOpenDrawer.setOnClickListener { (activity as MainActivity).openDrawer() }
-
             actualRoutine.ivPushpin.setOnClickListener { showUnpinDialog(UNPIN_ROUTINE) }
             pinnedNote.ivPushpin.setOnClickListener { showUnpinDialog(UNPIN_NOTE) }
 
@@ -93,10 +96,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     booleanArgs = true
                 )
             }
-            btnMyCalendar.setOnClickListener { navigateTo(R.navigation.nav_graph_calendar) }
             btnExercises.setOnClickListener { navigateTo(R.navigation.nav_graph_exercises) }
             btnStretching.setOnClickListener { navigateTo(R.navigation.nav_graph_stretchings) }
-            btnNotes.setOnClickListener { navigateTo(R.navigation.nav_graph_notes) }
         }
     }
 
@@ -107,18 +108,13 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
                 is MenuEvent.ActualRoutine -> {
                     pinnedRoutineId = event.routine?.id
-                    setUpActualRoutine(event.routine)
+                    setActualRoutineFirstTime(event.routine)
                     viewModel.getPinnedNote()
                 }
 
                 is MenuEvent.PinnedNote -> {
                     pinnedNoteId = event.note?.id
                     setUpPinnedNote(event.note)
-                    viewModel.getTotalCalendarSaved()
-                }
-
-                is MenuEvent.CalendarSaved -> {
-                    setTotalCalendarDays(event.totalSaved)
                     viewModel.getBodyImage()
                 }
 
@@ -128,6 +124,16 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                 }
 
                 is MenuEvent.GetMuscularGroups -> setUpMuscularGroups(event.mGroups)
+
+                is MenuEvent.SecondCallPinnedRoutine -> {
+                    setActualRoutineSecondTime(event.routine)
+                    viewModel.secondCallPinnedNote()
+                }
+
+                is MenuEvent.SecondCallPinnedNote -> {
+                    setUpPinnedNote(event.note)
+                    viewModel.getMuscularGroups()
+                }
 
                 is MenuEvent.SWW -> error()
             }
@@ -142,51 +148,63 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
         id?.let { activity?.showFragmentDialog(UnpinDataDialog.newInstance(id, type)) }
     }
 
-    private fun setTotalCalendarDays(total: Int) {
-        binding.apply {
-            val text = when (total) {
-                0 -> getString(R.string.menu_my_routines_calendar_nothing_saved)
-                1 -> getString(R.string.menu_my_routines_calendar_one_saved)
-                else -> getString(R.string.menu_my_routines_calendar_saved, total.toString())
-            }
-            tvCalendarSaved.text = text
-        }
-    }
-
-    private fun setUpActualRoutine(routine: Routine?) {
+    private fun setActualRoutineFirstTime(routine: Routine?) {
         binding.apply {
             routine?.let {
-                actualRoutine.apply {
-                    val color = if (routine.createdByUser) R.color.blue else R.color.dark_green
-                    image.llMain.backgroundTintList = getColorStateList(mContext, color)
-                    image.tvNumOfDays.text = routine.days.toString()
+                llMyActualRoutine.animateY(-500f, 1)
+                setPinnedRoutine(it)
+                countDown(350) {
+                    llMyActualRoutine.visibility = View.VISIBLE
+                    llMyActualRoutine.animateY(0f, 350).setListener(object : AnimatorListener {
+                        override fun onAnimationStart(animation: Animator) {}
+                        override fun onAnimationCancel(animation: Animator) {}
+                        override fun onAnimationRepeat(animation: Animator) {}
 
-                    tvTitle.text = routine.name
-                    val description = routine.description?.let { routine.description }
-                        ?: run { getString(R.string.my_routines_no_description) }
-                    tvDescription.text = description
-                    ivPushpin.setImageResource(R.drawable.ic_pushpin)
-                    root.setOnClickListener {
-                        val dialog = MenuDaysSheet(
-                            routineId = routine.id,
-                            createdByUser = routine.createdByUser,
-                            this@MenuFragment
-                        )
-                        activity?.let { dialog.show(it.supportFragmentManager, "") }
-                    }
+                        override fun onAnimationEnd(animation: Animator) {
+                            llNonePinned.visibility = View.INVISIBLE
+                        }
+                    })
                 }
-                llMyActualRoutine.animateY(0f, 350).setListener(object : AnimatorListener {
-                    override fun onAnimationStart(animation: Animator) {}
-                    override fun onAnimationCancel(animation: Animator) {}
-                    override fun onAnimationRepeat(animation: Animator) {}
-
-                    override fun onAnimationEnd(animation: Animator) {
-                        llNonePinned.visibility = View.INVISIBLE
-                    }
-                })
             } ?: run {
                 llMyActualRoutine.animateY(-500f, 1).setListener(null)
                 llNonePinned.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun setActualRoutineSecondTime(routine: Routine?) {
+        binding.apply {
+            routine?.let {
+                setPinnedRoutine(it)
+                llMyActualRoutine.visibility = View.VISIBLE
+                llNonePinned.visibility = View.INVISIBLE
+            } ?: run {
+                llMyActualRoutine.visibility = View.INVISIBLE
+                llNonePinned.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun setPinnedRoutine(routine: Routine) {
+        binding.apply {
+            actualRoutine.apply {
+                val color = if (routine.createdByUser) R.color.blue else R.color.dark_green
+                image.llMain.backgroundTintList = getColorStateList(mContext, color)
+                image.tvNumOfDays.text = routine.days.toString()
+
+                tvTitle.text = routine.name
+                val description = routine.description?.let { routine.description }
+                    ?: run { getString(R.string.my_routines_no_description) }
+                tvDescription.text = description
+                ivPushpin.setImageResource(R.drawable.ic_pushpin)
+                root.setOnClickListener {
+                    val dialog = MenuDaysSheet(
+                        routineId = routine.id,
+                        createdByUser = routine.createdByUser,
+                        this@MenuFragment
+                    )
+                    activity?.let { dialog.show(it.supportFragmentManager, "") }
+                }
             }
         }
     }
@@ -240,7 +258,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun onResume() {
         super.onResume()
-        activity?.updateMenuUI(mContext)
+//        activity?.updateMenuUI(mContext)
     }
 
     private fun error() = activity?.showErrorDialog(goBack = false)

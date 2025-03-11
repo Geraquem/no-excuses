@@ -51,9 +51,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
         binding.apply {
             calendar.addDecorator(TodayDecorator())
         }
-        (activity as BedRockActivity).apply {
-            setUpToolbar(title = getString(R.string.calendar_title))
-        }
     }
 
     override fun setListeners() {
@@ -83,6 +80,17 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
             }
         }
     }
+
+//    private fun setTotalCalendarDays(total: Int) {
+//        binding.apply {
+//            val text = when (total) {
+//                0 -> getString(R.string.menu_my_routines_calendar_nothing_saved)
+//                1 -> getString(R.string.menu_my_routines_calendar_one_saved)
+//                else -> getString(R.string.menu_my_routines_calendar_saved, total.toString())
+//            }
+//            tvCalendarSaved.text = text
+//        }
+//    }
 
     private fun setDayInfo(date: CalendarDay, info: List<CalendarDayData>) {
         binding.apply {

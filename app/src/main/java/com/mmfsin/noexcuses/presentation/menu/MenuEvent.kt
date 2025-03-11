@@ -8,8 +8,11 @@ sealed class MenuEvent {
     object VersionCompleted : MenuEvent()
     class ActualRoutine(val routine: Routine?) : MenuEvent()
     class PinnedNote(val note: Note?) : MenuEvent()
-    class CalendarSaved(val totalSaved: Int) : MenuEvent()
     class BodyImage(val isWomanImage: Boolean) : MenuEvent()
     class GetMuscularGroups(val mGroups: List<MuscularGroup>) : MenuEvent()
+
+    class SecondCallPinnedRoutine(val routine: Routine?) : MenuEvent()
+    class SecondCallPinnedNote(val note: Note?) : MenuEvent()
+
     object SWW : MenuEvent()
 }

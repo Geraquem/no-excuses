@@ -9,9 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
-import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentNotesBinding
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.presentation.notes.NotesFragmentDirections.Companion.actionNotesToNoteDetail
@@ -48,15 +46,6 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
             findNavController().navigate(actionNotesToNoteDetail(id))
             noteId = null
         } ?: run { viewModel.getNotes() }
-    }
-
-    override fun setUI() {
-        binding.apply {
-            (activity as BedRockActivity).apply {
-                setUpToolbar(title = getString(R.string.notes_toolbar))
-                rightIconToolbar(isVisible = false)
-            }
-        }
     }
 
     override fun setListeners() {

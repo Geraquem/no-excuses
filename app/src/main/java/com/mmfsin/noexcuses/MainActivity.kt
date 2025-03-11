@@ -9,6 +9,11 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.ActivityMainBinding
 import com.mmfsin.noexcuses.utils.BEDROCK_BOOLEAN_ARGS
@@ -22,6 +27,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    var firstTimeAccess = true
+
+    private var navHostFragment: NavHostFragment? = null
+    private var navController: NavController? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         Thread.sleep(100)
         setTheme(R.style.Theme_Noexcuses)
@@ -31,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         changeStatusBar()
         setNavigationDrawer()
+        setBottomNav()
     }
 
     private fun changeStatusBar() {
@@ -47,13 +58,36 @@ class MainActivity : AppCompatActivity() {
                     R.id.nav_default_routines -> openBedRockActivity(R.navigation.nav_graph_default_routines)
                     R.id.nav_my_routines -> openBedRockActivity(R.navigation.nav_graph_my_routines)
                     R.id.nav_exercises -> openBedRockActivity(R.navigation.nav_graph_exercises)
-                    R.id.nav_calendar -> openBedRockActivity(R.navigation.nav_graph_calendar)
+                    R.id.nav_calendar -> navigateToTabInBottomNav(R.id.calendarFragment)
                     R.id.nav_fav_exercises -> openBedRockActivity(R.navigation.nav_graph_fav_exercises)
                     R.id.nav_stretching -> openBedRockActivity(R.navigation.nav_graph_stretchings)
-                    R.id.nav_notes -> openBedRockActivity(R.navigation.nav_graph_notes)
+                    R.id.nav_notes -> navigateToTabInBottomNav(R.id.notesFragment)
                 }
                 drawerLayout.closeDrawers()
                 true
+            }
+            toolbar.ivOpenDrawer.setOnClickListener { openDrawer() }
+        }
+    }
+
+    private fun setBottomNav() {
+        navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navHostFragment?.let { nhf ->
+            navController = nhf.findNavController()
+            navController?.let { nC ->
+                binding.bottomNav.apply {
+                    setupWithNavController(nC)
+                    setOnItemReselectedListener { }
+                }
+            }
+        }
+    }
+
+    private fun navigateToTabInBottomNav(tabId: Int) {
+        binding.apply {
+            if (tabId != bottomNav.selectedItemId) {
+                findViewById<BottomNavigationView>(R.id.bottom_nav).selectedItemId = tabId
             }
         }
     }
@@ -69,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun openDrawer() = binding.drawerLayout.openDrawer(binding.navigationView)
+    private fun openDrawer() = binding.drawerLayout.openDrawer(binding.navigationView)
 
     fun openBedRockActivity(
         navGraph: Int, strArgs: String? = null,

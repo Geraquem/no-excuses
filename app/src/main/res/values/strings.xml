@@ -10,6 +10,11 @@
     <string name="error_description">Inténtalo de nuevo más tarde</string>
     <string name="error_btn">Aceptar</string>
 
+    <!-- BOTTOM NAV -->
+    <string name="bottom_nav_home">Inicio</string>
+    <string name="bottom_nav_calendar">Calendario</string>
+    <string name="bottom_nav_notes">Notas</string>
+
     <!-- DRAWER -->
     <string name="drawer_item_default_routines">Rutinas</string>
     <string name="drawer_item_my_routines">Mis entrenamientos</string>
@@ -39,7 +44,7 @@
     <string name="menu_stretching_title">Estiramientos</string>
     <string name="menu_stretching_description">Estirar antes y después de hacer ejercicio es crucial ya que ayuda a preparar el cuerpo para la actividad física y a recuperarse adecuadamente después de la misma.</string>
     <string name="menu_notes_title">Notas</string>
-    <string name="menu_notes_description">Está bien confiar en la memoria de uno mismo, pero siempre es mucho mejor si queda por escrito.</string>
+    <string name="menu_notes_description">Está bien confiar en la memoria de uno mismo, pero siempre es mejor dejarlo por escrito.</string>
 
     <string name="menu_unpin_routine_title">Desfijar rutina</string>
     <string name="menu_unpin_routine">¿Quieres desfijar esta rutina?</string>

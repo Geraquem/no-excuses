@@ -39,7 +39,7 @@ class DaysSheet(
         bottomSheet?.let {
             val behavior = BottomSheetBehavior.from(it)
             val layoutParams = it.layoutParams
-            layoutParams.height = (resources.displayMetrics.heightPixels * 0.8).toInt()
+            layoutParams.height = (resources.displayMetrics.heightPixels * 0.9).toInt()
             it.layoutParams = layoutParams
             behavior.peekHeight = layoutParams.height
         }
