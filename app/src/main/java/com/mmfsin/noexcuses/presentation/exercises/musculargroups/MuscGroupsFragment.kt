@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -44,7 +45,9 @@ class MuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MuscGroup
         mGroupId?.let { id ->
             findNavController().navigate(actionMuscularGroupsToExercises(id))
             mGroupId = null
-        } ?: run { viewModel.getBodyImage() }
+        } ?: run {
+            viewModel.getBodyImage()
+        }
     }
 
     override fun setUI() {
@@ -53,8 +56,14 @@ class MuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MuscGroup
 
     override fun setListeners() {
         binding.apply {
-            btnMan.setOnClickListener { viewModel.editBodyImage(selectedWomanImage = false) }
-            btnWoman.setOnClickListener { viewModel.editBodyImage(selectedWomanImage = true) }
+            btnMan.setOnClickListener {
+                Toast.makeText(mContext, "man", Toast.LENGTH_SHORT).show()
+                viewModel.editBodyImage(selectedWomanImage = false)
+            }
+            btnWoman.setOnClickListener {
+                Toast.makeText(mContext, "woman", Toast.LENGTH_SHORT).show()
+                viewModel.editBodyImage(selectedWomanImage = true)
+            }
         }
     }
 
