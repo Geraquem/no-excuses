@@ -46,6 +46,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
     override fun setListeners() {
         binding.apply {
             btnAddNote.setOnClickListener { navigateToDetail(NO_ID_NOTE) }
+            btnAddNoteEmpty.setOnClickListener { navigateToDetail(NO_ID_NOTE)  }
         }
     }
 
@@ -70,7 +71,10 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
                 adapter = NotesAdapter(notes, this@NotesFragment)
             }
             rvNotes.isVisible = notes.isNotEmpty()
-            tvEmpty.isVisible = notes.isEmpty()
+            tvTitle.isVisible = notes.isNotEmpty()
+            btnAddNote.isVisible = notes.isNotEmpty()
+
+            llEmpty.isVisible = notes.isEmpty()
         }
     }
 
@@ -82,7 +86,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
 
     private fun navigateToDetail(id: String) {
         val intent = Intent(mContext, BedRockActivity::class.java)
-        intent.putExtra(ROOT_ACTIVITY_NAV_GRAPH, R.navigation.nav_graph_detail_note)
+        intent.putExtra(ROOT_ACTIVITY_NAV_GRAPH, R.navigation.nav_graph_note_detail)
         intent.putExtra(BEDROCK_STR_ARGS, id)
 
         activityResultLauncher.launch(intent)

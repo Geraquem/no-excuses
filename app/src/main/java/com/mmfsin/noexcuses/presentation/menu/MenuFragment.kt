@@ -101,7 +101,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                 )
             }
             btnExercises.setOnClickListener { navigateTo(R.navigation.nav_graph_exercises) }
-            btnStretching.setOnClickListener { navigateTo(R.navigation.nav_graph_stretchings) }
+            btnFavs.setOnClickListener { navigateTo(R.navigation.nav_graph_fav_exercises) }
         }
     }
 
@@ -243,7 +243,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     root.visibility = View.VISIBLE
                     root.setOnClickListener {
                         navigateTo(
-                            navGraph = R.navigation.nav_graph_detail_note,
+                            navGraph = R.navigation.nav_graph_note_detail,
                             strArgs = note.id
                         )
                     }

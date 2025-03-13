@@ -14,6 +14,7 @@ import com.mmfsin.noexcuses.domain.models.Stretching
 import com.mmfsin.noexcuses.presentation.stretching.StretchingEvent
 import com.mmfsin.noexcuses.presentation.stretching.StretchingViewModel
 import com.mmfsin.noexcuses.presentation.stretching.adapter.StretchingDetailAdapter
+import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.MGROUP_ID
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +34,11 @@ class StretchingDetailFragment : BaseFragment<FragmentStretchingBinding, Stretch
     override fun getBundleArgs() {
         arguments?.let { mGroup = it.getString(MGROUP_ID) }
     }
+
+
+//    override fun getBundleArgs() {
+//        noteId = activity?.intent?.getStringExtra(BEDROCK_STR_ARGS)
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

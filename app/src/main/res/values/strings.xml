@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">No excuses</string>
-    <string name="app_name_caps">NO EXCUSES</string>
 
     <string name="content_description">image</string>
     <string name="sww">Vaya, algo ha salido mal</string>
@@ -14,6 +13,7 @@
     <string name="bottom_nav_home">Inicio</string>
     <string name="bottom_nav_calendar">Calendario</string>
     <string name="bottom_nav_notes">Notas</string>
+    <string name="bottom_nav_stretching">Estiramientos</string>
 
     <!-- DRAWER -->
     <string name="drawer_item_default_routines">Rutinas</string>
@@ -41,8 +41,8 @@
     <string name="menu_my_actual_routine">Actualmente estás haciendo:</string>
     <string name="menu_exercises_title">Ejercicios</string>
     <string name="menu_exercises_description">Echa un vistazo más detallado a todos los ejercicios.</string>
-    <string name="menu_stretching_title">Estiramientos</string>
-    <string name="menu_stretching_description">Estirar antes y después de hacer ejercicio es crucial ya que ayuda a preparar el cuerpo para la actividad física y a recuperarse adecuadamente después de la misma.</string>
+    <string name="menu_favs_title">Ejercicios favoritos</string>
+    <string name="menu_favs_description">Aqui puedes ver todos los ejercicios que hayas guardado previamente como favorito. Para marcar un ejercicio como favorito, accede al ejercicio que más te guste y dale a la estrellita que aparece al lado del nombre del ejercicio.</string>
     <string name="menu_notes_title">Notas</string>
     <string name="menu_notes_description">Está bien confiar en la memoria de uno mismo, pero siempre es mejor dejarlo por escrito.</string>
 
@@ -212,13 +212,15 @@
 
     <!-- NOTES -->
     <string name="notes_toolbar">Notas</string>
-    <string name="notes_empty">Todavía no has escrito nada</string>
+    <string name="notes_empty">Parece que todavía no has escrito nada...</string>
     <string name="notes_date">Última modificación %s</string>
 
     <string name="notes_delete_top_text">Eliminar nota</string>
     <string name="notes_delete_text">¿Quieres eliminar %s?</string>
     <string name="notes_delete_yes">Eliminar</string>
     <string name="notes_delete_cancel">Volver</string>
+
+    <string name="notes_add">Crear nota</string>
 
     <!-- STRETCHING -->
     <string name="stretching_title">Estiramientos</string>

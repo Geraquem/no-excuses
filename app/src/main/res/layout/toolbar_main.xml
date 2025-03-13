@@ -19,13 +19,14 @@
             android:layout_marginEnd="24dp">
 
             <TextView
+                style="@style/MediumTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:contentDescription="@string/content_description"
-                android:text="@string/app_name"
-                style="@style/MediumTextView"
-                android:textAllCaps="true"
                 android:fontFamily="@font/montserrat_bold"
+                android:text="@string/app_name"
+                android:textAllCaps="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

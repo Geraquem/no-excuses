@@ -52,19 +52,59 @@
         tools:itemCount="2"
         tools:listitem="@layout/item_note" />
 
-    <TextView
-        android:id="@+id/tv_empty"
-        style="@style/MediumTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_empty"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:alpha="0.5"
         android:gravity="center"
-        android:text="@string/notes_empty"
-        android:textSize="18sp"
+        android:orientation="vertical"
+        android:paddingVertical="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="24dp"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/ic_notes_empty"
+            app:tint="@color/grey" />
+
+        <TextView
+            style="@style/MediumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:text="@string/menu_notes_description"
+            android:textColor="@color/grey"
+            android:textSize="18sp" />
+
+        <TextView
+            style="@style/MediumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="@string/notes_empty"
+            android:textColor="@color/grey"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/btn_add_note_empty"
+            style="@style/BigTextView"
+            android:layout_width="wrap_content"
+            android:alpha="0.5"
+            android:layout_height="wrap_content"
+            android:background="@drawable/click_effect_border"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="6dp"
+            android:text="@string/notes_add"
+            android:textAllCaps="true" />
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add_note"

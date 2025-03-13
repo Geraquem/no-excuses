@@ -252,7 +252,7 @@
                     tools:listitem="@layout/item_menu_muscular_group" />
 
                 <LinearLayout
-                    android:id="@+id/btn_stretching"
+                    android:id="@+id/btn_favs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
@@ -267,17 +267,17 @@
                         android:layout_marginBottom="4dp"
                         android:drawablePadding="8dp"
                         android:gravity="center"
-                        android:text="@string/menu_stretching_title"
-                        android:textColor="@color/dark_purple"
-                        app:drawableStartCompat="@drawable/ic_stretching"
-                        app:drawableTint="@color/dark_purple" />
+                        android:text="@string/menu_favs_title"
+                        android:textColor="@color/dark_orange"
+                        app:drawableStartCompat="@drawable/ic_fav_on"
+                        app:drawableTint="@color/dark_orange" />
 
                     <TextView
                         style="@style/MediumTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:alpha="0.6"
-                        android:text="@string/menu_stretching_description" />
+                        android:text="@string/menu_favs_description" />
 
                 </LinearLayout>
 

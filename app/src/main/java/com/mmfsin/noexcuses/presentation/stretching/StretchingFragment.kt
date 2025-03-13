@@ -6,14 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
-import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentStretchingBinding
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
-import com.mmfsin.noexcuses.presentation.stretching.StretchingFragmentDirections.Companion.actionMGroupsToStretchingDetail
 import com.mmfsin.noexcuses.presentation.stretching.adapter.StretchingMGroupAdapter
 import com.mmfsin.noexcuses.presentation.stretching.interfaces.IStretchingListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -36,7 +34,6 @@ class StretchingFragment : BaseFragment<FragmentStretchingBinding, StretchingVie
     }
 
     override fun setUI() {
-        (activity as BedRockActivity).setUpToolbar(title = getString(R.string.stretching_title))
         binding.apply {
             tvTopText.visibility = View.VISIBLE
         }
@@ -61,8 +58,12 @@ class StretchingFragment : BaseFragment<FragmentStretchingBinding, StretchingVie
         }
     }
 
-    override fun onStretchingMGroupClick(category: String) =
-        findNavController().navigate(actionMGroupsToStretchingDetail(category))
+    override fun onStretchingMGroupClick(category: String){
+        (activity as MainActivity).openBedRockActivity(
+            navGraph = R.navigation.nav_graph_stretching_detail,
+            strArgs = category,
+        )
+    }
 
     private fun error() = activity?.showErrorDialog()
 
