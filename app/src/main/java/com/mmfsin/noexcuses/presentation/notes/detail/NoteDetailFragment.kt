@@ -96,12 +96,6 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
         }
     }
 
-    override fun onStop() {
-        addNote()
-        closeFlow()
-        super.onStop()
-    }
-
     private fun closeFlow() = (activity as? BedRockActivity)?.closeActivityForResult()
 
     private fun error() = activity?.showErrorDialog()

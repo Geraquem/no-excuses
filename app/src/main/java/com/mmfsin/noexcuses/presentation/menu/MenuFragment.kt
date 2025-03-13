@@ -85,8 +85,12 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     override fun setListeners() {
         binding.apply {
-            actualRoutine.ivPushpin.setOnClickListener { showUnpinDialog(UNPIN_ROUTINE) }
-            pinnedNote.ivPushpin.setOnClickListener { showUnpinDialog(UNPIN_NOTE) }
+            actualRoutine.ivPushpin.setOnClickListener {
+                showUnpinDialog(UNPIN_ROUTINE)
+            }
+            pinnedNote.ivPushpin.setOnClickListener {
+                showUnpinDialog(UNPIN_NOTE)
+            }
 
             btnDefaultRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_default_routines) }
             btnMyRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_my_routines) }
@@ -166,7 +170,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     })
                 }
             } ?: run {
-                llMyActualRoutine.animateY(-500f, 1).setListener(null)
                 llNonePinned.visibility = View.VISIBLE
             }
         }
