@@ -149,7 +149,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             UNPIN_ROUTINE -> pinnedRoutineId
             UNPIN_NOTE -> pinnedNoteId
         }
-        id?.let { activity?.showFragmentDialog(UnpinDataDialog.newInstance(id, type)) }
+        id?.let { activity?.showFragmentDialog(UnpinDataDialog.newInstance(id, type)) } ?: run {}
     }
 
     private fun setActualRoutineFirstTime(routine: Routine?) {
