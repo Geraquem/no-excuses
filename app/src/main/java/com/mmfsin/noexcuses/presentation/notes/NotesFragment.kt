@@ -46,7 +46,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
     override fun setListeners() {
         binding.apply {
             btnAddNote.setOnClickListener { navigateToDetail(NO_ID_NOTE) }
-            btnAddNoteEmpty.setOnClickListener { navigateToDetail(NO_ID_NOTE)  }
+            btnAddNoteEmpty.setOnClickListener { navigateToDetail(NO_ID_NOTE) }
         }
     }
 
@@ -70,7 +70,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
                 layoutManager = LinearLayoutManager(mContext)
                 adapter = NotesAdapter(notes, this@NotesFragment)
             }
-            rvNotes.isVisible = notes.isNotEmpty()
+            nsvNotes.isVisible = notes.isNotEmpty()
             tvTitle.isVisible = notes.isNotEmpty()
             btnAddNote.isVisible = notes.isNotEmpty()
 
