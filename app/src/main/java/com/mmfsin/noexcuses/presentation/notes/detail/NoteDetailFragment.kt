@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
@@ -14,7 +15,6 @@ import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.NO_ID_NOTE
 import com.mmfsin.noexcuses.utils.showErrorDialog
-import com.mmfsin.noexcuses.utils.updateMenuUI
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -61,6 +61,16 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
         }
     }
 
+    override fun setListeners() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    addNote()
+                }
+            })
+    }
+
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
@@ -69,11 +79,7 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
                     setUI()
                 }
 
-                is NoteDetailEvent.NoteCreated -> {
-                    activity?.updateMenuUI(mContext)
-                    activity?.onBackPressedDispatcher?.onBackPressed()
-                }
-
+                is NoteDetailEvent.NoteCreated -> closeFlow()
                 is NoteDetailEvent.SWW -> error()
             }
         }
@@ -92,9 +98,11 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
 
     override fun onStop() {
         addNote()
-        activity?.updateMenuUI(mContext)
+        closeFlow()
         super.onStop()
     }
+
+    private fun closeFlow() = (activity as? BedRockActivity)?.closeActivityForResult()
 
     private fun error() = activity?.showErrorDialog()
 

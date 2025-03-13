@@ -1,20 +1,28 @@
 package com.mmfsin.noexcuses.presentation.notes
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
+import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentNotesBinding
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.presentation.notes.adapter.NotesAdapter
 import com.mmfsin.noexcuses.presentation.notes.dialogs.DeleteNoteDialog
 import com.mmfsin.noexcuses.presentation.notes.interfaces.INotesListener
+import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.NO_ID_NOTE
+import com.mmfsin.noexcuses.utils.ROOT_ACTIVITY_NAV_GRAPH
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import com.mmfsin.noexcuses.utils.updateMenuUI
@@ -31,8 +39,8 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
         inflater: LayoutInflater, container: ViewGroup?
     ) = FragmentNotesBinding.inflate(inflater, container, false)
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.getNotes()
     }
 
@@ -74,11 +82,26 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
     }
 
     private fun navigateToDetail(id: String) {
-        if (activity is MainActivity) {
-            (activity as MainActivity).openBedRockActivity(
-                navGraph = R.navigation.nav_graph_detail_note,
-                strArgs = id
-            )
+//        if (activity is MainActivity) {
+//            (activity as MainActivity).openBedRockActivity(
+//                navGraph = R.navigation.nav_graph_detail_note,
+//                strArgs = id
+//            )
+//        }
+
+        val intent = Intent(mContext, BedRockActivity::class.java)
+        intent.putExtra(ROOT_ACTIVITY_NAV_GRAPH, R.navigation.nav_graph_detail_note)
+        intent.putExtra(BEDROCK_STR_ARGS, id)
+
+        activityResultLauncher.launch(intent)
+    }
+
+    private val activityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            activity?.updateMenuUI(mContext)
+            viewModel.getNotes()
         }
     }
 

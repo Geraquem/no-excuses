@@ -1,5 +1,7 @@
 package com.mmfsin.noexcuses.base.bedrock
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -59,4 +61,10 @@ class BedRockActivity : AppCompatActivity() {
     }
 
     private fun error() = showErrorDialog()
+
+    fun closeActivityForResult() {
+        val intent = Intent()
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+    }
 }

@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:alpha="0.4"
+        android:paddingHorizontal="4dp"
         android:text="@string/menu_notes_description"
         app:layout_constraintLeft_toLeftOf="@id/gl_left"
         app:layout_constraintRight_toRightOf="@id/gl_right"

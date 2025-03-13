@@ -106,7 +106,8 @@ class MainActivity : AppCompatActivity() {
     private fun openDrawer() = binding.drawerLayout.openDrawer(binding.navigationView)
 
     fun openBedRockActivity(
-        navGraph: Int, strArgs: String? = null,
+        navGraph: Int,
+        strArgs: String? = null,
         booleanArgs: Boolean? = null,
         parcelable: Any? = null
     ) {
