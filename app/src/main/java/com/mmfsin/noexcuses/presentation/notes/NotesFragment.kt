@@ -82,13 +82,6 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
     }
 
     private fun navigateToDetail(id: String) {
-//        if (activity is MainActivity) {
-//            (activity as MainActivity).openBedRockActivity(
-//                navGraph = R.navigation.nav_graph_detail_note,
-//                strArgs = id
-//            )
-//        }
-
         val intent = Intent(mContext, BedRockActivity::class.java)
         intent.putExtra(ROOT_ACTIVITY_NAV_GRAPH, R.navigation.nav_graph_detail_note)
         intent.putExtra(BEDROCK_STR_ARGS, id)
