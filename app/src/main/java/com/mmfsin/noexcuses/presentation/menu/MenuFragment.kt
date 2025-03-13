@@ -240,7 +240,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     root.visibility = View.VISIBLE
                     root.setOnClickListener {
                         navigateTo(
-                            navGraph = R.navigation.nav_graph_notes,
+                            navGraph = R.navigation.nav_graph_detail_note,
                             strArgs = note.id
                         )
                     }
@@ -255,11 +255,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             strArgs = strArgs,
             booleanArgs = booleanArgs
         )
-
-    override fun onResume() {
-        super.onResume()
-//        activity?.updateMenuUI(mContext)
-    }
 
     private fun error() = activity?.showErrorDialog(goBack = false)
 

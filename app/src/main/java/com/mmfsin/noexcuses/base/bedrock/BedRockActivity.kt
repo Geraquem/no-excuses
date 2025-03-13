@@ -25,6 +25,7 @@ class BedRockActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         changeStatusBar()
+        setUpToolbar()
         setUpNavGraph()
     }
 

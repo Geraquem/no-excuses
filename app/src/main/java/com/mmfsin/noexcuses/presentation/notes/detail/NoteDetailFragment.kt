@@ -11,7 +11,7 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentNoteDetailBinding
 import com.mmfsin.noexcuses.domain.models.Note
-import com.mmfsin.noexcuses.utils.ID_NOTE
+import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.NO_ID_NOTE
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.updateMenuUI
@@ -32,7 +32,7 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
     ) = FragmentNoteDetailBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
-        arguments?.let { noteId = it.getString(ID_NOTE) } ?: run { error() }
+        noteId = activity?.intent?.getStringExtra(BEDROCK_STR_ARGS)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,11 +51,13 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
     }
 
     private fun setUpToolbar() {
-        (activity as BedRockActivity).apply {
-            setUpToolbar(title = getString(R.string.notes_toolbar))
-            rightIconToolbar(isVisible = true,
-                icon = R.drawable.ic_check,
-                action = { addNote() })
+        if (activity is BedRockActivity) {
+            (activity as BedRockActivity).apply {
+                setUpToolbar(title = getString(R.string.notes_toolbar))
+                rightIconToolbar(isVisible = true,
+                    icon = R.drawable.ic_check,
+                    action = { addNote() })
+            }
         }
     }
 

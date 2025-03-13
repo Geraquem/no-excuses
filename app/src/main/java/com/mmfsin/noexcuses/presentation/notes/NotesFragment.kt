@@ -1,22 +1,19 @@
 package com.mmfsin.noexcuses.presentation.notes
 
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mmfsin.noexcuses.MainActivity
+import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentNotesBinding
 import com.mmfsin.noexcuses.domain.models.Note
-import com.mmfsin.noexcuses.presentation.notes.NotesFragmentDirections.Companion.actionNotesToNoteDetail
 import com.mmfsin.noexcuses.presentation.notes.adapter.NotesAdapter
 import com.mmfsin.noexcuses.presentation.notes.dialogs.DeleteNoteDialog
 import com.mmfsin.noexcuses.presentation.notes.interfaces.INotesListener
-import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.NO_ID_NOTE
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
@@ -30,22 +27,13 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
 
     private lateinit var mContext: Context
 
-    private var noteId: String? = null
-
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
     ) = FragmentNotesBinding.inflate(inflater, container, false)
 
-    override fun getBundleArgs() {
-        noteId = activity?.intent?.getStringExtra(BEDROCK_STR_ARGS)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        noteId?.let { id ->
-            findNavController().navigate(actionNotesToNoteDetail(id))
-            noteId = null
-        } ?: run { viewModel.getNotes() }
+    override fun onResume() {
+        super.onResume()
+        viewModel.getNotes()
     }
 
     override fun setListeners() {
@@ -85,8 +73,14 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
         activity?.showFragmentDialog(DeleteNoteDialog.newInstance(id, this@NotesFragment))
     }
 
-    private fun navigateToDetail(id: String) =
-        findNavController().navigate(actionNotesToNoteDetail(id))
+    private fun navigateToDetail(id: String) {
+        if (activity is MainActivity) {
+            (activity as MainActivity).openBedRockActivity(
+                navGraph = R.navigation.nav_graph_detail_note,
+                strArgs = id
+            )
+        }
+    }
 
     override fun updatePinnedNote(id: String) = viewModel.updatePinnedNote(id)
 
