@@ -220,15 +220,53 @@
                     android:orientation="vertical"
                     android:padding="12dp">
 
-                    <TextView
-                        style="@style/MediumTextView_Bold"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:drawablePadding="8dp"
-                        android:gravity="center"
-                        android:text="@string/menu_exercises_title"
-                        app:drawableStartCompat="@drawable/ic_dumbbell" />
+                        android:layout_marginBottom="6dp">
+
+                        <TextView
+                            style="@style/MediumTextView_Bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:drawablePadding="8dp"
+                            android:gravity="center"
+                            android:text="@string/menu_exercises_title"
+                            app:drawableStartCompat="@drawable/ic_dumbbell" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true">
+
+                            <TextView
+                                style="@style/SmallTextView_Bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:alpha="0.6"
+                                android:text="@string/mgroups_man" />
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/sw_gender"
+                                android:layout_width="wrap_content"
+                                android:layout_height="16dp"
+                                android:layout_marginHorizontal="8dp"
+                                android:thumb="@drawable/selector_switch_thumb"
+                                app:track="@drawable/selector_switch_track" />
+
+                            <TextView
+                                style="@style/SmallTextView_Bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:alpha="0.6"
+                                android:text="@string/mgroups_woman" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                     <TextView
                         style="@style/MediumTextView"
@@ -251,34 +289,6 @@
                     android:orientation="horizontal"
                     tools:itemCount="1"
                     tools:listitem="@layout/item_menu_muscular_group" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp">
-
-                    <TextView
-                        style="@style/SmallTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:alpha="0.6"
-                        android:text="@string/mgroups_man" />
-
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/sw_gender"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:thumb="@drawable/selector_switch_thumb"
-                        app:track="@drawable/selector_switch_track" />
-
-                    <TextView
-                        style="@style/SmallTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:alpha="0.6"
-                        android:text="@string/mgroups_woman" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/btn_favs"

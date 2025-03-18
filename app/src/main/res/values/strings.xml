@@ -58,8 +58,8 @@
     <string name="mgroups_toolbar">Grupos musculares</string>
     <string name="mgroups_cardio">cardio</string>
     <string name="mgroups_forearm">antebrazo</string>
-    <string name="mgroups_man">Hombre</string>
-    <string name="mgroups_woman">Mujer</string>
+    <string name="mgroups_man">H</string>
+    <string name="mgroups_woman">M</string>
 
     <!-- EXERCISE DIALOG -->
     <string name="exercise_dialog_category">Ejercicio de %s</string>
