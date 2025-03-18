@@ -24,6 +24,7 @@ import com.mmfsin.noexcuses.presentation.myroutines.myroutines.dialogs.MyRoutine
 import com.mmfsin.noexcuses.presentation.myroutines.myroutines.dialogs.MyRoutineEditDialog
 import com.mmfsin.noexcuses.presentation.myroutines.myroutines.interfaces.IMyRoutineListener
 import com.mmfsin.noexcuses.utils.BEDROCK_BOOLEAN_ARGS
+import com.mmfsin.noexcuses.utils.DAYS
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import com.mmfsin.noexcuses.utils.updateMenuUI
@@ -118,7 +119,9 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
     override fun onRoutineClick(id: String) {
         (activity as BedRockActivity).routineOpened = id
         val dialog = DaysSheet(routineId = id, this@MyRoutinesFragment)
-        activity?.let { dialog.show(it.supportFragmentManager, "") }
+
+        val exists = activity?.supportFragmentManager?.findFragmentByTag(DAYS)
+        if (exists == null) activity?.let { dialog.show(it.supportFragmentManager, DAYS) }
     }
 
     override fun onRoutineLongClick(id: String) {

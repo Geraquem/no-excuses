@@ -19,6 +19,7 @@ import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.DefaultRoutinesFr
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.adapter.DefaultRoutinesAdapter
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.dialogs.AddRoutineToMineDialog
 import com.mmfsin.noexcuses.presentation.dfroutines.dfroutines.interfaces.IDefaultRoutineListener
+import com.mmfsin.noexcuses.utils.DAYS
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import com.mmfsin.noexcuses.utils.updateMenuUI
@@ -84,7 +85,9 @@ class DefaultRoutinesFragment :
     override fun onRoutineClick(routineId: String) {
         (activity as BedRockActivity).routineOpened = routineId
         val dialog = DefaultDaysSheet(routineId = routineId, this@DefaultRoutinesFragment)
-        activity?.let { dialog.show(it.supportFragmentManager, "") }
+
+        val exists = activity?.supportFragmentManager?.findFragmentByTag(DAYS)
+        if (exists == null) activity?.let { dialog.show(it.supportFragmentManager, DAYS) }
     }
 
     override fun onRoutinePushPinClick(routineId: String) =
