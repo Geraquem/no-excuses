@@ -62,12 +62,6 @@ class MuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MuscGroup
                 }
 
                 is MuscGroupsEvent.MuscGroups -> setUpMGroups(event.groups)
-
-                is MuscGroupsEvent.BodyImageChanged -> {
-                    bodyImage = !bodyImage
-                    viewModel.getMuscularGroups()
-                }
-
                 is MuscGroupsEvent.SWW -> error()
             }
         }

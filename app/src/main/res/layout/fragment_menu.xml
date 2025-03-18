@@ -218,55 +218,41 @@
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/click_effect"
                     android:orientation="vertical"
-                    android:padding="12dp">
+                    android:paddingHorizontal="12dp"
+                    android:paddingBottom="12dp">
 
-                    <RelativeLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             style="@style/MediumTextView_Bold"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:drawablePadding="8dp"
-                            android:gravity="center"
+                            android:gravity="start|bottom"
                             android:text="@string/menu_exercises_title"
-                            app:drawableStartCompat="@drawable/ic_dumbbell" />
+                            app:drawableStartCompat="@drawable/ic_dumbbell"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@id/sw_gender"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                        <LinearLayout
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/sw_gender"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true">
+                            android:layout_centerVertical="true"
+                            android:thumb="@drawable/switch_thumb"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:track="@drawable/switch_track" />
 
-                            <TextView
-                                style="@style/SmallTextView_Bold"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:alpha="0.6"
-                                android:text="@string/mgroups_man" />
-
-                            <androidx.appcompat.widget.SwitchCompat
-                                android:id="@+id/sw_gender"
-                                android:layout_width="wrap_content"
-                                android:layout_height="16dp"
-                                android:layout_marginHorizontal="8dp"
-                                android:thumb="@drawable/selector_switch_thumb"
-                                app:track="@drawable/selector_switch_track" />
-
-                            <TextView
-                                style="@style/SmallTextView_Bold"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:alpha="0.6"
-                                android:text="@string/mgroups_woman" />
-
-                        </LinearLayout>
-
-                    </RelativeLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
                         style="@style/MediumTextView"
