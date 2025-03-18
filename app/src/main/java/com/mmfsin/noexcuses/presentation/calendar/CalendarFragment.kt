@@ -10,9 +10,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
-import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentCalendarBinding
 import com.mmfsin.noexcuses.domain.models.CalendarDayData
 import com.mmfsin.noexcuses.presentation.calendar.adapter.CalendarDayAdapter
@@ -80,17 +78,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
             }
         }
     }
-
-//    private fun setTotalCalendarDays(total: Int) {
-//        binding.apply {
-//            val text = when (total) {
-//                0 -> getString(R.string.menu_my_routines_calendar_nothing_saved)
-//                1 -> getString(R.string.menu_my_routines_calendar_one_saved)
-//                else -> getString(R.string.menu_my_routines_calendar_saved, total.toString())
-//            }
-//            tvCalendarSaved.text = text
-//        }
-//    }
 
     private fun setDayInfo(date: CalendarDay, info: List<CalendarDayData>) {
         binding.apply {
