@@ -48,6 +48,7 @@
             android:maxLines="2"
             android:paddingHorizontal="12dp"
             android:textAllCaps="true"
+            android:textSize="14sp"
             tools:text="Press banca en banco plano" />
 
     </LinearLayout>

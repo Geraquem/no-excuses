@@ -31,14 +31,13 @@ class StretchingDetailFragment : BaseFragment<FragmentStretchingBinding, Stretch
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentStretchingBinding.inflate(inflater, container, false)
 
-    override fun getBundleArgs() {
-        arguments?.let { mGroup = it.getString(MGROUP_ID) }
-    }
-
-
 //    override fun getBundleArgs() {
-//        noteId = activity?.intent?.getStringExtra(BEDROCK_STR_ARGS)
+//        arguments?.let { mGroup = it.getString(MGROUP_ID) }
 //    }
+
+    override fun getBundleArgs() {
+        mGroup = activity?.intent?.getStringExtra(BEDROCK_STR_ARGS)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,8 +50,6 @@ class StretchingDetailFragment : BaseFragment<FragmentStretchingBinding, Stretch
             tvTopText.visibility = View.GONE
         }
     }
-
-    override fun setListeners() {}
 
     override fun observe() {
         viewModel.event.observe(this) { event ->

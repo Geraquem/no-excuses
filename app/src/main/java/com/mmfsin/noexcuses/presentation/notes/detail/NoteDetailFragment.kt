@@ -15,6 +15,7 @@ import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.NO_ID_NOTE
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.updateMenuUI
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -96,7 +97,10 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVie
         }
     }
 
-    private fun closeFlow() = (activity as? BedRockActivity)?.closeActivityForResult()
+    private fun closeFlow() {
+        activity?.updateMenuUI(mContext)
+        (activity as? BedRockActivity)?.closeActivityForResult()
+    }
 
     private fun error() = activity?.showErrorDialog()
 

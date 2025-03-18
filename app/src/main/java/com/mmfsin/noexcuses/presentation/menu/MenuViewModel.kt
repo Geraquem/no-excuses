@@ -6,6 +6,7 @@ import com.mmfsin.noexcuses.domain.usecases.CheckVersionUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetMuscularGroupsUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetMyActualRoutineUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetPinnedNoteUseCase
+import com.mmfsin.noexcuses.domain.usecases.SwitchBodyImageUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -16,6 +17,7 @@ class MenuViewModel @Inject constructor(
     private val getMuscularGroups: GetMuscularGroupsUseCase,
     private val getPinnedNoteUseCase: GetPinnedNoteUseCase,
     private val getBodyImageUseCase: CheckBodyImageUseCase,
+    private val switchBodyImageUseCase: SwitchBodyImageUseCase
 ) : BaseViewModel<MenuEvent>() {
 
     fun checkVersion() {
@@ -70,6 +72,14 @@ class MenuViewModel @Inject constructor(
         executeUseCase(
             { getPinnedNoteUseCase.execute() },
             { result -> _event.value = MenuEvent.PinnedNote(result) },
+            { _event.value = MenuEvent.SWW }
+        )
+    }
+
+    fun changeBodyImage(selectedWomanImage: Boolean) {
+        executeUseCase(
+            { switchBodyImageUseCase.execute(SwitchBodyImageUseCase.Params(selectedWomanImage)) },
+            { _event.value = MenuEvent.BodyImageChanged },
             { _event.value = MenuEvent.SWW }
         )
     }

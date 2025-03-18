@@ -57,26 +57,11 @@ class ChMuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, ChMuscG
         }
     }
 
-    override fun setListeners() {
-        binding.apply {
-            btnMan.setOnClickListener { viewModel.editBodyImage(selectedWomanImage = false) }
-            btnWoman.setOnClickListener { viewModel.editBodyImage(selectedWomanImage = true) }
-        }
-    }
-
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
                 is ChMuscGroupsEvent.BodyImage -> {
                     bodyImage = event.isWomanImage
-                    if (event.isWomanImage) binding.btnWoman.isChecked = true
-                    else binding.btnMan.isChecked = true
-
-                    viewModel.getMuscularGroups()
-                }
-
-                is ChMuscGroupsEvent.BodyImageChanged -> {
-                    bodyImage = !bodyImage
                     viewModel.getMuscularGroups()
                 }
 

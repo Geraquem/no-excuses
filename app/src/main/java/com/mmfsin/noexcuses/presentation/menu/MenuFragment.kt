@@ -101,6 +101,11 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                 )
             }
             btnExercises.setOnClickListener { navigateTo(R.navigation.nav_graph_exercises) }
+
+            swGender.setOnClickListener {
+                viewModel.changeBodyImage(selectedWomanImage = swGender.isChecked)
+            }
+
             btnFavs.setOnClickListener { navigateTo(R.navigation.nav_graph_fav_exercises) }
         }
     }
@@ -130,12 +135,19 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                 is MenuEvent.GetMuscularGroups -> setUpMuscularGroups(event.mGroups)
 
                 is MenuEvent.SecondCallPinnedRoutine -> {
+                    pinnedRoutineId = event.routine?.id
                     setActualRoutineSecondTime(event.routine)
                     viewModel.secondCallPinnedNote()
                 }
 
                 is MenuEvent.SecondCallPinnedNote -> {
+                    pinnedNoteId = event.note?.id
                     setUpPinnedNote(event.note)
+                    viewModel.getMuscularGroups()
+                }
+
+                is MenuEvent.BodyImageChanged -> {
+                    bodyImage = !bodyImage
                     viewModel.getMuscularGroups()
                 }
 
@@ -149,7 +161,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             UNPIN_ROUTINE -> pinnedRoutineId
             UNPIN_NOTE -> pinnedNoteId
         }
-        id?.let { activity?.showFragmentDialog(UnpinDataDialog.newInstance(id, type)) } ?: run {}
+        id?.let { activity?.showFragmentDialog(UnpinDataDialog.newInstance(id, type)) }
     }
 
     private fun setActualRoutineFirstTime(routine: Routine?) {
@@ -221,6 +233,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
     private fun setUpMuscularGroups(mGroups: List<MuscularGroup>) {
         binding.apply {
+            swGender.isChecked = bodyImage
             rvMuscularGroups.apply {
                 layoutManager = LinearLayoutManager(mContext, HORIZONTAL, false)
                 adapter = MenuMuscGroupsAdapter(mGroups, bodyImage, this@MenuFragment)

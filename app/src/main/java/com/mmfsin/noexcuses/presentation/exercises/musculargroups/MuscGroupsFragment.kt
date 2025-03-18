@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -54,31 +53,16 @@ class MuscGroupsFragment : BaseFragment<FragmentMuscularGroupsBinding, MuscGroup
         (activity as BedRockActivity).setUpToolbar(title = getString(R.string.mgroups_toolbar))
     }
 
-    override fun setListeners() {
-        binding.apply {
-            btnMan.setOnClickListener {
-                Toast.makeText(mContext, "man", Toast.LENGTH_SHORT).show()
-                viewModel.editBodyImage(selectedWomanImage = false)
-            }
-            btnWoman.setOnClickListener {
-                Toast.makeText(mContext, "woman", Toast.LENGTH_SHORT).show()
-                viewModel.editBodyImage(selectedWomanImage = true)
-            }
-        }
-    }
-
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
                 is MuscGroupsEvent.BodyImage -> {
                     bodyImage = event.isWomanImage
-                    if (event.isWomanImage) binding.btnWoman.isChecked = true
-                    else binding.btnMan.isChecked = true
-
                     viewModel.getMuscularGroups()
                 }
 
                 is MuscGroupsEvent.MuscGroups -> setUpMGroups(event.groups)
+
                 is MuscGroupsEvent.BodyImageChanged -> {
                     bodyImage = !bodyImage
                     viewModel.getMuscularGroups()

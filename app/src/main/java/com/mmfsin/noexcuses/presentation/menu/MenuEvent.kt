@@ -14,5 +14,7 @@ sealed class MenuEvent {
     class SecondCallPinnedRoutine(val routine: Routine?) : MenuEvent()
     class SecondCallPinnedNote(val note: Note?) : MenuEvent()
 
+    object BodyImageChanged : MenuEvent()
+
     object SWW : MenuEvent()
 }

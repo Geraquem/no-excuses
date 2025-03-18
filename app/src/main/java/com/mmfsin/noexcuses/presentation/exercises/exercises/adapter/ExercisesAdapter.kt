@@ -20,7 +20,8 @@ class ExercisesAdapter(
         fun bind(exercise: Exercise) {
             binding.apply {
                 Glide.with(binding.root.context).load(exercise.imageURL).into(image)
-                tvName.text = exercise.id + " - " + exercise.name
+//                tvName.text = exercise.id + " - " + exercise.name
+                tvName.text = exercise.name
             }
         }
     }
