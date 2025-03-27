@@ -56,7 +56,7 @@ class AddChExerciseDialog(
             exercise?.let {
                 tvCategory.text = getString(R.string.exercise_dialog_category, it.category)
                 tvName.text = it.name
-                Glide.with(requireContext()).load(it.imageURL).into(image)
+                Glide.with(requireContext()).load(it.gifURL).into(image)
                 setUpSeriesRV()
             }
         }

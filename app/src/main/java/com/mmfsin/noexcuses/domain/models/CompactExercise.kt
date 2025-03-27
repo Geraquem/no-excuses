@@ -7,6 +7,7 @@ open class CompactExercise(
     var name: String,
     var category: String,
     var imageURL: String,
+    var gifURL: String?,
     var series: Int?,
     var time: String?,
     var hasNotes: Boolean,

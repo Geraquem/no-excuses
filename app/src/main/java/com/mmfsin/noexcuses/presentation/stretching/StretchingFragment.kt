@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager.*
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
@@ -53,7 +55,8 @@ class StretchingFragment : BaseFragment<FragmentStretchingBinding, StretchingVie
 
     private fun setUpMuscularGroups(mgroups: List<MuscularGroup>) {
         binding.rvStretching.apply {
-            layoutManager = LinearLayoutManager(mContext)
+//            layoutManager = LinearLayoutManager(mContext)
+            layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
             adapter = StretchingMGroupAdapter(mgroups, this@StretchingFragment)
         }
     }

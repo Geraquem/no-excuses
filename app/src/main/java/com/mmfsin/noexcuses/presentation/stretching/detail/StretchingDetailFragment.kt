@@ -9,18 +9,17 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
-import com.mmfsin.noexcuses.databinding.FragmentStretchingBinding
+import com.mmfsin.noexcuses.databinding.FragmentStretchingDetailBinding
 import com.mmfsin.noexcuses.domain.models.Stretching
 import com.mmfsin.noexcuses.presentation.stretching.StretchingEvent
 import com.mmfsin.noexcuses.presentation.stretching.StretchingViewModel
 import com.mmfsin.noexcuses.presentation.stretching.adapter.StretchingDetailAdapter
 import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
-import com.mmfsin.noexcuses.utils.MGROUP_ID
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class StretchingDetailFragment : BaseFragment<FragmentStretchingBinding, StretchingViewModel>() {
+class StretchingDetailFragment : BaseFragment<FragmentStretchingDetailBinding, StretchingViewModel>() {
 
     override val viewModel: StretchingViewModel by viewModels()
 
@@ -29,11 +28,7 @@ class StretchingDetailFragment : BaseFragment<FragmentStretchingBinding, Stretch
     private var mGroup: String? = null
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup?) =
-        FragmentStretchingBinding.inflate(inflater, container, false)
-
-//    override fun getBundleArgs() {
-//        arguments?.let { mGroup = it.getString(MGROUP_ID) }
-//    }
+        FragmentStretchingDetailBinding.inflate(inflater, container, false)
 
     override fun getBundleArgs() {
         mGroup = activity?.intent?.getStringExtra(BEDROCK_STR_ARGS)
@@ -46,9 +41,6 @@ class StretchingDetailFragment : BaseFragment<FragmentStretchingBinding, Stretch
 
     override fun setUI() {
         (activity as BedRockActivity).setUpToolbar(title = mGroup)
-        binding.apply {
-            tvTopText.visibility = View.GONE
-        }
     }
 
     override fun observe() {
@@ -65,7 +57,7 @@ class StretchingDetailFragment : BaseFragment<FragmentStretchingBinding, Stretch
     }
 
     private fun setUpMuscularGroups(stretching: List<Stretching>) {
-        binding.rvStretching.apply {
+        binding.rvStretchingDetail.apply {
             layoutManager = LinearLayoutManager(mContext)
             adapter = StretchingDetailAdapter(stretching)
         }

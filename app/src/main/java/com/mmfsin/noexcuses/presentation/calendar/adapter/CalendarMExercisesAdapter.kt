@@ -30,7 +30,7 @@ class CalendarMExercisesAdapter(
                 rlEdit.isVisible = false
                 tvPosition.text = position.toString()
                 setCategoryColor(exercise.category)
-                Glide.with(binding.root.context).load(exercise.imageURL).into(image)
+                Glide.with(binding.root.context).load(exercise.gifURL).into(image)
                 tvCategory.text = exercise.category
                 tvName.text = exercise.name
 

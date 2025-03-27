@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout.VERTICAL
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.mmfsin.noexcuses.base.BaseFragment
@@ -44,6 +45,9 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding, ExercisesViewMo
 
     override fun setUI() {
         (activity as BedRockActivity).setUpToolbar(title = mGroup)
+        binding.apply {
+            loading.root.isVisible = true
+        }
     }
 
     override fun setListeners() {}
@@ -58,9 +62,12 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding, ExercisesViewMo
     }
 
     private fun setUpExercises(exercises: List<Exercise>) {
-        binding.rvExercises.apply {
-            layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-            adapter = ExercisesAdapter(exercises, this@ExercisesFragment)
+        binding.apply {
+            rvExercises.apply {
+                layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
+                adapter = ExercisesAdapter(exercises, this@ExercisesFragment)
+            }
+            loading.root.isVisible = false
         }
     }
 

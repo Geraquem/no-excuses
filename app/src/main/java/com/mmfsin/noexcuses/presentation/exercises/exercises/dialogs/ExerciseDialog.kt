@@ -80,10 +80,10 @@ class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment
             exercise?.let {
                 tvCategory.text = getString(R.string.exercise_dialog_category, it.category)
                 tvName.text = it.name
-                Glide.with(requireContext()).load(it.imageURL).into(image)
+
                 it.gifURL?.let { gif ->
                     Glide.with(requireContext()).load(gif).into(gifImage)
-                } ?: run { gifImage.isVisible = false }
+                } ?: run { Glide.with(requireContext()).load(it.imageURL).into(gifImage) }
 
                 llMuscleWiki.isVisible = it.muscleWikiURL != null
                 tvDescription.text = it.description

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
@@ -50,6 +51,9 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
     }
 
     override fun setUI() {
+        binding.apply {
+            loading.root.isVisible = true
+        }
         (activity as BedRockActivity).apply {
             setUpToolbar(title = group?.muscularGroup)
             rightIconToolbar(isVisible = true,
@@ -70,9 +74,12 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
     }
 
     private fun setUpExercises(exercises: List<Exercise>) {
-        binding.rvExercises.apply {
-            layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-            adapter = ChExercisesAdapter(exercises, this@ChExercisesFragment)
+        binding.apply {
+            rvExercises.apply {
+                layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
+                adapter = ChExercisesAdapter(exercises, this@ChExercisesFragment)
+            }
+            loading.root.isVisible = false
         }
     }
 

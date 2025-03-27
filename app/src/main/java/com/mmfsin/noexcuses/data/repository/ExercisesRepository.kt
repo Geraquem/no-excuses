@@ -50,7 +50,8 @@ class ExercisesRepository @Inject constructor(
         val latch = CountDownLatch(1)
         val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
 
-        if (sharedPrefs.getBoolean(SERVER_EXERCISES, true)) {
+//        if (sharedPrefs.getBoolean(SERVER_EXERCISES, true)) {
+        if (true) {
             realmDatabase.deleteAllObjects(ExerciseDTO::class.java)
             val exercises = mutableListOf<ExerciseDTO>()
             Firebase.database.reference.child(EXERCISES).get().addOnSuccessListener {
@@ -76,6 +77,10 @@ class ExercisesRepository @Inject constructor(
             return exercises.sortedBy { it.order }.toExerciseList()
 
         } else {
+
+            println("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*")
+            println("from realm")
+
             val exercises = realmDatabase.getObjectsFromRealm { where<ExerciseDTO>().findAll() }
             return exercises.sortedBy { it.order }.toExerciseList()
         }

@@ -19,7 +19,7 @@ class ChExercisesAdapter(
         private val binding = ItemExerciseBinding.bind(view)
         fun bind(exercise: Exercise) {
             binding.apply {
-                Glide.with(binding.root.context).load(exercise.imageURL).into(image)
+                Glide.with(binding.root.context).load(exercise.gifURL).into(image)
                 tvName.text = exercise.name
             }
         }

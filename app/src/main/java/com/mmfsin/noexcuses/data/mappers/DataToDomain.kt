@@ -123,6 +123,7 @@ fun ChExerciseDTO.toCompactExercise(e: Exercise) = CompactExercise(
     name = e.name,
     category = e.category,
     imageURL = e.imageURL,
+    gifURL = e.gifURL,
     series = data?.size,
     time = time.formatTime(),
     hasNotes = !notes.isNullOrEmpty(),

@@ -29,7 +29,7 @@ class CalendarDfExercisesAdapter(
             binding.apply {
                 tvPosition.text = position.toString()
                 setCategoryColor(exercise.exercise.category)
-                Glide.with(c).load(exercise.exercise.imageURL).into(image)
+                Glide.with(c).load(exercise.exercise.gifURL).into(image)
                 tvCategory.text = exercise.exercise.category
                 tvName.text = exercise.exercise.name
 
