@@ -2,7 +2,6 @@ package com.mmfsin.noexcuses.data.repository
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import android.widget.Toast
 import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -15,6 +14,7 @@ import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
 import com.mmfsin.noexcuses.data.models.NoteDTO
+import com.mmfsin.noexcuses.domain.interfaces.IDefaultRoutinesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IMenuRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Day
@@ -42,7 +42,7 @@ import javax.inject.Inject
 
 class MenuRepository @Inject constructor(
     @ApplicationContext val context: Context,
-    private val realmDatabase: IRealmDatabase
+    private val realmDatabase: IRealmDatabase,
 ) : IMenuRepository {
 
     private val reference = Firebase.database.reference
@@ -194,11 +194,9 @@ class MenuRepository @Inject constructor(
         batch.commit()
             .addOnSuccessListener {
                 latch.countDown()
-                Toast.makeText(context, "Todo perfe", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
                 latch.countDown()
-                Toast.makeText(context, "Algo ha ido mal", Toast.LENGTH_SHORT).show()
             }
         withContext(Dispatchers.IO) { latch.await() }
     }

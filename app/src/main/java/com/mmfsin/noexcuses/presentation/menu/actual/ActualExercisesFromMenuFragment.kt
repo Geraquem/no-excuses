@@ -61,7 +61,11 @@ class ActualExercisesFromMenuFragment :
     }
 
     override fun setUI() {
-        binding.apply { clAdd.visibility = View.GONE }
+        binding.apply {
+            clAdd.visibility = View.GONE
+            clEmpty.isVisible = false
+            llRegister.isVisible = false
+        }
     }
 
     override fun setListeners() {
@@ -128,6 +132,8 @@ class ActualExercisesFromMenuFragment :
             rvExercises.isVisible = exercises.isNotEmpty()
             llRegister.isVisible = exercises.isNotEmpty()
             clEmpty.isVisible = exercises.isEmpty()
+
+            loading.isVisible = false
         }
     }
 

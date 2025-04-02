@@ -127,6 +127,7 @@ class MExercisesFragment : BaseFragment<FragmentChExercisesBinding, MExercisesVi
             }
             nvExercises.isVisible = exercises.isNotEmpty()
             clEmpty.isVisible = exercises.isEmpty()
+            loading.isVisible = false
         }
     }
 

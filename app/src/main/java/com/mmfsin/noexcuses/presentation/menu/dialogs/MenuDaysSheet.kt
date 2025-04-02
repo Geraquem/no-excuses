@@ -51,6 +51,7 @@ class MenuDaysSheet(
     override fun setUI() {
         isCancelable = true
         binding.apply {
+            tvEmpty.visibility = View.GONE
             flBtnSeparator.visibility = View.GONE
             btnAddDay.visibility = View.GONE
         }

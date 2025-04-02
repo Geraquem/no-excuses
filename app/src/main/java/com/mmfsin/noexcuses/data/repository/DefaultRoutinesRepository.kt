@@ -70,14 +70,11 @@ class DefaultRoutinesRepository @Inject constructor(
                     latch.countDown()
                 }
             withContext(Dispatchers.IO) { latch.await() }
-            Toast.makeText(context, "from firebase", Toast.LENGTH_SHORT).show()
             return defaultRoutines.toDefaultRoutineList()
         } else {
             val routines = realmDatabase.getObjectsFromRealm {
                 where<DefaultRoutineDTO>().findAll()
             }
-
-            Toast.makeText(context, "from realm", Toast.LENGTH_SHORT).show()
             return routines.toDefaultRoutineList()
         }
     }
@@ -128,11 +125,8 @@ class DefaultRoutinesRepository @Inject constructor(
                     latch.countDown()
                 }
             withContext(Dispatchers.IO) { latch.await() }
-            Toast.makeText(context, "from firebase", Toast.LENGTH_SHORT).show()
-
             return dDays.toDayListFromDefaultDayDTO()
         } else {
-            Toast.makeText(context, "from realm", Toast.LENGTH_SHORT).show()
             return days.toDayListFromDefaultDayDTO()
         }
     }
@@ -172,9 +166,7 @@ class DefaultRoutinesRepository @Inject constructor(
                 }
 
             withContext(Dispatchers.IO) { latch.await() }
-            Toast.makeText(context, "from firebase", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(context, "from realm", Toast.LENGTH_SHORT).show()
             dfExercises = dfExercisesFromRealm.toMutableList()
         }
 

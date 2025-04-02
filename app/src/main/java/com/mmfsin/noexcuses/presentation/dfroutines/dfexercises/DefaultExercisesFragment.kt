@@ -55,7 +55,7 @@ class DefaultExercisesFragment :
 
     override fun setUI() {
         binding.apply {
-            loading.isVisible = true
+            llRegisterDf.isVisible = false
             nvExercises.isVisible = false
         }
     }
@@ -111,6 +111,7 @@ class DefaultExercisesFragment :
                 adapter = DefaultExercisesAdapter(exercises, this@DefaultExercisesFragment)
             }
             nvExercises.isVisible = true
+            llRegisterDf.isVisible = true
             loading.isVisible = false
         }
     }
