@@ -8,9 +8,9 @@ import com.google.firebase.ktx.Firebase
 import com.mmfsin.noexcuses.data.mappers.toDay
 import com.mmfsin.noexcuses.data.mappers.toDayListFromDefaultDayDTO
 import com.mmfsin.noexcuses.data.mappers.toDefaultExercise
-import com.mmfsin.noexcuses.data.mappers.toRoutine
 import com.mmfsin.noexcuses.data.mappers.toDefaultRoutineList
 import com.mmfsin.noexcuses.data.mappers.toExercise
+import com.mmfsin.noexcuses.data.mappers.toRoutine
 import com.mmfsin.noexcuses.data.models.DefaultDayDTO
 import com.mmfsin.noexcuses.data.models.DefaultExerciseDTO
 import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
@@ -47,8 +47,7 @@ class DefaultRoutinesRepository @Inject constructor(
         val defaultRoutines = mutableListOf<DefaultRoutineDTO>()
         val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
 
-//        if (sharedPrefs.getBoolean(SERVER_DEFAULT_ROUTINES, true)) {
-        if (true) {
+        if (sharedPrefs.getBoolean(SERVER_DEFAULT_ROUTINES, true)) {
             Firebase.firestore.collection(DEFAULT_ROUTINES).get()
                 .addOnSuccessListener { documents ->
                     for (doc in documents) {
@@ -107,8 +106,7 @@ class DefaultRoutinesRepository @Inject constructor(
         val days = realmDatabase.getObjectsFromRealm {
             where<DefaultDayDTO>().equalTo(ROUTINE_ID, routineId).findAll()
         }
-//        if (days.isEmpty()) {
-        if (true) {
+        if (days.isEmpty()) {
             val latch = CountDownLatch(1)
             val dDays = mutableListOf<DefaultDayDTO>()
             Firebase.firestore.collection(DEFAULT_ROUTINES).document(routineId).collection(DAYS)
@@ -153,8 +151,7 @@ class DefaultRoutinesRepository @Inject constructor(
             where<DefaultExerciseDTO>().equalTo(DAY_ID, dayId).findAll()
         }
 
-//        if (dfExercisesFromRealm.isEmpty()) {
-        if (true) {
+        if (dfExercisesFromRealm.isEmpty()) {
             val latch = CountDownLatch(1)
             Firebase.firestore.collection(DEFAULT_ROUTINES).document(routineId).collection(DAYS)
                 .document(dayId).collection(EXERCISES).get().addOnSuccessListener { documents ->

@@ -31,7 +31,7 @@ class DefaultRoutinesAdapter(
                 ivPushpin.setImageResource(pushPinIcon)
 
                 ivPushpin.setOnClickListener { listener.onRoutinePushPinClick(defaultRoutine.id) }
-                tvAdd.setOnClickListener {
+                ivAddToMine.setOnClickListener {
                     listener.addToMyRoutines(defaultRoutine.id, defaultRoutine.name)
                 }
             }

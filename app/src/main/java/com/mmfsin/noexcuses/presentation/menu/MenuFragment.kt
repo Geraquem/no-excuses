@@ -94,9 +94,10 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
 
             btnDefaultRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_default_routines) }
             btnMyRoutines.setOnClickListener {
-                viewModel.insertDataInFirestore()
-//                navigateTo(R.navigation.nav_graph_my_routines)
+//                viewModel.insertDataInFirestore()
+                navigateTo(R.navigation.nav_graph_my_routines)
             }
+
             btnNewRoutine.setOnClickListener {
                 navigateTo(
                     navGraph = R.navigation.nav_graph_my_routines,

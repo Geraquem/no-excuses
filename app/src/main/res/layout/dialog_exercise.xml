@@ -96,13 +96,14 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
+            <com.jsibbold.zoomage.ZoomageView
                 android:id="@+id/gifImage"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/content_description"
+                android:elevation="10dp"
                 tools:src="@color/black" />
 
             <Space

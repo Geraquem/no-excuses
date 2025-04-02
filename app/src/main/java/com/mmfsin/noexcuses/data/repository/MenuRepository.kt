@@ -171,8 +171,8 @@ class MenuRepository @Inject constructor(
         val db = Firebase.firestore
         val batch = db.batch()
 
-        val routineId = "routine_6"
-        val dayId = "r6d1"
+        val routineId = "routine_7"
+        val dayId = "r7d3"
 
         val listToInsert = getExercisesToInsert(dayId)
 //        val listToInsert = getDaysToInsert(routineId)
@@ -194,11 +194,11 @@ class MenuRepository @Inject constructor(
         batch.commit()
             .addOnSuccessListener {
                 latch.countDown()
-                Toast.makeText(context, "ok firebasin", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Todo perfe", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
                 latch.countDown()
-                Toast.makeText(context, "errorrrr", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Algo ha ido mal", Toast.LENGTH_SHORT).show()
             }
         withContext(Dispatchers.IO) { latch.await() }
     }
@@ -206,29 +206,35 @@ class MenuRepository @Inject constructor(
     private fun getDaysToInsert(routineId: String): List<HashMap<String, String>> {
         return listOf(
             hashMapOf(
-                "id" to "r6d1",
+                "id" to "r7d1",
                 "routineId" to routineId,
-                "name" to "Core + Empuje (Push)",
+                "name" to "Piernas y Core",
                 "exercises" to "2000000000000000000",
             ),
             hashMapOf(
-                "id" to "r6d2",
+                "id" to "r7d2",
                 "routineId" to routineId,
-                "name" to "Core + Tirar (Pull)",
+                "name" to "Pecho, Hombros y Tríceps",
                 "exercises" to "2000000000000000000",
             ),
             hashMapOf(
-                "id" to "r6d3",
+                "id" to "r7d3",
                 "routineId" to routineId,
-                "name" to "Core + Piernas",
+                "name" to "Espalda, Bíceps y Core",
                 "exercises" to "2000000000000000000",
             ),
-            hashMapOf(
-                "id" to "r6d4",
-                "routineId" to routineId,
-                "name" to "Core + Fullbody",
-                "exercises" to "2000000000000000000",
-            )
+//            hashMapOf(
+//                "id" to "r8d4",
+//                "routineId" to routineId,
+//                "name" to "Pierna y abdomen",
+//                "exercises" to "2000000000000000000",
+//            ),
+//            hashMapOf(
+//                "id" to "r8d5",
+//                "routineId" to routineId,
+//                "name" to "TORSO (Pecho, Espalda, Hombro y Brazos)",
+//                "exercises" to "2000000000000000000",
+//            )
         )
     }
 
@@ -237,58 +243,58 @@ class MenuRepository @Inject constructor(
             hashMapOf(
                 "dayId" to day,
                 "id" to "${day}e1",
-                "exerciseId" to "core10",
-                "reps" to "10,10,10,10",
-                "desc" to "1",
+                "exerciseId" to "espalda2",
+                "reps" to "12,12,15,15",
+                "desc" to "1.30",
             ),
             hashMapOf(
                 "dayId" to day,
                 "id" to "${day}e2",
-                "exerciseId" to "core1",
-                "reps" to "10,10,10,10",
-                "desc" to "1",
+                "exerciseId" to "espalda5",
+                "reps" to "12,12,15,15",
+                "desc" to "1.30",
             ),
             hashMapOf(
                 "dayId" to day,
                 "id" to "${day}e3",
-                "exerciseId" to "core6",
-                "reps" to "10,10,10,10",
-                "desc" to "1",
+                "exerciseId" to "espalda11",
+                "reps" to "12,12,15,15",
+                "desc" to "1.30",
             ),
             hashMapOf(
                 "dayId" to day,
                 "id" to "${day}e4",
-                "exerciseId" to "core12",
+                "exerciseId" to "espalda17",
+                "reps" to "12,12,15,15",
+                "desc" to "1.30",
+            ),
+            hashMapOf(
+                "dayId" to day,
+                "id" to "${day}e5",
+                "exerciseId" to "biceps12",
+                "reps" to "12,12,15,15",
+                "desc" to "1.30",
+            ),
+            hashMapOf(
+                "dayId" to day,
+                "id" to "${day}e6",
+                "exerciseId" to "biceps2",
+                "reps" to "12,12,15,15",
+                "desc" to "1.30",
+            ),
+            hashMapOf(
+                "dayId" to day,
+                "id" to "${day}e7",
+                "exerciseId" to "core15",
                 "reps" to "10,10,10,10",
                 "desc" to "1",
             ),
             hashMapOf(
                 "dayId" to day,
-                "id" to "${day}e5",
-                "exerciseId" to "pecho1",
-                "reps" to "6,6,8,10",
-                "desc" to "3",
-            ),
-            hashMapOf(
-                "dayId" to day,
-                "id" to "${day}e6",
-                "exerciseId" to "pecho13",
-                "reps" to "6,8,8,10",
-                "desc" to "2",
-            ),
-            hashMapOf(
-                "dayId" to day,
-                "id" to "${day}e7",
-                "exerciseId" to "hombro2",
-                "reps" to "6,8,8,10",
-                "desc" to "2",
-            ),
-            hashMapOf(
-                "dayId" to day,
                 "id" to "${day}e8",
-                "exerciseId" to "triceps12",
-                "reps" to "8,8,10,10",
-                "desc" to "2",
+                "exerciseId" to "cardio5",
+                "reps" to "20'",
+                "desc" to "-",
             )
         )
     }
