@@ -45,3 +45,4 @@ const val SERVER_STRETCHING = "server_stretching"
 const val BODY_IMAGE_WOMAN_SELECTED = "body_image_woman_selected"
 
 const val SEPARATOR = "//separator//"
+const val ADD_EXERCISE = "add_exercise"

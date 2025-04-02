@@ -14,5 +14,6 @@ open class ExerciseDTO(
     var description: String = "",
     var muscles: String = "",
     var isFav: Boolean = false,
-    var muscleWikiURL: String? = null
+    var muscleWikiURL: String? = null,
+    var createdByUser: Boolean = false
 ) : RealmObject()

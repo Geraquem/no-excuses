@@ -1,6 +1,7 @@
 package com.mmfsin.noexcuses.presentation.menu
 
 import com.mmfsin.noexcuses.base.BaseViewModel
+import com.mmfsin.noexcuses.domain.usecases.InsertDataInFirestoreUseCase
 import com.mmfsin.noexcuses.domain.usecases.CheckBodyImageUseCase
 import com.mmfsin.noexcuses.domain.usecases.CheckVersionUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetMuscularGroupsUseCase
@@ -12,6 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MenuViewModel @Inject constructor(
+    private val insertDataInFirestoreUseCase: InsertDataInFirestoreUseCase,
     private val checkVersionUseCase: CheckVersionUseCase,
     private val getMyActualRoutine: GetMyActualRoutineUseCase,
     private val getMuscularGroups: GetMuscularGroupsUseCase,
@@ -19,6 +21,14 @@ class MenuViewModel @Inject constructor(
     private val getBodyImageUseCase: CheckBodyImageUseCase,
     private val switchBodyImageUseCase: SwitchBodyImageUseCase
 ) : BaseViewModel<MenuEvent>() {
+
+    fun insertDataInFirestore() {
+        executeUseCase(
+            { insertDataInFirestoreUseCase.execute() },
+            { _event.value = MenuEvent.DataInserted },
+            { _event.value = MenuEvent.SWW }
+        )
+    }
 
     fun checkVersion() {
         executeUseCase(

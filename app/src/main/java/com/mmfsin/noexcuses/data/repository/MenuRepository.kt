@@ -2,7 +2,9 @@ package com.mmfsin.noexcuses.data.repository
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.widget.Toast
 import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.mmfsin.noexcuses.data.mappers.toDayListFromDayDTO
 import com.mmfsin.noexcuses.data.mappers.toDayListFromDefaultDayDTO
@@ -18,6 +20,9 @@ import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.Routine
 import com.mmfsin.noexcuses.utils.BODY_IMAGE_WOMAN_SELECTED
+import com.mmfsin.noexcuses.utils.DAYS
+import com.mmfsin.noexcuses.utils.DEFAULT_ROUTINES
+import com.mmfsin.noexcuses.utils.EXERCISES
 import com.mmfsin.noexcuses.utils.ID
 import com.mmfsin.noexcuses.utils.MY_SHARED_PREFS
 import com.mmfsin.noexcuses.utils.M_GROUPS
@@ -160,4 +165,132 @@ class MenuRepository @Inject constructor(
             apply()
         }
     }
+
+    /*****************************************************************************************************************************************/
+    override suspend fun insertDataInFirestore() {
+        val db = Firebase.firestore
+        val batch = db.batch()
+
+        val routineId = "routine_6"
+        val dayId = "r6d1"
+
+        val listToInsert = getExercisesToInsert(dayId)
+//        val listToInsert = getDaysToInsert(routineId)
+
+        val latch = CountDownLatch(1)
+
+        val usersCollection = db.collection(DEFAULT_ROUTINES).document(routineId)
+            .collection(DAYS)
+            .document(dayId)
+            .collection(EXERCISES)
+
+        for (user in listToInsert) {
+            val newDocRef = user["id"]?.let { usersCollection.document(it) }
+            if (newDocRef != null) {
+                batch.set(newDocRef, user)
+            }
+        }
+
+        batch.commit()
+            .addOnSuccessListener {
+                latch.countDown()
+                Toast.makeText(context, "ok firebasin", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                latch.countDown()
+                Toast.makeText(context, "errorrrr", Toast.LENGTH_SHORT).show()
+            }
+        withContext(Dispatchers.IO) { latch.await() }
+    }
+
+    private fun getDaysToInsert(routineId: String): List<HashMap<String, String>> {
+        return listOf(
+            hashMapOf(
+                "id" to "r6d1",
+                "routineId" to routineId,
+                "name" to "Core + Empuje (Push)",
+                "exercises" to "2000000000000000000",
+            ),
+            hashMapOf(
+                "id" to "r6d2",
+                "routineId" to routineId,
+                "name" to "Core + Tirar (Pull)",
+                "exercises" to "2000000000000000000",
+            ),
+            hashMapOf(
+                "id" to "r6d3",
+                "routineId" to routineId,
+                "name" to "Core + Piernas",
+                "exercises" to "2000000000000000000",
+            ),
+            hashMapOf(
+                "id" to "r6d4",
+                "routineId" to routineId,
+                "name" to "Core + Fullbody",
+                "exercises" to "2000000000000000000",
+            )
+        )
+    }
+
+    private fun getExercisesToInsert(day: String): List<HashMap<String, String>> {
+        return listOf(
+            hashMapOf(
+                "dayId" to day,
+                "id" to "${day}e1",
+                "exerciseId" to "core10",
+                "reps" to "10,10,10,10",
+                "desc" to "1",
+            ),
+            hashMapOf(
+                "dayId" to day,
+                "id" to "${day}e2",
+                "exerciseId" to "core1",
+                "reps" to "10,10,10,10",
+                "desc" to "1",
+            ),
+            hashMapOf(
+                "dayId" to day,
+                "id" to "${day}e3",
+                "exerciseId" to "core6",
+                "reps" to "10,10,10,10",
+                "desc" to "1",
+            ),
+            hashMapOf(
+                "dayId" to day,
+                "id" to "${day}e4",
+                "exerciseId" to "core12",
+                "reps" to "10,10,10,10",
+                "desc" to "1",
+            ),
+            hashMapOf(
+                "dayId" to day,
+                "id" to "${day}e5",
+                "exerciseId" to "pecho1",
+                "reps" to "6,6,8,10",
+                "desc" to "3",
+            ),
+            hashMapOf(
+                "dayId" to day,
+                "id" to "${day}e6",
+                "exerciseId" to "pecho13",
+                "reps" to "6,8,8,10",
+                "desc" to "2",
+            ),
+            hashMapOf(
+                "dayId" to day,
+                "id" to "${day}e7",
+                "exerciseId" to "hombro2",
+                "reps" to "6,8,8,10",
+                "desc" to "2",
+            ),
+            hashMapOf(
+                "dayId" to day,
+                "id" to "${day}e8",
+                "exerciseId" to "triceps12",
+                "reps" to "8,8,10,10",
+                "desc" to "2",
+            )
+        )
+    }
+    /*****************************************************************************************************************************************/
 }

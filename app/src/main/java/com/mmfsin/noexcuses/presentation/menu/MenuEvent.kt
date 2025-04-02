@@ -10,6 +10,7 @@ sealed class MenuEvent {
     class PinnedNote(val note: Note?) : MenuEvent()
     class BodyImage(val isWomanImage: Boolean) : MenuEvent()
     class GetMuscularGroups(val mGroups: List<MuscularGroup>) : MenuEvent()
+    object DataInserted : MenuEvent()
 
     class SecondCallPinnedRoutine(val routine: Routine?) : MenuEvent()
     class SecondCallPinnedNote(val note: Note?) : MenuEvent()

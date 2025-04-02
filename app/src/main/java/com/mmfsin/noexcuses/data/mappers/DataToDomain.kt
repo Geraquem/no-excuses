@@ -47,7 +47,8 @@ fun ExerciseDTO.toExercise() = Exercise(
     description = description,
     involvedMuscles = muscles,
     isFav = isFav,
-    muscleWikiURL = muscleWikiURL
+    muscleWikiURL = muscleWikiURL,
+    createdByUser = createdByUser
 )
 
 fun List<ExerciseDTO>.toExerciseList() = this.map { it.toExercise() }

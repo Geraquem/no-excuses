@@ -5,6 +5,7 @@ import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.CompactExercise
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
+import com.mmfsin.noexcuses.presentation.models.CreatedExercise
 
 interface IExercisesRepository {
     fun getMuscularGroups(): List<MuscularGroup>
@@ -24,6 +25,10 @@ interface IExercisesRepository {
 
     fun deleteExercisesFromDeletedDay(dayId: String)
     fun deleteExercisesFromDeletedRoutine(routineId: String)
+
+    fun createCustomExercise(createdExercise: CreatedExercise)
+    fun editCustomExercise(createdExercise: CreatedExercise, id: String)
+    fun deleteCustomExercise(createdExerciseId: String)
 
     fun addDefaultExerciseAsMine(chExercise: ChExerciseDTO)
 }

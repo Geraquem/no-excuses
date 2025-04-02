@@ -9,5 +9,6 @@ open class Exercise(
     var description: String,
     var involvedMuscles: String,
     var isFav: Boolean,
-    var muscleWikiURL: String?
+    var muscleWikiURL: String?,
+    var createdByUser: Boolean
 )

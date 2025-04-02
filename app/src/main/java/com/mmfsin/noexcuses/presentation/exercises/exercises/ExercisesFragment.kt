@@ -15,7 +15,12 @@ import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.exercises.exercises.adapter.ExercisesAdapter
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.custom.create.CreateExerciseDialog
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.custom.delete.DeleteCreatedExerciseDialog
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.custom.edit.EditCreatedExerciseDialog
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.custom.edit.listeners.IEditCreatedExerciseListener
 import com.mmfsin.noexcuses.presentation.exercises.exercises.interfaces.IExercisesListener
+import com.mmfsin.noexcuses.utils.ADD_EXERCISE
 import com.mmfsin.noexcuses.utils.MGROUP_ID
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
@@ -23,13 +28,15 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ExercisesFragment : BaseFragment<FragmentExercisesBinding, ExercisesViewModel>(),
-    IExercisesListener {
+    IExercisesListener, IEditCreatedExerciseListener {
 
     override val viewModel: ExercisesViewModel by viewModels()
 
     private lateinit var mContext: Context
 
     private var mGroup: String? = null
+    private var mExercises: MutableList<Exercise>? = null
+    private var mAdapter: ExercisesAdapter? = null
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentExercisesBinding.inflate(inflater, container, false)
@@ -55,24 +62,57 @@ class ExercisesFragment : BaseFragment<FragmentExercisesBinding, ExercisesViewMo
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is ExercisesEvent.GetExercises -> setUpExercises(event.exercises)
+                is ExercisesEvent.GetExercises -> setUpExercises(event.exercises, event.newCreated)
                 is ExercisesEvent.SWW -> error()
             }
         }
     }
 
-    private fun setUpExercises(exercises: List<Exercise>) {
+    private fun setUpExercises(exercises: List<Exercise>, newCreated: Boolean) {
+        mExercises = exercises.toMutableList()
         binding.apply {
-            rvExercises.apply {
-                layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-                adapter = ExercisesAdapter(exercises, this@ExercisesFragment)
+            mExercises?.let { list ->
+                rvExercises.apply {
+                    layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
+                    mAdapter = ExercisesAdapter(list, this@ExercisesFragment)
+                    adapter = mAdapter
+                }
+                mAdapter?.let {
+                    if (newCreated) rvExercises.scrollToPosition(it.itemCount - 1)
+                }
             }
             loading.root.isVisible = false
         }
     }
 
     override fun onExerciseClick(id: String) {
-        activity?.showFragmentDialog(ExerciseDialog(id))
+        val dialog = if (id == ADD_EXERCISE) {
+            mGroup?.let { category ->
+                CreateExerciseDialog(category) {
+                    viewModel.getExercises(category, newCreated = true)
+                }
+            }
+        } else ExerciseDialog(id)
+        if (dialog != null) activity?.showFragmentDialog(dialog)
+    }
+
+    override fun onExerciseLongClick(id: String) {
+        mGroup?.let { category ->
+            viewModel.getExercises(category, newCreated = true)
+            val dialog = EditCreatedExerciseDialog(id, category, this)
+            activity?.showFragmentDialog(dialog)
+        }
+    }
+
+    override fun editedCreatedExercise() {
+        mGroup?.let { category -> viewModel.getExercises(category, newCreated = true) }
+    }
+
+    override fun deletedCreatedExercise(id: String) {
+        val dialog = DeleteCreatedExerciseDialog(id) {
+            mGroup?.let { category -> viewModel.getExercises(category, newCreated = true) }
+        }
+        activity?.showFragmentDialog(dialog)
     }
 
     private fun error() = activity?.showErrorDialog()

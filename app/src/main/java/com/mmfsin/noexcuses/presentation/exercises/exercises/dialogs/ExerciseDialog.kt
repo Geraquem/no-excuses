@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -81,13 +82,29 @@ class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment
                 tvCategory.text = getString(R.string.exercise_dialog_category, it.category)
                 tvName.text = it.name
 
-                it.gifURL?.let { gif ->
-                    Glide.with(requireContext()).load(gif).into(gifImage)
-                } ?: run { Glide.with(requireContext()).load(it.imageURL).into(gifImage) }
+                if (it.gifURL.isNullOrEmpty()) {
+                    gifImage.isVisible = false
+                } else Glide.with(requireContext()).load(it.gifURL).into(gifImage)
 
-                llMuscleWiki.isVisible = it.muscleWikiURL != null
-                tvDescription.text = it.description
-                tvMuscles.text = it.involvedMuscles
+                if (it.muscleWikiURL.isNullOrEmpty()) {
+                    llMuscleWiki.isVisible = false
+                } else {
+                    if (it.createdByUser) {
+                        ivMw.setImageResource(R.drawable.ic_search)
+                        tvMw.text = getString(R.string.exercise_dialog_search)
+                    }
+                }
+
+                if (it.description.isEmpty()) {
+                    tvDescriptionTitle.isVisible = false
+                    tvDescription.isVisible = false
+                } else tvDescription.text = it.description
+
+                if (it.involvedMuscles.isEmpty()) {
+                    tvMusclesTitle.isVisible = false
+                    tvMuscles.isVisible = false
+                } else tvMuscles.text = it.involvedMuscles
+
                 updateFavIcon(it.isFav)
             }
         }
@@ -99,12 +116,20 @@ class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment
             ivFav.setOnClickListener { exercise?.let { e -> viewModel.updateFav(e.id) } }
 
             llMuscleWiki.setOnClickListener {
-                exercise?.let { e ->
-                    e.muscleWikiURL?.let { url ->
-                        val intent = Intent(Intent.ACTION_VIEW)
-                        intent.data = Uri.parse(url)
-                        startActivity(intent)
+                try {
+                    exercise?.let { e ->
+                        e.muscleWikiURL?.let { url ->
+                            val intent = Intent(Intent.ACTION_VIEW)
+                            intent.data = Uri.parse(url)
+                            startActivity(intent)
+                        }
                     }
+                } catch (e: Exception) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.exercise_dialog_url_wrong),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }

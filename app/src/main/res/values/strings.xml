@@ -66,8 +66,28 @@
     <string name="exercise_dialog_video">Vídeo</string>
     <string name="exercise_dialog_hide_video">Ocultar</string>
     <string name="exercise_dialog_hide_muscle_wiki">Ver en Muscle Wiki</string>
-    <string name="exercise_dialog_description">Descripción</string>
+    <string name="exercise_dialog_description">¿Cómo se hace?</string>
     <string name="exercise_dialog_involved_muscles">Músculos involucrados</string>
+    <string name="exercise_dialog_search">Buscar en internet</string>
+    <string name="exercise_dialog_url_wrong">No parece que la url sea correcta</string>
+
+    <!-- CREATE EXERCISE -->
+    <string name="exercise_add_new_one">Añade tu propio ejercicio</string>
+    <string name="exercise_add_title">Crear ejercicio</string>
+    <string name="exercise_add_image">Seleccionar imagen (opcional)</string>
+    <string name="exercise_add_name">Nombre</string>
+    <string name="exercise_add_description">Cómo se hace (opcional)</string>
+    <string name="exercise_add_muscles">Músculos involucrados (opcional)</string>
+    <string name="exercise_add_external_url">Url externa (opcional)</string>
+    <string name="exercise_add_btn">Crear ejercicio</string>
+
+    <string name="exercise_add_delete_title">Eliminar ejercicio</string>
+    <string name="exercise_add_delete_text">¿Quieres eliminar definitivamente %s?</string>
+    <string name="exercise_add_delete_yes">Eliminar</string>
+    <string name="exercise_add_delete_cancel">Cancelar</string>
+
+    <string name="exercise_add_delete_btn">Eliminar</string>
+    <string name="exercise_add_edit_btn">Editar</string>
 
     <!-- FIRST DIALOG -->
     <string name="first_dialog_explanation_info">Información</string>

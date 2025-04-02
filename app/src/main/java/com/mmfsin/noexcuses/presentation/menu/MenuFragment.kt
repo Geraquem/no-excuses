@@ -93,7 +93,10 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             }
 
             btnDefaultRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_default_routines) }
-            btnMyRoutines.setOnClickListener { navigateTo(R.navigation.nav_graph_my_routines) }
+            btnMyRoutines.setOnClickListener {
+                viewModel.insertDataInFirestore()
+//                navigateTo(R.navigation.nav_graph_my_routines)
+            }
             btnNewRoutine.setOnClickListener {
                 navigateTo(
                     navGraph = R.navigation.nav_graph_my_routines,
@@ -151,6 +154,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                     viewModel.getMuscularGroups()
                 }
 
+                is MenuEvent.DataInserted -> {}
                 is MenuEvent.SWW -> error()
             }
         }

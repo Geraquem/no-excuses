@@ -10,12 +10,13 @@ class ExercisesViewModel @Inject constructor(
     private val getExercisesUseCase: GetExercisesUseCase
 ) : BaseViewModel<ExercisesEvent>() {
 
-    fun getExercises(mGroup: String) {
+    fun getExercises(mGroup: String, newCreated: Boolean = false) {
         executeUseCase(
             { getExercisesUseCase.execute(GetExercisesUseCase.Params(mGroup)) },
             { result ->
-                _event.value = if (result.isNotEmpty()) ExercisesEvent.GetExercises(result)
-                else ExercisesEvent.SWW
+                _event.value =
+                    if (result.isNotEmpty()) ExercisesEvent.GetExercises(result, newCreated)
+                    else ExercisesEvent.SWW
             },
             { _event.value = ExercisesEvent.SWW }
         )

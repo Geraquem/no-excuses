@@ -124,6 +124,7 @@
                 tools:ignore="UselessParent">
 
                 <ImageView
+                    android:id="@+id/iv_mw"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginEnd="6dp"
@@ -131,7 +132,7 @@
                     android:src="@drawable/ic_musclewiki" />
 
                 <TextView
-                    android:id="@+id/tv_video"
+                    android:id="@+id/tv_mw"
                     style="@style/MediumTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -140,6 +141,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_description_title"
                 style="@style/MediumTextView_Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -158,6 +160,7 @@
                 tools:text="bla bla bla" />
 
             <TextView
+                android:id="@+id/tv_muscles_title"
                 style="@style/MediumTextView_Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

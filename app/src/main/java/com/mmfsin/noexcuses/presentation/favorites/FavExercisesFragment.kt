@@ -61,7 +61,7 @@ class FavExercisesFragment : BaseFragment<FragmentFavExercisesBinding, FavExerci
         binding.apply {
             rvFavExercises.apply {
                 layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-                adapter = ExercisesAdapter(exercises, this@FavExercisesFragment)
+                adapter = ExercisesAdapter(exercises.toMutableList(), this@FavExercisesFragment)
             }
             rvFavExercises.isVisible = exercises.isNotEmpty()
             tvFavsEmpty.isVisible = exercises.isEmpty()
@@ -71,6 +71,8 @@ class FavExercisesFragment : BaseFragment<FragmentFavExercisesBinding, FavExerci
     override fun onExerciseClick(id: String) {
         activity?.showFragmentDialog(ExerciseDialog(id))
     }
+
+    override fun onExerciseLongClick(id: String) {}
 
     private fun error() = activity?.showErrorDialog()
 

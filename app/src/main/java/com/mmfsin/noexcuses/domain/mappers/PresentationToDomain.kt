@@ -1,6 +1,8 @@
 package com.mmfsin.noexcuses.domain.mappers
 
+import com.mmfsin.noexcuses.data.models.ExerciseDTO
 import com.mmfsin.noexcuses.domain.models.ChExercise
+import com.mmfsin.noexcuses.presentation.models.CreatedExercise
 import com.mmfsin.noexcuses.presentation.models.DataChExercise
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import java.util.UUID
@@ -32,3 +34,16 @@ fun editChExercise(chExercise: ChExercise, dataChExercise: DataChExercise): ChEx
         superSerie = dataChExercise.superSerie
     )
 }
+
+fun CreatedExercise.toExerciseDTO(id: String? = null, order: Long) = ExerciseDTO(
+    id = id ?: UUID.randomUUID().toString(),
+    category = category,
+    imageURL = "",
+    gifURL = image,
+    name = name,
+    order = order,
+    description = description ?: "",
+    muscles = muscles ?: "",
+    muscleWikiURL = externalURL,
+    createdByUser = true
+)
