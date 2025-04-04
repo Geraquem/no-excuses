@@ -32,6 +32,29 @@ class NotesAdapter(
         }
     }
 
+    fun updatePushPin(id: String) {
+        deletePreviousPushPin(id)
+        var position: Int? = null
+        notes.forEachIndexed { i, note ->
+            if (note.id == id) {
+                note.pinned = !note.pinned
+                position = i
+            }
+        }
+        position?.let { pos -> notifyItemChanged(pos) }
+    }
+
+    private fun deletePreviousPushPin(id: String) {
+        var position: Int? = null
+        notes.forEachIndexed { i, routine ->
+            if (routine.pinned && routine.id != id) {
+                routine.pinned = false
+                position = i
+            }
+        }
+        position?.let { pos -> notifyItemChanged(pos) }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false)

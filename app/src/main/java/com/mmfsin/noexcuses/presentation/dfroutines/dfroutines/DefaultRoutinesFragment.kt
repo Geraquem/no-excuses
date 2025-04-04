@@ -32,6 +32,7 @@ class DefaultRoutinesFragment :
 
     override val viewModel: DefaultRoutinesViewModel by viewModels()
 
+    private var mAdapter: DefaultRoutinesAdapter? = null
     private lateinit var mContext: Context
 
     override fun inflateView(
@@ -63,7 +64,7 @@ class DefaultRoutinesFragment :
             when (event) {
                 is DefaultRoutinesEvent.GetDefaultRoutines -> setUpRoutines(event.defaultRoutines)
                 is DefaultRoutinesEvent.PushPinUpdated -> {
-                    viewModel.getDefaultRoutines()
+                    mAdapter?.updatePushPin(event.routineId)
                     activity?.updateMenuUI(mContext)
                 }
 
@@ -76,7 +77,8 @@ class DefaultRoutinesFragment :
         binding.apply {
             rvRoutines.apply {
                 layoutManager = LinearLayoutManager(mContext)
-                adapter = DefaultRoutinesAdapter(defaultRoutines, this@DefaultRoutinesFragment)
+                mAdapter = DefaultRoutinesAdapter(defaultRoutines, this@DefaultRoutinesFragment)
+                adapter = mAdapter
             }
             loading.isVisible = false
         }

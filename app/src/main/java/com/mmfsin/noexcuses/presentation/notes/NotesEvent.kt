@@ -4,6 +4,6 @@ import com.mmfsin.noexcuses.domain.models.Note
 
 sealed class NotesEvent {
     class GetNotes(val notes: List<Note>) : NotesEvent()
-    object UpdatePushPin : NotesEvent()
+    class UpdatePushPin(val noteId: String) : NotesEvent()
     object SWW : NotesEvent()
 }

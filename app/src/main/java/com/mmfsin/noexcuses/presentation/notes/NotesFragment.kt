@@ -32,6 +32,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
 
     override val viewModel: NotesViewModel by viewModels()
 
+    private var mAdapter: NotesAdapter? = null
     private lateinit var mContext: Context
 
     override fun inflateView(
@@ -55,7 +56,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
             when (event) {
                 is NotesEvent.GetNotes -> setUpNotes(event.notes)
                 is NotesEvent.UpdatePushPin -> {
-                    viewModel.getNotes()
+                    mAdapter?.updatePushPin(event.noteId)
                     activity?.updateMenuUI(mContext)
                 }
 
@@ -68,7 +69,8 @@ class NotesFragment : BaseFragment<FragmentNotesBinding, NotesViewModel>(), INot
         binding.apply {
             rvNotes.apply {
                 layoutManager = LinearLayoutManager(mContext)
-                adapter = NotesAdapter(notes, this@NotesFragment)
+                mAdapter = NotesAdapter(notes, this@NotesFragment)
+                adapter = mAdapter
             }
             nsvNotes.isVisible = notes.isNotEmpty()
             tvTitle.isVisible = notes.isNotEmpty()

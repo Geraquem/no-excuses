@@ -1,7 +1,6 @@
 package com.mmfsin.noexcuses.presentation.dfroutines.dfroutines
 
 import com.mmfsin.noexcuses.base.BaseViewModel
-import com.mmfsin.noexcuses.domain.usecases.AddDfRoutineToMineUseCase
 import com.mmfsin.noexcuses.domain.usecases.GetDefaultRoutinesUseCase
 import com.mmfsin.noexcuses.domain.usecases.UpdateDefaultRoutinePushPinUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,7 +27,7 @@ class DefaultRoutinesViewModel @Inject constructor(
                     UpdateDefaultRoutinePushPinUseCase.Params(routineId)
                 )
             },
-            { _event.value = DefaultRoutinesEvent.PushPinUpdated },
+            { _event.value = DefaultRoutinesEvent.PushPinUpdated(routineId) },
             { _event.value = DefaultRoutinesEvent.SWW }
         )
     }

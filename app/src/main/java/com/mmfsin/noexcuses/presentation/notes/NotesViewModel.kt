@@ -23,7 +23,7 @@ class NotesViewModel @Inject constructor(
     fun updatePinnedNote(id: String) {
         executeUseCase(
             { updateNotePushPinUseCase.execute(UpdateNotePushPinUseCase.Params(id)) },
-            { _event.value = NotesEvent.UpdatePushPin },
+            { _event.value = NotesEvent.UpdatePushPin(id) },
             { _event.value = NotesEvent.SWW }
         )
     }

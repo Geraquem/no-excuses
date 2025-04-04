@@ -37,6 +37,29 @@ class MyRoutinesAdapter(
         }
     }
 
+    fun updatePushPin(id: String) {
+        deletePreviousPushPin(id)
+        var position: Int? = null
+        routines.forEachIndexed { i, routine ->
+            if (routine.id == id) {
+                routine.doingIt = !routine.doingIt
+                position = i
+            }
+        }
+        position?.let { pos -> notifyItemChanged(pos) }
+    }
+
+    private fun deletePreviousPushPin(id: String) {
+        var position: Int? = null
+        routines.forEachIndexed { i, routine ->
+            if (routine.doingIt && routine.id != id) {
+                routine.doingIt = false
+                position = i
+            }
+        }
+        position?.let { pos -> notifyItemChanged(pos) }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_routine, parent, false)

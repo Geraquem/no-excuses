@@ -39,6 +39,7 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
     private lateinit var mContext: Context
 
     private var routines = emptyList<Routine>()
+    private var mAdapter: MyRoutinesAdapter? = null
     private var openNewRoutineDialog: Boolean? = null
 
     override fun getBundleArgs() {
@@ -96,7 +97,7 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
                 }
 
                 is MyRoutinesEvent.PushPinUpdated -> {
-                    viewModel.getRoutines()
+                    mAdapter?.updatePushPin(event.routineId)
                     activity?.updateMenuUI(mContext)
                 }
 
@@ -109,7 +110,8 @@ class MyRoutinesFragment : BaseFragment<FragmentMyRoutinesBinding, MyRoutinesVie
         binding.apply {
             rvRoutines.apply {
                 layoutManager = LinearLayoutManager(mContext)
-                adapter = MyRoutinesAdapter(routines, this@MyRoutinesFragment)
+                mAdapter = MyRoutinesAdapter(routines, this@MyRoutinesFragment)
+                adapter = mAdapter
             }
             rvRoutines.isVisible = routines.isNotEmpty()
             tvEmpty.isVisible = routines.isEmpty()

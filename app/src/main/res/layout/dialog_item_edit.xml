@@ -74,6 +74,7 @@
                 android:id="@+id/et_description"
                 style="@style/MediumTextView"
                 android:layout_width="match_parent"
+                android:maxLines="8"
                 android:layout_height="wrap_content"
                 android:maxLength="100" />
 
