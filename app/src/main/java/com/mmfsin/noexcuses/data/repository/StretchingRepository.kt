@@ -3,10 +3,12 @@ package com.mmfsin.noexcuses.data.repository
 import android.content.Context
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.mmfsin.noexcuses.data.mappers.toStretchList
 import com.mmfsin.noexcuses.data.mappers.toStretching
 import com.mmfsin.noexcuses.data.models.StretchingDTO
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.interfaces.IStretchingRepository
+import com.mmfsin.noexcuses.domain.models.Stretch
 import com.mmfsin.noexcuses.domain.models.Stretching
 import com.mmfsin.noexcuses.utils.CATEGORY
 import com.mmfsin.noexcuses.utils.MY_SHARED_PREFS
@@ -24,12 +26,44 @@ class StretchingRepository @Inject constructor(
     private val realmDatabase: IRealmDatabase
 ) : IStretchingRepository {
 
-    override suspend fun getStretching(category: String): List<Stretching> {
+    override suspend fun getStretchingData(): List<Stretch> {
+        val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
+        if (sharedPrefs.getBoolean(SERVER_STRETCHING, true)) {
+            val latch = CountDownLatch(1)
+            realmDatabase.deleteAllObjects(StretchingDTO::class.java)
+            val stretches = mutableListOf<StretchingDTO>()
+            Firebase.database.reference.child(STRETCHING).get().addOnSuccessListener {
+                for (mgroup in it.children) {
+                    for (child in mgroup.children) {
+                        child.getValue(StretchingDTO::class.java)?.let { stretchingDTO ->
+                            saveStretchingInRealm(stretchingDTO)
+                            stretches.add(stretchingDTO)
+                        }
+                    }
+                }
+                sharedPrefs.edit().apply {
+                    putBoolean(SERVER_STRETCHING, false)
+                    apply()
+                }
+                latch.countDown()
+
+            }.addOnFailureListener {
+                latch.countDown()
+            }
+
+            withContext(Dispatchers.IO) { latch.await() }
+            return stretches.toStretchList()
+        } else {
+            val result = realmDatabase.getObjectsFromRealm { where<StretchingDTO>().findAll() }
+            return result.toStretchList()
+        }
+    }
+
+    override suspend fun getStretchingByMGroup(category: String): List<Stretching> {
         val latch = CountDownLatch(1)
         val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
 
-//        if (sharedPrefs.getBoolean(SERVER_STRETCHING, true)) {
-        if (true) {
+        if (sharedPrefs.getBoolean(SERVER_STRETCHING, true)) {
             realmDatabase.deleteAllObjects(StretchingDTO::class.java)
             val stretches = mutableListOf<StretchingDTO>()
             Firebase.database.reference.child(STRETCHING).get().addOnSuccessListener {

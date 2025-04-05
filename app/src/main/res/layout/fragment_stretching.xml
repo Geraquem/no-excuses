@@ -60,7 +60,7 @@
                     style="@style/SmallTextView_Bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="start"
                     android:layout_marginBottom="8dp"
                     android:text="@string/stretching_mgroup"
                     android:textAllCaps="true" />
@@ -71,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:itemCount="5"
-                    tools:listitem="@layout/item_stretching_mgroup" />
+                    tools:listitem="@layout/item_stretching" />
 
             </LinearLayout>
 

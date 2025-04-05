@@ -5,12 +5,12 @@ import com.mmfsin.noexcuses.domain.interfaces.IStretchingRepository
 import com.mmfsin.noexcuses.domain.models.Stretching
 import javax.inject.Inject
 
-class GetStretchingByCategoryUseCase @Inject constructor(
+class GetStretchingByMGroupUseCase @Inject constructor(
     private val repository: IStretchingRepository
-) : BaseUseCase<GetStretchingByCategoryUseCase.Params, List<Stretching>>() {
+) : BaseUseCase<GetStretchingByMGroupUseCase.Params, List<Stretching>>() {
 
     override suspend fun execute(params: Params): List<Stretching> =
-        repository.getStretching(params.category)
+        repository.getStretchingByMGroup(params.category)
 
     data class Params(
         val category: String

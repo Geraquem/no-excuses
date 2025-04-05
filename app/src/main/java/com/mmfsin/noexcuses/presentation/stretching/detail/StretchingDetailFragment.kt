@@ -36,7 +36,7 @@ class StretchingDetailFragment : BaseFragment<FragmentStretchingDetailBinding, S
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mGroup?.let { viewModel.getStretching(it) } ?: run { error() }
+        mGroup?.let { viewModel.getStretchingByMGroup(it) } ?: run { error() }
     }
 
     override fun setUI() {
@@ -46,8 +46,8 @@ class StretchingDetailFragment : BaseFragment<FragmentStretchingDetailBinding, S
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is StretchingEvent.GetMuscularGroups -> {}
-                is StretchingEvent.GetStretching -> {
+                is StretchingEvent.GetStretchingData -> {}
+                is StretchingEvent.GetStretchingByMGroup -> {
                     setUpMuscularGroups(event.stretching)
                 }
 

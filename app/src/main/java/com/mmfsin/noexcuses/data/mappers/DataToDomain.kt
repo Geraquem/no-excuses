@@ -20,6 +20,7 @@ import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.domain.models.Routine
+import com.mmfsin.noexcuses.domain.models.Stretch
 import com.mmfsin.noexcuses.domain.models.Stretching
 import com.mmfsin.noexcuses.utils.formatTime
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -160,14 +161,29 @@ fun List<NoteDTO>.toNoteList() = this.map { it.toNote() }
 
 /** Stretching */
 
+fun List<StretchingDTO>.toStretchList(): List<Stretch> {
+    val result = mutableListOf<Stretch>()
+    val list = this.groupBy { it.category }
+    list.forEach { data ->
+        val (mGroup, stretching) = data
+        val stretch = Stretch(
+            mGroup = mGroup,
+            stretching = stretching.toStretching().sortedBy { it.order }
+        )
+        result.add(stretch)
+    }
+    return result
+}
+
 fun StretchingDTO.toStretching() = Stretching(
-    image1URL = imageURL,
-    image2URL = image2URL,
+    imageURL = imageURL,
     description = description,
     order = order
 )
 
 fun List<StretchingDTO>.toStretching() = this.map { it.toStretching() }
+
+/** Calendar */
 
 fun List<String>.toCalendarDayList(): List<CalendarDay> {
     val result = mutableListOf<CalendarDay>()

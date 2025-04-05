@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:itemCount="5"
-                tools:listitem="@layout/item_stretching_mgroup" />
+                tools:listitem="@layout/item_stretching" />
 
             <Space
                 android:layout_width="match_parent"

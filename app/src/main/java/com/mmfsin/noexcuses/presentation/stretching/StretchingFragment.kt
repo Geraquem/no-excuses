@@ -5,16 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager.*
-import com.mmfsin.noexcuses.MainActivity
-import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentStretchingBinding
-import com.mmfsin.noexcuses.domain.models.MuscularGroup
-import com.mmfsin.noexcuses.presentation.stretching.adapter.StretchingMGroupAdapter
+import com.mmfsin.noexcuses.domain.models.Stretch
+import com.mmfsin.noexcuses.presentation.stretching.adapter.StretchingAdapter
 import com.mmfsin.noexcuses.presentation.stretching.interfaces.IStretchingListener
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +29,7 @@ class StretchingFragment : BaseFragment<FragmentStretchingBinding, StretchingVie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getMuscularGroups()
+        viewModel.getStretchingData()
     }
 
     override fun setUI() {
@@ -46,26 +43,22 @@ class StretchingFragment : BaseFragment<FragmentStretchingBinding, StretchingVie
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is StretchingEvent.GetMuscularGroups -> setUpMuscularGroups(event.mGroups)
-                is StretchingEvent.GetStretching -> {}
+                is StretchingEvent.GetStretchingData -> setUpStretching(event.data)
+                is StretchingEvent.GetStretchingByMGroup -> {}
                 is StretchingEvent.SWW -> error()
             }
         }
     }
 
-    private fun setUpMuscularGroups(mgroups: List<MuscularGroup>) {
+    private fun setUpStretching(data: List<Stretch>) {
         binding.rvStretching.apply {
-//            layoutManager = LinearLayoutManager(mContext)
-            layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-            adapter = StretchingMGroupAdapter(mgroups, this@StretchingFragment)
+            layoutManager = LinearLayoutManager(mContext)
+            adapter = StretchingAdapter(data, this@StretchingFragment)
         }
     }
 
-    override fun onStretchingMGroupClick(category: String){
-        (activity as MainActivity).openBedRockActivity(
-            navGraph = R.navigation.nav_graph_stretching_detail,
-            strArgs = category,
-        )
+    override fun onStretchingClick(category: String) {
+        Toast.makeText(mContext, "ey", Toast.LENGTH_SHORT).show()
     }
 
     private fun error() = activity?.showErrorDialog()
