@@ -28,7 +28,8 @@ class StretchingRepository @Inject constructor(
         val latch = CountDownLatch(1)
         val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
 
-        if (sharedPrefs.getBoolean(SERVER_STRETCHING, true)) {
+//        if (sharedPrefs.getBoolean(SERVER_STRETCHING, true)) {
+        if (true) {
             realmDatabase.deleteAllObjects(StretchingDTO::class.java)
             val stretches = mutableListOf<StretchingDTO>()
             Firebase.database.reference.child(STRETCHING).get().addOnSuccessListener {
