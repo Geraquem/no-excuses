@@ -14,7 +14,6 @@ import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
 import com.mmfsin.noexcuses.data.models.NoteDTO
-import com.mmfsin.noexcuses.domain.interfaces.IDefaultRoutinesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IMenuRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Day
@@ -195,7 +194,7 @@ class MenuRepository @Inject constructor(
             .addOnSuccessListener {
                 latch.countDown()
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener {
                 latch.countDown()
             }
         withContext(Dispatchers.IO) { latch.await() }

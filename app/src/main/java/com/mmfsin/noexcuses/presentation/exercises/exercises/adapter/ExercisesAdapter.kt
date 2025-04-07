@@ -39,8 +39,7 @@ class ExercisesAdapter(
                     ivAddExercise.isVisible = true
                 }
 
-                tvName.text = exercise.id + " - " + exercise.name
-//                tvName.text = exercise.name
+                tvName.text = exercise.name
             }
         }
     }

@@ -14,12 +14,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Noexcuses">
+        android:theme="@style/Theme.NoExcuses.Splash">
 
         <activity
             android:name=".base.bedrock.BedRockActivity"
             android:exported="true"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.Noexcuses"
             android:windowSoftInputMode="stateHidden|adjustPan"
             tools:ignore="LockedOrientationActivity" />
 
@@ -27,7 +28,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashScreenTheme"
+            android:theme="@style/Theme.NoExcuses.Splash"
             android:windowSoftInputMode="stateHidden|adjustPan"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
