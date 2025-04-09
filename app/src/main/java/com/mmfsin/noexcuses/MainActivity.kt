@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
         changeStatusBar()
         setNavigationDrawer()
         setBottomNav()
+
+
+        navigateToTabInBottomNav(R.id.maximumsFragment)
+
     }
 
     private fun changeStatusBar() {
@@ -57,8 +61,9 @@ class MainActivity : AppCompatActivity() {
                 when (menuItem.itemId) {
                     R.id.nav_default_routines -> openBedRockActivity(R.navigation.nav_graph_default_routines)
                     R.id.nav_my_routines -> openBedRockActivity(R.navigation.nav_graph_my_routines)
-                    R.id.nav_exercises -> openBedRockActivity(R.navigation.nav_graph_exercises)
                     R.id.nav_calendar -> navigateToTabInBottomNav(R.id.calendarFragment)
+                    R.id.nav_exercises -> openBedRockActivity(R.navigation.nav_graph_exercises)
+                    R.id.nav_maximums -> navigateToTabInBottomNav(R.id.maximumsFragment)
                     R.id.nav_fav_exercises -> openBedRockActivity(R.navigation.nav_graph_fav_exercises)
                     R.id.nav_stretching -> navigateToTabInBottomNav(R.id.stretchingFragment)
                     R.id.nav_notes -> navigateToTabInBottomNav(R.id.notesFragment)

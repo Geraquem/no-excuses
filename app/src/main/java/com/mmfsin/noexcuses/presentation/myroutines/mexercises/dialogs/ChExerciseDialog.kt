@@ -65,7 +65,6 @@ class ChExerciseDialog(
             tvSeeExercise.setOnClickListener {
                 exercise?.let { e ->
                     listener.onSeeExerciseButtonClick(e.id)
-                    dismiss()
                 }
             }
         }

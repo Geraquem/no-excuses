@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_maximums"
+    app:startDestination="@id/maxMGroupsFragment">
+
+    <fragment
+        android:id="@+id/maxMGroupsFragment"
+        android:name="com.mmfsin.noexcuses.presentation.maximums.mgroups.ChMaxMuscGroupsFragment"
+        android:label="maxMGroupsFragment"
+        tools:layout="@layout/fragment_muscular_groups">
+        <action
+            android:id="@+id/action_routines_to_exercises"
+            app:destination="@id/maxExercisesFragment">
+            <argument
+                android:name="mGroupId"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/maxExercisesFragment"
+        android:name="com.mmfsin.noexcuses.presentation.maximums.exercises.MaxExercisesFragment"
+        android:label="maxExercisesFragment"
+        tools:layout="@layout/fragment_exercises" />
+
+</navigation>

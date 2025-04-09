@@ -6,14 +6,19 @@
         android:title="@string/bottom_nav_home" />
 
     <item
-        android:id="@+id/stretchingFragment"
-        android:icon="@drawable/ic_stretching"
-        android:title="@string/bottom_nav_stretching" />
-
-    <item
         android:id="@+id/calendarFragment"
         android:icon="@drawable/ic_calendar"
         android:title="@string/bottom_nav_calendar" />
+
+    <item
+        android:id="@+id/maximumsFragment"
+        android:icon="@drawable/ic_maximum"
+        android:title="@string/bottom_nav_maximum" />
+
+    <item
+        android:id="@+id/stretchingFragment"
+        android:icon="@drawable/ic_stretching"
+        android:title="@string/bottom_nav_stretching" />
 
     <item
         android:id="@+id/notesFragment"

@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.mmfsin.noexcuses.base.dialog.ErrorDialog
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import java.util.Locale
 
 //fun FragmentActivity.shouldShowInterstitial(position: Int) =
 //    (this as MainActivity).showInterstitial(position)
@@ -135,5 +136,11 @@ fun Int.getMonthName(): String {
 }
 
 fun CalendarDay.toDateString() = "${this.day}/${this.month}/${this.year}"
+
 fun CalendarDay.toCompleteDateString() =
     "${this.day} de ${(this.month).getMonthName()} de ${this.year}"
+
+fun Double.deletePointZero(): String {
+    return if (this % 1.0 == 0.0) this.toInt().toString()
+    else String.format(Locale.getDefault(), "%.2f", this)
+}

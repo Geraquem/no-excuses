@@ -11,6 +11,7 @@
 
     <!-- BOTTOM NAV -->
     <string name="bottom_nav_home">Inicio</string>
+    <string name="bottom_nav_maximum">Máximos</string>
     <string name="bottom_nav_calendar">Calendario</string>
     <string name="bottom_nav_notes">Notas</string>
     <string name="bottom_nav_stretching">Estiramientos</string>
@@ -19,6 +20,7 @@
     <string name="drawer_item_default_routines">Rutinas</string>
     <string name="drawer_item_my_routines">Mis entrenamientos</string>
     <string name="drawer_item_exercises">Ejercicios</string>
+    <string name="drawer_item_maximums">Máximos</string>
     <string name="drawer_item_calendar">Calendario</string>
     <string name="drawer_item_fav_exercises">Favoritos</string>
     <string name="drawer_item_stretching">Estiramientos</string>
@@ -210,6 +212,9 @@
     <string name="days_delete_alert">Eliminarás también los ejercicios relacionados con este día.</string>
     <string name="days_delete_yes">Eliminar</string>
     <string name="days_delete_cancel">Volver</string>
+
+    <!-- MAXIMUMS -->
+    <string name="maximums_empty">No hay nada guardado.</string>
 
     <!-- FAVS -->
     <string name="favs_title">Favoritos</string>

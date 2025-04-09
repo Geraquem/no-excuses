@@ -16,6 +16,11 @@
         tools:layout="@layout/fragment_calendar" />
 
     <fragment
+        android:id="@+id/maximumsFragment"
+        android:name="com.mmfsin.noexcuses.presentation.maximums.MaximumsFragment"
+        tools:layout="@layout/fragment_maximums" />
+
+    <fragment
         android:id="@+id/notesFragment"
         android:name="com.mmfsin.noexcuses.presentation.notes.NotesFragment"
         tools:layout="@layout/fragment_notes" />
