@@ -16,7 +16,7 @@ class DatePickerDialog(val selected: (d: Int, m: Int, y: Int) -> Unit) : DialogF
     DatePickerDialog.OnDateSetListener {
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        selected(dayOfMonth, month, year)
+        selected(dayOfMonth, month + 1, year)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

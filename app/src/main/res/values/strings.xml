@@ -215,6 +215,19 @@
 
     <!-- MAXIMUMS -->
     <string name="maximums_empty">No hay nada guardado.</string>
+    <string name="maximums_select_date">Selecciona una fecha</string>
+    <string name="maximums_selected_date">Fecha:</string>
+    <string name="maximums_selected_date_default">-- / -- / ----</string>
+    <string name="maximums_selected_date_str">%1s de %2s de %3s</string>
+    <string name="maximums_new_weight">Nuevo peso:</string>
+    <string name="maximums_kg">Kg</string>
+    <string name="maximums_my_kg">%s Kg</string>
+    <string name="maximums_add">Agregar nuevo peso</string>
+    <string name="maximums_added">Registrado correctamente</string>
+    <string name="maximums_last_weight">Último peso:</string>
+    <string name="maximums_max_weight">Peso máximo:</string>
+    <string name="maximums_details">Ver detalles</string>
+    <string name="maximums_list_title">Tus registros:</string>
 
     <!-- FAVS -->
     <string name="favs_title">Favoritos</string>

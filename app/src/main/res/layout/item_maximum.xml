@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/click_effect"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/content_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@color/black" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/image"
+        app:layout_constraintLeft_toRightOf="@id/image"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/image">
+
+        <TextView
+            android:id="@+id/tv_exercise_name"
+            style="@style/MediumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            tools:text="Press banca con mancuernas" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/MediumTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/maximums_last_weight" />
+
+            <TextView
+                android:id="@+id/tv_last_weight"
+                style="@style/MediumTextView_Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="120kg" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/MediumTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/maximums_max_weight" />
+
+            <TextView
+                android:id="@+id/tv_max_weight"
+                style="@style/MediumTextView_Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="120kg" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_details"
+            style="@style/MediumTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/click_effect_border"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:text="@string/maximums_details" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

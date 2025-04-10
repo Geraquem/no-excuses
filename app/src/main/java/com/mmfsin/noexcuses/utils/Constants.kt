@@ -22,6 +22,7 @@ const val STRETCHING = "stretching"
 //REALM
 const val CATEGORY = "category"
 const val ID = "id"
+const val EXERCISE_ID = "exerciseId"
 const val DAY_ID = "dayId"
 const val FAV_ID = "isFav"
 const val DATA_ID = "exerciseDayId"

@@ -7,6 +7,7 @@ import com.mmfsin.noexcuses.data.models.DefaultDayDTO
 import com.mmfsin.noexcuses.data.models.DefaultExerciseDTO
 import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
 import com.mmfsin.noexcuses.data.models.ExerciseDTO
+import com.mmfsin.noexcuses.data.models.MaximumDataDTO
 import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
 import com.mmfsin.noexcuses.data.models.NoteDTO
@@ -17,6 +18,8 @@ import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.Day
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.domain.models.MData
+import com.mmfsin.noexcuses.domain.models.MaximumData
 import com.mmfsin.noexcuses.domain.models.MuscularGroup
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.domain.models.Routine
@@ -183,8 +186,6 @@ fun StretchingDTO.toStretching() = Stretching(
 
 fun List<StretchingDTO>.toStretching() = this.map { it.toStretching() }
 
-/** Calendar */
-
 fun List<String>.toCalendarDayList(): List<CalendarDay> {
     val result = mutableListOf<CalendarDay>()
     this.forEach { date ->
@@ -201,3 +202,14 @@ fun List<String>.toCalendarDayList(): List<CalendarDay> {
     }
     return result
 }
+
+fun MaximumDataDTO.toMData() = MData(
+    id = id,
+    weight = weight,
+    date = date
+)
+
+fun List<MaximumDataDTO>.toMaximumData(exercise: Exercise) = MaximumData(
+    exercise = exercise,
+    data = this.map { it.toMData() }
+)

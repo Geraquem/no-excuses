@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_white_box"
-    android:backgroundTint="@color/green"
     android:clipChildren="false"
     android:clipToPadding="false">
 
@@ -112,6 +111,93 @@
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/btn_open_calendar"
+                style="@style/MediumTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/click_effect"
+                android:elevation="4dp"
+                android:gravity="center"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="12dp"
+                android:text="@string/maximums_select_date" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MediumTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/maximums_selected_date" />
+
+                <TextView
+                    android:id="@+id/tv_selected_date"
+                    style="@style/MediumTextView_Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/maximums_selected_date_default" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MediumTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/maximums_new_weight" />
+
+                <EditText
+                    android:id="@+id/et_weight"
+                    style="@style/MediumTextView"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:autofillHints="@null"
+                    android:background="@drawable/bg_small_edit_text"
+                    android:gravity="center"
+                    android:hint="@string/days_exercise_dialog_weight_hint"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingHorizontal="18dp"
+                    android:paddingVertical="6dp"
+                    android:textColorHint="@color/soft_black"
+                    android:textCursorDrawable="@drawable/et_cursor_color" />
+
+                <TextView
+                    style="@style/MediumTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/maximums_kg" />
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add"
+                style="@style/MediumTextView_Bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:paddingVertical="12dp"
+                android:text="@string/maximums_add"
+                app:backgroundTint="@color/light_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/gl_left"
+                app:layout_constraintRight_toRightOf="@id/gl_right" />
 
         </LinearLayout>
 

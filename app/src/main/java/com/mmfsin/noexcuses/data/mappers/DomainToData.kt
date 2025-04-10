@@ -4,14 +4,14 @@ import android.util.Log
 import com.mmfsin.noexcuses.data.models.CalendarInfoDTO
 import com.mmfsin.noexcuses.data.models.ChExerciseDTO
 import com.mmfsin.noexcuses.data.models.DataDTO
+import com.mmfsin.noexcuses.data.models.MaximumDataDTO
 import com.mmfsin.noexcuses.data.models.MyRoutineDTO
 import com.mmfsin.noexcuses.domain.models.CalendarInfo
 import com.mmfsin.noexcuses.domain.models.ChExercise
 import com.mmfsin.noexcuses.domain.models.Data
 import com.mmfsin.noexcuses.domain.models.DefaultExercise
 import com.mmfsin.noexcuses.domain.models.Routine
-import com.mmfsin.noexcuses.utils.getMonthName
-import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.mmfsin.noexcuses.domain.models.TempMaximumData
 import io.realm.RealmList
 import java.util.UUID
 
@@ -95,7 +95,14 @@ fun parseDataSeries(
 
 fun CalendarInfo.toCalendarInfoDTO() = CalendarInfoDTO(
     id = UUID.randomUUID().toString(),
-    date = "$day/${month + 1}/$year",
+    date = "$day/$month/$year",
     dayId = dayId,
     routineId = routineId
+)
+
+fun TempMaximumData.toMaximumDataDTO() = MaximumDataDTO(
+    id = UUID.randomUUID().toString(),
+    exerciseId = exerciseId,
+    weight = weight,
+    date = date
 )
