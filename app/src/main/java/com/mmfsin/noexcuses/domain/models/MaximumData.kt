@@ -7,13 +7,13 @@ data class MaximumData(
 
 data class MData(
     val id: String,
-    val weight: String,
+    val weight: Double,
     val date: String
 )
 
 data class TempMaximumData(
     val exerciseId: String,
-    val weight: String,
+    val weight: Double,
     val date: String
 )
 

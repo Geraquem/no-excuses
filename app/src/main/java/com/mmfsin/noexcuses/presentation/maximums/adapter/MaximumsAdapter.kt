@@ -23,13 +23,17 @@ class MaximumsAdapter(
         private val c = binding.root.context
         fun bind(data: MaximumData, listener: IMaximumsListener) {
             binding.apply {
+                tvCategory.text = data.exercise.category
+                setCategoryColor(data.exercise.category)
+
                 tvExerciseName.text = data.exercise.name
                 Glide.with(c).load(data.exercise.gifURL).into(image)
 
-                tvLastWeight.text = c.getString(R.string.maximums_my_kg, data.data.last().weight)
+                val lastWeight = data.data.last().weight.deletePointZero()
+                tvLastWeight.text = c.getString(R.string.maximums_my_kg, lastWeight)
 
-                val maxWeight = data.data.mapNotNull { it.weight.toDoubleOrNull() }.maxOrNull()
-                tvMaxWeight.text = c.getString(R.string.maximums_my_kg, maxWeight.deletePointZero())
+                val maxWeight = data.data.maxOfOrNull { it.weight }.deletePointZero()
+                tvMaxWeight.text = c.getString(R.string.maximums_my_kg, maxWeight)
 
                 tvDetails.setOnClickListener {
                     listener.onSeeDetailsClick(data.exercise.id)
@@ -39,7 +43,7 @@ class MaximumsAdapter(
 
         private fun setCategoryColor(category: String) {
             val categoryColor = ContextCompat.getColor(c, getCategoryColor(category))
-//            binding.tvCategory.background.setTint(categoryColor)
+            binding.tvCategory.background.setTint(categoryColor)
         }
     }
 

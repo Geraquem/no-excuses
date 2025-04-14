@@ -59,4 +59,13 @@ class MaximumRepository @Inject constructor(
         val exercise = getExerciseById(exerciseId)
         return if (exercise != null) maximumDTOList.toMaximumData(exercise) else null
     }
+
+    override fun getMDataById(mDataId: String): MData? {
+        val data = realmDatabase.getObjectFromRealm(MaximumDataDTO::class.java, ID, mDataId)
+        return data?.toMData()
+    }
+
+    override fun deleteMDataById(mDataId: String) {
+        realmDatabase.deleteObject(MaximumDataDTO::class.java, ID, mDataId)
+    }
 }

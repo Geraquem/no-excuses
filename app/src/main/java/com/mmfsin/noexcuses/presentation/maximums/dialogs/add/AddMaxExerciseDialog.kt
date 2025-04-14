@@ -1,9 +1,10 @@
-package com.mmfsin.noexcuses.presentation.maximums.dialogs
+package com.mmfsin.noexcuses.presentation.maximums.dialogs.add
 
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.mmfsin.noexcuses.R
@@ -12,20 +13,16 @@ import com.mmfsin.noexcuses.databinding.DialogAddMaxExerciseBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.TempMaximumData
 import com.mmfsin.noexcuses.presentation.calendar.dialogs.DatePickerDialog
-import com.mmfsin.noexcuses.presentation.maximums.listeners.IAddMaxExerciseListener
+import com.mmfsin.noexcuses.presentation.maximums.listeners.IDialogsMaxExerciseListener
 import com.mmfsin.noexcuses.utils.animateDialog
-import com.mmfsin.noexcuses.utils.deletePointZero
 import com.mmfsin.noexcuses.utils.getMonthName
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDate
-import java.time.ZoneId.systemDefault
-import java.util.Date
 
 @AndroidEntryPoint
 class AddMaxExerciseDialog(
     private val exerciseId: String,
-    private val listener: IAddMaxExerciseListener
+    private val listener: IDialogsMaxExerciseListener
 ) : BaseDialog<DialogAddMaxExerciseBinding>() {
 
     private val viewModel: AddMaxExerciseDialogViewModel by viewModels()
@@ -52,6 +49,7 @@ class AddMaxExerciseDialog(
     override fun setUI() {
         isCancelable = true
         binding.apply {
+            tvError.isVisible = false
             exercise?.let {
                 tvCategory.text = getString(R.string.exercise_dialog_category, it.category)
                 tvName.text = it.name
@@ -83,11 +81,16 @@ class AddMaxExerciseDialog(
                 selectedDate?.let { date ->
                     val weight = etWeight.text.toString()
                     if (weight.isNotEmpty()) {
-                        val newWeight = weight.toDouble().deletePointZero()
-                        val maxData = TempMaximumData(exerciseId, newWeight, date)
-                        viewModel.saveMaximumData(maxData)
-                    }
-                }
+                        try {
+                            val doubleWeight = weight.toDouble()
+                            val maxData = TempMaximumData(exerciseId, doubleWeight, date)
+                            viewModel.saveMaximumData(maxData)
+                            tvError.isVisible = false
+                        } catch (e: Exception) {
+                            tvError.isVisible = true
+                        }
+                    } else tvError.isVisible = true
+                } ?: run { tvError.isVisible = true }
             }
         }
     }
@@ -116,7 +119,7 @@ class AddMaxExerciseDialog(
     companion object {
         fun newInstance(
             chExerciseId: String,
-            listener: IAddMaxExerciseListener
+            listener: IDialogsMaxExerciseListener
         ): AddMaxExerciseDialog {
             return AddMaxExerciseDialog(chExerciseId, listener)
         }

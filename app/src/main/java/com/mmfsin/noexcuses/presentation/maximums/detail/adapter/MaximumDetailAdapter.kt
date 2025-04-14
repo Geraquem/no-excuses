@@ -8,6 +8,8 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.ItemMaximumDetailBinding
 import com.mmfsin.noexcuses.domain.models.MData
 import com.mmfsin.noexcuses.presentation.maximums.listeners.IMaximumDetailListener
+import com.mmfsin.noexcuses.utils.deletePointZero
+import com.mmfsin.noexcuses.utils.toCompleteDate
 
 class MaximumDetailAdapter(
     private val mDataList: List<MData>,
@@ -16,11 +18,11 @@ class MaximumDetailAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemMaximumDetailBinding.bind(view)
-        private val c = binding.root.context
+        private val context = binding.root.context
         fun bind(data: MData) {
             binding.apply {
-                tvDate.text = data.date
-                tvWeight.text = data.weight
+                tvDate.text = data.date.toCompleteDate(context)
+                tvWeight.text = data.weight.deletePointZero()
             }
         }
     }
@@ -34,7 +36,7 @@ class MaximumDetailAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = mDataList[position]
         holder.bind(data)
-        holder.itemView.setOnClickListener { listener.onItemClick(data.id) }
+        holder.itemView.setOnClickListener { listener.onMDataClick(data.id) }
     }
 
     override fun getItemCount(): Int = mDataList.size

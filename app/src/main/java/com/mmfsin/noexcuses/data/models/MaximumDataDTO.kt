@@ -7,6 +7,6 @@ open class MaximumDataDTO(
     @PrimaryKey
     var id: String = "",
     var exerciseId: String = "",
-    var weight: String = "",
+    var weight: Double = 0.0,
     var date: String = "",
 ) : RealmObject()

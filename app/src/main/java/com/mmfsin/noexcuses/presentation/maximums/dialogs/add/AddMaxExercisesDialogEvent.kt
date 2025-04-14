@@ -1,4 +1,4 @@
-package com.mmfsin.noexcuses.presentation.maximums.dialogs
+package com.mmfsin.noexcuses.presentation.maximums.dialogs.add
 
 import com.mmfsin.noexcuses.domain.models.Exercise
 

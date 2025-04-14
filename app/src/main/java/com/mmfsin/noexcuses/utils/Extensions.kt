@@ -16,8 +16,12 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.dialog.ErrorDialog
+import com.mmfsin.noexcuses.domain.models.MData
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 //fun FragmentActivity.shouldShowInterstitial(position: Int) =
@@ -144,3 +148,35 @@ fun Double.deletePointZero(): String {
     return if (this % 1.0 == 0.0) this.toInt().toString()
     else String.format(Locale.getDefault(), "%.2f", this)
 }
+
+fun String.toCompleteDate(context: Context): String {
+    val locale = Locale("es", "ES")
+
+    val inputFormat = SimpleDateFormat("d/M/yyyy", locale)
+    val date = inputFormat.parse(this)
+
+    val outputDayFormat = SimpleDateFormat("d", locale)
+    val outputMonthFormat = SimpleDateFormat("MMMM", locale)
+    val outputYearFormat = SimpleDateFormat("yyyy", locale)
+
+    date?.let {
+        val day = outputDayFormat.format(date)
+        val month = outputMonthFormat.format(date).capitalizeFirstLetter()
+        val year = outputYearFormat.format(date)
+
+        return context.getString(R.string.maximums_completed_date, day, month, year)
+    }
+
+    return this
+}
+
+fun List<MData>.sortedDateList(): List<MData> {
+    val format = SimpleDateFormat("d/M/yyyy", Locale("es", "ES"))
+    return this
+        .map { format.parse(it.date) to it }
+        .sortedByDescending { it.first }
+        .map { it.second }
+}
+
+fun String.capitalizeFirstLetter(): String =
+    this.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }

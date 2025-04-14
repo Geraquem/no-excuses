@@ -70,22 +70,6 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_white_box"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="24dp"
-        android:visibility="gone">
-
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/barChart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_centerInParent="true" />
-
-    </RelativeLayout>
-
     <TextView
         android:id="@+id/tv_favs_empty"
         style="@style/MediumTextView"

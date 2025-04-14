@@ -21,8 +21,9 @@ import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.custom.dele
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.custom.edit.EditCreatedExerciseDialog
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.custom.edit.listeners.IEditCreatedExerciseListener
 import com.mmfsin.noexcuses.presentation.exercises.exercises.interfaces.IExercisesListener
-import com.mmfsin.noexcuses.presentation.maximums.dialogs.AddMaxExerciseDialog
-import com.mmfsin.noexcuses.presentation.maximums.listeners.IAddMaxExerciseListener
+import com.mmfsin.noexcuses.presentation.maximums.dialogs.add.AddMaxExerciseDialog
+import com.mmfsin.noexcuses.presentation.maximums.dialogs.delete.DeleteMaxExerciseDialog
+import com.mmfsin.noexcuses.presentation.maximums.listeners.IDialogsMaxExerciseListener
 import com.mmfsin.noexcuses.utils.ADD_EXERCISE
 import com.mmfsin.noexcuses.utils.MGROUP_ID
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -31,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MaxExercisesFragment : BaseFragment<FragmentExercisesBinding, MaxExercisesViewModel>(),
-    IExercisesListener, IEditCreatedExerciseListener, IAddMaxExerciseListener {
+    IExercisesListener, IEditCreatedExerciseListener, IDialogsMaxExerciseListener {
 
     override val viewModel: MaxExercisesViewModel by viewModels()
 
@@ -120,6 +121,10 @@ class MaxExercisesFragment : BaseFragment<FragmentExercisesBinding, MaxExercises
 
     override fun onSeeExerciseClick(exerciseId: String) {
         activity?.showFragmentDialog(ExerciseDialog(exerciseId))
+    }
+
+    override fun deleteMData(mDataId: String) {
+        activity?.showFragmentDialog(DeleteMaxExerciseDialog(mDataId))
     }
 
     private fun error() = activity?.showErrorDialog()

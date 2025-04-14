@@ -30,6 +30,20 @@
         app:layout_constraintTop_toTopOf="@id/image">
 
         <TextView
+            android:id="@+id/tv_category"
+            style="@style/SmallTextView_Bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/bg_category_color"
+            android:gravity="center"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:textAllCaps="true"
+            android:textSize="11sp"
+            tools:text="Espalda" />
+
+        <TextView
             android:id="@+id/tv_exercise_name"
             style="@style/MediumTextView"
             android:layout_width="wrap_content"
