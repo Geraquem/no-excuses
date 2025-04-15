@@ -30,6 +30,15 @@ class MaximumRepository @Inject constructor(
         realmDatabase.addObject { data.toMaximumDataDTO() }
     }
 
+    override fun editMData(mDataId: String, data: TempMaximumData) {
+        val dataDTO = realmDatabase.getObjectFromRealm(MaximumDataDTO::class.java, ID, mDataId)
+        dataDTO?.let {
+            it.date = data.date
+            it.weight = data.weight
+            realmDatabase.addObject { it }
+        }
+    }
+
     override fun getAllMaximumData(): List<MaximumData> {
         val formatter = DateTimeFormatter.ofPattern("d/M/yyyy")
 
@@ -43,7 +52,7 @@ class MaximumRepository @Inject constructor(
             sortedData.forEach { list.add(it.toMData()) }
             exercise?.let { e -> result.add(MaximumData(e, list)) }
         }
-        return result
+        return result.sortedBy { it.exercise.category }
     }
 
     private fun getExerciseById(id: String): Exercise? {

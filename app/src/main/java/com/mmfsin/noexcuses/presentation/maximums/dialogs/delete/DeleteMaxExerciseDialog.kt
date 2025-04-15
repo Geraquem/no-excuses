@@ -9,16 +9,21 @@ import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogItemDeleteBinding
 import com.mmfsin.noexcuses.domain.models.MData
+import com.mmfsin.noexcuses.presentation.maximums.trigger.TriggerManager
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.deletePointZero
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.toCompleteDate
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DeleteMaxExerciseDialog(
     private val mDataId: String,
 ) : BaseDialog<DialogItemDeleteBinding>() {
+
+    @Inject
+    lateinit var trigger: TriggerManager
 
     private val viewModel: DeleteMaxExerciseDialogViewModel by viewModels()
 
@@ -56,7 +61,7 @@ class DeleteMaxExerciseDialog(
             when (event) {
                 is DeleteMaxExercisesDialogEvent.GetMData -> setMData(event.data)
                 is DeleteMaxExercisesDialogEvent.Deleted -> {
-
+                    trigger.updateTrigger()
                     dismiss()
                 }
 

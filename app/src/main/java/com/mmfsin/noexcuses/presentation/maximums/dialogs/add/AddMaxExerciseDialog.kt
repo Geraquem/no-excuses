@@ -14,16 +14,21 @@ import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.domain.models.TempMaximumData
 import com.mmfsin.noexcuses.presentation.calendar.dialogs.DatePickerDialog
 import com.mmfsin.noexcuses.presentation.maximums.listeners.IDialogsMaxExerciseListener
+import com.mmfsin.noexcuses.presentation.maximums.trigger.TriggerManager
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.getMonthName
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddMaxExerciseDialog(
     private val exerciseId: String,
     private val listener: IDialogsMaxExerciseListener
 ) : BaseDialog<DialogAddMaxExerciseBinding>() {
+
+    @Inject
+    lateinit var trigger: TriggerManager
 
     private val viewModel: AddMaxExerciseDialogViewModel by viewModels()
 
@@ -106,6 +111,7 @@ class AddMaxExerciseDialog(
                 is AddMaxExercisesDialogEvent.Registered -> {
                     Toast.makeText(requireContext(), R.string.maximums_added, Toast.LENGTH_SHORT)
                         .show()
+                    trigger.updateTrigger()
                     dismiss()
                 }
 

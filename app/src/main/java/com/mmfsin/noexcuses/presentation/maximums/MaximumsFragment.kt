@@ -1,7 +1,6 @@
 package com.mmfsin.noexcuses.presentation.maximums
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +8,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.formatter.ValueFormatter
 import com.mmfsin.noexcuses.MainActivity
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
@@ -22,16 +15,19 @@ import com.mmfsin.noexcuses.databinding.FragmentMaximumsBinding
 import com.mmfsin.noexcuses.domain.models.MaximumData
 import com.mmfsin.noexcuses.presentation.maximums.adapter.MaximumsAdapter
 import com.mmfsin.noexcuses.presentation.maximums.listeners.IMaximumsListener
+import com.mmfsin.noexcuses.presentation.maximums.trigger.TriggerManager
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.Locale
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MaximumsFragment : BaseFragment<FragmentMaximumsBinding, MaximumsViewModel>(),
     IMaximumsListener {
 
     override val viewModel: MaximumsViewModel by viewModels()
+
+    @Inject
+    lateinit var trigger: TriggerManager
 
     private lateinit var mContext: Context
 
@@ -47,6 +43,10 @@ class MaximumsFragment : BaseFragment<FragmentMaximumsBinding, MaximumsViewModel
         binding.apply {
             btnAddMaximum.setOnClickListener {
                 (activity as MainActivity).openBedRockActivity(R.navigation.nav_graph_maximums)
+            }
+
+            trigger.trigger.observe(viewLifecycleOwner) {
+                viewModel.getMaximumData()
             }
         }
     }

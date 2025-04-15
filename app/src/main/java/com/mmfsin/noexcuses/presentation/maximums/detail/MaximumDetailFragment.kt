@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -28,6 +29,7 @@ import com.mmfsin.noexcuses.presentation.maximums.dialogs.delete.DeleteMaxExerci
 import com.mmfsin.noexcuses.presentation.maximums.dialogs.edit.EditMaxExerciseDialog
 import com.mmfsin.noexcuses.presentation.maximums.listeners.IDialogsMaxExerciseListener
 import com.mmfsin.noexcuses.presentation.maximums.listeners.IMaximumDetailListener
+import com.mmfsin.noexcuses.presentation.maximums.trigger.TriggerManager
 import com.mmfsin.noexcuses.utils.BEDROCK_STR_ARGS
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
@@ -35,11 +37,15 @@ import com.mmfsin.noexcuses.utils.sortedDateList
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Locale
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MaximumDetailFragment :
     BaseFragment<FragmentMaximumsDetailBinding, MaximumDetailViewModel>(), IMaximumDetailListener,
     IDialogsMaxExerciseListener {
+
+    @Inject
+    lateinit var trigger: TriggerManager
 
     override val viewModel: MaximumDetailViewModel by viewModels()
 
@@ -69,6 +75,10 @@ class MaximumDetailFragment :
                     val dialog = AddMaxExerciseDialog(id, this@MaximumDetailFragment)
                     activity?.showFragmentDialog(dialog)
                 }
+            }
+
+            trigger.trigger.observe(viewLifecycleOwner) {
+                exerciseId?.let { id -> viewModel.getMaximumData(id) }
             }
         }
     }

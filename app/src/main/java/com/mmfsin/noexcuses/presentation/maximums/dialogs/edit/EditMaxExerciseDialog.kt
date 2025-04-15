@@ -14,12 +14,14 @@ import com.mmfsin.noexcuses.domain.models.MData
 import com.mmfsin.noexcuses.domain.models.TempMaximumData
 import com.mmfsin.noexcuses.presentation.calendar.dialogs.DatePickerDialog
 import com.mmfsin.noexcuses.presentation.maximums.listeners.IDialogsMaxExerciseListener
+import com.mmfsin.noexcuses.presentation.maximums.trigger.TriggerManager
 import com.mmfsin.noexcuses.utils.animateDialog
 import com.mmfsin.noexcuses.utils.deletePointZero
 import com.mmfsin.noexcuses.utils.getMonthName
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.toCompleteDate
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class EditMaxExerciseDialog(
@@ -27,6 +29,9 @@ class EditMaxExerciseDialog(
     private val mDataId: String,
     private val listener: IDialogsMaxExerciseListener
 ) : BaseDialog<DialogEditMaxExerciseBinding>() {
+
+    @Inject
+    lateinit var trigger: TriggerManager
 
     private val viewModel: EditMaxExerciseDialogViewModel by viewModels()
 
@@ -91,7 +96,8 @@ class EditMaxExerciseDialog(
                         try {
                             val doubleWeight = weight.toDouble()
                             val maxData = TempMaximumData(exerciseId, doubleWeight, date)
-//                            viewModel.saveMaximumData(maxData)
+                            viewModel.editMData(mDataId, maxData)
+
                             tvError.isVisible = false
                         } catch (e: Exception) {
                             tvError.isVisible = true
@@ -112,6 +118,11 @@ class EditMaxExerciseDialog(
                 }
 
                 is EditMaxExercisesDialogEvent.GetMData -> setMData(event.data)
+                is EditMaxExercisesDialogEvent.Edited -> {
+                    trigger.updateTrigger()
+                    dismiss()
+                }
+
                 is EditMaxExercisesDialogEvent.SWW -> error()
             }
         }
