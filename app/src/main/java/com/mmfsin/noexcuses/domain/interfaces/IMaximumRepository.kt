@@ -6,10 +6,11 @@ import com.mmfsin.noexcuses.domain.models.TempMaximumData
 
 interface IMaximumRepository {
     fun registerMaximumData(data: TempMaximumData)
-    fun editMData(mDataId: String, data: TempMaximumData)
+    fun deleteMaximumData(exerciseId: String)
 
     fun getAllMaximumData(): List<MaximumData>
     fun getMaximumDataByExerciseId(exerciseId: String): MaximumData?
     fun getMDataById(mDataId: String): MData?
+    fun editMData(mDataId: String, data: TempMaximumData)
     fun deleteMDataById(mDataId: String)
 }

@@ -236,6 +236,7 @@
     <string name="maximums_completed_date">%1s de %2s de %3s</string>
 
     <string name="maximums_delete_title">Eliminar</string>
+    <string name="maximums_delete_maximum_data_text">¿Quieres eliminar definitivamente %s y todos sus pesos registrados? </string>
     <string name="maximums_delete_text">¿Quieres eliminar %s kg para el %s? </string>
 
     <!-- FAVS -->

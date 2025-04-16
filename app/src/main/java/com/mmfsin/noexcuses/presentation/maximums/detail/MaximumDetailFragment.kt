@@ -22,12 +22,11 @@ import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentMaximumsDetailBinding
 import com.mmfsin.noexcuses.domain.models.MData
 import com.mmfsin.noexcuses.domain.models.MaximumData
-import com.mmfsin.noexcuses.domain.models.getCategoryColor
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.maximums.detail.adapter.MaximumDetailAdapter
 import com.mmfsin.noexcuses.presentation.maximums.dialogs.add.AddMaxExerciseDialog
-import com.mmfsin.noexcuses.presentation.maximums.dialogs.delete.DeleteMaxExerciseDialog
-import com.mmfsin.noexcuses.presentation.maximums.dialogs.edit.EditMaxExerciseDialog
+import com.mmfsin.noexcuses.presentation.maximums.dialogs.delete.DeleteMDataDialog
+import com.mmfsin.noexcuses.presentation.maximums.dialogs.edit.EditMDataDialog
 import com.mmfsin.noexcuses.presentation.maximums.listeners.IDialogsMaxExerciseListener
 import com.mmfsin.noexcuses.presentation.maximums.listeners.IMaximumDetailListener
 import com.mmfsin.noexcuses.presentation.maximums.trigger.TriggerManager
@@ -112,7 +111,7 @@ class MaximumDetailFragment :
     override fun onMDataClick(id: String) {
         exerciseId?.let {
             activity?.showFragmentDialog(
-                EditMaxExerciseDialog(
+                EditMDataDialog(
                     exerciseId = it,
                     mDataId = id,
                     this@MaximumDetailFragment
@@ -126,7 +125,7 @@ class MaximumDetailFragment :
     }
 
     override fun deleteMData(mDataId: String) {
-        activity?.showFragmentDialog(DeleteMaxExerciseDialog(mDataId))
+        activity?.showFragmentDialog(DeleteMDataDialog(mDataId))
     }
 
     private fun setBarChart(mData: List<MData>) {

@@ -14,9 +14,11 @@ import com.mmfsin.noexcuses.base.BaseFragment
 import com.mmfsin.noexcuses.databinding.FragmentMaximumsBinding
 import com.mmfsin.noexcuses.domain.models.MaximumData
 import com.mmfsin.noexcuses.presentation.maximums.adapter.MaximumsAdapter
+import com.mmfsin.noexcuses.presentation.maximums.dialogs.delete.DeleteMaxExerciseDialog
 import com.mmfsin.noexcuses.presentation.maximums.listeners.IMaximumsListener
 import com.mmfsin.noexcuses.presentation.maximums.trigger.TriggerManager
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -80,6 +82,10 @@ class MaximumsFragment : BaseFragment<FragmentMaximumsBinding, MaximumsViewModel
             R.navigation.nav_graph_maximums_detail,
             strArgs = exerciseId
         )
+    }
+
+    override fun onLongClick(exerciseId: String) {
+        activity?.showFragmentDialog(DeleteMaxExerciseDialog(exerciseId))
     }
 
     private fun error() = activity?.showErrorDialog()

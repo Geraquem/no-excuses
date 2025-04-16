@@ -30,6 +30,15 @@ class MaximumRepository @Inject constructor(
         realmDatabase.addObject { data.toMaximumDataDTO() }
     }
 
+    override fun deleteMaximumData(exerciseId: String) {
+        val maximumDTOList = realmDatabase.getObjectsFromRealm {
+            where<MaximumDataDTO>().equalTo(EXERCISE_ID, exerciseId).findAll()
+        }
+        maximumDTOList.forEach {
+            realmDatabase.deleteObject(MaximumDataDTO::class.java, ID, it.id)
+        }
+    }
+
     override fun editMData(mDataId: String, data: TempMaximumData) {
         val dataDTO = realmDatabase.getObjectFromRealm(MaximumDataDTO::class.java, ID, mDataId)
         dataDTO?.let {

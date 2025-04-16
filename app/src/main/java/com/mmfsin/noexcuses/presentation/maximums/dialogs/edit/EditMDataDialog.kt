@@ -24,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class EditMaxExerciseDialog(
+class EditMDataDialog(
     private val exerciseId: String,
     private val mDataId: String,
     private val listener: IDialogsMaxExerciseListener
@@ -33,7 +33,7 @@ class EditMaxExerciseDialog(
     @Inject
     lateinit var trigger: TriggerManager
 
-    private val viewModel: EditMaxExerciseDialogViewModel by viewModels()
+    private val viewModel: EditMDataDialogViewModel by viewModels()
 
     private var exercise: Exercise? = null
 
@@ -111,19 +111,19 @@ class EditMaxExerciseDialog(
     private fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is EditMaxExercisesDialogEvent.GetExercise -> {
+                is EditMDataDialogEvent.GetExercise -> {
                     this.exercise = event.exercise
                     setUI()
                     viewModel.getMData(mDataId)
                 }
 
-                is EditMaxExercisesDialogEvent.GetMData -> setMData(event.data)
-                is EditMaxExercisesDialogEvent.Edited -> {
+                is EditMDataDialogEvent.GetMData -> setMData(event.data)
+                is EditMDataDialogEvent.Edited -> {
                     trigger.updateTrigger()
                     dismiss()
                 }
 
-                is EditMaxExercisesDialogEvent.SWW -> error()
+                is EditMDataDialogEvent.SWW -> error()
             }
         }
     }
@@ -145,8 +145,8 @@ class EditMaxExerciseDialog(
             exerciseId: String,
             mDataId: String,
             listener: IDialogsMaxExerciseListener
-        ): EditMaxExerciseDialog {
-            return EditMaxExerciseDialog(exerciseId, mDataId, listener)
+        ): EditMDataDialog {
+            return EditMDataDialog(exerciseId, mDataId, listener)
         }
     }
 }

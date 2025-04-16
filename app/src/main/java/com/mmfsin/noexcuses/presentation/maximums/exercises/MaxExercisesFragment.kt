@@ -22,7 +22,7 @@ import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.custom.edit
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.custom.edit.listeners.IEditCreatedExerciseListener
 import com.mmfsin.noexcuses.presentation.exercises.exercises.interfaces.IExercisesListener
 import com.mmfsin.noexcuses.presentation.maximums.dialogs.add.AddMaxExerciseDialog
-import com.mmfsin.noexcuses.presentation.maximums.dialogs.delete.DeleteMaxExerciseDialog
+import com.mmfsin.noexcuses.presentation.maximums.dialogs.delete.DeleteMDataDialog
 import com.mmfsin.noexcuses.presentation.maximums.listeners.IDialogsMaxExerciseListener
 import com.mmfsin.noexcuses.utils.ADD_EXERCISE
 import com.mmfsin.noexcuses.utils.MGROUP_ID
@@ -124,7 +124,7 @@ class MaxExercisesFragment : BaseFragment<FragmentExercisesBinding, MaxExercises
     }
 
     override fun deleteMData(mDataId: String) {
-        activity?.showFragmentDialog(DeleteMaxExerciseDialog(mDataId))
+        activity?.showFragmentDialog(DeleteMDataDialog(mDataId))
     }
 
     private fun error() = activity?.showErrorDialog()

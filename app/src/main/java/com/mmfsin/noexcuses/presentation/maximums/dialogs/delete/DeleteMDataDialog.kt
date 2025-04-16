@@ -8,16 +8,18 @@ import androidx.fragment.app.viewModels
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseDialog
 import com.mmfsin.noexcuses.databinding.DialogItemDeleteBinding
-import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.domain.models.MData
 import com.mmfsin.noexcuses.presentation.maximums.trigger.TriggerManager
 import com.mmfsin.noexcuses.utils.animateDialog
+import com.mmfsin.noexcuses.utils.deletePointZero
 import com.mmfsin.noexcuses.utils.showErrorDialog
+import com.mmfsin.noexcuses.utils.toCompleteDate
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DeleteMaxExerciseDialog(
-    private val exerciseId: String,
+class DeleteMDataDialog(
+    private val mDataId: String,
 ) : BaseDialog<DialogItemDeleteBinding>() {
 
     @Inject
@@ -38,7 +40,7 @@ class DeleteMaxExerciseDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         observe()
-        viewModel.getExercise(exerciseId)
+        viewModel.getMData(mDataId)
     }
 
     override fun setUI() {
@@ -47,7 +49,7 @@ class DeleteMaxExerciseDialog(
 
     override fun setListeners() {
         binding.apply {
-            btnDelete.setOnClickListener { viewModel.deleteMaximumData(exerciseId) }
+            btnDelete.setOnClickListener { viewModel.deleteMData(mDataId) }
             btnCancel.setOnClickListener { dismiss() }
         }
     }
@@ -55,8 +57,8 @@ class DeleteMaxExerciseDialog(
     private fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is DeleteMDataDialogEvent.GetExercise -> setData(event.exercise)
-                is DeleteMDataDialogEvent.GetMData -> {}
+                is DeleteMDataDialogEvent.GetExercise -> {}
+                is DeleteMDataDialogEvent.GetMData -> setMData(event.data)
                 is DeleteMDataDialogEvent.Deleted -> {
                     trigger.updateTrigger()
                     dismiss()
@@ -67,23 +69,24 @@ class DeleteMaxExerciseDialog(
         }
     }
 
-    private fun setData(data: Exercise) {
+    private fun setMData(data: MData) {
         binding.apply {
             tvTitle.text = getString(R.string.maximums_delete_title)
             tvText.text =
                 getString(
-                    R.string.maximums_delete_maximum_data_text,
-                    data.name
+                    R.string.maximums_delete_text,
+                    data.weight.deletePointZero(),
+                    data.date.toCompleteDate(requireContext())
                 )
             tvAlert.isVisible = false
         }
     }
 
-    private fun error() = activity?.showErrorDialog(false)
+    private fun error() = activity?.showErrorDialog()
 
     companion object {
-        fun newInstance(mDataId: String): DeleteMaxExerciseDialog {
-            return DeleteMaxExerciseDialog(mDataId)
+        fun newInstance(mDataId: String): DeleteMDataDialog {
+            return DeleteMDataDialog(mDataId)
         }
     }
 }

@@ -38,6 +38,11 @@ class MaximumsAdapter(
                 tvDetails.setOnClickListener {
                     listener.onSeeDetailsClick(data.exercise.id)
                 }
+
+                root.setOnLongClickListener {
+                    listener.onLongClick(data.exercise.id)
+                    true
+                }
             }
         }
 

@@ -9,20 +9,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class EditMaxExerciseDialogViewModel @Inject constructor(
+class EditMDataDialogViewModel @Inject constructor(
     private val getExerciseUseCase: GetExerciseUseCase,
     private val getMDataByIdUseCase: GetMDataByIdUseCase,
     private val editMDataUseCase: EditMDataUseCase
-) : BaseViewModel<EditMaxExercisesDialogEvent>() {
+) : BaseViewModel<EditMDataDialogEvent>() {
 
     fun getExercise(id: String) {
         executeUseCase(
             { getExerciseUseCase.execute(GetExerciseUseCase.Params(id)) },
             { result ->
-                _event.value = result?.let { EditMaxExercisesDialogEvent.GetExercise(it) }
-                    ?: run { EditMaxExercisesDialogEvent.SWW }
+                _event.value = result?.let { EditMDataDialogEvent.GetExercise(it) }
+                    ?: run { EditMDataDialogEvent.SWW }
             },
-            { _event.value = EditMaxExercisesDialogEvent.SWW }
+            { _event.value = EditMDataDialogEvent.SWW }
         )
     }
 
@@ -30,18 +30,18 @@ class EditMaxExerciseDialogViewModel @Inject constructor(
         executeUseCase(
             { getMDataByIdUseCase.execute(GetMDataByIdUseCase.Params(mDataId)) },
             { result ->
-                _event.value = result?.let { EditMaxExercisesDialogEvent.GetMData(it) }
-                    ?: run { EditMaxExercisesDialogEvent.SWW }
+                _event.value = result?.let { EditMDataDialogEvent.GetMData(it) }
+                    ?: run { EditMDataDialogEvent.SWW }
             },
-            { _event.value = EditMaxExercisesDialogEvent.SWW }
+            { _event.value = EditMDataDialogEvent.SWW }
         )
     }
 
     fun editMData(mDataId: String, tmpData: TempMaximumData) {
         executeUseCase(
             { editMDataUseCase.execute(EditMDataUseCase.Params(mDataId, tmpData)) },
-            { _event.value = EditMaxExercisesDialogEvent.Edited },
-            { _event.value = EditMaxExercisesDialogEvent.SWW }
+            { _event.value = EditMDataDialogEvent.Edited },
+            { _event.value = EditMDataDialogEvent.SWW }
         )
     }
 }
