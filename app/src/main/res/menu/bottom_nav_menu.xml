@@ -16,11 +16,6 @@
         android:title="@string/bottom_nav_maximum" />
 
     <item
-        android:id="@+id/stretchingFragment"
-        android:icon="@drawable/ic_stretching"
-        android:title="@string/bottom_nav_stretching" />
-
-    <item
         android:id="@+id/notesFragment"
         android:icon="@drawable/ic_notes"
         android:title="@string/bottom_nav_notes" />

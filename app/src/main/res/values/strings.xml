@@ -43,6 +43,8 @@
     <string name="menu_my_actual_routine">Actualmente estás haciendo:</string>
     <string name="menu_exercises_title">Ejercicios</string>
     <string name="menu_exercises_description">Echa un vistazo más detallado a todos los ejercicios.</string>
+    <string name="menu_stretch_title">Estiramientos</string>
+    <string name="menu_stretch_detail">La práctica regular de estiramientos antes y después del ejercicio es fundamental para maximizar el rendimiento, prevenir lesiones, y mejorar la flexibilidad y la recuperación muscular.</string>
     <string name="menu_favs_title">Ejercicios favoritos</string>
     <string name="menu_favs_description">Aqui puedes ver todos los ejercicios que hayas guardado previamente como favorito. Para marcar un ejercicio como favorito, accede al ejercicio que más te guste y dale a la estrellita que aparece al lado del nombre del ejercicio.</string>
     <string name="menu_notes_title">Notas</string>
@@ -270,6 +272,6 @@
     <string name="stretching_title">Estiramientos</string>
     <string name="stretching_mgroup">Estiramientos de</string>
     <string name="stretching_position">Estiramiento %s</string>
-    <string name="stretching_description">La práctica regular de estiramientos antes y después del ejercicio es fundamental para maximizar el rendimiento, prevenir lesiones, y mejorar la flexibilidad y la recuperación muscular.\n\nIncorporar estos estiramientos en tu rutina de ejercicio puede llevar a una mejor salud física y bienestar general.</string>
+    <string name="stretching_description">Incorporar estos estiramientos en tu rutina de ejercicio puede llevar a una mejor salud física y bienestar general.</string>
 
 </resources>

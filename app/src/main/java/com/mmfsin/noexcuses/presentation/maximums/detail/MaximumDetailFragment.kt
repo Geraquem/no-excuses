@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -22,6 +22,7 @@ import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentMaximumsDetailBinding
 import com.mmfsin.noexcuses.domain.models.MData
 import com.mmfsin.noexcuses.domain.models.MaximumData
+import com.mmfsin.noexcuses.domain.models.getCategoryColor
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
 import com.mmfsin.noexcuses.presentation.maximums.detail.adapter.MaximumDetailAdapter
 import com.mmfsin.noexcuses.presentation.maximums.dialogs.add.AddMaxExerciseDialog
@@ -104,7 +105,7 @@ class MaximumDetailFragment :
                 adapter = MaximumDetailAdapter(sortedList, this@MaximumDetailFragment)
             }
 
-            setBarChart(sortedList.reversed())
+            setBarChart(sortedList.reversed().take(6))
         }
     }
 
@@ -140,15 +141,11 @@ class MaximumDetailFragment :
             val barDataSet = BarDataSet(entries, "Peso")
             barDataSet.valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
-                    return if (value % 1f == 0f) {
-                        "${value.toInt()}Kg"
-                    } else {
-                        "${value}Kg"
-                    }
+                    return if (value % 1f == 0f) "${value.toInt()}" else "$value"
                 }
             }
 
-            barDataSet.color = Color.parseColor("#FF6200EE")
+            barDataSet.color = ContextCompat.getColor(mContext, R.color.dark_blue)
             barDataSet.valueTextColor = Color.BLACK
             barDataSet.valueTextSize = 12f
 
@@ -163,6 +160,7 @@ class MaximumDetailFragment :
                 setTouchEnabled(false)
                 setScaleEnabled(false)
                 setPinchZoom(false)
+
                 // Eje X
                 xAxis.apply {
                     position = XAxis.XAxisPosition.BOTTOM
@@ -170,10 +168,11 @@ class MaximumDetailFragment :
                     granularity = 1f
                     valueFormatter = IndexAxisValueFormatter(fechas)
                     textColor = Color.BLACK
+                    setCenterAxisLabels(false)
 
                     val inputFormat = SimpleDateFormat("dd/MM", Locale.getDefault())
                     val outputFormat =
-                        SimpleDateFormat("dd/MMM", Locale("es", "ES")) // Formato deseado
+                        SimpleDateFormat("dd/MMM", Locale("es", "ES"))
 
                     valueFormatter = object : IndexAxisValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
@@ -181,29 +180,21 @@ class MaximumDetailFragment :
                             return if (index >= 0 && index < fechas.size) {
                                 try {
                                     val date = inputFormat.parse(fechas[index])
-                                    outputFormat.format(date ?: "")  // "02/Ene", "04/Abr", etc.
+                                    outputFormat.format(date ?: "")
                                 } catch (e: Exception) {
-                                    fechas[index]  // fallback
+                                    fechas[index]
                                 }
-                            } else {
-                                ""
-                            }
+                            } else ""
                         }
                     }
-
                 }
 
-
-                // Ejes Y
-
-                axisLeft.textColor = Color.BLACK
-                axisRight.isEnabled = false
-                axisLeft.isEnabled = false
-
+                // Eje Y
                 axisLeft.apply {
-                    setDrawGridLines(false)
-                    setDrawAxisLine(true)
+                    axisMinimum = 0f
+                    textColor = Color.BLACK
                 }
+                axisRight.isEnabled = false
 
                 legend.isEnabled = false
                 description.isEnabled = false

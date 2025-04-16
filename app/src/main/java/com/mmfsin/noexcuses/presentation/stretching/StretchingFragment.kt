@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.base.BaseFragment
+import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentStretchingBinding
 import com.mmfsin.noexcuses.domain.models.Stretch
 import com.mmfsin.noexcuses.presentation.stretching.adapter.StretchingAdapter
@@ -34,7 +36,7 @@ class StretchingFragment : BaseFragment<FragmentStretchingBinding, StretchingVie
 
     override fun setUI() {
         binding.apply {
-            tvTopText.visibility = View.VISIBLE
+            (activity as BedRockActivity).setUpToolbar(title = getString(R.string.menu_stretch_title))
         }
     }
 

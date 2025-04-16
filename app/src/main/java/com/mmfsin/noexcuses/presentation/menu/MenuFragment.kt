@@ -110,6 +110,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
                 viewModel.changeBodyImage(selectedWomanImage = swGender.isChecked)
             }
 
+            btnStretching.setOnClickListener { navigateTo(R.navigation.nav_graph_stretching_detail) }
+
             btnFavs.setOnClickListener { navigateTo(R.navigation.nav_graph_fav_exercises) }
         }
     }

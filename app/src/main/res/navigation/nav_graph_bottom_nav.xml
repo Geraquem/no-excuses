@@ -25,9 +25,4 @@
         android:name="com.mmfsin.noexcuses.presentation.notes.NotesFragment"
         tools:layout="@layout/fragment_notes" />
 
-    <fragment
-        android:id="@+id/stretchingFragment"
-        android:name="com.mmfsin.noexcuses.presentation.stretching.StretchingFragment"
-        tools:layout="@layout/fragment_stretching" />
-
 </navigation>

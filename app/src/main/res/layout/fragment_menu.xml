@@ -277,6 +277,36 @@
                     tools:listitem="@layout/item_menu_muscular_group" />
 
                 <LinearLayout
+                    android:id="@+id/btn_stretching"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/click_effect"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        style="@style/MediumTextView_Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:text="@string/menu_stretch_title"
+                        android:textColor="@color/dark_purple"
+                        app:drawableStartCompat="@drawable/ic_stretching"
+                        app:drawableTint="@color/dark_purple" />
+
+                    <TextView
+                        style="@style/MediumTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.6"
+                        android:text="@string/menu_stretch_detail" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/btn_favs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

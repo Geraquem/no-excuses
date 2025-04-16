@@ -16,9 +16,8 @@ class StretchingDetailAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemStretchingDetailBinding.bind(view)
         private val c = binding.root.context
-        fun bind(stretching: Stretching, position: Int) {
+        fun bind(stretching: Stretching) {
             binding.apply {
-                tvPosition.text = c.getString(R.string.stretching_position, position.toString())
                 Glide.with(binding.root.context).load(stretching.imageURL).into(image1)
                 tvDescription.text = stretching.description
             }
@@ -33,7 +32,7 @@ class StretchingDetailAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(stretching[position], position + 1)
+        holder.bind(stretching[position])
     }
 
     override fun getItemCount(): Int = stretching.size

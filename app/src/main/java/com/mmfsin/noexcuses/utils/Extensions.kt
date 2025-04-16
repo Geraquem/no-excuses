@@ -161,7 +161,7 @@ fun String.toCompleteDate(context: Context): String {
 
     date?.let {
         val day = outputDayFormat.format(date)
-        val month = outputMonthFormat.format(date).capitalizeFirstLetter()
+        val month = outputMonthFormat.format(date)
         val year = outputYearFormat.format(date)
 
         return context.getString(R.string.maximums_completed_date, day, month, year)
