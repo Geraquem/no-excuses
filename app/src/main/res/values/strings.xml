@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">No excuses</string>
 
     <string name="content_description">image</string>
@@ -217,7 +217,8 @@
 
     <!-- MAXIMUMS -->
     <string name="maximums_title">Mis pesos</string>
-    <string name="maximums_empty">No hay nada guardado.</string>
+    <string name="maximums_empty_title">Aquí podrás guardar los PR de los ejercicios que elijas. Selecciona un ejercicio, marca una fecha y un peso para poder ver cómo vas mejorando con el paso del tiempo</string>
+    <string name="maximums_empty" tools:ignore="Typos">Parece que de momento no tienes nada guardado.</string>
     <string name="maximums_select_date">Selecciona fecha</string>
     <string name="maximums_selected_date">Fecha:</string>
     <string name="maximums_selected_date_default">-- / -- / ----</string>

@@ -45,6 +45,10 @@ class MaximumsFragment : BaseFragment<FragmentMaximumsBinding, MaximumsViewModel
                 (activity as MainActivity).openBedRockActivity(R.navigation.nav_graph_maximums)
             }
 
+            btnAddMaxEmpty.setOnClickListener {
+                (activity as MainActivity).openBedRockActivity(R.navigation.nav_graph_maximums)
+            }
+
             trigger.trigger.observe(viewLifecycleOwner) {
                 viewModel.getMaximumData()
             }
@@ -66,8 +70,8 @@ class MaximumsFragment : BaseFragment<FragmentMaximumsBinding, MaximumsViewModel
                 layoutManager = LinearLayoutManager(mContext)
                 adapter = MaximumsAdapter(data, this@MaximumsFragment)
             }
-            rvMaximums.isVisible = data.isNotEmpty()
-            tvFavsEmpty.isVisible = data.isEmpty()
+            svData.isVisible = data.isNotEmpty()
+            llEmpty.isVisible = data.isEmpty()
         }
     }
 
