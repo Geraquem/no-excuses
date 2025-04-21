@@ -123,7 +123,7 @@
 
                 <LinearLayout
                     android:id="@+id/ll_data"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_marginTop="4dp"
@@ -214,38 +214,19 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/ll_notes"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tv_notes"
+                        style="@style/SmallTextView"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="4dp"
-                            android:layout_height="4dp"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="6dp"
-                            android:background="@color/black"
-                            app:shapeAppearanceOverlay="@style/circular_image" />
-
-                        <TextView
-                            style="@style/MediumTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="4dp"
-                            android:text="@string/days_exercise_dialog_notes"
-                            android:textSize="14sp" />
-
-                        <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="@string/content_description"
-                            android:src="@drawable/ic_notes" />
-
-                    </LinearLayout>
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_white_box"
+                        android:backgroundTint="@color/background"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        tools:text="hola holita soy una notita" />
 
                 </LinearLayout>
 

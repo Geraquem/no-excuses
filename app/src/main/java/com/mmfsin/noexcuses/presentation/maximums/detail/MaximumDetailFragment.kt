@@ -104,7 +104,7 @@ class MaximumDetailFragment :
                 adapter = MaximumDetailAdapter(sortedList, this@MaximumDetailFragment)
             }
 
-            setBarChart(sortedList.reversed().take(6))
+            setBarChart(sortedList.take(10).reversed())
         }
     }
 

@@ -58,7 +58,7 @@ class InfoDialog : BaseBottomSheet<DialogInfoBinding>() {
                 tvSeries.text = getString(R.string.first_dialog_exercise_series)
                 tvWait.text = getString(R.string.first_dialog_exercise_rest)
                 tvPosition.text = getString(R.string.first_dialog_exercise_rest)
-                llNotes.isVisible = true
+                tvNotes.isVisible = false
                 ivEdit.isVisible = false
             }
         }

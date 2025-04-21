@@ -131,6 +131,7 @@ fun ChExerciseDTO.toCompactExercise(e: Exercise) = CompactExercise(
     gifURL = e.gifURL,
     series = data?.size,
     time = time.formatTime(),
+    notes = notes,
     hasNotes = !notes.isNullOrEmpty(),
     position = position,
     superSerie = superSerie

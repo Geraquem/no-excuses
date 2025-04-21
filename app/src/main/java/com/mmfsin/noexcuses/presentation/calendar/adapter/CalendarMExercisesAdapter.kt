@@ -48,7 +48,8 @@ class CalendarMExercisesAdapter(
                     llTime.visibility = View.VISIBLE
                 } ?: run { llTime.visibility = View.GONE }
 
-                llNotes.isVisible = exercise.hasNotes
+                tvNotes.isVisible = exercise.hasNotes
+                tvNotes.text = exercise.notes
 
                 val addDataVisible = series == 0 && time == null && !exercise.hasNotes
                 llData.isVisible = !addDataVisible

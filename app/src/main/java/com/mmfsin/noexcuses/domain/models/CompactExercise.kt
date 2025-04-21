@@ -10,6 +10,7 @@ open class CompactExercise(
     var gifURL: String?,
     var series: Int?,
     var time: String?,
+    var notes: String?,
     var hasNotes: Boolean,
     var position: Int,
     var superSerie: Boolean
