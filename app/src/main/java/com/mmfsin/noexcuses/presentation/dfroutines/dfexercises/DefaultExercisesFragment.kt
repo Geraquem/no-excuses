@@ -22,6 +22,7 @@ import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDia
 import com.mmfsin.noexcuses.utils.DAY_ID
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import com.mmfsin.noexcuses.utils.checkNotNulls
+import com.mmfsin.noexcuses.utils.loadNativeAds
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,6 +58,8 @@ class DefaultExercisesFragment :
         binding.apply {
             llRegisterDf.isVisible = false
             nvExercises.isVisible = false
+
+            mContext.loadNativeAds(binding.nativeAd, binding.nativeContent)
         }
     }
 

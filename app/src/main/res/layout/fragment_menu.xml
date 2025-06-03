@@ -310,7 +310,6 @@
                     android:id="@+id/btn_favs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
                     android:background="@drawable/click_effect"
                     android:orientation="vertical"
                     android:padding="12dp">
@@ -335,6 +334,20 @@
                         android:text="@string/menu_favs_description" />
 
                 </LinearLayout>
+
+                <com.google.android.gms.ads.nativead.NativeAdView
+                    android:id="@+id/native_ad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <include
+                        android:id="@+id/native_content"
+                        layout="@layout/native_ad" />
+
+                </com.google.android.gms.ads.nativead.NativeAdView>
 
             </LinearLayout>
 

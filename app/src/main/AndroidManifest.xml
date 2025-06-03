@@ -16,6 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoExcuses.Splash">
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4515698012373396~6663693223" />
+
         <activity
             android:name=".base.bedrock.BedRockActivity"
             android:exported="true"

@@ -4,6 +4,10 @@
     <string name="content_description">image</string>
     <string name="sww">Vaya, algo ha salido mal</string>
 
+    <!-- ADS -->
+    <string name="native_ad">ca-app-pub-3940256099942544/2247696110</string>
+<!--    <string name="native_ad">ca-app-pub-4515698012373396/5226929413</string>-->
+
     <!-- ERROR -->
     <string name="error_title">Ha ocurrido un problema</string>
     <string name="error_description">Inténtalo de nuevo más tarde</string>

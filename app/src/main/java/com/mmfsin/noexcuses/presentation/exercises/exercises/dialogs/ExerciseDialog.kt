@@ -19,6 +19,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mmfsin.noexcuses.R
 import com.mmfsin.noexcuses.databinding.DialogExerciseBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
+import com.mmfsin.noexcuses.utils.loadNativeAds
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -107,6 +108,8 @@ class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment
 
                 updateFavIcon(it.isFav)
             }
+
+            context?.loadNativeAds(binding.nativeAd, binding.nativeContent)
         }
     }
 

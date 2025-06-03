@@ -53,6 +53,8 @@
         style="@style/scroll_no_effects"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rl_top">
@@ -174,14 +176,30 @@
                 style="@style/SmallTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:alpha="0.75"
                 android:textSize="14sp"
                 tools:text="bla bla bla" />
 
+            <com.google.android.gms.ads.nativead.NativeAdView
+                android:id="@+id/native_ad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_white_box"
+                android:elevation="4dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <include
+                    android:id="@+id/native_content"
+                    layout="@layout/native_ad" />
+
+            </com.google.android.gms.ads.nativead.NativeAdView>
+
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="48dp" />
+                android:layout_height="64dp" />
 
         </LinearLayout>
 
