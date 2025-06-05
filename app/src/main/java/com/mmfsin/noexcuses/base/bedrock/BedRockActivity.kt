@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
@@ -32,6 +33,7 @@ class BedRockActivity : AppCompatActivity() {
     }
 
     private fun changeStatusBar() {
+        WindowCompat.setDecorFitsSystemWindows(window, true)
         window.statusBarColor = ContextCompat.getColor(this, R.color.white)
         val controller = WindowInsetsControllerCompat(window, window.decorView)
         controller.isAppearanceLightStatusBars = true

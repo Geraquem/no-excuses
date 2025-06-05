@@ -3,11 +3,13 @@ package com.mmfsin.noexcuses
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -44,7 +46,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeStatusBar() {
-        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
+        WindowCompat.setDecorFitsSystemWindows(window, true)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.red)
         val controller = WindowInsetsControllerCompat(window, window.decorView)
         controller.isAppearanceLightStatusBars = true
     }

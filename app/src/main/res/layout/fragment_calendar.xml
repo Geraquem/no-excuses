@@ -41,7 +41,7 @@
                 android:id="@+id/calendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 app:mcv_allowClickDaysOutsideCurrentMonth="true"
                 app:mcv_calendarMode="month"
                 app:mcv_headerTextAppearance="@style/MediumTextView"
