@@ -1,13 +1,13 @@
 package com.mmfsin.noexcuses.data.models
 
-import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
+import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.annotations.PrimaryKey
 
-open class NoteDTO(
+open class NoteDTO : RealmObject {
     @PrimaryKey
-    var id: String = "",
-    var title: String = "",
-    var description: String = "",
-    var date: Long = 0,
+    var id: String = ""
+    var title: String = ""
+    var description: String = ""
+    var date: Long = 0
     var pinned: Boolean = false
-) : RealmObject()
+}

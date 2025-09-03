@@ -1,12 +1,12 @@
 package com.mmfsin.noexcuses.data.models
 
-import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
+import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.annotations.PrimaryKey
 
-open class DayDTO(
+open class DayDTO : RealmObject {
     @PrimaryKey
-    var id: String = "",
-    var routineId: String = "",
-    var title: String = "",
+    var id: String = ""
+    var routineId: String = ""
+    var title: String = ""
     var exercises: Int = 0
-) : RealmObject()
+}

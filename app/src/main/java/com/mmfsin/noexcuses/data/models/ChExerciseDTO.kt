@@ -10,7 +10,7 @@ open class ChExerciseDTO: RealmObject {
     var routineId: String = ""
     var dayId: String = ""
     var exerciseId: String? = null
-    var data: RealmList<DataDTO>?
+    var data: RealmList<DataDTO>? = null
     var time: Double? = null
     var notes: String? = null
     var position: Int = 0
