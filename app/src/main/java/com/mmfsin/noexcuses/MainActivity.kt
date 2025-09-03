@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeStatusBar() {
         WindowCompat.setDecorFitsSystemWindows(window, true)
-        window.statusBarColor = ContextCompat.getColor(this, R.color.red)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
         val controller = WindowInsetsControllerCompat(window, window.decorView)
         controller.isAppearanceLightStatusBars = true
     }

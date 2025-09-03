@@ -16,12 +16,17 @@ import com.mmfsin.noexcuses.base.bedrock.BedRockActivity
 import com.mmfsin.noexcuses.databinding.FragmentExercisesBinding
 import com.mmfsin.noexcuses.domain.models.Exercise
 import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.ExerciseDialog
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.custom.create.CreateExerciseDialog
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.custom.delete.DeleteCreatedExerciseDialog
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.custom.edit.EditCreatedExerciseDialog
+import com.mmfsin.noexcuses.presentation.exercises.exercises.dialogs.custom.edit.listeners.IEditCreatedExerciseListener
 import com.mmfsin.noexcuses.presentation.models.IdGroup
 import com.mmfsin.noexcuses.presentation.myroutines.dialogs.InfoDialog
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.adapter.ChExercisesAdapter
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.dialogs.AddChExerciseDialog
 import com.mmfsin.noexcuses.presentation.myroutines.exercises.interfaces.IChExercisesListener
 import com.mmfsin.noexcuses.presentation.myroutines.snackbar.CustomSnackbar
+import com.mmfsin.noexcuses.utils.ADD_EXERCISE
 import com.mmfsin.noexcuses.utils.ID_GROUP
 import com.mmfsin.noexcuses.utils.getBundleParcelableArgs
 import com.mmfsin.noexcuses.utils.showErrorDialog
@@ -30,12 +35,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesViewModel>(),
-    IChExercisesListener {
+    IChExercisesListener, IEditCreatedExerciseListener {
 
     override val viewModel: ChExercisesViewModel by viewModels()
 
     private lateinit var mContext: Context
 
+    private var mAdapter: ChExercisesAdapter? = null
     private var group: IdGroup? = null
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup?) =
@@ -67,31 +73,55 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
-                is ChExercisesEvent.GetExercises -> setUpExercises(event.exercises)
+                is ChExercisesEvent.GetExercises -> {
+                    setUpExercises(event.exercises, event.newCreated)
+                }
+
                 is ChExercisesEvent.SWW -> error()
             }
         }
     }
 
-    private fun setUpExercises(exercises: List<Exercise>) {
+    private fun setUpExercises(exercises: List<Exercise>, newCreated: Boolean) {
         binding.apply {
             rvExercises.apply {
                 layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-                adapter = ChExercisesAdapter(exercises, this@ChExercisesFragment)
+                mAdapter = ChExercisesAdapter(exercises, this@ChExercisesFragment)
+                adapter = mAdapter
+            }
+            mAdapter?.let {
+                if (newCreated) rvExercises.scrollToPosition(it.itemCount - 1)
             }
             loading.root.isVisible = false
         }
     }
 
     override fun onExerciseClick(id: String) {
-        group?.let { ids ->
-            ids.exerciseId = id
-            activity?.showFragmentDialog(
-                AddChExerciseDialog.newInstance(
+        if (id == ADD_EXERCISE) {
+            group?.muscularGroup?.let { category ->
+                val dialog = CreateExerciseDialog(category) {
+                    viewModel.getExercises(category, newCreated = true)
+                }
+                activity?.showFragmentDialog(dialog)
+            }
+        } else {
+            group?.let { ids ->
+                ids.exerciseId = id
+                val dialog = AddChExerciseDialog.newInstance(
                     ids,
                     this@ChExercisesFragment
                 )
-            )
+                activity?.showFragmentDialog(dialog)
+            }
+        }
+    }
+
+    override fun onExerciseLongClick(id: String) {
+        /** sólo si lo ha creado el user */
+        group?.muscularGroup?.let { category ->
+            viewModel.getExercises(category, newCreated = true)
+            val dialog = EditCreatedExerciseDialog(id, category, this)
+            activity?.showFragmentDialog(dialog)
         }
     }
 
@@ -101,6 +131,21 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
 
     override fun showSnackBar() {
         CustomSnackbar.make(binding.clMain, Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun editedCreatedExercise() {
+        group?.muscularGroup?.let { category ->
+            viewModel.getExercises(category, newCreated = true)
+        }
+    }
+
+    override fun deletedCreatedExercise(id: String) {
+        val dialog = DeleteCreatedExerciseDialog(id) {
+            group?.muscularGroup?.let { category ->
+                viewModel.getExercises(category, newCreated = true)
+            }
+        }
+        activity?.showFragmentDialog(dialog)
     }
 
     private fun error() = activity?.showErrorDialog()

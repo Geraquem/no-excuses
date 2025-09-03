@@ -51,8 +51,13 @@ class ChExercisesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(exercises[position])
-        holder.itemView.setOnClickListener { listener.onExerciseClick(exercises[position].id) }
+        val exercise = exercises[position]
+        holder.bind(exercise)
+        holder.itemView.setOnClickListener { listener.onExerciseClick(exercise.id) }
+        holder.itemView.setOnLongClickListener {
+            if (exercise.createdByUser) listener.onExerciseLongClick(exercise.id)
+            true
+        }
     }
 
     override fun getItemCount(): Int = exercises.size
