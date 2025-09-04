@@ -250,34 +250,59 @@
                 android:textCursorDrawable="@drawable/et_cursor_color" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                <TextView
+                <RelativeLayout
                     android:id="@+id/btn_delete"
                     style="@style/MediumTextView_Bold"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="18dp"
+                    android:layout_weight="0.20"
                     android:background="@drawable/click_effect"
-                    android:paddingHorizontal="4dp"
-                    android:text="@string/routines_delete"
-                    android:textAllCaps="true"
-                    android:textColor="@color/red" />
+                    android:backgroundTint="@color/light_red"
+                    android:elevation="4dp"
+                    android:padding="4dp">
 
-                <TextView
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:contentDescription="@string/content_description"
+                        android:src="@drawable/ic_trash"
+                        app:tint="@color/white" />
+
+                </RelativeLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.0375" />
+
+                <RelativeLayout
                     android:id="@+id/btn_edit"
                     style="@style/MediumTextView_Bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7625"
                     android:background="@drawable/click_effect"
-                    android:paddingHorizontal="4dp"
-                    android:text="@string/routines_edit_button"
-                    android:textAllCaps="true"
-                    android:textColor="@color/blue" />
+                    android:backgroundTint="@color/light_blue"
+                    android:elevation="4dp"
+                    android:padding="4dp">
+
+                    <TextView
+                        style="@style/MediumTextView_Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/routines_edit_button"
+                        android:textAllCaps="true" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
