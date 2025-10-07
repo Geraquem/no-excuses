@@ -30,21 +30,20 @@ class MaximumRepository @Inject constructor(
         realmDatabase.addObject { toMaximumDataDTO(data) }
     }
 
-    override fun deleteMaximumData(exerciseId: String) {
-        val maximumDTOList = realmDatabase.getObjectsFromRealm {
-            query<MaximumDataDTO>("$EXERCISE_ID == $0", exerciseId).find()
-        }
-        maximumDTOList.forEach {
-            realmDatabase.deleteObject(MaximumDataDTO::class, ID, it.id)
+    override suspend fun deleteMaximumData(exerciseId: String) {
+        realmDatabase.write {
+            val maximumDTOList = query<MaximumDataDTO>("$EXERCISE_ID == $0", exerciseId).find()
+            delete(maximumDTOList)
         }
     }
 
-    override fun editMData(mDataId: String, data: TempMaximumData) {
-        val dataDTO = realmDatabase.getObjectFromRealm(MaximumDataDTO::class, ID, mDataId)
-        dataDTO?.let {
-            it.date = data.date
-            it.weight = data.weight
-            realmDatabase.addObject { it }
+    override suspend fun editMData(mDataId: String, data: TempMaximumData) {
+        realmDatabase.write {
+            val dataDTO = query<MaximumDataDTO>("$ID == $0", mDataId).first().find()
+            dataDTO?.let {
+                it.date = data.date
+                it.weight = data.weight
+            }
         }
     }
 
@@ -53,7 +52,7 @@ class MaximumRepository @Inject constructor(
 
         val maximums = realmDatabase.getObjectsFromRealm { query<MaximumDataDTO>().find() }
         val result = mutableListOf<MaximumData>()
-        maximums.groupBy { it.exerciseId }.map { mData ->
+        maximums.groupBy { it.exerciseId }.forEach { mData ->
             val (exerciseId, data) = mData
             val exercise = getExerciseById(exerciseId)
             val list = mutableListOf<MData>()

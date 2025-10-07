@@ -130,25 +130,26 @@ class MenuRepository @Inject constructor(
         return emptyList()
     }
 
-    override fun unpinRoutineFromMenu(routineId: String) {
-        val dfRoutine =
-            realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class, ID, routineId)
-        dfRoutine?.let { routine ->
-            routine.doingIt = false
-            realmDatabase.addObject { routine }
-        }
-        val mRoutine = realmDatabase.getObjectFromRealm(MyRoutineDTO::class, ID, routineId)
-        mRoutine?.let { routine ->
-            routine.doingIt = false
-            realmDatabase.addObject { routine }
+    override suspend fun unpinRoutineFromMenu(routineId: String) {
+        realmDatabase.write {
+            // DefaultRoutineDTO
+            query<DefaultRoutineDTO>("$ID == $0", routineId).first().find()?.let {
+                it.doingIt = false
+            }
+
+            // MyRoutineDTO
+            query<MyRoutineDTO>("$ID == $0", routineId).first().find()?.let {
+                it.doingIt = false
+            }
         }
     }
 
-    override fun unpinNoteFromMenu(noteId: String) {
-        val note = realmDatabase.getObjectFromRealm(NoteDTO::class, ID, noteId)
-        note?.let { n ->
-            n.pinned = false
-            realmDatabase.addObject { note }
+    override suspend fun unpinNoteFromMenu(noteId: String) {
+        realmDatabase.write {
+            val note = query<NoteDTO>("$ID == $0", noteId).first().find()
+            note?.let {
+                it.pinned = false
+            }
         }
     }
 

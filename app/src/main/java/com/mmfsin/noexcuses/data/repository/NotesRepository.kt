@@ -31,23 +31,24 @@ class NotesRepository @Inject constructor(
         realmDatabase.addObject { note }
     }
 
-    override fun editNote(id: String, title: String, description: String, date: Long) {
-        val note = getNoteDTO(id)
-        note?.let {
-            it.title = title
-            it.description = description
-            it.date = date
-            it.pinned = it.pinned
-            realmDatabase.addObject { it }
+    override suspend fun editNote(id: String, title: String, description: String, date: Long) {
+        realmDatabase.write {
+            val note = query<NoteDTO>("$ID == $0", id).first().find()
+            note?.let {
+                it.title = title
+                it.description = description
+                it.date = date
+            }
         }
     }
 
-    override fun pinnedNote(id: String) {
-        val notes = realmDatabase.getObjectsFromRealm { query<NoteDTO>().find() }
-        notes.forEach { note ->
-            if (note.id == id) note.pinned = !note.pinned
-            else note.pinned = false
-            realmDatabase.addObject { note }
+    override suspend fun pinnedNote(id: String) {
+        realmDatabase.write {
+            val notes = query<NoteDTO>().find()
+            notes.forEach { note ->
+                if (note.id == id) note.pinned = !note.pinned
+                else note.pinned = false
+            }
         }
     }
 
