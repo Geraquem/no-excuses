@@ -1,6 +1,5 @@
 package com.mmfsin.noexcuses.domain.models
 
-
 open class ChExercise(
     val id: String,
     val routineId: String,

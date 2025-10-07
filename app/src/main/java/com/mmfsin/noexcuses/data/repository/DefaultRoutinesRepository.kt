@@ -37,8 +37,7 @@ import java.util.concurrent.CountDownLatch
 import javax.inject.Inject
 
 class DefaultRoutinesRepository @Inject constructor(
-    @ApplicationContext val context: Context,
-    private val realmDatabase: IRealmDatabase
+    @ApplicationContext val context: Context, private val realmDatabase: IRealmDatabase
 ) : IDefaultRoutinesRepository {
 
     override suspend fun getDefaultRoutines(): List<Routine> {
@@ -106,8 +105,7 @@ class DefaultRoutinesRepository @Inject constructor(
             val latch = CountDownLatch(1)
             val dDays = mutableListOf<DefaultDayDTO>()
             Firebase.firestore.collection(DEFAULT_ROUTINES).document(routineId).collection(DAYS)
-                .get()
-                .addOnSuccessListener { documents ->
+                .get().addOnSuccessListener { documents ->
                     for (doc in documents) {
                         try {
                             doc.toObject(DefaultDayDTO::class.java).let {
@@ -136,8 +134,7 @@ class DefaultRoutinesRepository @Inject constructor(
     }
 
     override suspend fun getDefaultExercises(
-        routineId: String,
-        dayId: String
+        routineId: String, dayId: String
     ): List<DefaultExercise> {
         var dfExercises = mutableListOf<DefaultExerciseDTO>()
 
@@ -180,8 +177,7 @@ class DefaultRoutinesRepository @Inject constructor(
 
     override fun getDefaultExerciseById(id: String): DefaultExercise? {
         var result: DefaultExercise? = null
-        val dfExercise =
-            realmDatabase.getObjectFromRealm(DefaultExerciseDTO::class, ID, id)
+        val dfExercise = realmDatabase.getObjectFromRealm(DefaultExerciseDTO::class, ID, id)
         dfExercise?.let { dfE ->
             val exercise = getExerciseFromDefaultExercise(dfE.exerciseId)
             exercise?.let { e -> result = dfE.toDefaultExercise(e) }
@@ -190,8 +186,7 @@ class DefaultRoutinesRepository @Inject constructor(
     }
 
     private fun getExerciseFromDefaultExercise(exerciseId: String): Exercise? {
-        val exercise =
-            realmDatabase.getObjectFromRealm(ExerciseDTO::class, ID, exerciseId)
+        val exercise = realmDatabase.getObjectFromRealm(ExerciseDTO::class, ID, exerciseId)
         return exercise?.toExercise()
     }
 }

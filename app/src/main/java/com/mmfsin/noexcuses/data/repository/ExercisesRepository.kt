@@ -3,6 +3,7 @@ package com.mmfsin.noexcuses.data.repository
 import android.content.Context
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.mmfsin.noexcuses.data.mappers.setExerciseData
 import com.mmfsin.noexcuses.data.mappers.toChExercise
 import com.mmfsin.noexcuses.data.mappers.toChExerciseDTO
 import com.mmfsin.noexcuses.data.mappers.toCompactExercise
@@ -126,8 +127,16 @@ class ExercisesRepository @Inject constructor(
         realmDatabase.addObject { chExercise }
     }
 
-    override fun editChExercise(chExercise: ChExercise) {
-        realmDatabase.addObject { toChExerciseDTO(null, chExercise) }
+    override suspend fun editChExercise(chExercise: ChExercise) {
+        realmDatabase.write {
+            val exercise = query<ChExerciseDTO>("$ID == $0", chExercise.id).first().find()
+            exercise?.let { e ->
+                e.data = setExerciseData(chExercise.data)
+                e.time = chExercise.time
+                e.superSerie = chExercise.superSerie
+                e.notes = chExercise.notes
+            }
+        }
     }
 
     override fun moveChExercise(exercises: List<String>) {
@@ -169,42 +178,28 @@ class ExercisesRepository @Inject constructor(
         }
     }
 
-    override fun deleteChExercise(chExerciseId: String) {
-        val chExercise = getChExerciseDTO(chExerciseId)
-        chExercise?.let { e ->
-            /** delete all series related with chExercise */
-            val dataId = e.exerciseId + e.dayId
-            deleteDataExercise(dataId)
+    override suspend fun deleteChExercise(chExerciseId: String) {
+        realmDatabase.write {
+            val chExercise = query<ChExerciseDTO>("$ID == $0", chExerciseId).first().find()
+            chExercise?.let { e ->
+                // Eliminar todos los datos relacionados
+                val dataId = e.exerciseId + e.dayId
+                val data = query<DataDTO>("$DATA_ID == $0", dataId).find()
+                delete(data)
 
-            /** delete chExercise */
-            val day = getDayDTO(e.dayId)
-            day?.let {
-                it.exercises--
-                realmDatabase.addObject { it }
+                // Actualizar el contador de ejercicios del día
+                val day = query<DayDTO>("$ID == $0", e.dayId).first().find()
+                day?.let {
+                    it.exercises -= 1
+                }
+
+                // Eliminar el chExercise
+                delete(e)
             }
-            realmDatabase.deleteObject(ChExerciseDTO::class, ID, e.id)
         }
     }
 
-    private fun deleteDataExercise(dataId: String) {
-        val data = realmDatabase.getObjectsFromRealm {
-            query<DataDTO>("$DATA_ID == $0", dataId).find()
-        }
-        data.forEach { d ->
-            d.id?.let { id -> realmDatabase.deleteObject(DataDTO::class, ID, id) }
-        }
-    }
-
-    override fun deleteExercisesFromDeletedDay(dayId: String) {
-        val exercises = realmDatabase.getObjectsFromRealm {
-            query<ChExerciseDTO>("$DAY_ID == $0", dayId).find()
-        }
-        for (e in exercises) {
-            deleteChExercise(e.id)
-        }
-    }
-
-    override fun deleteExercisesFromDeletedRoutine(routineId: String) {
+    override suspend fun deleteExercisesFromDeletedRoutine(routineId: String) {
         val exercises = realmDatabase.getObjectsFromRealm {
             query<ChExerciseDTO>("$ROUTINE_ID == $0", routineId).find()
         }

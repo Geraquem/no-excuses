@@ -34,7 +34,7 @@ class MyRoutinesRepository @Inject constructor(
     }
 
     override fun getRoutineById(id: String): Routine? {
-        val routine = getRoutineDTO(id)
+        val routine = realmDatabase.getObjectFromRealm(MyRoutineDTO::class, ID, id)
         return routine?.toRoutine() ?: run { null }
     }
 
@@ -62,12 +62,13 @@ class MyRoutinesRepository @Inject constructor(
         realmDatabase.write { routine }
     }
 
-    override fun editRoutine(id: String, title: String, description: String?) {
-        val routine = getRoutineDTO(id)
-        routine?.let {
-            it.title = title
-            it.description = description
-            realmDatabase.addObject { it }
+    override suspend fun editRoutine(id: String, title: String, description: String?) {
+        realmDatabase.write {
+            val routine = query<MyRoutineDTO>("$ID == $0", id).first().find()
+            routine?.let { r ->
+                r.title = title
+                r.description = description
+            }
         }
     }
 
@@ -81,9 +82,6 @@ class MyRoutinesRepository @Inject constructor(
         /** DELTE ROUTINE */
         realmDatabase.deleteObject(MyRoutineDTO::class, ID, id)
     }
-
-    private fun getRoutineDTO(id: String): MyRoutineDTO? =
-        realmDatabase.getObjectFromRealm(MyRoutineDTO::class, ID, id)
 
     override fun getRoutineDays(routineId: String): List<Day> {
         val days = realmDatabase.getObjectsFromRealm {
@@ -110,59 +108,43 @@ class MyRoutinesRepository @Inject constructor(
     }
 
     override fun getDayById(dayId: String): Day? {
-        val day = getDayDTO(dayId)
+        val day = realmDatabase.getObjectFromRealm(DayDTO::class, ID, dayId)
         return day?.toDay() ?: run { null }
     }
 
-    override fun editDay(id: String, title: String) {
-        val day = getDayDTO(id)
-        day?.let {
-            it.title = title
-            realmDatabase.addObject { it }
-        }
-    }
-
-    override fun deleteDay(id: String) {
-        /** DELETE EXERCISES */
-        deleteChExercisesRelatedWithDay(dayId = id)
-
-        /** DELETE DAY */
-        val day = getDayDTO(id)
-        day?.let { d ->
-            /** DELETE DAYS COUNT IN ROUTINE */
-            val routine = getRoutineDTO(d.routineId)
-            routine?.let { r ->
-                r.days--
-                realmDatabase.addObject { r }
+    override suspend fun editDay(id: String, title: String) {
+        realmDatabase.write {
+            val day = query<DayDTO>("$ID == $0", id).first().find()
+            day?.let { d ->
+                d.title = title
             }
-            realmDatabase.deleteObject(DayDTO::class, ID, id)
         }
     }
 
-    private fun getDayDTO(id: String): DayDTO? =
-        realmDatabase.getObjectFromRealm(DayDTO::class, ID, id)
+    override suspend fun deleteDay(id: String) {
+        realmDatabase.write {
+            // Eliminar todos los ejercicios asociados a este día
+            val exercises = query<ChExerciseDTO>("$DAY_ID == $0", id).find()
+            exercises.forEach { e ->
+                val dataId = e.exerciseId + e.dayId
+                val data = query<DataDTO>("$DATA_ID == $0", dataId).find()
+                delete(data)
+                delete(e)
+            }
 
+            // Buscar el día
+            val day = query<DayDTO>("$ID == $0", id).first().find()
+            day?.let { d ->
 
-    private fun deleteChExercisesRelatedWithDay(dayId: String) {
-        val exercises = realmDatabase.getObjectsFromRealm {
-            query<ChExerciseDTO>("$DAY_ID == $0", dayId).find()
-        }
-        exercises.forEach { exercise ->
-            /** delete all series related with chExercise */
-            val dataId = exercise.exerciseId + exercise.dayId
-            deleteDataExercise(dataId)
+                // Actualizar la rutina
+                val routine = query<MyRoutineDTO>("$ID == $0", d.routineId).first().find()
+                routine?.let { r ->
+                    r.days -= 1
+                }
 
-            /** delete chExercise */
-            realmDatabase.deleteObject(ChExerciseDTO::class, ID, exercise.id)
-        }
-    }
-
-    private fun deleteDataExercise(dataId: String) {
-        val data = realmDatabase.getObjectsFromRealm {
-            query<DataDTO>("$DATA_ID == $0", dataId).find()
-        }
-        data.forEach { d ->
-            d.id?.let { id -> realmDatabase.deleteObject(DataDTO::class, ID, id) }
+                // Eliminar el día
+                delete(d)
+            }
         }
     }
 }

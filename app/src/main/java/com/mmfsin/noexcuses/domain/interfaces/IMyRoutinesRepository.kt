@@ -9,14 +9,14 @@ interface IMyRoutinesRepository {
     fun getRoutineById(id: String): Routine?
     suspend fun updateRoutinePushPin(id: String)
     suspend fun addRoutine(title: String, description: String?)
-    fun editRoutine(id: String, title: String, description: String?)
+    suspend fun editRoutine(id: String, title: String, description: String?)
     fun deleteRoutine(id: String)
 
     fun getRoutineDays(routineId: String): List<Day>
     fun getDayById(dayId: String): Day?
     suspend fun addDay(routineId: String, title: String)
-    fun editDay(id: String, title: String)
-    fun deleteDay(id: String)
+    suspend fun editDay(id: String, title: String)
+    suspend fun deleteDay(id: String)
 
     suspend fun addDfRoutineToMine(routine: MyRoutineDTO)
     fun addDayToNewDfRoutineMine(day: Day, newDayId: String, newRoutineId: String)

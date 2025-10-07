@@ -18,7 +18,7 @@ import io.realm.kotlin.ext.realmListOf
 import io.realm.kotlin.types.RealmList
 import java.util.UUID
 
-fun toChExerciseDTO(actualPos: Int?, chE: ChExercise) = ChExerciseDTO().apply {
+fun toChExerciseDTO(actualPos: Int? = null, chE: ChExercise) = ChExerciseDTO().apply {
     id = chE.id
     routineId = chE.routineId
     dayId = chE.dayId
