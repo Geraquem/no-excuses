@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity() {
         changeStatusBar()
         setNavigationDrawer()
         setBottomNav()
+
+//        openDrawer()
     }
 
     private fun changeStatusBar() {
