@@ -7,13 +7,9 @@ import javax.inject.Inject
 
 class DeleteMyRoutineUseCase @Inject constructor(
     private val routinesRepository: IMyRoutinesRepository,
-    private val exercisesRepository: IExercisesRepository
 ) : BaseUseCase<DeleteMyRoutineUseCase.Params, Unit>() {
 
     override suspend fun execute(params: Params) {
-        /** delete all exercises in routine */
-        exercisesRepository.deleteExercisesFromDeletedRoutine(params.id)
-        /** iniside deleteRoutine also delete days */
         routinesRepository.deleteRoutine(params.id)
     }
 

@@ -69,6 +69,7 @@ class DefaultRoutinesRepository @Inject constructor(
                 }
             withContext(Dispatchers.IO) { latch.await() }
             return defaultRoutines.toDefaultRoutineList()
+
         } else {
             val routines = realmDatabase.getObjectsFromRealm { query<DefaultRoutineDTO>().find() }
             return routines.toDefaultRoutineList()

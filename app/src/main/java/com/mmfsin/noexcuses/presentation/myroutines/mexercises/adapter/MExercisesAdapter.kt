@@ -31,7 +31,7 @@ class MExercisesAdapter(
             listener: IMExerciseListener
         ) {
             binding.apply {
-                tvPosition.text = position.toString()
+                tvPosition.text = "$position"
                 setCategoryColor(exercise.category)
                 Glide.with(binding.root.context).load(exercise.gifURL).into(image)
                 tvCategory.text = exercise.category
@@ -41,7 +41,7 @@ class MExercisesAdapter(
                 series?.let {
                     llReps.visibility = if (it == 0) View.GONE else View.VISIBLE
                     if (it == 1) tvSeriesText.text = c.getString(R.string.mexercises_serie)
-                    tvSeries.text = it.toString()
+                    tvSeries.text = "$it"
                 } ?: run { llReps.visibility = View.GONE }
 
                 val time = exercise.time

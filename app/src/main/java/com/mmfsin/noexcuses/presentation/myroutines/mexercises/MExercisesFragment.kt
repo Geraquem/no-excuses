@@ -160,7 +160,7 @@ class MExercisesFragment : BaseFragment<FragmentChExercisesBinding, MExercisesVi
         idGroup?.let { viewModel.getDayExercises(it.dayId) } ?: run { error() }
     }
 
-    private fun error() = activity?.showErrorDialog()
+    private fun error() = activity?.showErrorDialog(goBack = false)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

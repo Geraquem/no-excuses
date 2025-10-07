@@ -55,11 +55,11 @@ class MyRoutinesRepository @Inject constructor(
     }
 
     override suspend fun addRoutine(title: String, description: String?) {
-        realmDatabase.write { createNewMyRoutineDTO(title, description) }
+        realmDatabase.addObject { createNewMyRoutineDTO(title, description) }
     }
 
     override suspend fun addDfRoutineToMine(routine: MyRoutineDTO) {
-        realmDatabase.write { routine }
+        realmDatabase.addObject { routine }
     }
 
     override suspend fun editRoutine(id: String, title: String, description: String?) {
@@ -72,15 +72,27 @@ class MyRoutinesRepository @Inject constructor(
         }
     }
 
-    override fun deleteRoutine(id: String) {
-        /** DELETE DAYS RELATED WITH ROUTINE */
-        val days = realmDatabase.getObjectsFromRealm {
-            query<DayDTO>("$ROUTINE_ID == $0", id).find()
+    override suspend fun deleteRoutine(id: String) {
+        realmDatabase.write {
+            val routine = query<MyRoutineDTO>("$ID == $0", id).first().find()
+            routine?.let { r ->
+                val days = query<DayDTO>("$ROUTINE_ID == $0", id).find()
+                days.forEach { d ->
+                    // Eliminar todos los ejercicios asociados a este día
+                    val exercises = query<ChExerciseDTO>("$DAY_ID == $0", d.id).find()
+                    exercises.forEach { e ->
+                        val dataId = e.exerciseId + e.dayId
+                        val data = query<DataDTO>("$DATA_ID == $0", dataId).find()
+                        delete(data)
+                        delete(e)
+                    }
+                    // Borrar todos los días de la rutina
+                    delete(d)
+                }
+                //Borrar la rutina
+                delete(r)
+            }
         }
-        days.forEach { day -> realmDatabase.deleteObject(DayDTO::class, ID, day.id) }
-
-        /** DELTE ROUTINE */
-        realmDatabase.deleteObject(MyRoutineDTO::class, ID, id)
     }
 
     override fun getRoutineDays(routineId: String): List<Day> {

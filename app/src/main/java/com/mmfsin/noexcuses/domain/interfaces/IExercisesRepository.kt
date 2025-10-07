@@ -16,17 +16,15 @@ interface IExercisesRepository {
     fun getChExerciseById(chExerciseId: String): ChExercise?
     suspend fun addChExercise(chExercise: ChExercise)
     suspend fun editChExercise(chExercise: ChExercise)
-    fun moveChExercise(exercises: List<String>)
+    suspend fun moveChExercise(exercises: List<String>)
     suspend fun deleteChExercise(chExerciseId: String)
 
     fun getFavExercises(): List<Exercise>
     fun checkExerciseFav(exerciseId: String): Boolean
-    fun updateExerciseFav(exerciseId: String)
-
-    suspend fun deleteExercisesFromDeletedRoutine(routineId: String)
+    suspend fun updateExerciseFav(exerciseId: String)
 
     fun createCustomExercise(createdExercise: CreatedExercise)
-    fun editCustomExercise(createdExercise: CreatedExercise, id: String)
+    suspend fun editCustomExercise(createdExercise: CreatedExercise, id: String)
     fun deleteCustomExercise(createdExerciseId: String)
 
     fun addDefaultExerciseAsMine(chExercise: ChExerciseDTO)

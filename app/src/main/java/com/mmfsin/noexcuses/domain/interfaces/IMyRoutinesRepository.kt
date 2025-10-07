@@ -10,7 +10,7 @@ interface IMyRoutinesRepository {
     suspend fun updateRoutinePushPin(id: String)
     suspend fun addRoutine(title: String, description: String?)
     suspend fun editRoutine(id: String, title: String, description: String?)
-    fun deleteRoutine(id: String)
+    suspend fun deleteRoutine(id: String)
 
     fun getRoutineDays(routineId: String): List<Day>
     fun getDayById(dayId: String): Day?

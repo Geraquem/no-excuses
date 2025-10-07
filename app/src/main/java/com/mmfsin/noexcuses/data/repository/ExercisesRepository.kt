@@ -30,7 +30,6 @@ import com.mmfsin.noexcuses.utils.EXERCISES
 import com.mmfsin.noexcuses.utils.FAV_ID
 import com.mmfsin.noexcuses.utils.ID
 import com.mmfsin.noexcuses.utils.MY_SHARED_PREFS
-import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import com.mmfsin.noexcuses.utils.SERVER_EXERCISES
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.realm.kotlin.ext.query
@@ -139,18 +138,14 @@ class ExercisesRepository @Inject constructor(
         }
     }
 
-    override fun moveChExercise(exercises: List<String>) {
-        exercises.forEachIndexed { i, id ->
-            val exercise = realmDatabase.getObjectFromRealm(ChExerciseDTO::class, ID, id)
-            exercise?.let { e ->
-                e.position = i
-                realmDatabase.addObject { e }
+    override suspend fun moveChExercise(exercises: List<String>) {
+        realmDatabase.write {
+            exercises.forEachIndexed { i, id ->
+                val exercise = query<ChExerciseDTO>("$ID == $0", id).first().find()
+                exercise?.position = i
             }
         }
     }
-
-    private fun getDayDTO(id: String): DayDTO? =
-        realmDatabase.getObjectFromRealm(DayDTO::class, ID, id)
 
     override fun getChExerciseById(chExerciseId: String): ChExercise? =
         getChExerciseDTO(chExerciseId)?.toChExercise()
@@ -170,11 +165,12 @@ class ExercisesRepository @Inject constructor(
         return exercise?.isFav ?: run { false }
     }
 
-    override fun updateExerciseFav(exerciseId: String) {
-        val exercise = realmDatabase.getObjectFromRealm(ExerciseDTO::class, ID, exerciseId)
-        exercise?.let { e ->
-            e.isFav = !e.isFav
-            realmDatabase.addObject { e }
+    override suspend fun updateExerciseFav(exerciseId: String) {
+        realmDatabase.write {
+            val exercise = query<ExerciseDTO>("$ID == $0", exerciseId).first().find()
+            exercise?.let { e ->
+                e.isFav = !e.isFav
+            }
         }
     }
 
@@ -199,15 +195,6 @@ class ExercisesRepository @Inject constructor(
         }
     }
 
-    override suspend fun deleteExercisesFromDeletedRoutine(routineId: String) {
-        val exercises = realmDatabase.getObjectsFromRealm {
-            query<ChExerciseDTO>("$ROUTINE_ID == $0", routineId).find()
-        }
-        for (e in exercises) {
-            deleteChExercise(e.id)
-        }
-    }
-
     override fun createCustomExercise(createdExercise: CreatedExercise) {
         val exercises = realmDatabase.getObjectsFromRealm {
             query<ExerciseDTO>("$CATEGORY == $0", createdExercise.category).find()
@@ -218,11 +205,21 @@ class ExercisesRepository @Inject constructor(
         saveExerciseInRealm(exerciseToAdd)
     }
 
-    override fun editCustomExercise(createdExercise: CreatedExercise, id: String) {
-        val exercise = realmDatabase.getObjectFromRealm(ExerciseDTO::class, ID, id)
-        exercise?.order?.let { o ->
-            val exerciseToAdd = toExerciseDTO(id, o, createdExercise)
-            saveExerciseInRealm(exerciseToAdd)
+    override suspend fun editCustomExercise(createdExercise: CreatedExercise, id: String) {
+        realmDatabase.write {
+            val exercise = query<ExerciseDTO>("$ID == $0", id).first().find()
+            exercise?.let { e ->
+                e.order.let { order ->
+                    val n = toExerciseDTO(id, order, createdExercise)
+                    e.order = order
+                    e.imageURL = n.imageURL
+                    e.gifURL = n.gifURL
+                    e.name = n.name
+                    e.description = n.description
+                    e.muscles = n.muscles
+                    e.muscleWikiURL = n.muscleWikiURL
+                }
+            }
         }
     }
 

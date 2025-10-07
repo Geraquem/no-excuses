@@ -38,7 +38,7 @@ fun editChExercise(chExercise: ChExercise, dataChExercise: DataChExercise): ChEx
 fun toExerciseDTO(newId: String? = null, o: Long, cE: CreatedExercise) = ExerciseDTO().apply {
     id = newId ?: UUID.randomUUID().toString()
     category = cE.category
-    imageURL = ""
+    imageURL = cE.image ?: ""
     gifURL = cE.image
     name = cE.name
     order = o
