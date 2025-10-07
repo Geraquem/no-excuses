@@ -15,22 +15,21 @@ import com.mmfsin.noexcuses.utils.MY_SHARED_PREFS
 import com.mmfsin.noexcuses.utils.SERVER_STRETCHING
 import com.mmfsin.noexcuses.utils.STRETCHING
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.realm.kotlin.where
+import io.realm.kotlin.ext.query
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.concurrent.CountDownLatch
 import javax.inject.Inject
 
 class StretchingRepository @Inject constructor(
-    @ApplicationContext val context: Context,
-    private val realmDatabase: IRealmDatabase
+    @ApplicationContext val context: Context, private val realmDatabase: IRealmDatabase
 ) : IStretchingRepository {
 
     override suspend fun getStretchingData(): List<Stretch> {
         val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
         if (sharedPrefs.getBoolean(SERVER_STRETCHING, true)) {
             val latch = CountDownLatch(1)
-            realmDatabase.deleteAllObjects(StretchingDTO::class.java)
+            realmDatabase.deleteAllObjects(StretchingDTO::class)
             val stretches = mutableListOf<StretchingDTO>()
             Firebase.database.reference.child(STRETCHING).get().addOnSuccessListener {
                 for (mgroup in it.children) {
@@ -54,7 +53,7 @@ class StretchingRepository @Inject constructor(
             withContext(Dispatchers.IO) { latch.await() }
             return stretches.toStretchList()
         } else {
-            val result = realmDatabase.getObjectsFromRealm { where<StretchingDTO>().findAll() }
+            val result = realmDatabase.getObjectsFromRealm { query<StretchingDTO>().find() }
             return result.toStretchList()
         }
     }
@@ -64,7 +63,7 @@ class StretchingRepository @Inject constructor(
         val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
 
         if (sharedPrefs.getBoolean(SERVER_STRETCHING, true)) {
-            realmDatabase.deleteAllObjects(StretchingDTO::class.java)
+            realmDatabase.deleteAllObjects(StretchingDTO::class)
             val stretches = mutableListOf<StretchingDTO>()
             Firebase.database.reference.child(STRETCHING).get().addOnSuccessListener {
                 for (mgroup in it.children) {
@@ -91,12 +90,11 @@ class StretchingRepository @Inject constructor(
 
         } else {
             return realmDatabase.getObjectsFromRealm {
-                where<StretchingDTO>().equalTo(CATEGORY, category).findAll()
+                query<StretchingDTO>("$CATEGORY == $0", category).find()
             }.toStretching().sortedBy { it.order }
         }
     }
 
     private fun saveStretchingInRealm(stretching: StretchingDTO) =
         realmDatabase.addObject { stretching }
-
 }

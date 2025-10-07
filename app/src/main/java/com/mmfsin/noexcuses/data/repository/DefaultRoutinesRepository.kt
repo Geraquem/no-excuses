@@ -2,7 +2,6 @@ package com.mmfsin.noexcuses.data.repository
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.mmfsin.noexcuses.data.mappers.toDay
@@ -31,7 +30,7 @@ import com.mmfsin.noexcuses.utils.MY_SHARED_PREFS
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import com.mmfsin.noexcuses.utils.SERVER_DEFAULT_ROUTINES
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.realm.kotlin.where
+import io.realm.kotlin.ext.query
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.concurrent.CountDownLatch
@@ -72,26 +71,24 @@ class DefaultRoutinesRepository @Inject constructor(
             withContext(Dispatchers.IO) { latch.await() }
             return defaultRoutines.toDefaultRoutineList()
         } else {
-            val routines = realmDatabase.getObjectsFromRealm {
-                where<DefaultRoutineDTO>().findAll()
-            }
+            val routines = realmDatabase.getObjectsFromRealm { query<DefaultRoutineDTO>().find() }
             return routines.toDefaultRoutineList()
         }
     }
 
     override fun getDefaultRoutineById(id: String): Routine? {
-        val routine = realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class.java, ID, id)
+        val routine = realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class, ID, id)
         return routine?.toRoutine()
     }
 
     override fun updateRoutinePushPin(id: String) {
-        val myRoutines = realmDatabase.getObjectsFromRealm { where<MyRoutineDTO>().findAll() }
+        val myRoutines = realmDatabase.getObjectsFromRealm { query<MyRoutineDTO>().find() }
         myRoutines.forEach { routine ->
             routine.doingIt = false
             realmDatabase.addObject { routine }
         }
 
-        val dfRoutines = realmDatabase.getObjectsFromRealm { where<DefaultRoutineDTO>().findAll() }
+        val dfRoutines = realmDatabase.getObjectsFromRealm { query<DefaultRoutineDTO>().find() }
         dfRoutines.forEach { routine ->
             if (routine.id == id) routine.doingIt = !routine.doingIt
             else routine.doingIt = false
@@ -101,8 +98,9 @@ class DefaultRoutinesRepository @Inject constructor(
 
     override suspend fun getDefaultDays(routineId: String): List<Day> {
         val days = realmDatabase.getObjectsFromRealm {
-            where<DefaultDayDTO>().equalTo(ROUTINE_ID, routineId).findAll()
+            query<DefaultDayDTO>("$ROUTINE_ID == $0", routineId).find()
         }
+
         if (days.isEmpty()) {
             val latch = CountDownLatch(1)
             val dDays = mutableListOf<DefaultDayDTO>()
@@ -132,7 +130,7 @@ class DefaultRoutinesRepository @Inject constructor(
     }
 
     override fun getDefaultDayById(id: String): Day? {
-        val routine = realmDatabase.getObjectFromRealm(DefaultDayDTO::class.java, ID, id)
+        val routine = realmDatabase.getObjectFromRealm(DefaultDayDTO::class, ID, id)
         return routine?.toDay()
     }
 
@@ -141,8 +139,9 @@ class DefaultRoutinesRepository @Inject constructor(
         dayId: String
     ): List<DefaultExercise> {
         var dfExercises = mutableListOf<DefaultExerciseDTO>()
+
         val dfExercisesFromRealm = realmDatabase.getObjectsFromRealm {
-            where<DefaultExerciseDTO>().equalTo(DAY_ID, dayId).findAll()
+            query<DefaultExerciseDTO>("$DAY_ID == $0", dayId).find()
         }
 
         if (dfExercisesFromRealm.isEmpty()) {
@@ -181,7 +180,7 @@ class DefaultRoutinesRepository @Inject constructor(
     override fun getDefaultExerciseById(id: String): DefaultExercise? {
         var result: DefaultExercise? = null
         val dfExercise =
-            realmDatabase.getObjectFromRealm(DefaultExerciseDTO::class.java, ID, id)
+            realmDatabase.getObjectFromRealm(DefaultExerciseDTO::class, ID, id)
         dfExercise?.let { dfE ->
             val exercise = getExerciseFromDefaultExercise(dfE.exerciseId)
             exercise?.let { e -> result = dfE.toDefaultExercise(e) }
@@ -191,7 +190,7 @@ class DefaultRoutinesRepository @Inject constructor(
 
     private fun getExerciseFromDefaultExercise(exerciseId: String): Exercise? {
         val exercise =
-            realmDatabase.getObjectFromRealm(ExerciseDTO::class.java, ID, exerciseId)
+            realmDatabase.getObjectFromRealm(ExerciseDTO::class, ID, exerciseId)
         return exercise?.toExercise()
     }
 }

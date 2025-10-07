@@ -32,19 +32,18 @@ import com.mmfsin.noexcuses.utils.MY_SHARED_PREFS
 import com.mmfsin.noexcuses.utils.ROUTINE_ID
 import com.mmfsin.noexcuses.utils.SERVER_EXERCISES
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.realm.kotlin.where
+import io.realm.kotlin.ext.query
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.concurrent.CountDownLatch
 import javax.inject.Inject
 
 class ExercisesRepository @Inject constructor(
-    @ApplicationContext val context: Context,
-    private val realmDatabase: IRealmDatabase
+    @ApplicationContext val context: Context, private val realmDatabase: IRealmDatabase
 ) : IExercisesRepository {
 
     override fun getMuscularGroups(): List<MuscularGroup> {
-        val groups = realmDatabase.getObjectsFromRealm { where<MuscularGroupDTO>().findAll() }
+        val groups = realmDatabase.getObjectsFromRealm { query<MuscularGroupDTO>().find() }
         return if (groups.isNotEmpty()) groups.sortedBy { it.order }.toMuscularGroupList()
         else emptyList()
     }
@@ -54,7 +53,7 @@ class ExercisesRepository @Inject constructor(
         val sharedPrefs = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE)
 
         if (sharedPrefs.getBoolean(SERVER_EXERCISES, true)) {
-            realmDatabase.deleteAllObjects(ExerciseDTO::class.java)
+            realmDatabase.deleteAllObjects(ExerciseDTO::class)
             val exercises = mutableListOf<ExerciseDTO>()
             Firebase.database.reference.child(EXERCISES).get().addOnSuccessListener {
                 for (mgroup in it.children) {
@@ -79,7 +78,7 @@ class ExercisesRepository @Inject constructor(
             return exercises.sortedBy { it.order }.toExerciseList()
 
         } else {
-            val exercises = realmDatabase.getObjectsFromRealm { where<ExerciseDTO>().findAll() }
+            val exercises = realmDatabase.getObjectsFromRealm { query<ExerciseDTO>().find() }
             return exercises.sortedBy { it.order }.toExerciseList()
         }
     }
@@ -92,15 +91,14 @@ class ExercisesRepository @Inject constructor(
     private fun saveExerciseInRealm(exercise: ExerciseDTO) = realmDatabase.addObject { exercise }
 
     override fun getExerciseById(id: String): Exercise? {
-        val exercises = realmDatabase.getObjectFromRealm(ExerciseDTO::class.java, ID, id)
+        val exercises = realmDatabase.getObjectFromRealm(ExerciseDTO::class, ID, id)
         return exercises?.toExercise()
     }
 
     override fun getDayExercises(dayId: String): List<CompactExercise> {
         val exercises = realmDatabase.getObjectsFromRealm {
-            where<ChExerciseDTO>().equalTo(DAY_ID, dayId).findAll()
+            query<ChExerciseDTO>("$DAY_ID == $0", dayId).find()
         }
-
         val resultList = mutableListOf<CompactExercise>()
         for (exercise in exercises) {
             exercise.exerciseId?.let { id ->
@@ -119,7 +117,7 @@ class ExercisesRepository @Inject constructor(
             exercisePos = it.exercises
             realmDatabase.addObject { it }
         }
-        realmDatabase.addObject { chExercise.toChExerciseDTO(exercisePos) }
+        realmDatabase.addObject { toChExerciseDTO(exercisePos, chExercise) }
     }
 
     override fun addDefaultExerciseAsMine(chExercise: ChExerciseDTO) {
@@ -127,12 +125,12 @@ class ExercisesRepository @Inject constructor(
     }
 
     override fun editChExercise(chExercise: ChExercise) {
-        realmDatabase.addObject { chExercise.toChExerciseDTO(null) }
+        realmDatabase.addObject { toChExerciseDTO(null, chExercise) }
     }
 
     override fun moveChExercise(exercises: List<String>) {
         exercises.forEachIndexed { i, id ->
-            val exercise = realmDatabase.getObjectFromRealm(ChExerciseDTO::class.java, ID, id)
+            val exercise = realmDatabase.getObjectFromRealm(ChExerciseDTO::class, ID, id)
             exercise?.let { e ->
                 e.position = i
                 realmDatabase.addObject { e }
@@ -141,17 +139,17 @@ class ExercisesRepository @Inject constructor(
     }
 
     private fun getDayDTO(id: String): DayDTO? =
-        realmDatabase.getObjectFromRealm(DayDTO::class.java, ID, id)
+        realmDatabase.getObjectFromRealm(DayDTO::class, ID, id)
 
     override fun getChExerciseById(chExerciseId: String): ChExercise? =
         getChExerciseDTO(chExerciseId)?.toChExercise()
 
     private fun getChExerciseDTO(chExerciseId: String): ChExerciseDTO? =
-        realmDatabase.getObjectFromRealm(ChExerciseDTO::class.java, ID, chExerciseId)
+        realmDatabase.getObjectFromRealm(ChExerciseDTO::class, ID, chExerciseId)
 
     override fun getFavExercises(): List<Exercise> {
         val favs = realmDatabase.getObjectsFromRealm {
-            where<ExerciseDTO>().equalTo(FAV_ID, true).findAll()
+            query<ExerciseDTO>("$FAV_ID == $0", true).find()
         }
         return favs.toExerciseList().sortedBy { it.category }
     }
@@ -162,7 +160,7 @@ class ExercisesRepository @Inject constructor(
     }
 
     override fun updateExerciseFav(exerciseId: String) {
-        val exercise = realmDatabase.getObjectFromRealm(ExerciseDTO::class.java, ID, exerciseId)
+        val exercise = realmDatabase.getObjectFromRealm(ExerciseDTO::class, ID, exerciseId)
         exercise?.let { e ->
             e.isFav = !e.isFav
             realmDatabase.addObject { e }
@@ -182,22 +180,22 @@ class ExercisesRepository @Inject constructor(
                 it.exercises--
                 realmDatabase.addObject { it }
             }
-            realmDatabase.deleteObject(ChExerciseDTO::class.java, ID, e.id)
+            realmDatabase.deleteObject(ChExerciseDTO::class, ID, e.id)
         }
     }
 
     private fun deleteDataExercise(dataId: String) {
         val data = realmDatabase.getObjectsFromRealm {
-            where<DataDTO>().equalTo(DATA_ID, dataId).findAll()
+            query<DataDTO>("$DATA_ID == $0", dataId).find()
         }
         data.forEach { d ->
-            d.id?.let { id -> realmDatabase.deleteObject(DataDTO::class.java, ID, id) }
+            d.id?.let { id -> realmDatabase.deleteObject(DataDTO::class, ID, id) }
         }
     }
 
     override fun deleteExercisesFromDeletedDay(dayId: String) {
         val exercises = realmDatabase.getObjectsFromRealm {
-            where<ChExerciseDTO>().equalTo(DAY_ID, dayId).findAll()
+            query<ChExerciseDTO>("$DAY_ID == $0", dayId).find()
         }
         for (e in exercises) {
             deleteChExercise(e.id)
@@ -206,7 +204,7 @@ class ExercisesRepository @Inject constructor(
 
     override fun deleteExercisesFromDeletedRoutine(routineId: String) {
         val exercises = realmDatabase.getObjectsFromRealm {
-            where<ChExerciseDTO>().equalTo(ROUTINE_ID, routineId).findAll()
+            query<ChExerciseDTO>("$ROUTINE_ID == $0", routineId).find()
         }
         for (e in exercises) {
             deleteChExercise(e.id)
@@ -215,23 +213,23 @@ class ExercisesRepository @Inject constructor(
 
     override fun createCustomExercise(createdExercise: CreatedExercise) {
         val exercises = realmDatabase.getObjectsFromRealm {
-            where<ExerciseDTO>().equalTo(CATEGORY, createdExercise.category).findAll()
+            query<ExerciseDTO>("$CATEGORY == $0", createdExercise.category).find()
         }.sortedBy { it.order }
         val order = exercises.last().order + 10
 
-        val exerciseToAdd = createdExercise.toExerciseDTO(order = order)
+        val exerciseToAdd = toExerciseDTO(o = order, cE = createdExercise)
         saveExerciseInRealm(exerciseToAdd)
     }
 
     override fun editCustomExercise(createdExercise: CreatedExercise, id: String) {
-        val exercise = realmDatabase.getObjectFromRealm(ExerciseDTO::class.java, ID, id)
+        val exercise = realmDatabase.getObjectFromRealm(ExerciseDTO::class, ID, id)
         exercise?.order?.let { o ->
-            val exerciseToAdd = createdExercise.toExerciseDTO(id, o)
+            val exerciseToAdd = toExerciseDTO(id, o, createdExercise)
             saveExerciseInRealm(exerciseToAdd)
         }
     }
 
     override fun deleteCustomExercise(createdExerciseId: String) {
-        realmDatabase.deleteObject(ExerciseDTO::class.java, ID, createdExerciseId)
+        realmDatabase.deleteObject(ExerciseDTO::class, ID, createdExerciseId)
     }
 }

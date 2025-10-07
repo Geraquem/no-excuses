@@ -2,7 +2,7 @@ package com.mmfsin.noexcuses.domain.usecases
 
 import com.mmfsin.noexcuses.base.BaseUseCase
 import com.mmfsin.noexcuses.data.mappers.createNewRoutineFromDefault
-import com.mmfsin.noexcuses.data.mappers.toChExerciseDTO
+import com.mmfsin.noexcuses.data.mappers.defaultExerciseToChExerciseDTO
 import com.mmfsin.noexcuses.domain.interfaces.IDefaultRoutinesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IExercisesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IMyRoutinesRepository
@@ -30,7 +30,8 @@ class AddDfRoutineToMineUseCase @Inject constructor(
                     val newExerciseId = UUID.randomUUID().toString()
 
                     /** Para cada día, sacamos sus ejercicios */
-                    val chExerciseDTO = e.toChExerciseDTO(
+                    val chExerciseDTO = defaultExerciseToChExerciseDTO(
+                        e,
                         newExerciseId,
                         newRoutineId,
                         newDayId,
@@ -45,7 +46,7 @@ class AddDfRoutineToMineUseCase @Inject constructor(
             }
 
             /** Guardamos rutina */
-            val newRoutine = r.createNewRoutineFromDefault(newRoutineId, days.size)
+            val newRoutine = createNewRoutineFromDefault(newRoutineId, days.size, r)
             mRepository.addDfRoutineToMine(newRoutine)
 
         } ?: run { throw NullPointerException() }

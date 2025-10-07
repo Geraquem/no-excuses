@@ -1,29 +1,53 @@
 package com.mmfsin.noexcuses.di
 
 import com.mmfsin.noexcuses.data.database.RealmDatabase
+import com.mmfsin.noexcuses.data.models.CalendarInfoDTO
+import com.mmfsin.noexcuses.data.models.ChExerciseDTO
+import com.mmfsin.noexcuses.data.models.DataDTO
+import com.mmfsin.noexcuses.data.models.DayDTO
+import com.mmfsin.noexcuses.data.models.DefaultDayDTO
+import com.mmfsin.noexcuses.data.models.DefaultExerciseDTO
+import com.mmfsin.noexcuses.data.models.DefaultRoutineDTO
+import com.mmfsin.noexcuses.data.models.ExerciseDTO
+import com.mmfsin.noexcuses.data.models.MaximumDataDTO
+import com.mmfsin.noexcuses.data.models.MuscularGroupDTO
+import com.mmfsin.noexcuses.data.models.MyRoutineDTO
+import com.mmfsin.noexcuses.data.models.NoteDTO
+import com.mmfsin.noexcuses.data.models.StretchingDTO
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ServiceComponent
 import dagger.hilt.android.components.ViewModelComponent
-import io.realm.RealmConfiguration
-import io.realm.annotations.RealmModule
+import io.realm.kotlin.Realm
+import io.realm.kotlin.RealmConfiguration
 
 @Module
 @InstallIn(ViewModelComponent::class, ServiceComponent::class)
 object RealmDatabaseModule {
 
-    @RealmModule(library = true, allClasses = true)
-    class CoreModule
-
     @Provides
     fun provideRealmDatabase(): IRealmDatabase {
-        return RealmDatabase(
-            RealmConfiguration.Builder()
-                .deleteRealmIfMigrationNeeded()
-                .modules(CoreModule())
-                .build()
+        val config = RealmConfiguration.create(
+            schema = setOf(
+                CalendarInfoDTO::class,
+                ChExerciseDTO::class,
+                DataDTO::class,
+                DayDTO::class,
+                DefaultRoutineDTO::class,
+                DefaultDayDTO::class,
+                DefaultExerciseDTO::class,
+                ExerciseDTO::class,
+                MaximumDataDTO::class,
+                MuscularGroupDTO::class,
+                MyRoutineDTO::class,
+                NoteDTO::class,
+                StretchingDTO::class
+            )
         )
+
+        val realm = Realm.open(config)
+        return RealmDatabase(realm)
     }
 }

@@ -35,15 +35,15 @@ fun editChExercise(chExercise: ChExercise, dataChExercise: DataChExercise): ChEx
     )
 }
 
-fun CreatedExercise.toExerciseDTO(id: String? = null, order: Long) = ExerciseDTO(
-    id = id ?: UUID.randomUUID().toString(),
-    category = category,
-    imageURL = "",
-    gifURL = image,
-    name = name,
-    order = order,
-    description = description ?: "",
-    muscles = muscles ?: "",
-    muscleWikiURL = externalURL,
+fun toExerciseDTO(newId: String? = null, o: Long, cE: CreatedExercise) = ExerciseDTO().apply {
+    id = newId ?: UUID.randomUUID().toString()
+    category = cE.category
+    imageURL = ""
+    gifURL = cE.image
+    name = cE.name
+    order = o
+    description = cE.description ?: ""
+    muscles = cE.muscles ?: ""
+    muscleWikiURL = cE.externalURL
     createdByUser = true
-)
+}

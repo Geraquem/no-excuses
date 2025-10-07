@@ -16,7 +16,7 @@ import com.mmfsin.noexcuses.domain.models.TempMaximumData
 import com.mmfsin.noexcuses.utils.EXERCISE_ID
 import com.mmfsin.noexcuses.utils.ID
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.realm.kotlin.where
+import io.realm.kotlin.ext.query
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -27,20 +27,20 @@ class MaximumRepository @Inject constructor(
 ) : IMaximumRepository {
 
     override fun registerMaximumData(data: TempMaximumData) {
-        realmDatabase.addObject { data.toMaximumDataDTO() }
+        realmDatabase.addObject { toMaximumDataDTO(data) }
     }
 
     override fun deleteMaximumData(exerciseId: String) {
         val maximumDTOList = realmDatabase.getObjectsFromRealm {
-            where<MaximumDataDTO>().equalTo(EXERCISE_ID, exerciseId).findAll()
+            query<MaximumDataDTO>("$EXERCISE_ID == $0", exerciseId).find()
         }
         maximumDTOList.forEach {
-            realmDatabase.deleteObject(MaximumDataDTO::class.java, ID, it.id)
+            realmDatabase.deleteObject(MaximumDataDTO::class, ID, it.id)
         }
     }
 
     override fun editMData(mDataId: String, data: TempMaximumData) {
-        val dataDTO = realmDatabase.getObjectFromRealm(MaximumDataDTO::class.java, ID, mDataId)
+        val dataDTO = realmDatabase.getObjectFromRealm(MaximumDataDTO::class, ID, mDataId)
         dataDTO?.let {
             it.date = data.date
             it.weight = data.weight
@@ -51,7 +51,7 @@ class MaximumRepository @Inject constructor(
     override fun getAllMaximumData(): List<MaximumData> {
         val formatter = DateTimeFormatter.ofPattern("d/M/yyyy")
 
-        val maximums = realmDatabase.getObjectsFromRealm { where<MaximumDataDTO>().findAll() }
+        val maximums = realmDatabase.getObjectsFromRealm { query<MaximumDataDTO>().find() }
         val result = mutableListOf<MaximumData>()
         maximums.groupBy { it.exerciseId }.map { mData ->
             val (exerciseId, data) = mData
@@ -65,13 +65,13 @@ class MaximumRepository @Inject constructor(
     }
 
     private fun getExerciseById(id: String): Exercise? {
-        val exercises = realmDatabase.getObjectFromRealm(ExerciseDTO::class.java, ID, id)
+        val exercises = realmDatabase.getObjectFromRealm(ExerciseDTO::class, ID, id)
         return exercises?.toExercise()
     }
 
     override fun getMaximumDataByExerciseId(exerciseId: String): MaximumData? {
         val maximumDTOList = realmDatabase.getObjectsFromRealm {
-            where<MaximumDataDTO>().equalTo(EXERCISE_ID, exerciseId).findAll()
+            query<MaximumDataDTO>("$EXERCISE_ID == $0", exerciseId).find()
         }
 
         val exercise = getExerciseById(exerciseId)
@@ -79,11 +79,11 @@ class MaximumRepository @Inject constructor(
     }
 
     override fun getMDataById(mDataId: String): MData? {
-        val data = realmDatabase.getObjectFromRealm(MaximumDataDTO::class.java, ID, mDataId)
+        val data = realmDatabase.getObjectFromRealm(MaximumDataDTO::class, ID, mDataId)
         return data?.toMData()
     }
 
     override fun deleteMDataById(mDataId: String) {
-        realmDatabase.deleteObject(MaximumDataDTO::class.java, ID, mDataId)
+        realmDatabase.deleteObject(MaximumDataDTO::class, ID, mDataId)
     }
 }

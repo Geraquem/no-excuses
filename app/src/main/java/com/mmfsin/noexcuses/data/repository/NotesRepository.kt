@@ -1,5 +1,6 @@
 package com.mmfsin.noexcuses.data.repository
 
+import com.mmfsin.noexcuses.data.mappers.createNewNote
 import com.mmfsin.noexcuses.data.mappers.toNote
 import com.mmfsin.noexcuses.data.mappers.toNoteList
 import com.mmfsin.noexcuses.data.models.NoteDTO
@@ -7,8 +8,7 @@ import com.mmfsin.noexcuses.domain.interfaces.INotesRepository
 import com.mmfsin.noexcuses.domain.interfaces.IRealmDatabase
 import com.mmfsin.noexcuses.domain.models.Note
 import com.mmfsin.noexcuses.utils.ID
-import io.realm.kotlin.where
-import java.util.UUID
+import io.realm.kotlin.ext.query
 import javax.inject.Inject
 
 class NotesRepository @Inject constructor(
@@ -16,7 +16,7 @@ class NotesRepository @Inject constructor(
 ) : INotesRepository {
 
     override fun getNotes(): List<Note> {
-        val notes = realmDatabase.getObjectsFromRealm { where<NoteDTO>().findAll() }
+        val notes = realmDatabase.getObjectsFromRealm { query<NoteDTO>().find() }
         return if (notes.isNotEmpty()) notes.sortedBy { it.date }.toNoteList()
             .reversed() else emptyList()
     }
@@ -27,8 +27,7 @@ class NotesRepository @Inject constructor(
     }
 
     override fun addNote(title: String, description: String, date: Long) {
-        val id = UUID.randomUUID().toString()
-        val note = NoteDTO(id, title, description, date, pinned = false)
+        val note = createNewNote(title, description, date)
         realmDatabase.addObject { note }
     }
 
@@ -44,7 +43,7 @@ class NotesRepository @Inject constructor(
     }
 
     override fun pinnedNote(id: String) {
-        val notes = realmDatabase.getObjectsFromRealm { where<NoteDTO>().findAll() }
+        val notes = realmDatabase.getObjectsFromRealm { query<NoteDTO>().find() }
         notes.forEach { note ->
             if (note.id == id) note.pinned = !note.pinned
             else note.pinned = false
@@ -53,15 +52,15 @@ class NotesRepository @Inject constructor(
     }
 
     override fun getPinnedNote(): Note? {
-        val notes = realmDatabase.getObjectsFromRealm { where<NoteDTO>().findAll() }
+        val notes = realmDatabase.getObjectsFromRealm { query<NoteDTO>().find() }
         notes.forEach { note -> if (note.pinned) return note.toNote() }
         return null
     }
 
     override fun deleteNote(id: String) {
-        realmDatabase.deleteObject(NoteDTO::class.java, ID, id)
+        realmDatabase.deleteObject(NoteDTO::class, ID, id)
     }
 
     private fun getNoteDTO(id: String): NoteDTO? =
-        realmDatabase.getObjectFromRealm(NoteDTO::class.java, ID, id)
+        realmDatabase.getObjectFromRealm(NoteDTO::class, ID, id)
 }

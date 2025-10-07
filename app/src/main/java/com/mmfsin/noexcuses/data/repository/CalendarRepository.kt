@@ -11,7 +11,7 @@ import com.mmfsin.noexcuses.domain.models.CalendarDayData
 import com.mmfsin.noexcuses.domain.models.CalendarInfo
 import com.mmfsin.noexcuses.utils.DATE
 import com.mmfsin.noexcuses.utils.ID
-import io.realm.kotlin.where
+import io.realm.kotlin.ext.query
 import javax.inject.Inject
 
 class CalendarRepository @Inject constructor(
@@ -19,11 +19,11 @@ class CalendarRepository @Inject constructor(
 ) : ICalendarRepository {
 
     override fun registerDayInCalendar(calendarInfo: CalendarInfo) {
-        realmDatabase.addObject { calendarInfo.toCalendarInfoDTO() }
+        realmDatabase.addObject { toCalendarInfoDTO(calendarInfo) }
     }
 
     override fun getCalendarData(): List<String> {
-        val days = realmDatabase.getObjectsFromRealm { where<CalendarInfoDTO>().findAll() }
+        val days = realmDatabase.getObjectsFromRealm { query<CalendarInfoDTO>().find() }
         val result = mutableListOf<String>()
         days.forEach { d -> result.add(d.date) }
         return result
@@ -31,8 +31,9 @@ class CalendarRepository @Inject constructor(
 
     override fun getCalendarDayInfo(date: String): List<CalendarDayData> {
         val info = realmDatabase.getObjectsFromRealm {
-            where<CalendarInfoDTO>().equalTo(DATE, date).findAll()
+            query<CalendarInfoDTO>("$DATE == $0", date).find()
         }
+
         val result = mutableListOf<CalendarDayData>()
         info.forEach { i ->
             val data = getCalendarDayData(i.id, i.routineId, i.dayId)
@@ -42,10 +43,9 @@ class CalendarRepository @Inject constructor(
     }
 
     private fun getCalendarDayData(id: String, routineId: String, dayId: String): CalendarDayData {
-        val mRoutine = realmDatabase.getObjectFromRealm(MyRoutineDTO::class.java, ID, routineId)
-        val dfRoutine =
-            realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class.java, ID, routineId)
-        val day = realmDatabase.getObjectFromRealm(DayDTO::class.java, ID, dayId)
+        val mRoutine = realmDatabase.getObjectFromRealm(MyRoutineDTO::class, ID, routineId)
+        val dfRoutine = realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class, ID, routineId)
+        val day = realmDatabase.getObjectFromRealm(DayDTO::class, ID, dayId)
 
         return CalendarDayData(
             databaseId = id,
@@ -58,19 +58,19 @@ class CalendarRepository @Inject constructor(
     }
 
     override fun deleteCalendarDayInfo(id: String) {
-        realmDatabase.deleteObject(CalendarInfoDTO::class.java, ID, id)
+        realmDatabase.deleteObject(CalendarInfoDTO::class, ID, id)
     }
 
     override fun checkIfIsMyRoutine(routineId: String): Boolean? {
-        val dfR = realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class.java, ID, routineId)
+        val dfR = realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class, ID, routineId)
         dfR?.let { return it.createdByUser } ?: run {
-            val myR = realmDatabase.getObjectFromRealm(MyRoutineDTO::class.java, ID, routineId)
+            val myR = realmDatabase.getObjectFromRealm(MyRoutineDTO::class, ID, routineId)
             return myR?.createdByUser ?: run { null }
         }
     }
 
     override fun getTotalSavedInCalendar(): Int {
-        val saved = realmDatabase.getObjectsFromRealm { where<CalendarInfoDTO>().findAll() }
+        val saved = realmDatabase.getObjectsFromRealm { query<CalendarInfoDTO>().find() }
         return saved.size
     }
 }

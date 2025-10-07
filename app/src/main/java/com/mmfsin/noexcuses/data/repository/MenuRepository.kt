@@ -33,7 +33,7 @@ import com.mmfsin.noexcuses.utils.SERVER_EXERCISES
 import com.mmfsin.noexcuses.utils.SERVER_STRETCHING
 import com.mmfsin.noexcuses.utils.VERSION
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.realm.kotlin.where
+import io.realm.kotlin.ext.query
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.concurrent.CountDownLatch
@@ -101,12 +101,12 @@ class MenuRepository @Inject constructor(
 
     override fun getMyActualRoutine(): Routine? {
         val myRoutines = realmDatabase.getObjectsFromRealm {
-            where<MyRoutineDTO>().equalTo(ROUTINE_DOING_IT, true).findAll()
+            query<MyRoutineDTO>("$ROUTINE_DOING_IT == $0", true).find()
         }
         if (myRoutines.isNotEmpty()) return myRoutines.first().toRoutine()
 
         val dfRoutines = realmDatabase.getObjectsFromRealm {
-            where<DefaultRoutineDTO>().equalTo(ROUTINE_DOING_IT, true).findAll()
+            query<DefaultRoutineDTO>("$ROUTINE_DOING_IT == $0", true).find()
         }
         if (dfRoutines.isNotEmpty()) return dfRoutines.first().toRoutine()
         return null
@@ -117,12 +117,12 @@ class MenuRepository @Inject constructor(
         routine?.let {
             if (routine.createdByUser) {
                 val days = realmDatabase.getObjectsFromRealm {
-                    where<DayDTO>().equalTo(ROUTINE_ID, routineId).findAll()
+                    query<DayDTO>("$ROUTINE_ID == $0", routineId).find()
                 }
                 return days.toDayListFromDayDTO()
             } else {
                 val days = realmDatabase.getObjectsFromRealm {
-                    where<DefaultDayDTO>().equalTo(ROUTINE_ID, routineId).findAll()
+                    query<DefaultDayDTO>("$ROUTINE_ID == $0", routineId).find()
                 }
                 return days.toDayListFromDefaultDayDTO()
             }
@@ -132,12 +132,12 @@ class MenuRepository @Inject constructor(
 
     override fun unpinRoutineFromMenu(routineId: String) {
         val dfRoutine =
-            realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class.java, ID, routineId)
+            realmDatabase.getObjectFromRealm(DefaultRoutineDTO::class, ID, routineId)
         dfRoutine?.let { routine ->
             routine.doingIt = false
             realmDatabase.addObject { routine }
         }
-        val mRoutine = realmDatabase.getObjectFromRealm(MyRoutineDTO::class.java, ID, routineId)
+        val mRoutine = realmDatabase.getObjectFromRealm(MyRoutineDTO::class, ID, routineId)
         mRoutine?.let { routine ->
             routine.doingIt = false
             realmDatabase.addObject { routine }
@@ -145,7 +145,7 @@ class MenuRepository @Inject constructor(
     }
 
     override fun unpinNoteFromMenu(noteId: String) {
-        val note = realmDatabase.getObjectFromRealm(NoteDTO::class.java, ID, noteId)
+        val note = realmDatabase.getObjectFromRealm(NoteDTO::class, ID, noteId)
         note?.let { n ->
             n.pinned = false
             realmDatabase.addObject { note }
