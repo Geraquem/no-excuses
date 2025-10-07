@@ -7,7 +7,7 @@ import com.mmfsin.noexcuses.domain.models.Routine
 interface IMyRoutinesRepository {
     fun getRoutines(): List<Routine>
     fun getRoutineById(id: String): Routine?
-    fun updateRoutinePushPin(id: String)
+    suspend fun updateRoutinePushPin(id: String)
     suspend fun addRoutine(title: String, description: String?)
     fun editRoutine(id: String, title: String, description: String?)
     fun deleteRoutine(id: String)
@@ -18,6 +18,6 @@ interface IMyRoutinesRepository {
     fun editDay(id: String, title: String)
     fun deleteDay(id: String)
 
-    fun addDfRoutineToMine(routine: MyRoutineDTO)
+    suspend fun addDfRoutineToMine(routine: MyRoutineDTO)
     fun addDayToNewDfRoutineMine(day: Day, newDayId: String, newRoutineId: String)
 }

@@ -38,28 +38,28 @@ class MyRoutinesRepository @Inject constructor(
         return routine?.toRoutine() ?: run { null }
     }
 
-    override fun updateRoutinePushPin(id: String) {
-        val dfRoutines = realmDatabase.getObjectsFromRealm { query<DefaultRoutineDTO>().find() }
-        dfRoutines.forEach { routine ->
-            routine.doingIt = false
-            realmDatabase.addObject { routine }
-        }
+    override suspend fun updateRoutinePushPin(id: String) {
+        realmDatabase.write {
+            // Resetear todas las DefaultRoutineDTO
+            val dfRoutines = query<DefaultRoutineDTO>().find()
+            dfRoutines.forEach { routine ->
+                routine.doingIt = false
+            }
 
-        val myRoutines = realmDatabase.getObjectsFromRealm { query<MyRoutineDTO>().find() }
-        myRoutines.forEach { routine ->
-            if (routine.id == id) routine.doingIt = !routine.doingIt
-            else routine.doingIt = false
-            realmDatabase.addObject { routine }
+            // Actualizar MyRoutineDTO
+            val myRoutines = query<MyRoutineDTO>().find()
+            myRoutines.forEach { routine ->
+                routine.doingIt = (routine.id == id)
+            }
         }
     }
 
     override suspend fun addRoutine(title: String, description: String?) {
-        val routine = createNewMyRoutineDTO(title, description)
-        realmDatabase.write { routine }
+        realmDatabase.write { createNewMyRoutineDTO(title, description) }
     }
 
-    override fun addDfRoutineToMine(routine: MyRoutineDTO) {
-        realmDatabase.addObject { routine }
+    override suspend fun addDfRoutineToMine(routine: MyRoutineDTO) {
+        realmDatabase.write { routine }
     }
 
     override fun editRoutine(id: String, title: String, description: String?) {

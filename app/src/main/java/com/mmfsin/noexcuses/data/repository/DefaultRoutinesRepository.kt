@@ -81,18 +81,19 @@ class DefaultRoutinesRepository @Inject constructor(
         return routine?.toRoutine()
     }
 
-    override fun updateRoutinePushPin(id: String) {
-        val myRoutines = realmDatabase.getObjectsFromRealm { query<MyRoutineDTO>().find() }
-        myRoutines.forEach { routine ->
-            routine.doingIt = false
-            realmDatabase.addObject { routine }
-        }
+    override suspend fun updateRoutinePushPin(id: String) {
+        realmDatabase.write {
+            // Resetear todas las MyRoutineDTO
+            val dfRoutines = query<MyRoutineDTO>().find()
+            dfRoutines.forEach { routine ->
+                routine.doingIt = false
+            }
 
-        val dfRoutines = realmDatabase.getObjectsFromRealm { query<DefaultRoutineDTO>().find() }
-        dfRoutines.forEach { routine ->
-            if (routine.id == id) routine.doingIt = !routine.doingIt
-            else routine.doingIt = false
-            realmDatabase.addObject { routine }
+            // Actualizar mi DefaultRoutineDTO
+            val myRoutines = query<DefaultRoutineDTO>().find()
+            myRoutines.forEach { routine ->
+                routine.doingIt = (routine.id == id)
+            }
         }
     }
 

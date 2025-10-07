@@ -30,14 +30,14 @@ fun toChExerciseDTO(actualPos: Int?, chE: ChExercise) = ChExerciseDTO().apply {
     superSerie = chE.superSerie
 }
 
-fun setExerciseData(data: List<Data>?): RealmList<DataDTO>? {
+fun setExerciseData(data: List<Data>?): RealmList<DataDTO> {
     return data?.let {
         val list = realmListOf<DataDTO>()
         for (d in data) {
             list.add(dataToDataDTO(d))
         }
         list
-    } ?: run { null }
+    } ?: run { realmListOf() }
 }
 
 fun dataToDataDTO(data: Data) = DataDTO().apply {

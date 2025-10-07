@@ -162,7 +162,7 @@ class AddChExerciseDialog(
         }
     }
 
-    private fun error() = activity?.showErrorDialog()
+    private fun error() = activity?.showErrorDialog(goBack = false)
 
     companion object {
         fun newInstance(idGroup: IdGroup, listener: IChExercisesListener): AddChExerciseDialog {

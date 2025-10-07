@@ -109,15 +109,17 @@ class ExercisesRepository @Inject constructor(
         return resultList.sortedBy { it.position }
     }
 
-    override fun addChExercise(chExercise: ChExercise) {
-        val day = getDayDTO(chExercise.dayId)
-        var exercisePos = 0
-        day?.let {
-            it.exercises++
-            exercisePos = it.exercises
-            realmDatabase.addObject { it }
+    override suspend fun addChExercise(chExercise: ChExercise) {
+        realmDatabase.write {
+            val day = query<DayDTO>("$ID == $0", chExercise.dayId).first().find()
+            var exercisePos: Int
+            day?.let { d ->
+                d.exercises += 1
+                exercisePos = d.exercises
+
+                copyToRealm(toChExerciseDTO(exercisePos, chExercise))
+            }
         }
-        realmDatabase.addObject { toChExerciseDTO(exercisePos, chExercise) }
     }
 
     override fun addDefaultExerciseAsMine(chExercise: ChExerciseDTO) {

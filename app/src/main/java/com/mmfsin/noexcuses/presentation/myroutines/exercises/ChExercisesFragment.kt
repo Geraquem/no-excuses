@@ -148,7 +148,7 @@ class ChExercisesFragment : BaseFragment<FragmentExercisesBinding, ChExercisesVi
         activity?.showFragmentDialog(dialog)
     }
 
-    private fun error() = activity?.showErrorDialog()
+    private fun error() = activity?.showErrorDialog(goBack = false)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

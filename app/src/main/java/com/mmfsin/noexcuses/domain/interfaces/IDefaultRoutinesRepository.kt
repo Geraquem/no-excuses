@@ -7,7 +7,7 @@ import com.mmfsin.noexcuses.domain.models.Routine
 interface IDefaultRoutinesRepository {
     suspend fun getDefaultRoutines(): List<Routine>
     fun getDefaultRoutineById(id: String): Routine?
-    fun updateRoutinePushPin(id: String)
+    suspend fun updateRoutinePushPin(id: String)
 
     suspend fun getDefaultDays(routineId: String): List<Day>
     fun getDefaultDayById(id: String): Day?
