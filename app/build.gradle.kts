@@ -99,9 +99,6 @@ dependencies {
     //Realm
     implementation("io.realm.kotlin:library-base:3.0.0")
 
-    //Google services
-    implementation("com.google.android.gms:play-services-ads:22.1.0")
-
     //ImageView Zoom
     implementation("com.jsibbold:zoomage:1.3.1")
 
