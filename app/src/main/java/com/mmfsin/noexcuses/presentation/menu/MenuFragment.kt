@@ -33,7 +33,6 @@ import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 import com.mmfsin.noexcuses.utils.LOCAL_BROADCAST_FILTER
 import com.mmfsin.noexcuses.utils.animateY
 import com.mmfsin.noexcuses.utils.countDown
-import com.mmfsin.noexcuses.utils.loadNativeAds
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -81,7 +80,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             llMyActualRoutine.visibility = View.INVISIBLE
             pinnedNote.root.visibility = View.GONE
             loading.root.visibility = View.VISIBLE
-            mContext.loadNativeAds(binding.nativeAd, binding.nativeContent)
         }
     }
 
