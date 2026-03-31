@@ -33,7 +33,7 @@ class CreateExerciseDialog(val category: String, val refresh: () -> Unit) :
         bottomSheet?.let {
             val behavior = BottomSheetBehavior.from(it)
             val layoutParams = it.layoutParams
-            layoutParams.height = (resources.displayMetrics.heightPixels * 0.95).toInt()
+            layoutParams.height = (resources.displayMetrics.heightPixels)
             it.layoutParams = layoutParams
             behavior.peekHeight = layoutParams.height
         }
@@ -56,7 +56,7 @@ class CreateExerciseDialog(val category: String, val refresh: () -> Unit) :
     override fun setListeners() {
         binding.apply {
             ivClose.setOnClickListener { dismiss() }
-            tvAddImage.setOnClickListener { pickImageLauncher.launch("image/*") }
+            llAddImage.setOnClickListener { pickImageLauncher.launch("image/*") }
 
             btnAdd.setOnClickListener {
                 val name = etName.text.toString()

@@ -78,7 +78,7 @@
     <!-- CREATE EXERCISE -->
     <string name="exercise_add_new_one">Añade tu propio ejercicio</string>
     <string name="exercise_add_title">Crear ejercicio</string>
-    <string name="exercise_add_image">Seleccionar imagen (opcional)</string>
+    <string name="exercise_add_image">Imagen (opcional)</string>
     <string name="exercise_add_name">Nombre</string>
     <string name="exercise_add_description">Cómo se hace (opcional)</string>
     <string name="exercise_add_muscles">Músculos involucrados (opcional)</string>

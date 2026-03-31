@@ -64,6 +64,7 @@
         app:layout_constraintGuide_percent="0.95" />
 
     <ScrollView
+        android:id="@+id/sv_main"
         style="@style/scroll_no_effects"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -75,7 +76,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_left2"
@@ -97,7 +100,7 @@
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:orientation="vertical"
-                android:paddingVertical="16dp"
+                android:paddingVertical="12dp"
                 app:layout_constraintLeft_toLeftOf="@id/gl_left2"
                 app:layout_constraintRight_toRightOf="@id/gl_right2"
                 app:layout_constraintTop_toTopOf="parent">
@@ -112,27 +115,44 @@
                     android:visibility="gone"
                     tools:src="@color/black" />
 
-                <TextView
-                    android:id="@+id/tv_add_image"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/ll_add_image"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="12dp"
                     android:background="@drawable/click_effect"
-                    android:drawablePadding="6dp"
+                    android:backgroundTint="@color/light_green"
                     android:elevation="6dp"
                     android:gravity="center"
-                    android:padding="8dp"
-                    android:text="@string/exercise_add_image"
-                    android:textSize="14sp"
-                    app:drawableStartCompat="@drawable/ic_add"
-                    app:drawableTint="@color/grey" />
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="6dp"
+                        android:contentDescription="@string/content_description"
+                        android:src="@drawable/ic_add_image"
+                        app:tint="@color/dark_grey" />
+
+                    <TextView
+                        style="@style/MediumTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/exercise_add_image"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginBottom="8dp"
                     android:hint="@string/exercise_add_name"
                     app:boxBackgroundColor="@android:color/transparent"
                     app:boxStrokeColor="@color/grey"
@@ -155,7 +175,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginBottom="8dp"
                     android:hint="@string/exercise_add_description"
                     app:boxBackgroundColor="@android:color/transparent"
                     app:boxStrokeColor="@color/grey"
@@ -167,7 +187,9 @@
                         android:id="@+id/et_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="top"
                         android:inputType="textMultiLine|textCapSentences"
+                        android:lines="4"
                         android:maxLength="200"
                         android:maxLines="6" />
 
@@ -177,7 +199,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginBottom="8dp"
                     android:hint="@string/exercise_add_muscles"
                     app:boxBackgroundColor="@android:color/transparent"
                     app:boxStrokeColor="@color/grey"
@@ -189,7 +211,9 @@
                         android:id="@+id/et_muscles"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="top"
                         android:inputType="textMultiLine|textCapSentences"
+                        android:lines="2"
                         android:maxLength="200"
                         android:maxLines="6" />
 

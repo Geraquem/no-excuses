@@ -63,7 +63,7 @@ class EditCreatedExerciseDialog(
     override fun setListeners() {
         binding.apply {
             ivClose.setOnClickListener { dismiss() }
-            tvAddImage.setOnClickListener { pickImageLauncher.launch("image/*") }
+            llAddImage.setOnClickListener { pickImageLauncher.launch("image/*") }
 
             btnDelete.setOnClickListener {
                 listener.deletedCreatedExercise(exerciseId)
