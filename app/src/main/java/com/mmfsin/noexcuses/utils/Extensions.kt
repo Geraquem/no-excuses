@@ -21,7 +21,6 @@ import com.mmfsin.noexcuses.base.dialog.ErrorDialog
 import com.mmfsin.noexcuses.domain.models.MData
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 //fun FragmentActivity.shouldShowInterstitial(position: Int) =
@@ -180,3 +179,9 @@ fun List<MData>.sortedDateList(): List<MData> {
 
 fun String.capitalizeFirstLetter(): String =
     this.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+
+fun Long.formatPinnedDate(): String {
+    val date = java.util.Date(this)
+    val formatter = SimpleDateFormat("d 'de' MMMM 'de' yyyy", Locale("es", "ES"))
+    return formatter.format(date)
+}

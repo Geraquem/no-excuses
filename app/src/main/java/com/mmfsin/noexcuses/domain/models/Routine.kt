@@ -6,5 +6,6 @@ open class Routine(
     var description: String?,
     var days: Int,
     var doingIt: Boolean,
-    val createdByUser: Boolean
+    val createdByUser: Boolean,
+    val pinnedDate: Long?
 )

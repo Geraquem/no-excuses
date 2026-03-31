@@ -11,4 +11,5 @@ open class MyRoutineDTO : RealmObject {
     var days: Int = 0
     var doingIt: Boolean = false
     var createdByUser: Boolean = true
+    var pinnedDate: Long? = null
 }

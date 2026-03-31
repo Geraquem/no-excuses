@@ -111,7 +111,7 @@
 
                         <include
                             android:id="@+id/actual_routine"
-                            layout="@layout/item_routine" />
+                            layout="@layout/item_routine_pinned" />
 
                     </LinearLayout>
 

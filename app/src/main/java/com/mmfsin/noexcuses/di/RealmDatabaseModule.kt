@@ -29,7 +29,7 @@ object RealmDatabaseModule {
 
     @Provides
     fun provideRealmDatabase(): IRealmDatabase {
-        val config = RealmConfiguration.create(
+        val config = RealmConfiguration.Builder(
             schema = setOf(
                 CalendarInfoDTO::class,
                 ChExerciseDTO::class,
@@ -45,9 +45,30 @@ object RealmDatabaseModule {
                 NoteDTO::class,
                 StretchingDTO::class
             )
-        )
+        ).schemaVersion(3).build()
 
         val realm = Realm.open(config)
+
+        migrateMyRoutine(realm)
+
         return RealmDatabase(realm)
+    }
+
+    private fun migrateMyRoutine(realm: Realm) {
+        realm.writeBlocking {
+            val myRoutines = query(MyRoutineDTO::class).find()
+            myRoutines.forEach { oldRoutine ->
+                if (oldRoutine.pinnedDate == null) {
+                    oldRoutine.pinnedDate = null
+                }
+            }
+
+            val dfRoutines = query(DefaultRoutineDTO::class).find()
+            dfRoutines.forEach { oldRoutine ->
+                if (oldRoutine.pinnedDate == null) {
+                    oldRoutine.pinnedDate = null
+                }
+            }
+        }
     }
 }

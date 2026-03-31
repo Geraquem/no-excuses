@@ -49,7 +49,10 @@ class MyRoutinesRepository @Inject constructor(
             // Actualizar MyRoutineDTO
             val myRoutines = query<MyRoutineDTO>().find()
             myRoutines.forEach { routine ->
-                routine.doingIt = (routine.id == id)
+                if (routine.id == id) {
+                    routine.doingIt = true
+                    routine.pinnedDate = System.currentTimeMillis()
+                }
             }
         }
     }

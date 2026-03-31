@@ -11,6 +11,7 @@ open class DefaultRoutineDTO : RealmObject {
     var days: Long = 0
     var doingIt: Boolean = false
     var createdByUser: Boolean = false
+    var pinnedDate: Long? = null
 }
 
 open class DefaultDayDTO : RealmObject {
@@ -20,7 +21,6 @@ open class DefaultDayDTO : RealmObject {
     var routineId: String = ""
     var exercises: Long = 0
 }
-
 
 open class DefaultExerciseDTO : RealmObject {
     @PrimaryKey

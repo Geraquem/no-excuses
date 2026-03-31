@@ -86,14 +86,7 @@ class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment
                     gifImage.isVisible = false
                 } else Glide.with(requireContext()).load(it.gifURL).into(gifImage)
 
-                if (it.muscleWikiURL.isNullOrEmpty()) {
-                    llMuscleWiki.isVisible = false
-                } else {
-                    if (it.createdByUser) {
-                        ivMw.setImageResource(R.drawable.ic_search)
-                        tvMw.text = getString(R.string.exercise_dialog_search)
-                    }
-                }
+                llSearch.isVisible = it.createdByUser
 
                 if (it.description.isEmpty()) {
                     tvDescriptionTitle.isVisible = false
@@ -115,7 +108,7 @@ class ExerciseDialog(private val exerciseId: String) : BottomSheetDialogFragment
             ivClose.setOnClickListener { dismiss() }
             ivFav.setOnClickListener { exercise?.let { e -> viewModel.updateFav(e.id) } }
 
-            llMuscleWiki.setOnClickListener {
+            llSearch.setOnClickListener {
                 try {
                     exercise?.let { e ->
                         e.muscleWikiURL?.let { url ->

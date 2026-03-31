@@ -29,6 +29,7 @@
 
     <!-- MENU -->
     <string name="menu_none_routine_pinned">¡Fija aqui la rutina que estés haciendo!</string>
+    <string name="menu_none_routine_pinned_date">Fijada desde el %s</string>
     <string name="menu_none_routine_pinned_description">Solo tienes que pulsar el icono</string>
     <string name="menu_default_routines_title">Rutinas</string>
     <string name="menu_default_routines_description">Ponte en forma con los planes de entrenamiento creados para ganar masa muscular, definir o simplemente mantener la línea.</string>

@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.getColorStateList
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +34,7 @@ import com.mmfsin.noexcuses.presentation.menu.interfaces.IMenuListener
 import com.mmfsin.noexcuses.utils.LOCAL_BROADCAST_FILTER
 import com.mmfsin.noexcuses.utils.animateY
 import com.mmfsin.noexcuses.utils.countDown
+import com.mmfsin.noexcuses.utils.formatPinnedDate
 import com.mmfsin.noexcuses.utils.showErrorDialog
 import com.mmfsin.noexcuses.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -212,13 +214,21 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>(), IMenuLi
             actualRoutine.apply {
                 val color = if (routine.createdByUser) R.color.blue else R.color.dark_green
                 image.llMain.backgroundTintList = getColorStateList(mContext, color)
-                image.tvNumOfDays.text = routine.days.toString()
+                image.tvNumOfDays.text = "${routine.days}"
 
                 tvTitle.text = routine.name
                 val description = routine.description?.let { routine.description }
                     ?: run { getString(R.string.my_routines_no_description) }
                 tvDescription.text = description
                 ivPushpin.setImageResource(R.drawable.ic_pushpin)
+
+                routine.pinnedDate?.let { date ->
+                    val pinnedDate = date.formatPinnedDate()
+                    val text = getString(R.string.menu_none_routine_pinned_date, pinnedDate)
+                    tvPinnedDate.text = text
+                    tvPinnedDate.isVisible = true
+                } ?: run { tvPinnedDate.isVisible = false }
+
                 root.setOnClickListener {
                     val dialog = MenuDaysSheet(
                         routineId = routine.id,

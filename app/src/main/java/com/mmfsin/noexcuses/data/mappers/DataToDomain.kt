@@ -64,7 +64,8 @@ fun MyRoutineDTO.toRoutine() = Routine(
     description = description,
     days,
     doingIt = doingIt,
-    createdByUser = true
+    createdByUser = true,
+    pinnedDate = pinnedDate
 )
 
 fun List<MyRoutineDTO>.toMyRoutineList() = this.map { it.toRoutine() }
@@ -76,7 +77,8 @@ fun DefaultRoutineDTO.toRoutine() = Routine(
     description = description,
     days = days.toInt(),
     doingIt = doingIt,
-    createdByUser = false
+    createdByUser = false,
+    pinnedDate = pinnedDate
 )
 
 fun List<DefaultRoutineDTO>.toDefaultRoutineList() = this.map { it.toRoutine() }
