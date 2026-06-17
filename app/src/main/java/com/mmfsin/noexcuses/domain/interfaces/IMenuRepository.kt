@@ -6,7 +6,6 @@ import com.mmfsin.noexcuses.domain.models.Routine
 interface IMenuRepository {
     suspend fun insertDataInFirestore()
 
-
     suspend fun checkVersion()
 
     fun getMyActualRoutine(): Routine?

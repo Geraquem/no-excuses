@@ -95,6 +95,9 @@ class DefaultRoutinesRepository @Inject constructor(
                 if (routine.id == id) {
                     routine.doingIt = true
                     routine.pinnedDate = System.currentTimeMillis()
+                } else {
+                    routine.doingIt = false
+                    routine.pinnedDate = null
                 }
             }
         }
